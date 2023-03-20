@@ -1,7 +1,8 @@
 # Introduction 
 Digital Datasheets Creator
 
-[[_TOC_]]
+<!-- [[_TOC_]] -->
+A digital datasheet creator tool that is aligned with the Industry Work Group (IWG) based on joint specification with Google and component vendors.
 # Architectural Tenets
 A plugin based architecture has been used for the development of this tool. The architecture is based on the article [here](https://pythonhowtoprogram.com/a-plugin-architecture-for-using-importlib-in-python-3/?utm_source=dev.to&utm_medium=cp&utm_campaign=ctalink&utm_term=a-plugin-architecture-for-using-importlib-in-python-3)
 
