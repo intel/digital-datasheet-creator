@@ -1,0 +1,132 @@
+{
+    "guid": "1994225a-c7f8-4b1a-983d-2fff1dcdab62",
+    "specification": "IEC 61360-4",
+    "description": "IEC 61360 Part 4 Vocabulary File",
+    "uri": "https://cdd.iec.ch/cdd/iec61360/iec61360.nsf/TreeFrameset?OpenFrameSet",
+    "automationUri": "https://cdd.iec.ch/cdd/iec61360/iec61360.nsf/TU0/",
+    "vocabulary": [
+        {
+            "type": []
+        },
+        {
+            "title": []
+        },
+        {
+            "oneOf": []
+        },
+        {
+            "required": []
+        },
+        {
+            "properties": []
+        },
+        {
+            "componentID": []
+        },
+        {
+            "description": []
+        },
+        {
+            "enum": []
+        },
+        {
+            "vinMin": []
+        },
+        {
+            "comment": []
+        },
+        {
+            "vinMax": []
+        },
+        {
+            "dropoutVoltage": []
+        },
+        {
+            "ilim": []
+        },
+        {
+            "turnOnTime": []
+        },
+        {
+            "package": []
+        },
+        {
+            "pins": []
+        },
+        {
+            "items": []
+        },
+        {
+            "turnOnTimeNominal": []
+        },
+        {
+            "turnOnTimeMin": []
+        },
+        {
+            "turnOnTimeMax": []
+        },
+        {
+            "reverseCurrentBlocking": []
+        },
+        {
+            "onResistance": []
+        },
+        {
+            "converterType": []
+        },
+        {
+            "examples": []
+        },
+        {
+            "chargerTopology": []
+        },
+        {
+            "batteryConfig": []
+        },
+        {
+            "voutMin": []
+        },
+        {
+            "voutMax": []
+        },
+        {
+            "fsw": []
+        },
+        {
+            "TCPCSupport": []
+        },
+        {
+            "BC12Support": []
+        },
+        {
+            "itegratedLoadSwitch": []
+        },
+        {
+            "integratedFets": []
+        },
+        {
+            "currentMatchingAccuracy": []
+        },
+        {
+            "numberLEDStrings": []
+        },
+        {
+            "targetApplication": []
+        },
+        {
+            "numIntegratedFetOutput": []
+        },
+        {
+            "numExternalFetOutput": []
+        },
+        {
+            "numLDO": []
+        },
+        {
+            "numLoadSwitch": []
+        },
+        {
+            "interface": []
+        }
+    ]
+}

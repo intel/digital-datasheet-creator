@@ -1,0 +1,99 @@
+{
+    "description": "IEC 61360-4 - IEC/SC 3D - Common Data Dictionary (CDD- V2.0015.0002) - DET Classifications",
+    "guid": "1ec015bd-7159-4581-a6d8-d1f6b2fe3eb1",
+    "mapType": "spreadsheet",
+    "datasheetDescLocation" : {
+        "sheetName" : "Export",
+        "row" : 12,
+        "col" : "A"
+    },
+    "sheets": [
+        {
+            "sheetName": "Export",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                
+            ],
+            "ignoreCols" : [
+               
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 24,
+                            "col" : "B"
+                        },
+                        "dataStartRow" : 38,
+                        "maxRows" : 400
+                    },
+                    "fieldHeaders" : {
+                                "row" : 24                                       
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI",
+                            "AJ",
+                            "AK",
+                            "AL",
+                            "AM",
+                            "AN",
+                            "AO",
+                            "AP",
+                            "AQ",
+                            "AR",
+                            "AS",
+                            "AT",
+                            "AU",
+                            "AV",
+                            "AW",
+                            "AX",
+                            "AY",
+                            "AZ",
+                            "BA",
+                            "BB",
+                            "BC",
+                            "BD",
+                            "BE",
+                            "BF"
+                        ]
+                    }
+                }               
+            ]
+       }        
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "pipelineDescription":"Automate form DITA to JSON",
+    "pipelineJobs":[
+      {
+        "description": "DITA to JSON",
+        "jobID": 1,
+        "jobTasks": [
+          {
+            "taskID" : 1,
+            "description": "XLSX to json with map",
+            "taskGUID": "9289a2cf-7e17-4d36-8f18-186ecadbbe07",
+            "map": "C:/Users/bamunozm/Downloads/Mappers/",
+            "vocabulary":"",
+            "arg1": "C:/Users/bamunozm/Downloads/InputJson/",
+            "arg2": "",
+            "output": "C:/Users/bamunozm/Downloads/OutputJson/"
+          }
+        ]
+      }
+    ]
+  }

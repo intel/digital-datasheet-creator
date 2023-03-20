@@ -1,0 +1,42 @@
+{
+  "datasheet": {
+    "namespace": "Fiuxp namespace",
+    "generatedOn": "2022-09-08T16:37:17",
+    "generatedBy": "Intel e-Datasheet Generator",
+    "inputFile": "GUID-1234-Example.xml",
+    "platformAbbreviation": "New value for platformAbbreviation",
+    "sku": "New value for SKU",
+    "title": "Dita title example",
+    "ditaTitleExample": [
+      {
+        "tableExample1": [
+          {
+            "exampleOfHeader1": "Entry for header 1.1",
+            "exampleOfHeader2": "Entry for header 2.1"
+          },
+          {
+            "exampleOfHeader1": "Entry for header 1.2",
+            "exampleOfHeader2": "Entry for header 2.2"
+          }
+        ]
+      },
+      {
+        "tableExample2": [
+          {
+            "otherHeaderExample1": "OHE 1.1",
+            "otherHeaderExample2": "OHE 2.1",
+            "otherHeaderExample3": "OHE 3.1"
+          },
+          {
+            "otherHeaderExample1": "OHE 1.2",
+            "otherHeaderExample2": "OHE 2.2",
+            "otherHeaderExample3": "OHE 3.2"
+          }
+        ]
+      }
+    ],
+    "attachments": {
+      "images": "GUID-Example.svg"
+    }
+  }
+}

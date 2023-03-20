@@ -1,0 +1,1109 @@
+{
+    "title": "Datasheet - sample_h_file_2",
+    "description": "Describes a part",
+    "inputFile": "sample_h_file_2.xlsx",
+    "guid": "8b0ac9dd-b67d-475c-965a-864c32781f45",
+    "createdOn": "09/13/2022",
+    "adl-PEcGpioMappingWw394": [
+        {
+            "pinName": "GPIO067/VREF2_ADC",
+            "adl-PRvpNetName": "GPIO067",
+            "muxConfig": "GPIO",
+            "signalDirectionWRTEc": "Disconnected"
+        },
+        {
+            "pinName": "GPIO100/nEC_SCI_ALT2/ICT6",
+            "adl-PRvpNetName": "MIC_PRIVACY_EC",
+            "muxConfig": "GPIO",
+            "defaultState": "Low",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO222/PROCHOT_IN#",
+            "adl-PRvpNetName": "TC_RETIMER_FORCE_PWR_BTP_EC_R",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO015/PWM7/ICT10",
+            "adl-PRvpNetName": "EC_GPIO015_PWM7",
+            "muxConfig": "PWM",
+            "defaultState": "Low",
+            "signalDirectionWRTEc": "Output / Input"
+        },
+        {
+            "pinName": "GPIO171/UART1_RX/CEC_IN",
+            "adl-PRvpNetName": "STD_ADPT_CNTRL_GPIO",
+            "muxConfig": "GPIO",
+            "defaultState": "Low",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO245/GPSPI_IO0",
+            "adl-PRvpNetName": "TYPEC_EC_SMBUS_ALERT_1_R",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO243/GPSPI_IO1",
+            "adl-PRvpNetName": "PM_SLP_S0_R_N",
+            "muxConfig": "GPIO",
+            "defaultState": "Low",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO022/GPSPI_IO3",
+            "adl-PRvpNetName": "CPU_C10_GATE_N_R",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO023/GPSPI_CLK",
+            "adl-PRvpNetName": "HOME_BTN_EC_RVP_AEP_ID",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO024/GPSPI_CS#/I2C07_SCL_ALT",
+            "adl-PRvpNetName": "EC_PCH_SPI_OE_N",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO101/BGPO1",
+            "adl-PRvpNetName": "PM_PWRBTN_N",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO102/BGPO2",
+            "adl-PRvpNetName": "GPPC_E7_EC_SMI_N",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "pushpullOpenDrain": "Open Drain",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO161/VCI_IN2#",
+            "adl-PRvpNetName": "HB_NVDC_SEL",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO025/nEMI_INT/UART_CLK/UART1_RI#",
+            "adl-PRvpNetName": "PECI_MUX_CTRL_ER_INT",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO034/GPSPI_IO2",
+            "adl-PRvpNetName": "BC_PROCHOT_EC_N",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO035/PWM8/CTOUT1/ICT15",
+            "adl-PRvpNetName": "PM_BAT_STATUS_LED2",
+            "muxConfig": "PWM",
+            "defaultState": "Low",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO036",
+            "adl-PRvpNetName": "PEG_PLI_N_DG2",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO240",
+            "adl-PRvpNetName": "PEG_PIM_DG2",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO033/TACH3",
+            "adl-PRvpNetName": "SMC_LID",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input",
+            "interruptCapability": "BOTH"
+        },
+        {
+            "pinName": "GPIO221/32KHz_OUT/SYS_SHDN#",
+            "adl-PRvpNetName": "PM_SLP_S0_CS_N",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "nRESET_IN",
+            "adl-PRvpNetName": "SMC_RST_N_R1",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO057/VCC_PWRGD/GPSPI_CLK_ALT",
+            "adl-PRvpNetName": "ALL_SYS_PWRGD",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO106/PWROK",
+            "adl-PRvpNetName": "EC_PM_PCH_PWROK",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "XTAL1",
+            "adl-PRvpNetName": "XTAL1_32K_R"
+        },
+        {
+            "pinName": "XTAL2",
+            "adl-PRvpNetName": "XTAL2_32K_R"
+        },
+        {
+            "pinName": "VSS_ANALOG",
+            "adl-PRvpNetName": "GND",
+            "signalDirectionWRTEc": "Power"
+        },
+        {
+            "pinName": "GPIO000/SYSPWR_PRES &\nVCI_IN3#/I2C11_SDA",
+            "adl-PRvpNetName": "PM_SLP_SUS_N",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO226",
+            "adl-PRvpNetName": "EC_DS3",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO060/KBRST/TST_CLK_OUT/UART1_DCD#",
+            "adl-PRvpNetName": "EC_FAN_PWR_DISABLE_N",
+            "muxConfig": "GPIO",
+            "defaultState": "Low",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO050/ICT0_TACH0",
+            "adl-PRvpNetName": "CPU_TACHO_FAN",
+            "muxConfig": "TACHO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO200/ADC00/TRACEDAT0",
+            "adl-PRvpNetName": "EC_TRACE_DATA_0",
+            "muxConfig": "TRACE",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "IO"
+        },
+        {
+            "pinName": "GPIO201/ADC01/TRACEDAT1",
+            "adl-PRvpNetName": "EC_TRACE_DATA_1",
+            "muxConfig": "TRACE",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "IO"
+        },
+        {
+            "pinName": "GPIO202/ADC02/TRACEDAT2",
+            "adl-PRvpNetName": "EC_TRACE_DATA_2",
+            "muxConfig": "TRACE",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "IO"
+        },
+        {
+            "pinName": "GPIO203/ADC03/TRACEDAT3",
+            "adl-PRvpNetName": "EC_TRACE_DATA_3",
+            "muxConfig": "TRACE",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "IO"
+        },
+        {
+            "pinName": "GPIO205/ADC05",
+            "adl-PRvpNetName": "VR_THERM_IN",
+            "muxConfig": "ADC",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO206/ADC06",
+            "adl-PRvpNetName": "DDR_THERM_IN",
+            "muxConfig": "ADC",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO020/KSI1",
+            "adl-PRvpNetName": "KBC_SCANIN<1>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO021/KSI2",
+            "adl-PRvpNetName": "KBC_SCANIN<2>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO151/ICT4/KSO15",
+            "adl-PRvpNetName": "KBC_SCANOUT<15>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO152/KSO14/I2C07_SDA_ALT",
+            "adl-PRvpNetName": "KBC_SCANOUT<14>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO017/KSI0/UART0_DCD#",
+            "adl-PRvpNetName": "KBC_SCANIN<0>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO040/GPTP_OUT2/KSO00/UART1_CTS#",
+            "adl-PRvpNetName": "KBC_SCANOUT<0>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO032/KSI7/GPTP_OUT0/UART0_RI#",
+            "adl-PRvpNetName": "KBC_SCANIN<7>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO031/KSI6/GPTP_OUT1",
+            "adl-PRvpNetName": "KBC_SCANIN<6>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO132/I2C06_SDA/KSO16",
+            "adl-PRvpNetName": "TYPEC_EC_SMBUS_ALERT_0_R",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input",
+            "interruptCapability": "FALLING"
+        },
+        {
+            "pinName": "GPIO064/PCI_RESET#",
+            "adl-PRvpNetName": "EC_SLATEMODE_HALLOUT_SNSR_R",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input",
+            "interruptCapability": "BOTH"
+        },
+        {
+            "pinName": "GPIO066/ESPI_CS#/I2C13_SDA",
+            "adl-PRvpNetName": "ESPI_CS0_EC_R_N",
+            "muxConfig": "ESPI",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO061/ESPI_RE\nSET#/PWM7_ALT/nEC_SCI_ALT",
+            "adl-PRvpNetName": "ESPI_RST_EC_R_N",
+            "muxConfig": "ESPI",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO065/ESPI_CLKI2C13_SCL/ICT5_ALT",
+            "adl-PRvpNetName": "ESPI_CLK_EC_R",
+            "muxConfig": "ESPI",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO070/ESPI_IO0/I2C14_SDA",
+            "adl-PRvpNetName": "ESPI_IO0_EC_R",
+            "muxConfig": "ESPI",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "IO"
+        },
+        {
+            "pinName": "GPIO071/ESPI_IO1/I2C14_SCL",
+            "adl-PRvpNetName": "ESPI_IO1_EC_R",
+            "muxConfig": "ESPI",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "IO"
+        },
+        {
+            "pinName": "GPIO072/ESPI_IO2/I2C01_SDA_ALT",
+            "adl-PRvpNetName": "ESPI_IO2_EC_R",
+            "muxConfig": "ESPI",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "IO"
+        },
+        {
+            "pinName": "GPIO073/ESPI_IO3/I2C01_SCL_ALT",
+            "adl-PRvpNetName": "ESPI_IO3_EC_R",
+            "muxConfig": "ESPI",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "IO"
+        },
+        {
+            "pinName": "GPIO011/nSMI_ALT/PWM4/ICT7",
+            "adl-PRvpNetName": "MIC_PRIVACY_SWITCH",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO063/ESPI_ALERT#/PWM6_ALT/ICT8",
+            "adl-PRvpNetName": "ESPI_ALERT_EC_N",
+            "muxConfig": "ESPI",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO224/GPTP_IN0/SHD_IO1",
+            "adl-PRvpNetName": "EC_SPI_MISO",
+            "muxConfig": "SPI",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO016/GPTP_IN1/SHD_IO3/ICT3(DSW_P\nWROK)",
+            "adl-PRvpNetName": "EC_SPI_HOLD",
+            "muxConfig": "SPI",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO227/SHD_IO2[PWRGD_STRAP]",
+            "adl-PRvpNetName": "EC_SPI_WP",
+            "muxConfig": "SPI",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO223/SHD_IO0",
+            "adl-PRvpNetName": "EC_SPI_MOSI",
+            "muxConfig": "SPI",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO055(RSMRST#)/PWM2/SHD_CS0#[BSS_STRAP]",
+            "adl-PRvpNetName": "EC_SPI_CS0_N",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO056/PWM3/SHD_CLK",
+            "adl-PRvpNetName": "EC_SPI_CLK",
+            "muxConfig": "SPI",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO012/I2C07_SDA/SLV_SPI_IO2",
+            "adl-PRvpNetName": "RSMRST_PWRGD_EC_N",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO013/I2C07_SCL/SLV_SPI_IO3",
+            "adl-PRvpNetName": "SAF_G3_DETECT",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO130/I2C01_SDA/SLV_SPI_IO0",
+            "adl-PRvpNetName": "TYPEC_EC_SMBUS1_DATA",
+            "muxConfig": "I2C",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "IO"
+        },
+        {
+            "pinName": "GPIO131/I2C01_SCL/SLV_SPI_CS#",
+            "adl-PRvpNetName": "TYPEC_EC_SMBUS1_CLK",
+            "muxConfig": "I2C",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO140/I2C06_SCL/ICT5/KSO17",
+            "adl-PRvpNetName": "PM_BATLOW_N",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO115/PS2_DAT0A",
+            "adl-PRvpNetName": "DNX_FORCE_RELOAD_EC_R",
+            "muxConfig": "GPIO",
+            "defaultState": "Low",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO052/ICT2_TACH2",
+            "adl-PRvpNetName": "STD_ADP_PRSNT",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO002/PWM5/SHD_CS1#",
+            "adl-PRvpNetName": "EC_SPI_CS1_N",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO014/PWM6/SLV_SPI_IO2/GPTP_IN2",
+            "adl-PRvpNetName": "KBD_BKLT_CTRL",
+            "muxConfig": "PWM",
+            "defaultState": "Low",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO026/KSI3/UART0_DTR#/I2C12_SDA",
+            "adl-PRvpNetName": "KBC_SCANIN<3>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO027/KSI4/UART0_DSR#/I2C12_SCL",
+            "adl-PRvpNetName": "KBC_SCANIN<4>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO030/KSI5/I2C10_SDA",
+            "adl-PRvpNetName": "KBC_SCANIN<5>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO107/nSMI/KSO04/I2C10_SCL",
+            "adl-PRvpNetName": "KBC_SCANOUT<4>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO120/KSO07/UART1_DTR#",
+            "adl-PRvpNetName": "KBC_SCANOUT<7>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO112/KSO05",
+            "adl-PRvpNetName": "KBC_SCANOUT<5>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO113/KSO06/ICT9",
+            "adl-PRvpNetName": "KBC_SCANOUT<6>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO114/PS2_CLK0A/nEC_SCI",
+            "adl-PRvpNetName": "SMC_WAKE_SCI_N",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "pushpullOpenDrain": "Open Drain",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO042/PECI_DAT/SB-TSI_DAT",
+            "adl-PRvpNetName": "PECI_EC",
+            "muxConfig": "PECI",
+            "signalDirectionWRTEc": "BI"
+        },
+        {
+            "pinName": "GPIO043/SB-TSI_CLK",
+            "adl-PRvpNetName": "SYS_PWROK_EC_R",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "pushpullOpenDrain": "Open Drain"
+        },
+        {
+            "pinName": "GPIO053/PWM0/SLV_SPI_MSTR_INT",
+            "adl-PRvpNetName": "CPU_PWM_FAN",
+            "muxConfig": "PWM",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO054/PWM1/SLV_SPI_SCLK",
+            "adl-PRvpNetName": "PM_RSMRST_R_N",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO170/UART1_TX/CEC_OUT[JTAG_STRAP]",
+            "adl-PRvpNetName": "EC_JTAG_STRAP",
+            "muxConfig": "JTAG",
+            "defaultState": "Low",
+            "signalDirectionWRTEc": "STRAP"
+        },
+        {
+            "pinName": "JTAG_RST#",
+            "adl-PRvpNetName": "EC_JTAG_RST_N",
+            "muxConfig": "JTAG",
+            "defaultState": "High"
+        },
+        {
+            "pinName": "GPIO104/UART0_TX/TFDP_CLK[VTR2_STRAP]",
+            "adl-PRvpNetName": "EC_VTR2_STRAP",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "STRAP"
+        },
+        {
+            "pinName": "GPIO105/UART0_RX/TFDP_DATA/TRACECLK",
+            "adl-PRvpNetName": "EC_TRACE_CLK",
+            "muxConfig": "TRACE"
+        },
+        {
+            "pinName": "GPIO046/KSO02/ICT11",
+            "adl-PRvpNetName": "KBC_SCANOUT<2>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO047/KSO03/PWM3_ALT/ICT13",
+            "adl-PRvpNetName": "KBC_SCANOUT<3>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO121/PVT_IO0/KSO08",
+            "adl-PRvpNetName": "KBC_SCANOUT<8>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO122/PVT_IO1/KSO09",
+            "adl-PRvpNetName": "KBC_SCANOUT<9>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO123/PVT_IO2/KSO10",
+            "adl-PRvpNetName": "KBC_SCANOUT<10>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO126/PVT_IO3/KSO13",
+            "adl-PRvpNetName": "KBC_SCANOUT<13>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO124/PVT_CS#/KSO11/ICT12",
+            "adl-PRvpNetName": "KBC_SCANOUT<11>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO125/PVT_CLK/KSO12",
+            "adl-PRvpNetName": "KBC_SCANOUT<12>",
+            "muxConfig": "KSCAN",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO127/A20M/UART1_RTS#",
+            "adl-PRvpNetName": "KBC_CAPSLOCK",
+            "muxConfig": "GPIO",
+            "defaultState": "Low",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO156/LED0",
+            "adl-PRvpNetName": "PEG_RTD3_COLD_MOD_EC",
+            "muxConfig": "GPIO",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO157/LED1",
+            "adl-PRvpNetName": "Not used",
+            "muxConfig": "PWM"
+        },
+        {
+            "pinName": "GPIO007/I2C03_SDA/PS2_CLK0B",
+            "adl-PRvpNetName": "PS2_KB_CLK",
+            "muxConfig": "PS2",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "IO"
+        },
+        {
+            "pinName": "GPIO010/I2C03_SCL/PS2_DAT0B",
+            "adl-PRvpNetName": "PS2_KB_DATA",
+            "muxConfig": "PS2",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "IO"
+        },
+        {
+            "pinName": "GPIO154/I2C02_SDA/PS2_CLK1B",
+            "adl-PRvpNetName": "PS2_MOUSE_CLK",
+            "muxConfig": "PS2",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "IO"
+        },
+        {
+            "pinName": "GPIO155/I2C02_SCL/PS2_DAT1B",
+            "adl-PRvpNetName": "PS2_MOUSE_DATA",
+            "muxConfig": "PS2",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "IO"
+        },
+        {
+            "pinName": "GPIO246/CTOUT1_ALT/CMP_VREF0",
+            "adl-PRvpNetName": "VOL_DOWN_EC",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO244/UART_-\nCLK_ALT/nEMI_INT_ALT/CMP_VIN1",
+            "adl-PRvpNetName": "EC_GPPC_B14",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO242/CMP_VIN0",
+            "adl-PRvpNetName": "VOL_UP_EC",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO241/PWM0_ALT/CMP_VOUT0",
+            "adl-PRvpNetName": "EC_WAKE_CLK_R",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO045/KSO01/PWM2_ALT/ICT14[CR_STRAP]",
+            "adl-PRvpNetName": "KBC_SCANOUT<1>",
+            "muxConfig": "KSCAN",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO145/I2C09_SDA/JTAG_TDI/UART2_RX",
+            "adl-PRvpNetName": "EC_UART_RX",
+            "muxConfig": "UART",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO146/I2C09_SCL/JTAG_TDO/UART2_TX",
+            "adl-PRvpNetName": "EC_UART_TX",
+            "muxConfig": "UART",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO147/I2C15_SDA/JTAG_CLK/UART2_DSR#",
+            "adl-PRvpNetName": "EC_JTAG_TCK",
+            "muxConfig": "JTAG",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO150/I2C15_SCL/JTAG_TMS/UART2_DTR#",
+            "adl-PRvpNetName": "EC_JTAG_TMS",
+            "muxConfig": "JTAG",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO004/I2C00_SCL/UART2_DCD#",
+            "adl-PRvpNetName": "SMB_BS_CLK",
+            "muxConfig": "I2C",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO003/I2C00_SDA/UART2_RI#",
+            "adl-PRvpNetName": "SMB_BS_DATA",
+            "muxConfig": "I2C",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "IO"
+        },
+        {
+            "pinName": "GPIO255/UART1_RX_ALT/UART1_DSR#",
+            "adl-PRvpNetName": "KBC_NUMLOCK",
+            "muxConfig": "GPIO",
+            "defaultState": "Low",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO062(RESETO#)/I2C11_SCL",
+            "adl-PRvpNetName": "PCA9555_1_R_INT_N",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "pushpullOpenDrain": "Open Drain",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO051/ICT1_TACH1",
+            "adl-PRvpNetName": "PCA9555_0_R_INT_N",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "pushpullOpenDrain": "Open Drain",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO204/ADC04",
+            "adl-PRvpNetName": "AMBIENT_THERM_IN",
+            "muxConfig": "ADC",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO207/ADC07[CMP_STRAP]",
+            "adl-PRvpNetName": "SKIN_THERM_IN",
+            "muxConfig": "ADC",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO175/CMP_VOUT1/PWM8_ALT",
+            "adl-PRvpNetName": "SX_EXIT_HOLDOFF_N",
+            "muxConfig": "GPIO",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO254/PWM1_ALT/CMP_VREF1",
+            "adl-PRvpNetName": "PM_PWRBTN_LED",
+            "muxConfig": "PWM",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO165/32KHZ_IN/CTOUT0",
+            "adl-PRvpNetName": "DG2_PRESENT",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO141/I2C05_SDA/UART2_RTS#",
+            "adl-PRvpNetName": "TYPEC_EC_SMBUS3_DATA",
+            "muxConfig": "I2C",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "IO"
+        },
+        {
+            "pinName": "GPIO142/I2C05_SCL/UART2_CTS#",
+            "adl-PRvpNetName": "TYPEC_EC_SMBUS3_CLK",
+            "muxConfig": "I2C",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO143/I2C04_SDA/UART0_CTS#",
+            "adl-PRvpNetName": "SML0B_DATA",
+            "muxConfig": "I2C",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "IO"
+        },
+        {
+            "pinName": "GPIO144/I2C04_SCL/UART0_RTS#",
+            "adl-PRvpNetName": "SML0B_CLK",
+            "muxConfig": "I2C",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO153/LED2",
+            "adl-PRvpNetName": "H_CATERR_EC_N",
+            "muxConfig": "PWM",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO162/VCI_IN1#",
+            "adl-PRvpNetName": "BATT_ID",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO163/VCI_IN0#",
+            "adl-PRvpNetName": "PWRBTN_EC_IN_N",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO253/BGPO0",
+            "adl-PRvpNetName": "PROCHOT_EC",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "pushpullOpenDrain": "Open Drain",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO172/VCI_OVRD_IN",
+            "adl-PRvpNetName": "BC_ACOK_EC_IN",
+            "muxConfig": "GPIO",
+            "defaultState": "High",
+            "signalDirectionWRTEc": "Input"
+        },
+        {
+            "pinName": "GPIO250/VCI_OUT",
+            "adl-PRvpNetName": "EC_VCI_OUT_WAKE_R",
+            "muxConfig": "GPIO",
+            "defaultState": "Low",
+            "signalDirectionWRTEc": "Output"
+        },
+        {
+            "pinName": "GPIO044/VREF_VTT",
+            "adl-PRvpNetName": "+VREF_PECI_EC",
+            "muxConfig": "PECI",
+            "signalDirectionWRTEc": "Power"
+        },
+        {
+            "pinName": "VTR_PLL",
+            "signalDirectionWRTEc": "Power"
+        },
+        {
+            "pinName": "VBAT",
+            "signalDirectionWRTEc": "Power"
+        },
+        {
+            "pinName": "VSS1",
+            "signalDirectionWRTEc": "Power"
+        },
+        {
+            "pinName": "VTR_REG",
+            "signalDirectionWRTEc": "Power"
+        },
+        {
+            "pinName": "VREF_ADC",
+            "signalDirectionWRTEc": "Power"
+        },
+        {
+            "pinName": "VSS2",
+            "signalDirectionWRTEc": "Power"
+        },
+        {
+            "pinName": "VTR1",
+            "signalDirectionWRTEc": "Power"
+        },
+        {
+            "pinName": "VTR_ANALOG",
+            "signalDirectionWRTEc": "Power"
+        },
+        {
+            "pinName": "VR_CAP",
+            "signalDirectionWRTEc": "Power"
+        },
+        {
+            "pinName": "VSS3",
+            "signalDirectionWRTEc": "Power"
+        },
+        {
+            "pinName": "VTR2",
+            "signalDirectionWRTEc": "Power"
+        },
+        {
+            "pinName": "VTR3",
+            "signalDirectionWRTEc": "Power"
+        },
+        {
+            "pinName": "VSS_ADC",
+            "signalDirectionWRTEc": "Power"
+        },
+        {
+            "pinName": "VTR1_ADC"
+        },
+        {
+            "pinName": "VTR1"
+        },
+        {
+            "pinName": "VTR1"
+        },
+        {
+            "pinName": "VTR1"
+        }
+    ],
+    "ecIoExpander": [
+        {
+            "ioPins": "IO1_0",
+            "function": "Board_ID0",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO1_1",
+            "function": "Board_ID1",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO1_2",
+            "function": "Board_ID2",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO1_3",
+            "function": "Board_ID3",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO1_4",
+            "function": "Board_ID4",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO1_5",
+            "function": "Board_ID5",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO1_6",
+            "function": "BOM_ID0",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO1_7",
+            "function": "BOM_ID1",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_0",
+            "function": "BOM_ID2",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_1",
+            "function": "FAB_ID0",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_2",
+            "function": "FAB_ID1",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_3",
+            "function": "SPD_PRSNT",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_4",
+            "function": "DISPLAY_ID0",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_5",
+            "function": "DISPLAY_ID1",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_6",
+            "function": "DISPLAY_ID2",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_7",
+            "function": "DISPLAY_ID3",
+            "direction": "Input"
+        }
+    ],
+    "ecIoExpander2": [
+        {
+            "ioPins": "IO1_0",
+            "function": "ESPI_TESTCRD_DET",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO1_1",
+            "function": "EC_TYPEC_SINK_DISABLE4",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO1_2",
+            "function": "EC_TYPEC_SINK_DISABLE3",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO1_3",
+            "function": "EC_TYPEC_SINK_DISABLE2",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO1_4",
+            "function": "EC_TYPEC_SINK_DISABLE1",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO1_5",
+            "function": "KBC_SCROLLOCK",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO1_6",
+            "function": "C10_GATE_LED",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO1_7",
+            "function": "CS_INDICATE_LED",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO0_0",
+            "function": "PD_AIC_R_DETECT1",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_1",
+            "function": "PD_AIC_R_DETECT2",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_2",
+            "function": "PNP_NPNP_SKU",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_3",
+            "function": "PMC_GPIO",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_4",
+            "function": "EC_SOC_VR_CNTRL_PE",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO0_5",
+            "function": "EC_M.2_SSD_PLN_DELAY",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO0_6",
+            "function": "VIRTUAL_BATTERY",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_7",
+            "function": "VIRTUAL_DOCK_DET_N",
+            "direction": "Input"
+        }
+    ]
+}

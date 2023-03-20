@@ -1,0 +1,1 @@
+py main.py --p "../edatasheets_creator/jobs/test/input_files/pipeline_processing/pipeline_json_sample_3.json"

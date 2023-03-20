@@ -1,0 +1,125 @@
+{
+  "description": "Pin outs and definitions",
+  "guid": "",
+  "mapType": "",
+  "sheets": [
+    {
+      "sheetName": "sheet-1",
+      "includeInDatasheet": true,
+      "ignoreBlanks": true,
+      "ignoreRows": [
+
+      ],
+      "ignoreCols": [
+        "E"
+      ],
+      "sections": [
+        {
+          "indexOn": {
+            "orientation": "column",
+            "header": {
+              "row": 9,
+              "col": "E"
+            },
+            "dataStartRow": 10,
+            "maxRows": 147
+          },
+          "fieldHeaders": {
+            "row": 9
+          },
+          "spans": {
+            "columns": [
+              "F",
+              "G",
+              "L",
+              "M",
+              "O",
+              "U"
+
+            ]
+
+          }
+        }
+      ]
+    },
+    {
+      "sheetName": "sheet-2",
+      "includeInDatasheet": true,
+      "ignoreBlanks": true,
+      "ignoreRows": [
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "ignoreCols": [
+
+      ],
+      "sections": [
+        {
+          "indexOn": {
+            "orientation": "column",
+            "header": {
+              "row": 11,
+              "col": "B"
+            },
+            "dataStartRow": 12,
+            "maxRows": 17
+          },
+          "fieldHeaders": {
+            "row": 11
+          },
+          "spans": {
+            "columns": [
+              "C",
+              "D"
+
+            ]
+
+          }
+        }
+      ]
+
+    },
+    {
+      "sheetName": "sheet-3",
+      "includeInDatasheet": true,
+      "ignoreBlanks": true,
+      "ignoreRows": [
+
+      ],
+      "ignoreCols": [
+
+      ],
+      "sections": [
+        {
+          "indexOn": {
+            "orientation": "column",
+            "header": {
+              "row": 11,
+              "col": "B"
+            },
+            "dataStartRow": 12,
+            "maxRows": 16
+          },
+          "fieldHeaders": {
+            "row": 11
+          },
+          "spans": {
+            "columns": [
+              "C",
+              "D"
+
+            ]
+
+          }
+        }
+      ]
+
+    }
+  ]
+}

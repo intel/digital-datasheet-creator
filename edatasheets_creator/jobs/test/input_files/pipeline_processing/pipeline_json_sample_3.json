@@ -1,0 +1,76 @@
+{
+    "pipelineDescription":"XLSX to JSON and JSON to XLSX test",
+    "pipelineJobs":[
+      {
+        "description": "Format converting",
+        "jobID":1,
+        "jobTasks": [
+		  {
+            "taskID" : 1,
+            "nextTask": 2,
+            "description": "XLS to XLSX",
+            "taskGUID": "31880d5a-641f-4a56-a2d6-8ff852698e7a",
+            "map": "",
+            "vocabulary":"",
+            "arg1": "../edatasheets_creator/jobs/test/input_files/pipeline_processing/sample.xls",
+            "arg2": "",
+            "output": "../edatasheets_creator/jobs/test/output_files/pipeline_processing/sample_2.xlsx"
+          },
+		  		  {
+            "taskID" : 2,
+            "nextTask": 3,
+            "description": "XLSM to XLSX",
+            "taskGUID": "69909873-c30a-4961-bd2a-b057054e3b62",
+            "map": "",
+            "vocabulary":"",
+            "arg1": "../edatasheets_creator/jobs/test/input_files/pipeline_processing/sample_diff.xlsm",
+            "arg2": "",
+            "output": "../edatasheets_creator/jobs/test/output_files/pipeline_processing/sample_diff.xlsx"
+          },
+          {
+            "taskID" : 3,
+            "nextTask": 4,
+            "description": "XLSX to json with map",
+            "taskGUID": "a8a799ed-969a-4c77-b21b-bf9b77461037",
+            "map": "../edatasheets_creator/jobs/test/input_files/pipeline_processing/Datasheet-map.json",
+            "vocabulary":"",
+            "arg1": "../edatasheets_creator/jobs/test/output_files/pipeline_processing/sample_2.xlsx",
+            "arg2": "",
+            "output": "../edatasheets_creator/jobs/test/output_files/pipeline_processing/sample_2.json"
+          },
+		  {
+            "taskID" : 4,
+            "nextTask": 5,
+            "description": "XLSX to json with map",
+            "taskGUID": "a8a799ed-969a-4c77-b21b-bf9b77461037",
+            "map": "../edatasheets_creator/jobs/test/input_files/pipeline_processing/Datasheet-map.json",
+            "vocabulary":"",
+            "arg1": "../edatasheets_creator/jobs/test/output_files/pipeline_processing/sample_diff.xlsx",
+            "arg2": "",
+            "output": "../edatasheets_creator/jobs/test/output_files/pipeline_processing/sample_diff.json"
+          },
+		  {
+            "taskID" : 5,
+            "nextTask": 6,
+            "description": "diff files",
+            "taskGUID": "6efd8af2-ea34-49f4-826c-a2ad45595c5f",
+            "map": "",
+			"vocabulary":"",
+            "arg1": "../edatasheets_creator/jobs/test/output_files/pipeline_processing/sample_2.json",
+            "arg2": "../edatasheets_creator/jobs/test/output_files/pipeline_processing/sample_diff.json",
+            "output": ""
+          },
+          {
+            "taskID" : 6,
+            "description": "Json to XLSX",
+            "taskGUID": "39794f7f-43c8-4156-a920-f718ed9b18df",
+            "map": "",
+            "vocabulary":"",
+            "arg1": "../edatasheets_creator/jobs/test/output_files/pipeline_processing/sample_2.json",
+            "arg2": "",
+            "output": "../edatasheets_creator/jobs/test/output_files/pipeline_processing/sample_3.xlsx"
+          }
+        ]
+      }
+    ]
+  }

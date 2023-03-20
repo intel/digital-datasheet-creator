@@ -1,0 +1,121 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "datasheet": {
+            "type": "object",
+            "properties": {
+                "namespace": {
+                    "type": "string"
+                },
+                "generatedOn": {
+                    "type": "string"
+                },
+                "generatedBy": {
+                    "type": "string"
+                },
+                "inputFile": {
+                    "type": "string"
+                },
+                "platformAbbreviation": {
+                    "type": "string"
+                },
+                "sku": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "tables": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "tableExample1": {
+                                "type": "object",
+                                "properties": {
+                                    "table_entries": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "exampleOfHeader1": {
+                                                    "type": "string"
+                                                },
+                                                "exampleOfHeader2": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "exampleOfHeader1",
+                                                "exampleOfHeader2"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "table_entries"
+                                ]
+                            },
+                            "tableExample2": {
+                                "type": "object",
+                                "properties": {
+                                    "table_entries": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "otherHeaderExample1": {
+                                                    "type": "string"
+                                                },
+                                                "otherHeaderExample2": {
+                                                    "type": "string"
+                                                },
+                                                "otherHeaderExample3": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "otherHeaderExample1",
+                                                "otherHeaderExample2",
+                                                "otherHeaderExample3"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "table_entries"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "attachments": {
+                    "type": "object",
+                    "properties": {
+                        "images": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "images"
+                    ]
+                }
+            },
+            "required": [
+                "attachments",
+                "generatedBy",
+                "generatedOn",
+                "inputFile",
+                "namespace",
+                "platformAbbreviation",
+                "sku",
+                "tables",
+                "title"
+            ]
+        }
+    },
+    "required": [
+        "datasheet"
+    ]
+}

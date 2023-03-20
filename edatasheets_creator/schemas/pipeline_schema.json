@@ -1,0 +1,87 @@
+{
+    "title":"Pipeline file schema",
+    "description":"This schema provides the structure to validate a pipeline file",
+    "type":"object",
+    "properties": {
+        "pipelineDescription":{
+            "type":"string",
+            "description": "Description of the pipeline file"
+        },
+        "pipelineJobs":{
+            "type":"array",
+            "description": "List of Jobs",
+            "items": {
+                "type":"object",
+                "description": "Job to group tasks",
+                "properties": {
+                    "description":{
+                        "type":"string",
+                        "description": "Job description"
+                    },
+                    "jobID":{
+                        "type":"number",
+                        "description": "Unique identifier of a job",
+                        "uniqueItems": true
+                    },
+                    "nextJob":{
+                        "type":"number",
+                        "description": "Next job to execute"
+                    },
+                    "jobTasks":{
+                        "type":"array",
+                        "description": "List of tasks",
+                        "items": {
+                            "type":"object",
+                            "description": "Task to perform an operation",
+                            "properties": {
+                                "taskID":{
+                                    "type":"number",
+                                    "description": "Unique identifier of a task",
+                                    "uniqueItems": true
+                                },
+                                "nextTask":{
+                                    "type":"number",
+                                    "description": "Next task to execute"
+                                },
+                                "description":{
+                                    "type":"string",
+                                    "description": "Description of the task"
+                                },
+                                "taskGUID":{
+                                    "type":"string",
+                                    "description": "Unique identifier of a plugin"
+                                },
+                                "map":{
+                                    "type":"string",
+                                    "description": "Field to define a path of a map file"
+                                },
+                                "vocabulary":{
+                                    "type":"string",
+                                    "description": "Field to define a path of a vocabulary file"
+                                },
+                                "arg1":{
+                                    "type":"string",
+                                    "description": "Field to define the arg1"
+                                },
+                                "arg2":{
+                                    "type":"string",
+                                    "description": "Field to define the arg2"
+                                },
+                                "output":{
+                                    "type":"string",
+                                    "description": "Field to define the output path"
+                                }
+                            },
+                            "additionalProperties": true,
+                            "required":["taskID", "description", "taskGUID", "map", "vocabulary", "arg1", "arg2", "output"]
+                        }
+                    }
+                },
+                "additionalProperties": false,
+                "required":["description", "jobID", "jobTasks"]
+            }
+        }
+    },
+    "additionalProperties": false,
+    "required":["pipelineDescription", "pipelineJobs"]
+}

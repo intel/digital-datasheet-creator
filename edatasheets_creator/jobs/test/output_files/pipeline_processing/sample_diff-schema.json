@@ -1,0 +1,28 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "inputFile": {
+            "type": "string"
+        },
+        "guid": {
+            "type": "string"
+        },
+        "createdOn": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "createdOn",
+        "description",
+        "guid",
+        "inputFile",
+        "title"
+    ]
+}

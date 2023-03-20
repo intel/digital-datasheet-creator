@@ -1,0 +1,2 @@
+python3 main.py --f "../edatasheets_creator/jobs/test/input_files/html_plugin/HTMLtoJSON_example.html" --o "../edatasheets_creator/jobs/test/output_files/html_files/HTMLtoJSON_example.json"
+

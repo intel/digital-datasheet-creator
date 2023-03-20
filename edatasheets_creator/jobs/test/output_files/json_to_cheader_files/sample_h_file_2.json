@@ -1,0 +1,623 @@
+{
+    "title": "Datasheet - sample_h_file_2",
+    "description": "Describes a part",
+    "inputFile": "sample_h_file_2.xlsx",
+    "guid": "1bdd4b69-0c13-459d-9d6f-22823bdc3a11",
+    "createdOn": "09/13/2022",
+    "adl-PEcGpioMappingWw394": [
+        {
+            "pinName": "GPIO067/VREF2_ADC",
+            "adl-PRvpNetName": "GPIO197",
+            "muxConfig": "PECI",
+            "signalDirectionWRTEc": "Power",
+            "defaultState": "Low",
+            "pushpullOpenDrain": "Open Drain",
+            "interruptCapability": "BOTH"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        },
+        {
+            "pinName": "GPIO067/VREF2_ADC"
+        }
+    ],
+    "ecIoExpander": [
+        {
+            "ioPins": "IO1_0",
+            "function": "Board_ID0",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO1_1",
+            "function": "Board_ID1",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO1_2",
+            "function": "Board_ID2",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO1_3",
+            "function": "Board_ID3",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO1_4",
+            "function": "Board_ID4",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO1_5",
+            "function": "Board_ID5",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO1_6",
+            "function": "BOM_ID0",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO1_7",
+            "function": "BOM_ID1",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_0",
+            "function": "BOM_ID2",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_1",
+            "function": "FAB_ID0",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_2",
+            "function": "FAB_ID1",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_3",
+            "function": "SPD_PRSNT",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_4",
+            "function": "DISPLAY_ID0",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_5",
+            "function": "DISPLAY_ID1",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_6",
+            "function": "DISPLAY_ID2",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_7",
+            "function": "DISPLAY_ID3",
+            "direction": "Input"
+        }
+    ],
+    "ecIoExpander2": [
+        {
+            "ioPins": "IO1_0",
+            "function": "ESPI_TESTCRD_DET",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO1_1",
+            "function": "EC_TYPEC_SINK_DISABLE4",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO1_2",
+            "function": "EC_TYPEC_SINK_DISABLE3",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO1_3",
+            "function": "EC_TYPEC_SINK_DISABLE2",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO1_4",
+            "function": "EC_TYPEC_SINK_DISABLE1",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO1_5",
+            "function": "KBC_SCROLLOCK",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO1_6",
+            "function": "C10_GATE_LED",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO1_7",
+            "function": "CS_INDICATE_LED",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO0_0",
+            "function": "PD_AIC_R_DETECT1",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_1",
+            "function": "PD_AIC_R_DETECT2",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_2",
+            "function": "PNP_NPNP_SKU",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_3",
+            "function": "PMC_GPIO",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_4",
+            "function": "EC_SOC_VR_CNTRL_PE",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO0_5",
+            "function": "EC_M.2_SSD_PLN_DELAY",
+            "direction": "Output"
+        },
+        {
+            "ioPins": "IO0_6",
+            "function": "VIRTUAL_BATTERY",
+            "direction": "Input"
+        },
+        {
+            "ioPins": "IO0_7",
+            "function": "VIRTUAL_DOCK_DET_N",
+            "direction": "Input"
+        }
+    ]
+}

@@ -1,0 +1,1218 @@
+{
+    "description": "Sample map file",
+    "guid": "76c6f334-1afe-4b32-9ba7-e1909a79b203",
+    "mapType": "spreadsheet",
+    "datasheetDescLocation" : {
+        "sheetName" : "Read me",
+        "row" : 2,
+        "col" : "A"
+    },
+    "sheets": [
+        {
+            "sheetName": "Read me",
+            "includeInDatasheet" : false
+        },
+        {
+            "sheetName": "PIN Mux (Arch)",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                255,
+                256
+            ],
+            "ignoreCols" : [
+                "ZZ",
+                "ZA"
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 2,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 4,
+                        "maxRows" : 255
+                    },
+                    "fieldHeaders" : {
+                                "row" : 2                                       
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "B"
+                        ]
+                    }
+                },
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 2,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 4,
+                        "maxRows" : 255
+                    },
+                    "fieldHeaders" : {
+                        "row" : 2 
+                    },  
+                    "spans" : {
+                        "columns" : [
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I"
+                        ]
+                    },
+                    "groupBy" : [
+
+                        {
+                            "name" : {
+                                "row" : 1,
+                                "col" : "C",
+                                "valueCol" : ""                                   
+                            },
+                            "spans" : {
+                                "columns" : [
+                                    "C",
+                                    "D",
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H",
+                                    "I"
+                                ]
+                            }
+                        },
+                        {
+                            "name" : {
+                                "row" : 3,
+                                "col" : "C",
+                                "valueCol" : ""
+                            },
+                            "spans" : {
+                                "columns" : [
+                                    "C",
+                                    "D",
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H",
+                                    "I"
+                                ]
+                            }                           
+                        }                 
+                    ]
+                },
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 2,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 4,
+                        "maxRows" : 255
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "J",
+                            "K",
+                            "L",
+                            "M"
+                        ]
+                    },
+                    "fieldHeaders" : {
+                                "row" : 2                                       
+                    },
+                    "groupBy" : [
+
+                        {
+                            "name" : {
+                                "row" : 1,
+                                "col" : "J",
+                                "valueCol" : ""                                   
+                            },
+                            "spans" : {
+                                "columns" : [
+                                    "J",
+                                    "K",
+                                    "L",
+                                    "M"
+                                ]
+                            }
+                        },
+                        {
+                            "name" : {
+                                "row" : 3,
+                                "col" : "J",
+                                "valueCol" : "K"
+                            },
+                            "spans" : {
+                                "columns" : [
+                                    "J",
+                                    "K",
+                                    "L",
+                                    "M"
+                                ]
+                            }                           
+                        }             
+                    ]
+                },
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 2,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 4,
+                        "maxRows" : 255
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "N",
+                            "O",
+                            "P",
+                            "Q"
+                        ]
+                    },
+                    "fieldHeaders" : {
+                                "row" : 2                                       
+                    },
+                    "groupBy" : [
+
+                        {
+                            "name" : {
+                                "row" : 1,
+                                "col" : "J",
+                                "valueCol" : ""                                   
+                            },
+                            "spans" : {
+                                "columns" : [
+                                    "N",
+                                    "O",
+                                    "P",
+                                    "Q"
+                                ]
+                            }
+                        },
+                        {
+                            "name" : {
+                                "row" : 3,
+                                "col" : "N",
+                                "valueCol" : "P"
+                            },
+                            "spans" : {
+                                "columns" : [
+                                    "N",
+                                    "O",
+                                    "P",
+                                    "Q"
+                                ]
+                            }                           
+                        }             
+                    ]
+                },
+                
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 2,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 4,
+                        "maxRows" : 255
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V"
+                        ]
+                    },
+                    "fieldHeaders" : {
+                                "row" : 2                                       
+                    },
+                    "groupBy" : [
+
+                        {
+                            "name" : {
+                                "row" : 1,
+                                "col" : "R",
+                                "valueCol" : ""                                   
+                            },
+                            "spans" : {
+                                "columns" : [
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U",
+                                    "V"
+                                ]
+                            }
+                        }
+                                     
+                    ]
+                },
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 2,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 4,
+                        "maxRows" : 255
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG"
+                        ]
+                    },
+                    "fieldHeaders" : {
+                                "row" : 2                                       
+                    },
+                    "groupBy" : [
+
+                        {
+                            "name" : {
+                                "row" : 1,
+                                "col" : "Z",
+                                "valueCol" : ""                                   
+                            },
+                            "spans" : {
+                                "columns" : [
+                                    "Z",
+                                    "AA",
+                                    "AB",
+                                    "AC",
+                                    "AD",
+                                    "AE",
+                                    "AF",
+                                    "AG"
+                                ]
+                            }
+                        }
+                                     
+                    ]
+                },
+
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 2,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 4,
+                        "maxRows" : 255
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "AH",
+                            "AI",
+                            "AJ",
+                            "AK",
+                            "AL",
+                            "AM",
+                            "AN",
+                            "AO"
+                        ]
+                    },
+                    "fieldHeaders" : {
+                                "row" : 2                                       
+                    },
+                    "groupBy" : [
+
+                        {
+                            "name" : {
+                                "row" : 1,
+                                "col" : "AH",
+                                "valueCol" : ""                                   
+                            },
+                            "spans" : {
+                                "columns" : [
+                                    "AH",
+                                    "AI",
+                                    "AJ",
+                                    "AK",
+                                    "AL",
+                                    "AM",
+                                    "AN",
+                                    "AO"
+                                ]
+                            }
+                        }
+                                     
+                    ]
+                },
+
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 2,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 4,
+                        "maxRows" : 255
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "AP",
+                            "AQ",
+                            "AR",
+                            "AS",
+                            "AT",
+                            "AU",
+                            "AV",
+                            "AW"
+                        ]
+                    },
+                    "fieldHeaders" : {
+                                "row" : 2                                       
+                    },
+                    "groupBy" : [
+
+                        {
+                            "name" : {
+                                "row" : 1,
+                                "col" : "AP",
+                                "valueCol" : ""                                   
+                            },
+                            "spans" : {
+                                "columns" : [ 
+                                    "AP",
+                                    "AQ",
+                                    "AR",
+                                    "AS",
+                                    "AT",
+                                    "AU",
+                                    "AV",
+                                    "AW"
+                                ]
+                            }
+                        }
+                                     
+                    ]
+                },
+
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 2,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 4,
+                        "maxRows" : 255
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "AX",
+                            "AY",
+                            "AZ",
+                            "BA",
+                            "BB",
+                            "BC",
+                            "BD",
+                            "BE"
+                        ]
+                    },
+                    "fieldHeaders" : {
+                                "row" : 2                                       
+                    },
+                    "groupBy" : [
+
+                        {
+                            "name" : {
+                                "row" : 1,
+                                "col" : "AX",
+                                "valueCol" : ""                                   
+                            },
+                            "spans" : {
+                                "columns" : [ 
+                                    "AX",
+                                    "AY",
+                                    "AZ",
+                                    "BA",
+                                    "BB",
+                                    "BC",
+                                    "BD",
+                                    "BE"
+                                ]
+                            }
+                        }
+                                     
+                    ]
+                },
+
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 2,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 4,
+                        "maxRows" : 255
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "BF",
+                            "BG",
+                            "BH",
+                            "BI",
+                            "BJ",
+                            "BK",
+                            "BL",
+                            "BM"
+                        ]
+                    },
+                    "fieldHeaders" : {
+                                "row" : 2                                       
+                    },
+                    "groupBy" : [
+
+                        {
+                            "name" : {
+                                "row" : 1,
+                                "col" : "BF",
+                                "valueCol" : ""                                   
+                            },
+                            "spans" : {
+                                "columns" : [ 
+                                    "BF",
+                                    "BG",
+                                    "BH",
+                                    "BI",
+                                    "BJ",
+                                    "BK",
+                                    "BL",
+                                    "BM"
+                                ]
+                            }
+                        }
+                                     
+                    ]
+                },
+
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 2,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 4,
+                        "maxRows" : 255
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "BN",
+                            "BO",
+                            "BP",
+                            "BQ",
+                            "BR",
+                            "BS",
+                            "BT",
+                            "BU"
+                        ]
+                    },
+                    "fieldHeaders" : {
+                                "row" : 2                                       
+                    },
+                    "groupBy" : [
+
+                        {
+                            "name" : {
+                                "row" : 1,
+                                "col" : "BN",
+                                "valueCol" : ""                                   
+                            },
+                            "spans" : {
+                                "columns" : [ 
+                                    "BN",
+                                    "BO",
+                                    "BP",
+                                    "BQ",
+                                    "BR",
+                                    "BS",
+                                    "BT",
+                                    "BU"
+                                ]
+                            }
+                        }
+                                     
+                    ]
+                },
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 2,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 4,
+                        "maxRows" : 255
+                    },
+                    "fieldHeaders" : {
+                                "row" : 2                                       
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "BV"
+                        ]
+                    }
+                }
+
+            ]
+       },
+
+
+       {
+        "sheetName": "Interface (Arch)",
+        "includeInDatasheet" : true,
+        "ignoreBlanks" : true,
+        "ignoreRows" : [
+            255,
+            256
+        ],
+        "ignoreCols" : [
+            "ZZ",
+            "ZA"
+        ],
+        "sections" : [ 
+            {
+                "indexOn" : {
+                    "orientation" : "column",
+                    "header" : {
+                        "row" : 33,
+                        "col" : "B"
+                    },
+                    "dataStartRow" : 34,
+                    "maxRows" : 14
+                },
+                "spans" : {
+                    "columns" : [
+                        "C",
+                        "D",
+                        "E"
+                    ]
+                },
+                "includeTags" : 
+                    [
+                        {
+                            "fieldLabel" : {
+                                "row" : 32,
+                                "col" : "A"
+                            },
+                            "fieldValue" : {
+                                "row" : 32,
+                                "col" : "B"
+                            }
+                        }
+                    ]
+                ,
+                "fieldHeaders" : {
+                            "row" : 32                                       
+                }
+            },
+            {
+                "indexOn" : {
+                    "orientation" : "column",
+                    "header" : {
+                        "row" : 33,
+                        "col" : "B"
+                    },
+                    "dataStartRow" : 34,
+                    "maxRows" : 14
+                },
+                "spans" : {
+                    "columns" : [
+                        "F",
+                        "G",
+                        "H",
+                        "I",
+                        "J",
+                        "K",
+                        "L",
+                        "M",
+                        "N",
+                        "O",
+                        "P",
+                        "Q",
+                        "R"
+                    ]
+                },
+                "includeTags" : 
+                    [
+                        {
+                            "fieldLabel" : {
+                                "row" : 32,
+                                "col" : "A"
+                            },
+                            "fieldValue" : {
+                                "row" : 32,
+                                "col" : "B"
+                            }
+                        }
+                    ]
+                ,
+                "fieldHeaders" : {
+                            "row" : 33                                      
+                }
+                
+            },
+
+
+            {
+                "indexOn" : {
+                    "orientation" : "column",
+                    "header" : {
+                        "row" : 58,
+                        "col" : "B"
+                    },
+                    "dataStartRow" : 59,
+                    "maxRows" : 9
+                },
+                "spans" : {
+                    "columns" : [
+                        "C",
+                        "D",
+                        "E"
+                    ]
+                },
+                "includeTags" : 
+                    [
+                        {
+                            "fieldLabel" : {
+                                "row" : 57,
+                                "col" : "A"
+                            },
+                            "fieldValue" : {
+                                "row" : 57,
+                                "col" : "B"
+                            }
+                        }
+                    ]
+                ,
+                "fieldHeaders" : {
+                            "row" : 57                                       
+                }
+            },
+            {
+                "indexOn" : {
+                    "orientation" : "column",
+                    "header" : {
+                        "row" : 58,
+                        "col" : "B"
+                    },
+                    "dataStartRow" : 59,
+                    "maxRows" : 9
+                },
+                "spans" : {
+                    "columns" : [
+                        "F",
+                        "G",
+                        "H",
+                        "I",
+                        "J",
+                        "K",
+                        "L",
+                        "M",
+                        "N",
+                        "O",
+                        "P",
+                        "Q",
+                        "R"
+                    ]
+                },
+                "includeTags" : 
+                    [
+                        {
+                            "fieldLabel" : {
+                                "row" : 57,
+                                "col" : "A"
+                            },
+                            "fieldValue" : {
+                                "row" : 57,
+                                "col" : "B"
+                            }
+                        }
+                    ]
+                ,
+                "fieldHeaders" : {
+                            "row" : 58                                      
+                }
+                
+            },
+
+
+            {
+                "indexOn" : {
+                    "orientation" : "column",
+                    "header" : {
+                        "row" : 78,
+                        "col" : "B"
+                    },
+                    "dataStartRow" : 79,
+                    "maxRows" : 4
+                },
+                "spans" : {
+                    "columns" : [
+                        "C",
+                        "D",
+                        "E"
+                    ]
+                },
+                "includeTags" : 
+                    [
+                        {
+                            "fieldLabel" : {
+                                "row" : 77,
+                                "col" : "A"
+                            },
+                            "fieldValue" : {
+                                "row" : 77,
+                                "col" : "B"
+                            }
+                        }
+                    ]
+                ,
+                "fieldHeaders" : {
+                            "row" : 77                                       
+                }
+            },
+            {
+                "indexOn" : {
+                    "orientation" : "column",
+                    "header" : {
+                        "row" : 78,
+                        "col" : "B"
+                    },
+                    "dataStartRow" : 79,
+                    "maxRows" : 4
+                },
+                "spans" : {
+                    "columns" : [
+                        "F",
+                        "G",
+                        "H",
+                        "I",
+                        "J",
+                        "K",
+                        "L",
+                        "M",
+                        "N",
+                        "O",
+                        "P",
+                        "Q",
+                        "R"
+                    ]
+                },
+                "includeTags" : 
+                    [
+                        {
+                            "fieldLabel" : {
+                                "row" : 77,
+                                "col" : "A"
+                            },
+                            "fieldValue" : {
+                                "row" : 77,
+                                "col" : "B"
+                            }
+                        }
+                    ]
+                ,
+                "fieldHeaders" : {
+                            "row" : 78                                      
+                }
+                
+            },
+
+
+
+
+            {
+                "indexOn" : {
+                    "orientation" : "column",
+                    "header" : {
+                        "row" : 93,
+                        "col" : "B"
+                    },
+                    "dataStartRow" : 94,
+                    "maxRows" : 52
+                },
+                "spans" : {
+                    "columns" : [
+                        "C",
+                        "D",
+                        "E"
+                    ]
+                },
+                "includeTags" : 
+                    [
+                        {
+                            "fieldLabel" : {
+                                "row" : 92,
+                                "col" : "A"
+                            },
+                            "fieldValue" : {
+                                "row" : 92,
+                                "col" : "B"
+                            }
+                        }
+                    ]
+                ,
+                "fieldHeaders" : {
+                            "row" : 92                                       
+                }
+            },
+            {
+                "indexOn" : {
+                    "orientation" : "column",
+                    "header" : {
+                        "row" : 93,
+                        "col" : "B"
+                    },
+                    "dataStartRow" : 94,
+                    "maxRows" : 52
+                },
+                "spans" : {
+                    "columns" : [
+                        "F",
+                        "G",
+                        "H",
+                        "I",
+                        "J",
+                        "K",
+                        "L",
+                        "M",
+                        "N",
+                        "O",
+                        "P",
+                        "Q",
+                        "R"
+                    ]
+                },
+                "includeTags" : 
+                    [
+                        {
+                            "fieldLabel" : {
+                                "row" : 92,
+                                "col" : "A"
+                            },
+                            "fieldValue" : {
+                                "row" : 92,
+                                "col" : "B"
+                            }
+                        }
+                    ]
+                ,
+                "fieldHeaders" : {
+                            "row" : 93                                      
+                }
+                
+            },
+
+
+
+
+            {
+                "indexOn" : {
+                    "orientation" : "column",
+                    "header" : {
+                        "row" : 157,
+                        "col" : "B"
+                    },
+                    "dataStartRow" : 94,
+                    "maxRows" : 9
+                },
+                "spans" : {
+                    "columns" : [
+                        "C",
+                        "D",
+                        "E"
+                    ]
+                },
+                "includeTags" : 
+                    [
+                        {
+                            "fieldLabel" : {
+                                "row" : 156,
+                                "col" : "A"
+                            },
+                            "fieldValue" : {
+                                "row" : 156,
+                                "col" : "B"
+                            }
+                        }
+                    ]
+                ,
+                "fieldHeaders" : {
+                            "row" : 156                                       
+                }
+            },
+            {
+                "indexOn" : {
+                    "orientation" : "column",
+                    "header" : {
+                        "row" : 157,
+                        "col" : "B"
+                    },
+                    "dataStartRow" : 94,
+                    "maxRows" : 9
+                },
+                "spans" : {
+                    "columns" : [
+                        "F",
+                        "G",
+                        "H",
+                        "I",
+                        "J",
+                        "K",
+                        "L",
+                        "M",
+                        "N",
+                        "O",
+                        "P",
+                        "Q",
+                        "R"
+                    ]
+                },
+                "includeTags" : 
+                    [
+                        {
+                            "fieldLabel" : {
+                                "row" : 156,
+                                "col" : "A"
+                            },
+                            "fieldValue" : {
+                                "row" : 156,
+                                "col" : "B"
+                            }
+                        }
+                    ]
+                ,
+                "fieldHeaders" : {
+                            "row" : 157                                      
+                }
+                
+            }
+
+
+
+
+
+
+
+
+            ]
+        },
+
+        {
+            "sheetName": "Basic Input Buffers (P)",
+            "includeInDatasheet"
+             : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                255,
+                256
+            ],
+            "ignoreCols" : [
+                "ZZ",
+                "ZA"
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 1,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 3,
+                        "maxRows" : 13
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "B",
+                            "C",
+                            "D",
+                            "E"
+                        ]
+                    },
+                    "fieldHeaders" : {
+                                "row" : 2                                       
+                    },
+                    "groupBy" : [
+
+                        {
+                            "name" : {
+                                "row" : 1,
+                                "col" : "B",
+                                "valueCol" : ""                                   
+                            },
+                            "spans" : {
+                                "columns" : [ 
+                                    "B",
+                                    "C",
+                                    "D",
+                                    "E"
+                                ]
+                            }
+                        }
+                                     
+                    ]
+                }
+            ]
+        },
+
+
+
+        {
+            "sheetName": "Basic Output Buffers (P)",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                255,
+                256
+            ],
+            "ignoreCols" : [
+                "ZZ",
+                "ZA"
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 1,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 3,
+                        "maxRows" : 23
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J"
+                        ]
+                    },
+                    "fieldHeaders" : {
+                                "row" : 2                                       
+                    },
+                    "groupBy" : [
+
+                        {
+                            "name" : {
+                                "row" : 1,
+                                "col" : "B",
+                                "valueCol" : ""                                   
+                            },
+                            "spans" : {
+                                "columns" : [ 
+                                    "B",
+                                    "C",
+                                    "D",
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J"
+                                ]
+                            }
+                        }
+                                     
+                    ]
+                }
+            ]
+        },
+
+
+        {
+            "sheetName": "C Buffer Type (Projct)",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                255,
+                256
+            ],
+            "ignoreCols" : [
+                "ZZ",
+                "ZA"
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 1,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 3,
+                        "maxRows" : 44
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G"
+                        ]
+                    },
+                    "fieldHeaders" : {
+                                "row" : 2                                       
+                    },
+                    "groupBy" : [
+
+                        {
+                            "name" : {
+                                "row" : 1,
+                                "col" : "B",
+                                "valueCol" : ""                                   
+                            },
+                            "spans" : {
+                                "columns" : [ 
+                                    "B",
+                                    "C",
+                                    "D",
+                                    "E",
+                                    "F",
+                                    "G"
+                                ]
+                            }
+                        }
+                                     
+                    ]
+                }
+            ]
+        }
+    ]
+}

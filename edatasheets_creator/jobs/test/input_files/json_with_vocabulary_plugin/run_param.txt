@@ -1,0 +1,2 @@
+py main.py --f "../edatasheets_creator/jobs/test/input_files/json_with_vocabulary_plugin/sample.json" --vocabulary "../edatasheets_creator/jobs/test/input_files/json_with_vocabulary_plugin/IEC-61360-4-lists-of-units-vocabulary.json" --o "../edatasheets_creator/jobs/test/output_files/json_with_vocabulary_files/output.json"
+

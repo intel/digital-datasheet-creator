@@ -1,0 +1,32 @@
+{
+    "pipelineDescription":"XLSX to JSON and JSON to XLSX test",
+    "pipelineJobs":[
+      {
+        "description": "Format converting",
+        "jobID":1,
+        "jobTasks": [
+          {
+            "taskID" : 1,
+            "nextTask": 2,
+            "description": "XLSX to json with map",
+            "taskGUID": "a8a799ed-969a-4c77-b21b-bf9b77461037",
+            "map": "C:/Users/crisptof/CCG-Engagement/E-Datasheets/digital-datasheets-creator/edatasheets_creator/maps/AA-007100-DS-4-ANX7498_Datasheet-map.json",
+            "vocabulary":"",
+            "arg1": "C:/Users/crisptof/CCG-Engagement/E-Datasheets/task_5241_files/AA-007100-DS-4-ANX7498_Datasheet.xlsx",
+            "arg2": "",
+            "output": "C:/Users/crisptof/CCG-Engagement/E-Datasheets/task_5241_files/AA-007100-DS-4-ANX7498_Datasheet.json"
+          },
+          {
+            "taskID" : 2,
+            "description": "Json to XLSX",
+            "taskGUID": "39794f7f-43c8-4156-a920-f718ed9b18df",
+            "map": "",
+            "vocabulary":"",
+            "arg1": "C:/Users/crisptof/CCG-Engagement/E-Datasheets/task_5241_files/AA-007100-DS-4-ANX7498_Datasheet.json",
+            "arg2": "",
+            "output": "C:/Users/crisptof/CCG-Engagement/E-Datasheets/task_5241_files/output/AA-007100-DS-4-ANX7498_Datasheet.xlsx"
+          }
+        ]
+      }
+    ]
+  }

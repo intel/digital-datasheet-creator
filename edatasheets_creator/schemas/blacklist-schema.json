@@ -1,0 +1,11 @@
+{
+    "$schema":"http://json-schema.org/draft-04/schema#",
+    "title":"Map file schema",
+    "description":"This schema provides the structure to validate a blacklist file",
+    "type":"array",
+    "items": {
+        "type":"string",
+        "description": "Words to skip when creating a vocabulary file"
+    },
+    "uniqueItems": true
+}

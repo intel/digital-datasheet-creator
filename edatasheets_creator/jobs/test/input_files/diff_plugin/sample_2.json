@@ -1,0 +1,129 @@
+{
+    "title": "Datasheet - sample-2",
+    "description": "Pad Paramters",
+    "inputFile": "sample-2.xlsx",
+    "guid": "04e3d0dd-f7b3-4161-915d-3ef0024cff6c",
+    "createdOn": "09/25/2022",
+    "pinMux": [
+        {
+            "numberOfPin": "A_A",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_B",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_C",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_D",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_E",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_F",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_G",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_H",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_I",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_J",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_K",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_L",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_M",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_N",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_O",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_P",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_Q",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_R",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_S",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "25_A",
+            "padIOBufferModel": "5B"
+        },
+        {
+            "numberOfPin": "A_T",
+            "powerRail": "NHMB",
+            "siliconPadNumber": "26_B",
+            "padIOBufferModel": "5B"
+        }
+    ]
+}
