@@ -398,15 +398,15 @@ Map files may be used to capture specific parts of a workbook.   These map files
 
 #### Overview of a Map File
 
-![Map File Top Level](./docs/images/map-file-top-level.png)
+![Map File Top Level](./edatasheets_creator/docs/images/map-file-top-level.png)
 
 Each worksheet within a workbook can include special processing rules
 
-![Worksheet Specification Top Level](./docs/images/map-file-individual-worksheet-top-level.PNG)
+![Worksheet Specification Top Level](./edatasheets_creator/docs/images/map-file-individual-worksheet-top-level.PNG)
 
 Next, each section will need to be described.  Sections are defined within the scope of a sheet item.  Subsets of each worksheet can be shaped using the language described here:
 
-![Specifying a section within a worksheet](./docs/images/map-file-section.png)
+![Specifying a section within a worksheet](./edatasheets_creator/docs/images/map-file-section.png)
 
 JSON object data can also be grouped under other column values.   A JSON object will be constructed under the specified group by columns.  These groupings are defined within a section object and produces JSON that is shaped as below:
 
@@ -420,7 +420,7 @@ JSON object data can also be grouped under other column values.   A JSON object 
     }
 
 
-![Specifying a grouping](./docs/images/map-file-groupby.PNG)
+![Specifying a grouping](./edatasheets_creator/docs/images/map-file-groupby.PNG)
 
 ## Plugins with Multiple Arguments
 This is an implementation introduced with the Directory Listing plugin, which allows the app to support more than 3 arguments of any type that the plugin needs.
