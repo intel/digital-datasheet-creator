@@ -938,6 +938,8 @@ class Plugin:
             if indexOn is not None:
                 columnIndex = -1
 
+                colsToIgnore = map.getColsToIgnore(sheetName)
+                ignoreBlanksFlag = map.ignoreBlanks(sheetName)
                 header = map.getValue(spreadsheettypes.SPREADSHEET_MAP_HEADER_FIELD, indexOn)
                 indexOnRow = indexOn[spreadsheettypes.SPREADSHEET_MAP_HEADER_FIELD][spreadsheettypes.SPREADSHEET_MAP_ROW_FIELD]
                 indexOnCol = indexOn[spreadsheettypes.SPREADSHEET_MAP_HEADER_FIELD][spreadsheettypes.SPREADSHEET_MAP_COL_FIELD]
@@ -948,109 +950,114 @@ class Plugin:
 
                 if spans is not None and len(spans) > 0:
                     for s in spans:
-                        val = None
-                        itemDict = None
-                        groupBy = None
-                        groupByItemHeaderDictList = None
-                        groupByItemHeaders = None
-                        itemSubDict = None
-                        deepKey = None
-                        newDict = None
-                        itemKeyName = None
-                        columnIndex += 1
+                        if s in colsToIgnore:
+                            columnIndex += 1
+                            pass
+                        else:
+                            val = None
+                            itemDict = None
+                            groupBy = None
+                            groupByItemHeaderDictList = None
+                            groupByItemHeaders = None
+                            itemSubDict = None
+                            deepKey = None
+                            newDict = None
+                            itemKeyName = None
+                            columnIndex += 1
 
-                        val = self.getColValueFromRow(rowValues, s, wb, rowNumber)
+                            val = self.getColValueFromRow(rowValues, s, wb, rowNumber)
 
-                        # if val is None:
-                        #     val = spreadsheettypes.SPREADSHEET_MAP_EMPTY_VAL
+                            # if val is None:
+                            #     val = spreadsheettypes.SPREADSHEET_MAP_EMPTY_VAL
+                            if ignoreBlanksFlag is True and len(str(val).strip()) == 0:
+                                pass
+                            elif ((val is not None) and (len(str(val)) > 0)):
+                                # this is the value from the key value pair to look up in the generated datasheet
 
-                        if ((val is not None) and (len(str(val)) > 0)):
-                            # this is the value from the key value pair to look up in the generated datasheet
+                                # if isinstance(val, str):
+                                #     val = val.strip()
 
-                            # if isinstance(val, str):
-                            #     val = val.strip()
+                                #     val = val.replace('\n', '')
 
-                            #     val = val.replace('\n', '')
+                                indexValue = self.getColValueFromRow(rowValues, headerCol, wb, rowNumber)
 
-                            indexValue = self.getColValueFromRow(rowValues, headerCol, wb, rowNumber)
+                                # itemDict is the subdocument containing the key.
 
-                            # itemDict is the subdocument containing the key.
+                                # check whether this is item is in a GroupBy.  If it is, get the subdocument and insert new value
+                                groupBy = map.getGroups(section)
+                                # groupByList = SpreadsheetMap.getGroupBySpansList(section)
 
-                            # check whether this is item is in a GroupBy.  If it is, get the subdocument and insert new value
-                            groupBy = map.getGroups(section)
-                            # groupByList = SpreadsheetMap.getGroupBySpansList(section)
+                                if groupBy is None:
+                                    itemDict = self.getDatasheetDict(datasheet, sheetKey, indexFieldName, indexValue)
 
-                            if groupBy is None:
-                                itemDict = self.getDatasheetDict(datasheet, sheetKey, indexFieldName, indexValue)
+                                if groupBy is not None:
 
-                            if groupBy is not None:
+                                    if SpreadsheetMap.columnInGroupByList(s, groupBy):
 
-                                if SpreadsheetMap.columnInGroupByList(s, groupBy):
+                                        # Build the header list for the subdocument field names to be added
+                                        groupByItemHeaderDictList = SpreadsheetMap.getGroupByItemHeaderDictList(groupBy)
+                                        groupByItemHeaders = self.getFieldHeaderList(
+                                            wb, sheetName, groupByItemHeaderDictList)  # get a list of the item headers
 
-                                    # Build the header list for the subdocument field names to be added
-                                    groupByItemHeaderDictList = SpreadsheetMap.getGroupByItemHeaderDictList(groupBy)
-                                    groupByItemHeaders = self.getFieldHeaderList(
-                                        wb, sheetName, groupByItemHeaderDictList)  # get a list of the item headers
+                                        # itemDict = self.getDatasheetDictGroupBy(datasheet, sheetKey, indexFieldName, indexValue, groupByItemHeaders[0])
+                                        itemDict = datasheet[sheetKey][rowNumTracker]
 
-                                    # itemDict = self.getDatasheetDictGroupBy(datasheet, sheetKey, indexFieldName, indexValue, groupByItemHeaders[0])
-                                    itemDict = datasheet[sheetKey][rowNumTracker]
+                                        itemSubDict = itemDict.get(groupByItemHeaders[0])  # get from a dictionary
 
-                                    itemSubDict = itemDict.get(groupByItemHeaders[0])  # get from a dictionary
+                                        # see if there is a subgroup in the itemDict
+                                        if itemSubDict is not None:
 
-                                    # see if there is a subgroup in the itemDict
-                                    if itemSubDict is not None:
+                                            # itemSubDict already exists so append the current key/value pair to the subdocument
+                                            # the document already exists, but when we pull this back, it is missing the top level padParameters key add it back in
+                                            itemSubDict = dict({groupByItemHeaders[0]: itemSubDict})
 
-                                        # itemSubDict already exists so append the current key/value pair to the subdocument
-                                        # the document already exists, but when we pull this back, it is missing the top level padParameters key add it back in
-                                        itemSubDict = dict({groupByItemHeaders[0]: itemSubDict})
+                                            deepKey = ""
+                                            for g in groupByItemHeaders:
+                                                deepKey = deepKey + g + '.'
+                                            deepKey = deepKey + fieldHeaders[columnIndex]
 
-                                        deepKey = ""
-                                        for g in groupByItemHeaders:
-                                            deepKey = deepKey + g + '.'
-                                        deepKey = deepKey + fieldHeaders[columnIndex]
+                                        else:
+
+                                            # No subdictionary found
+                                            # Create an empty dictionary with the top level groupby header
+                                            itemSubDict = dict({})
+
+                                            deepKey = ""
+                                            for g in groupByItemHeaders:
+                                                deepKey = deepKey + g + '.'
+                                            deepKey = deepKey + fieldHeaders[columnIndex]
+
+                                            if len(groupByItemHeaders) > 0:
+                                                for ih in groupByItemHeaders[1::]:
+
+                                                    newDict = dict({ih: {}})
+                                                    self.insertNestedDictionary(itemSubDict, newDict, groupByItemHeaders, groupByItemHeaders[0])
+
+                                        self.set(itemSubDict, deepKey, val)
+
+                                        # save the subdocument back to the index
+                                        itemKeyName = groupByItemHeaders[0]
+                                        itemDict[itemKeyName] = itemSubDict[itemKeyName]
 
                                     else:
 
-                                        # No subdictionary found
-                                        # Create an empty dictionary with the top level groupby header
-                                        itemSubDict = dict({})
-
-                                        deepKey = ""
-                                        for g in groupByItemHeaders:
-                                            deepKey = deepKey + g + '.'
-                                        deepKey = deepKey + fieldHeaders[columnIndex]
-
-                                        if len(groupByItemHeaders) > 0:
-                                            for ih in groupByItemHeaders[1::]:
-
-                                                newDict = dict({ih: {}})
-                                                self.insertNestedDictionary(itemSubDict, newDict, groupByItemHeaders, groupByItemHeaders[0])
-
-                                    self.set(itemSubDict, deepKey, val)
-
-                                    # save the subdocument back to the index
-                                    itemKeyName = groupByItemHeaders[0]
-                                    itemDict[itemKeyName] = itemSubDict[itemKeyName]
+                                        # Not a groupBy Element
+                                        itemDict[fieldHeaders[columnIndex]] = val
 
                                 else:
+                                    # this is not a groupBy element so just add it
+                                    # New value will be inserted into the subdocument and the datasheet updated
 
-                                    # Not a groupBy Element
-                                    itemDict[fieldHeaders[columnIndex]] = val
+                                    if val is not None and len(str(val)) > 0:
 
-                            else:
-                                # this is not a groupBy element so just add it
-                                # New value will be inserted into the subdocument and the datasheet updated
+                                        # ExceptionLogger.logDebug(__name__,"fieldHeaders=",fieldHeaders)
+                                        # ExceptionLogger.logDebug(__name__,"columnIndex=",columnIndex)
+                                        # ExceptionLogger.logDebug(__name__,"itemDict=",itemDict)
+                                        itemDict = dict({fieldHeaders[columnIndex]: val})
 
-                                if val is not None and len(str(val)) > 0:
+                                if itemDict is not None:
 
-                                    # ExceptionLogger.logDebug(__name__,"fieldHeaders=",fieldHeaders)
-                                    # ExceptionLogger.logDebug(__name__,"columnIndex=",columnIndex)
-                                    # ExceptionLogger.logDebug(__name__,"itemDict=",itemDict)
-                                    itemDict = dict({fieldHeaders[columnIndex]: val})
-
-                            if itemDict is not None:
-
-                                self.updateDatasheetDict(datasheet, sheetKey, indexFieldName, indexValue, itemDict, rowNumber, dataStartOffset)
+                                    self.updateDatasheetDict(datasheet, sheetKey, indexFieldName, indexValue, itemDict, rowNumber, dataStartOffset)
 
         except Exception as e:
             ExceptionLogger.logError(__name__, "", e)
