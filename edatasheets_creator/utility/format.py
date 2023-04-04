@@ -145,6 +145,31 @@ class Format:
         if field_name.lower() == "pinname":
             value = value.replace(' ', '')
         return value
+    
+    def format_name_spreadsheet(self, string: str) -> str:
+        """Replaces the supplied characters in FORMATTERS_NAME_MAP and converts the string to camel case for spreadsheet files.
+
+        Args:
+            string (str): string to format.
+
+        Returns:
+            str: formatted string.
+        """
+        try:
+            string = self.convert_to_camel_case(string)
+
+            string = self.format_by_mapper(string, self.FORMATTERS_NAME_MAP)
+
+            string = string.replace(' ', "")
+            string = string.replace('*', "")
+
+            if (string.endswith("-")):
+                string = string[:-1]
+
+            return string
+
+        except Exception as e:
+            ExceptionLogger.logError(__name__, "", e)
 
     def format_name(self, string: str) -> str:
         """Replaces the supplied characters in FORMATTERS_NAME_MAP and converts the string to camel case.

@@ -21,6 +21,7 @@ import json
 from edatasheets_creator.document.jsondatasheet import JsonDataSheet
 from edatasheets_creator.document.jsondatasheetschema import JsonDataSheetSchema
 from edatasheets_creator.utility.path_utilities import validateRealPath
+from edatasheets_creator.utility.format import Format
 
 
 from edatasheets_creator.functions import t
@@ -46,6 +47,7 @@ class Plugin:
         self._worksheetSectionIndexWritten = False  # used in multisection worksheets to indicate that index values are already written
         self._indexOnRow = -1
         self._indexOnCol = -1
+        self.format = Format()
 
     def __repr__(self):
         """
@@ -860,7 +862,8 @@ class Plugin:
                         data = self.getCellValue(wb, sheetName, fieldHeaderRow, col)
                     # if(headerProperties["merged"]):
                     #     spanHeader.append(spanHeader[-1])
-                    fieldHeader = JsonDataSheet.generateValidJsonFieldName(data)
+                    fieldHeader = self.format.format_name_spreadsheet(data)
+                    # fieldHeader = JsonDataSheet.generateValidJsonFieldName(data)
                     if fieldHeader not in spanHeader:
                         spanHeader.append(fieldHeader)
                     else:
