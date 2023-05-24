@@ -135,6 +135,7 @@ class Plugin:
                 # ExceptionLogger.logDebug(__name__,"datasheet:",datasheet)
 
                 # iterate through the sheets described in the map file, ignore other worksheets
+                datasheet[spreadsheettypes.SPREADSHEET_TABLES] = {}
                 for i in sheetNames:
 
                     ExceptionLogger.logInformation(__name__, t("\nProcessing") + " " + t("spreadsheet") + ":  " + i + "...")
@@ -160,9 +161,11 @@ class Plugin:
                 strMsg = "\n\n" + t("Writing") + " " + str((self._outputFileName)) + "...\n"
                 ExceptionLogger.logInformation(__name__, strMsg)
 
+                edatasheet = {spreadsheettypes.SPREADSHEET_DATASHEET: datasheet}
+
                 # pretty print JSON, preserving unicode characters
                 with open(self._outputFileName, "w", encoding='utf-8') as outfile:
-                    json.dump(datasheet, outfile, ensure_ascii=False, indent=serializationconstants.JSON_INDENT_DEFAULT)
+                    json.dump(edatasheet, outfile, ensure_ascii=False, indent=serializationconstants.JSON_INDENT_DEFAULT)
                     outfile.close()
 
                 # write the schema
@@ -205,11 +208,14 @@ class Plugin:
             # put the datasheet header on the datasheet
             self._datasheet = datasheetHeader
 
+            self._datasheet[spreadsheettypes.SPREADSHEET_TABLES] = {}
+            self._tablesDatasheet = self._datasheet[spreadsheettypes.SPREADSHEET_TABLES]
+
             # iterate through the sheets of the excel file
             for i in wb.sheetnames:
 
                 worksheetName = JsonDataSheet.generateValidJsonFieldName(str(i))
-                self._datasheet[worksheetName] = []
+                self._tablesDatasheet[worksheetName] = []
 
                 ExceptionLogger.logInformation(__name__, t("\nProcessing") + " " + t("spreadsheet") + ":  " + i + "...")
 
@@ -243,12 +249,14 @@ class Plugin:
                 # adding the values of the dictionary to the output file
                 strMsg = "\n\n" + t("Writing") + " " + str((self._outputFileName)) + "...\n"
                 ExceptionLogger.logInformation(__name__, strMsg)
-                self._datasheet[worksheetName].append(indexOnDict)
+                self._tablesDatasheet[worksheetName].append(indexOnDict)
                 indexOnDict = dict()
+
+                edatasheet = {spreadsheettypes.SPREADSHEET_DATASHEET: self._datasheet}
 
                 # pretty print JSON, preserving unicode characters
                 with open(self._outputFileName, "w", encoding='utf-8') as outfile:
-                    json.dump(self._datasheet, outfile, ensure_ascii=False, indent=serializationconstants.JSON_INDENT_DEFAULT)
+                    json.dump(edatasheet, outfile, ensure_ascii=False, indent=serializationconstants.JSON_INDENT_DEFAULT)
                     outfile.close()
 
             # writing the schema
@@ -513,12 +521,13 @@ class Plugin:
             # sheet = wb.active
             sheetKey = JsonDataSheet.generateValidJsonFieldName(sheetName)
 
-            datasheet[sheetKey] = []
+            tablesDatasheet = datasheet[spreadsheettypes.SPREADSHEET_TABLES]
+            tablesDatasheet[sheetKey] = []
 
             # at this point the active sheet should be set to the worksheet named in the sheetName argument
 
             sections = map.getSections(sheetName)
-            self.parseSections(datasheet, sheetKey, wb, sheetName, sections, map)
+            self.parseSections(tablesDatasheet, sheetKey, wb, sheetName, sections, map)
 
         except Exception as e:
             ExceptionLogger.logError(__name__, "", e)
@@ -766,7 +775,7 @@ class Plugin:
         except Exception as e:
             ExceptionLogger.logError(__name__, "", e)
 
-    def updateDatasheetDict(self, datasheet, sheetKey, key, value, updatedDict, rowNum, dataStartOffset):
+    def updateDatasheetDict(self, datasheet, sheetKey, key, value, updatedDict, rowNum, dataStartOffset, rowNumTracker, map, section):
         """
         Updates the datasheet output subdocument with new/updated values.
 
@@ -807,7 +816,11 @@ class Plugin:
             #         datasheet[sheetKey][foundIdx].update(updatedDict)
             dictKeys = list(updatedDict)
             key = dictKeys[0]
-            rowNumindex = rowNum - dataStartOffset
+            tagList = map.getIncludeTagsDictionaryList(section)
+            if tagList is None:
+                rowNumindex = rowNum - dataStartOffset
+            elif tagList is not None and len(tagList) > 0:
+                rowNumindex = (rowNumTracker + 1) - dataStartOffset
             datasheetDict = datasheet[sheetKey][rowNumindex]
             if (key in datasheet[sheetKey][rowNumindex]):
                 if (datasheetDict[key] != updatedDict[key]):
@@ -863,7 +876,6 @@ class Plugin:
                     # if(headerProperties["merged"]):
                     #     spanHeader.append(spanHeader[-1])
                     fieldHeader = self.format.format_name_spreadsheet(data)
-                    # fieldHeader = JsonDataSheet.generateValidJsonFieldName(data)
                     if fieldHeader not in spanHeader:
                         spanHeader.append(fieldHeader)
                     else:
@@ -1060,7 +1072,7 @@ class Plugin:
 
                                 if itemDict is not None:
 
-                                    self.updateDatasheetDict(datasheet, sheetKey, indexFieldName, indexValue, itemDict, rowNumber, dataStartOffset)
+                                    self.updateDatasheetDict(datasheet, sheetKey, indexFieldName, indexValue, itemDict, rowNumber, dataStartOffset, rowNumTracker, map, section)
 
         except Exception as e:
             ExceptionLogger.logError(__name__, "", e)

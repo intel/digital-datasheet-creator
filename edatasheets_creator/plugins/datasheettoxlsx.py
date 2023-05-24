@@ -19,6 +19,7 @@ from edatasheets_creator.functions import t
 from json import load
 from openpyxl import Workbook
 from edatasheets_creator.constants.datasheettoxlsxconstants import INITIAL_SHEET, HEADER_DATASHEET_LIST
+from edatasheets_creator.constants.datasheetconstants import DATASHEET_TABLES_LOWER, DATASHEET_DEFAULT_TITLE_LOWER
 from edatasheets_creator.constants.pluginconstants import XLSX_SUFIX, JSON_SUFIX
 from edatasheets_creator.utility.path_utilities import validateRealPath
 
@@ -166,7 +167,7 @@ class Plugin:
             eDataSheet.pop(key)
 
         # Creating and populating sheets
-        for sheetName, rowList in eDataSheet.items():
+        for sheetName, rowList in eDataSheet[DATASHEET_DEFAULT_TITLE_LOWER][DATASHEET_TABLES_LOWER].items():
 
             sheet = workbook.create_sheet(sheetName)
 

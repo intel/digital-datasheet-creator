@@ -110,6 +110,18 @@ class XMLUtilities:
         elements = list(source.iter())
         return len(elements) > 1
 
+    def has_table_element(self, source: Element) -> bool:
+        """Determines if the source Element has table elements inside.
+
+        Args:
+            source (Element): Element to determine.
+
+        Returns:
+            bool
+        """
+        elements = list(source.iter(transformer_constants.TABLES_CONTAINER))
+        return len(elements) > 1
+
     def get_images(self, source: Element) -> List[Element]:
         """Get the list of images (image tag) in a source.
 
@@ -497,18 +509,24 @@ class XMLUtilities:
                 column_name = dictionary[key].get(dita_c.LABEL_HEADER)
                 column_unit = dictionary[key].get(dita_c.UNIT_HEADER)
             else:
-                match = re.sub("(\d)+", ' ', key)  # noqa
-                pos = int(match) - 1
-                item = self.get_column_header_key_from_ordinal_pos(dictionary, pos)
-                column_name = dictionary[item].get(dita_c.LABEL_HEADER, None)
-                column_unit = dictionary[item].get(dita_c.UNIT_HEADER, None)
-                if column_name and len(column_name) < 1:
+                match = re.findall("(\d)+", key)
+                if match:
+                    pos = int(match[0]) - 1
+                    item = self.get_column_header_key_from_ordinal_pos(dictionary, pos)
+                    column_name = dictionary[item].get(dita_c.LABEL_HEADER, None)
+                    column_unit = dictionary[item].get(dita_c.UNIT_HEADER, None)
+                    if column_name and len(column_name) < 1:
+                        msg = f"get_column_name_from_dictionary_by_key:  Could not find value for key {key}"
+                        ExceptionLogger.logError(__name__, msg)
+                else:
                     msg = f"get_column_name_from_dictionary_by_key:  Could not find value for key {key}"
                     ExceptionLogger.logError(__name__, msg)
+                    raise Exception(msg)
             return column_name, column_unit
 
         except Exception as e:
-            raise ExceptionLogger.logError(__name__, "", e)
+            ExceptionLogger.logError(__name__, "", e)
+            raise e
 
     def get_column_header_key_from_ordinal_pos(self, dictionary: dict, position: int) -> str:
         """Returns the column header key from the dictionary, using the index value.

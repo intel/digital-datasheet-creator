@@ -118,7 +118,7 @@
                                         "maxRows":{
                                             "type": "integer",
                                             "description": "Max cout of rows to include in the indexing.",
-                                            "minimum": 1
+                                            "minimum": 0
                                         }
                                     },
                                     "additionalProperties": false,

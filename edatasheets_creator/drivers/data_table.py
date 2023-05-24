@@ -9,9 +9,6 @@
 # Copyright (c), Intel Corporation
 #
 # ********************** COPYRIGHT INTEL CORPORATION ***********************
-
-
-import json
 from pathlib import Path
 import re
 from xml.etree.ElementTree import Element  # nosec
@@ -20,62 +17,48 @@ Element is only used to create objects defined in the application code,
 not from the input files. The parse functionality is also secured by
 the implementation of defusedxml.Element tree.
 """
-from defusedxml import ElementTree
+from edatasheets_creator.drivers.edatasheet import EDatasheet
 import edatasheets_creator.constants.header_constants as header_constants
 import edatasheets_creator.constants.transformer_constants as transformer_constants
 import edatasheets_creator.constants.dita_constants as dita_c
-from edatasheets_creator.document.jsondatasheetschema import JsonDataSheetSchema
 from edatasheets_creator.utility.table_attributes_utilities import TableAttributesUtilities
 from edatasheets_creator.utility.format import Format
 from edatasheets_creator.utility.collateral_utilities import CollateralUtilities
 from typing import List
-from edatasheets_creator.utility.time_utilities import get_current_utc_datetime
 from edatasheets_creator.utility.xml_utilities import XMLUtilities
 from edatasheets_creator.logger.exceptionlogger import ExceptionLogger
 
 
 class DataTable:
-    def __init__(self, file_name, output_file_name):
-        self.file_name: str = file_name
-        self.output_file_name: str = output_file_name
+    def __init__(self, file_name, source: Element):
+        self.file_name_path: str = file_name
+        self.source: Element = source
         self.xml_utilities = XMLUtilities()
         self.collateral_utilities = CollateralUtilities()
         self.table_attributes_utilities = TableAttributesUtilities()
         self.format = Format()
         self.column_header_keys: dict[str, dict] = {}
+        self.document_title = self.xml_utilities.get_title(self.source)
+        self.file_name = Path(self.file_name_path).name
+        self.edatasheet = EDatasheet(self.document_title, self.file_name)
 
-    def transform(self):
-        """Call the main process to tranform the input file name, using the global path.
-        """
-        try:
-            self.transform_file(self.file_name)
-        except Exception as e:
-            ExceptionLogger.logError(__name__, "", e)
-
-    def transform_file(self, file_name: str):
-        """Execute the file processing using the given file_name.
-
-        Args:
-            file_name (str): pathname of the input file.
-        """
-        try:
-            self.process_file(file_name)
-        except Exception as e:
-            ExceptionLogger.logError(__name__, "", e)
-
-    def process_file(self, file_name: str):
+    def transform(self) -> dict:
         """Open the input file name and check if is a normal dita file or is an EDS Register file.
 
         Args:
             file_name (str): pathname of the input dita file.
+
+        Returns:
+            dict: Generated E-Datasheet from the Input Dita File.
         """
         try:
-            root = ElementTree.parse(file_name).getroot()
-
-            if (self.xml_utilities.is_eds_register_file(root)):
-                self.translate_xml_to_json(root)
+            edatasheet = {}
+            if (self.xml_utilities.is_eds_register_file(self.source)):
+                edatasheet = self.translate_xml_to_json(self.source)
             else:
-                self.build_output_xml_document(root)
+                edatasheet = self.build_output_xml_document(self.source)
+
+            return edatasheet
 
         except FileNotFoundError as fnf:
             ExceptionLogger.logError(__name__, "", fnf)
@@ -83,140 +66,70 @@ class DataTable:
         except Exception as e:
             ExceptionLogger.logError(__name__, "", e)
 
-    def translate_xml_to_json(self, source: Element):
+    def translate_xml_to_json(self, source: Element) -> dict:
         """If the input dita file, is an EDS Register file, we just convert it to a json file.
 
         Args:
             source (Element): Dita Element.
+
+        Returns:
+            dict: Generated E-Datasheet from the Input Dita File.
         """
         try:
-            target_namespace = self.xml_utilities.get_target_namespace()
             root_element = Element(header_constants.DATASHEET)
-
-            namespace_element = Element(self.xml_utilities.NAMESPACE_FIELD_NAME)
-            namespace_element.text = target_namespace
-
-            root_element.append(namespace_element)
-
-            # Build Output File Name
-            path = Path(self.file_name)
-
-            if self.output_file_name:
-                output_file_name = self.output_file_name
-            else:
-                output_file_name = str(path.parent) + "\\" + path.stem + ".json"
 
             root_element.append(source)
 
             if len(list(root_element.iter())) > 2:
                 try:
-                    msg = f"Writing the output json file: {output_file_name}...\n"
+                    msg = "Generating the output dictionary...\n"
                     ExceptionLogger.logInformation(__name__, msg)
 
                     dictionary = self.xml_utilities.xml_to_dictionary(root_element)
-                    with open(output_file_name, "w") as output_json:
-                        json.dump(dictionary, output_json, indent=2)
-
-                    json_schema = JsonDataSheetSchema(output_file_name)
-                    json_schema.write()
+                    edatasheet = self.edatasheet.get_edatasheet(dictionary)
+                    return edatasheet
 
                 except FileNotFoundError as fnf:
                     ExceptionLogger.logError(__name__, "", fnf)
 
             else:
-                msg = f"{path.name} was not converted."
+                msg = f"{self.file_name_path} was not converted."
                 ExceptionLogger.logError(__name__, msg)
 
         except Exception as e:
             ExceptionLogger.logError(__name__, "", e)
 
-    def build_output_xml_document(self, input: Element):
+    def build_output_xml_document(self, input: Element) -> dict:
         """Converts the readed xml (dita) document to an edatasheet format.
 
         Args:
             input (Element): Dita Element.
+
+        Returns:
+            dict: Generated E-Datasheet from the Input Dita File.
         """
         try:
-            target_namespace = self.xml_utilities.get_target_namespace()
             source_root = input
             title = self.xml_utilities.get_title(source_root)
 
             root_element = Element(header_constants.DATASHEET)
-            namespace_element = Element(self.xml_utilities.NAMESPACE_FIELD_NAME)
-            namespace_element.text = target_namespace
-
-            generated_on = get_current_utc_datetime()
-            generated_on_element = Element(header_constants.GENERATED_ON)
-            generated_on_element.text = generated_on
-
-            title_element = Element(header_constants.TITLE)
-            title_element.text = title.strip()
-
-            input_file_element = Element(header_constants.INPUT_FILE)
-            input_file_element.text = Path(self.file_name).name
-
-            generated_by_element = Element(header_constants.GENERATED_BY)
-            generated_by_element.text = transformer_constants.GENERATED_BY
-
-            platform_abbreviation = self.xml_utilities.get_first_platform_name(source_root)
-
-            platform_abbreviation_element = Element(header_constants.PLATFORM_ABBREVIATION)
-            platform_abbreviation_element.text = platform_abbreviation
-
-            segment_element = Element(header_constants.SKU)
-
-            segment_element.text = transformer_constants.UNKNOWN
-
-            root_element.append(namespace_element)
-            root_element.append(generated_on_element)
-            root_element.append(generated_by_element)
-            root_element.append(input_file_element)
-            root_element.append(platform_abbreviation_element)
-            root_element.append(segment_element)
-            root_element.append(title_element)
-
-            # Get the GUID from the file name
-            guid = self.collateral_utilities.get_first_guid_from_string(self.file_name)
-
-            if guid:
-                source_guid_element = Element(header_constants.GUID)
-                source_guid_element.text = guid
-                root_element.append(source_guid_element)
-
-            # Build Output File Name
-            path = Path(self.file_name)
-
-            if self.output_file_name:
-                output_file_name = self.output_file_name
-            else:
-                output_file_name = str(path.parent) + "\\" + path.stem + ".json"
 
             # Some DITA files do not have sections so we will have to have an alternate path for to handle that case
             tables_element = self.build_tables(root_element, title, self.xml_utilities.get_tables(source_root))
 
             tables_element = self.xml_utilities.build_attachments(root_element, source_root)
 
-            if len(list(root_element.iter())) > 2:
-                try:
-                    msg = f"Writing the output json file: {output_file_name}...\n"
-                    ExceptionLogger.logInformation(__name__, msg)
+            dictionary = {}
+            if len(list(root_element.iter())) > 1:
+                dictionary = self.xml_utilities.xml_to_dictionary(tables_element, (transformer_constants.ATTACHMENTS, transformer_constants.TABLE_ENTRIES))
 
-                    dictionary = self.xml_utilities.xml_to_dictionary(tables_element, (transformer_constants.TABLE_ENTRIES))
-                    with open(output_file_name, "w", encoding="utf8") as output_json:
-                        json.dump(dictionary, output_json, indent=2, ensure_ascii=False)
-
-                    json_schema = JsonDataSheetSchema(output_file_name)
-                    json_schema.write()
-
-                except FileNotFoundError as fnf:
-                    ExceptionLogger.logError(__name__, "", fnf)
-
-            else:
-                msg = f"{path.name} was not converted."
-                ExceptionLogger.logError(__name__, msg)
+            msg = "Generating the output dictionary...\n"
+            ExceptionLogger.logInformation(__name__, msg)
+            edatasheet = self.edatasheet.get_edatasheet(dictionary)
+            return edatasheet
 
         except Exception as e:
-            msg = f"File={self.file_name}, Message={e}"
+            msg = f"File={self.file_name_path}, Message={e}"
             ExceptionLogger.logError(__name__, msg)
 
     def build_tables(self, root_element: Element, document_title: str, table_list: List[Element]) -> Element:
@@ -250,14 +163,14 @@ class DataTable:
                         if builded_table:
                             root_element.append(builded_table)
                         else:
-                            ExceptionLogger.logError(__name__, f"Unexpected null encountered in building table entry in {self.file_name}")
+                            ExceptionLogger.logError(__name__, f"Unexpected null encountered in building table entry in {self.file_name_path}")
                     except Exception as e:
-                        msg = f"File={self.file_name}, Message={e}"
+                        msg = f"File={self.file_name_path}, Message={e}"
                         ExceptionLogger.logError(__name__, msg)
             return root_element
 
         except Exception as e:
-            msg = f"File={self.file_name}, Message={e}"
+            msg = f"File={self.file_name_path}, Message={e}"
             ExceptionLogger.logError(__name__, msg)
 
     def build_table_on_left(self, document_title: str, source: Element, table_attributes: Element) -> Element:
@@ -275,10 +188,13 @@ class DataTable:
             output_element: Element = None
             table_container: Element = None
             title = self.xml_utilities.get_title(source)
-            if self.xml_utilities.has_elements(table_attributes):
-                splitted_elements = title.split(transformer_constants.TITLE_SEPARATOR)
-                title = splitted_elements[-1].strip()
-            table_title = self.format.format_name(title)
+            if title and title != transformer_constants.UNKNOWN:
+                if self.xml_utilities.has_elements(table_attributes):
+                    splitted_elements = title.split(transformer_constants.TITLE_SEPARATOR)
+                    title = splitted_elements[-1].strip()
+                table_title = self.format.format_name(title)
+            else:
+                table_title = source.attrib.get(transformer_constants.ID_ATTRIBUTE, transformer_constants.UNKNOWN)
             table_rows = self.xml_utilities.get_row_body_elements(source)
 
             if (not self.initialize_fields(source)):
@@ -302,7 +218,7 @@ class DataTable:
 
                         table_container.append(table_entries)
                     except Exception as e:
-                        msg = f"Error encountered in extracting required values for row number {row_num} in {self.file_name}, Message={e}"
+                        msg = f"Error encountered in extracting required values for row number {row_num} in {self.file_name_path}, Message={e}"
                         ExceptionLogger.logError(__name__, msg)
                 if self.xml_utilities.has_elements(table_attributes):
                     table_container.append(table_attributes)
@@ -328,10 +244,13 @@ class DataTable:
             output_element: Element = None
             table_container: Element = None
             title = self.xml_utilities.get_title(source)
-            if self.xml_utilities.has_elements(table_attributes):
-                splitted_elements = title.split(transformer_constants.TITLE_SEPARATOR)
-                title = splitted_elements[-1].strip()
-            table_title = self.format.format_name(title)
+            if title and title != transformer_constants.UNKNOWN:
+                if self.xml_utilities.has_elements(table_attributes):
+                    splitted_elements = title.split(transformer_constants.TITLE_SEPARATOR)
+                    title = splitted_elements[-1].strip()
+                table_title = self.format.format_name(title)
+            else:
+                table_title = source.attrib.get(transformer_constants.ID_ATTRIBUTE, transformer_constants.UNKNOWN)
 
             if (not self.initialize_fields(source)):
                 msg = f"No table header detected in '{document_title}'. Table '{title}' will be skipped. "
@@ -350,10 +269,11 @@ class DataTable:
                 for row in table_rows:
                     try:
                         row_elements = self.build_row_on_top(row, col_element)
-                        table_entries = Element(transformer_constants.TABLE_ENTRIES)
-                        for entry in row_elements:
-                            table_entries.append(entry)
-                        table_container.append(table_entries)
+                        if row_elements:
+                            table_entries = Element(transformer_constants.TABLE_ENTRIES)
+                            for entry in row_elements:
+                                table_entries.append(entry)
+                            table_container.append(table_entries)
                     except Exception as e:
                         ExceptionLogger.logError(__name__, "", e)
                 if self.xml_utilities.has_elements(table_attributes):
@@ -413,7 +333,7 @@ class DataTable:
         except Exception as e:
             ExceptionLogger.logError(__name__, '', e)
 
-    def build_row_on_top(self, source: Element, col_element: dict[str, Element]) -> Element:
+    def build_row_on_top(self, source: Element, col_element: dict[str, Element]) -> List[Element]:
         """Gets the entries for non vertically oriented tables with his respective header
         in a XML structure to include it in the general table Element.
 
@@ -422,7 +342,7 @@ class DataTable:
             col_element (dict[str, Element]): Dictionary with the colnames to set the respective columns.
 
         Returns:
-            Element: XML Element with the entry info formatted to include it in the general table Element.
+            List[Element]: List XML Elements with the entries info formatted to include it in the general table Element.
         """
         try:
             entries = self.xml_utilities.get_entries(source)
@@ -431,7 +351,6 @@ class DataTable:
             column_number = 0
             for entry in entries:
                 column_index: List[str] = self.xml_utilities.get_column_index(entry)
-
                 if column_index:
                     for item in column_index:
                         col_element[item] = entry
@@ -446,6 +365,7 @@ class DataTable:
                 column_number += 1
 
             is_note = True
+
             for _, value in col_element.items():
                 if value != element_temp:
                     is_note = False
@@ -472,7 +392,6 @@ class DataTable:
                                     p_value = self.format.format_value(self.xml_utilities.get_text(p))
                                     p_string += p_value
                                 element_value = p_string
-
                             if element_value and len(element_value) > 0:
                                 column_name_element = Element(col_name)
                                 if col_unit:
@@ -547,14 +466,16 @@ class DataTable:
                         column_headers[dita_c.NAME_START] = name_start.strip()
                         if (len(name_start) < 4):
                             msg = f"The namest is incorrect: {name_start}"
-                            raise ExceptionLogger.logError(__name__, msg)
+                            ExceptionLogger.logError(__name__, msg)
+                            raise Exception(msg)
                         start = int(name_start[3:])
 
                     if name_end:
                         column_headers[dita_c.NAME_END] = name_end.strip()
                         if (len(name_end) < 4):
                             msg = f"The namest is incorrect: {name_end}"
-                            raise ExceptionLogger.logError(__name__, msg)
+                            ExceptionLogger.logError(__name__, msg)
+                            raise Exception(msg)
                         end = int(name_end[3:])
 
                     if more_rows:

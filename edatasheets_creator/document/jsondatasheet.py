@@ -114,6 +114,13 @@ class JsonDataSheet:
 
             datasheetHeader[datasheetconstants.DATASHEET_CREATION_DATE_FIELD] = JsonDataSheet.getCurrentDate()
 
+            datasheetHeader[datasheetconstants.DATASHEET_NAMESPACE_FIELD] = datasheetconstants.DATASHEET_NAMESPACE
+            datasheetHeader[datasheetconstants.DATASHEET_CREATION_BY_FIELD] = datasheetconstants.DATASHEET_CREATOR
+
+            datasheetHeader[datasheetconstants.DATASHEET_PLATFORM_ABBREVIATION_FIELD] = datasheetconstants.DATASHEET_DEFAULT_INPUT_FILE_FIELD
+            datasheetHeader[datasheetconstants.DATASHEET_SKU_FIELD] = datasheetconstants.DATASHEET_DEFAULT_INPUT_FILE_FIELD
+            datasheetHeader[datasheetconstants.DATASHEET_REVISION_FIELD] = datasheetconstants.DATASHEET_DEFAULT_INPUT_FILE_FIELD
+
             return datasheetHeader
 
         except Exception as e:
