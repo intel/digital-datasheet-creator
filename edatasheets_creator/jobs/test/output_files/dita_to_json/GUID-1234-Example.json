@@ -1,0 +1,46 @@
+{
+  "datasheet": {
+    "namespace": "https://www.intel.com/design",
+    "generatedOn": "2022-10-26T15:58:57",
+    "generatedBy": "Intel e-Datasheet Generator",
+    "inputFile": "GUID-1234-Example.xml",
+    "platformAbbreviation": "Unknown",
+    "sku": "Unknown",
+    "title": "Dita title example",
+    "tables": [
+      {
+        "tableExample1": {
+          "table_entries": [
+            {
+              "exampleOfHeader1": "Entry for header 1.1",
+              "exampleOfHeader2": "Entry for header 2.1"
+            },
+            {
+              "exampleOfHeader1": "Entry for header 1.2",
+              "exampleOfHeader2": "Entry for header 2.2"
+            }
+          ]
+        }
+      },
+      {
+        "tableExample2": {
+          "table_entries": [
+            {
+              "otherHeaderExample1": "OHE 1.1",
+              "otherHeaderExample2": "OHE 2.1",
+              "otherHeaderExample3": "OHE 3.1"
+            },
+            {
+              "otherHeaderExample1": "OHE 1.2",
+              "otherHeaderExample2": "OHE 2.2",
+              "otherHeaderExample3": "OHE 3.2"
+            }
+          ]
+        }
+      }
+    ],
+    "attachments": {
+      "images": "GUID-Example.svg"
+    }
+  }
+}

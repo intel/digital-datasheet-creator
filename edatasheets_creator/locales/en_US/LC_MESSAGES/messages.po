@@ -1,0 +1,131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-26 10:41-0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Compare 2 datasheets"
+msgstr "Compare 2 datasheets"
+
+msgid "Core application running"
+msgstr "Core application running..."
+
+msgid "does not exist"
+msgstr "does not exist"
+
+msgid "Done"
+msgstr "Done."
+
+msgid "Ending application"
+msgstr "Ending application."
+
+msgid "Enter the number of the target specification\n 1. C Language Header\n 2. Raw json\n"
+msgstr "Enter the number of the target specification\n 1. C Language Header\n 2. Raw json...\n"
+
+msgid "Error"
+msgstr "Error:  "
+
+msgid "Exception"
+msgstr "Exception:  "
+
+msgid "Expected item not found"
+msgstr "Expected item not found:"
+
+msgid "File to compare"
+msgstr "File to compare"
+
+msgid "Finished"
+msgstr "Finished."
+
+msgid "File"
+msgstr "File:  "
+
+msgid "file"
+msgstr "file"
+
+msgid "File not found"
+msgstr "File not found:  "
+
+msgid "Input file name"
+msgstr "Input file name"
+
+msgid "Input map to guide parser (json file)"
+msgstr "Input map to guide parser (json file)"
+
+msgid "Input file must be a JSON file"
+msgstr "Input file must be a JSON file"
+
+msgid "No map file so will use defualt processing"
+msgstr "No map file so will use defualt processing"
+
+msgid "No plugins so will use the default"
+msgstr "No plugins so will use the default..."
+
+msgid "No sections found in map file.  Map file must have at least 1 section"
+msgstr "No sections found in map file.  Map file must have at least 1 section"
+
+msgid "No spans found in map file.  Map file and a section must have at least 1 span"
+msgstr "No spans found in map file.  Map file and a section must have at least 1 span"
+
+msgid "No translation target specified"
+msgstr "No translation target specified"
+
+msgid "Output file name"
+msgstr "Output file name"
+
+msgid "Plugin is loaded"
+msgstr "Plugin is loaded"
+
+msgid "Processing"
+msgstr "Processing"
+
+msgid "schema"
+msgstr "schema"
+
+msgid "Specification Translator"
+msgstr "Specification Translator"
+
+msgid "spreadsheet"
+msgstr "spreadsheet"
+
+msgid "Spreadsheet Plugin is loaded"
+msgstr "Spreadsheet Plugin is loaded..."
+
+msgid "Spreadsheet Plugin is loaded in plugins subdirectory"
+msgstr "Spreadsheet Plugin is loaded in plugins subdirectory..."
+
+msgid "Starting Application"
+msgstr "Starting Application..."
+
+msgid "Target specification of output"
+msgstr "Target specification of output..."
+
+msgid "Target vocabulary for translation"
+msgstr "Target vocabulary for translation..."
+
+msgid "Warning"
+msgstr "Warning:  "
+
+msgid "workbook"
+msgstr "workbook"
+
+msgid "Writing"
+msgstr "Writing"
+
+
+
+
+

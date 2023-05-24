@@ -1,0 +1,108 @@
+{
+    "guid": "1994225a-c7f8-4b1a-983d-2fff1dcdab62",
+    "specification": "IEC 61360-4",
+    "description": "IEC 61360 Part 4 Vocabulary File",
+    "uri": "https://cdd.iec.ch/cdd/iec61360/iec61360.nsf/TreeFrameset?OpenFrameSet",
+    "automationUri": "https://cdd.iec.ch/cdd/iec61360/iec61360.nsf/TU0/",
+    "vocabulary": [
+        {
+            "type": []
+        },
+        {
+            "title": []
+        },
+        {
+            "oneOf": []
+        },
+        {
+            "required": []
+        },
+        {
+            "properties": []
+        },
+        {
+            "componentID": []
+        },
+        {
+            "description": []
+        },
+        {
+            "pins": []
+        },
+        {
+            "items": []
+        },
+        {
+            "value": []
+        },
+        {
+            "comment": []
+        },
+        {
+            "tolerance": []
+        },
+        {
+            "powerRating": []
+        },
+        {
+            "temperatureCoefficient": []
+        },
+        {
+            "maxOverloadVoltage": []
+        },
+        {
+            "maxLimitingElementVoltage": []
+        },
+        {
+            "minTemperature": []
+        },
+        {
+            "maxTemperature": []
+        },
+        {
+            "resistorDerating": []
+        },
+        {
+            "package": []
+        },
+        {
+            "ratedVoltage": []
+        },
+        {
+            "dielectric": []
+        },
+        {
+            "examples": []
+        },
+        {
+            "polarized": []
+        },
+        {
+            "equivalentSerieResistance": []
+        },
+        {
+            "capacitorDerating": []
+        },
+        {
+            "ratedCurrent": []
+        },
+        {
+            "saturationCurrent": []
+        },
+        {
+            "rmsCurrent": []
+        },
+        {
+            "selfResonantFrequency": []
+        },
+        {
+            "dcResistance": []
+        },
+        {
+            "saturationCurve": []
+        },
+        {
+            "resonantFrequencyCurve": []
+        }
+    ]
+}

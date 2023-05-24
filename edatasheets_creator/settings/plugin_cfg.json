@@ -1,0 +1,266 @@
+[
+  {
+    "label": "Clang header file",
+    "pluginName": "clangheader",
+    "description": "Implements header file generation from an Edatasheet (JSON).",
+    "pluginGUID": "dbbb4b96-3142-4a1f-9002-2ab857ed0f0d",
+    "case": [
+      "arg1",
+      "",
+      "map"
+    ],
+    "inputFormats": [
+      "json"
+    ],
+    "outputFormat": "h"
+  },
+  {
+    "label": "Clang C file",
+    "pluginName": "clangfile",
+    "description": "Implements C file generation from an Edatasheet (JSON).",
+    "pluginGUID": "3060d9b5-a170-4469-b43b-56746036a7e8",
+    "case": [
+      "arg1",
+      "",
+      "map"
+    ],
+    "inputFormats": [
+      "json"
+    ],
+    "outputFormat": "c"
+  },
+  {
+    "label": "Difference",
+    "pluginName": "diff",
+    "description": "Generates a HTML difference report between two Edatasheets (JSON).",
+    "pluginGUID": "6efd8af2-ea34-49f4-826c-a2ad45595c5f",
+    "case": [
+      "arg1",
+      "arg2",
+      ""
+    ],
+    "inputFormats": [
+      "json"
+    ],
+    "outputFormat": "html"
+  },
+  {
+    "label": "Spreadsheet",
+    "pluginName": "spreadsheet",
+    "description": "Implements Edatasheet generation from an XLSX file.",
+    "pluginGUID": "a8a799ed-969a-4c77-b21b-bf9b77461037",
+    "case": [
+      "arg1",
+      "output",
+      "map"
+    ],
+    "inputFormats": [
+      "xlsx"
+    ],
+    "outputFormat": "json"
+  },
+  {
+    "label": "Translator",
+    "pluginName": "translator",
+    "description": "Implements translation for edatasheets in json format using a Vocabulary file.",
+    "pluginGUID": "3034c0e7-782a-4c39-8b4b-fb400a4c2063",
+    "case": [
+      "arg1",
+      "output",
+      "vocabulary"
+    ],
+    "inputFormats": [
+      "json"
+    ],
+    "outputFormat": "json"
+  },
+  {
+    "label": "XLSM to XLSX",
+    "pluginName": "xlsmtoxlsx",
+    "description": "Plugin that converts XLSM file to XLSX file.",
+    "pluginGUID": "69909873-c30a-4961-bd2a-b057054e3b62",
+    "case": [
+      "arg1",
+      "output",
+      ""
+    ],
+    "inputFormats": [
+      "xlsm"
+    ],
+    "outputFormat": "xlsx"
+  },
+  {
+    "label": "XLS to XLSX",
+    "pluginName": "xlstoxlsx",
+    "description": "Plugin that converts XLSX file to XLSX file.",
+    "pluginGUID": "31880d5a-641f-4a56-a2d6-8ff852698e7a",
+    "case": [
+      "arg1",
+      "output",
+      ""
+    ],
+    "inputFormats": [
+      "xls"
+    ],
+    "outputFormat": "xlsx"
+  },
+  {
+    "label": "Edatasheet to XLSX",
+    "pluginName": "datasheettoxlsx",
+    "description": "Plugin that converts json file to xlsx.",
+    "pluginGUID": "39794f7f-43c8-4156-a920-f718ed9b18df",
+    "case": [
+      "arg1",
+      "output",
+      ""
+    ],
+    "inputFormats": [
+      "json"
+    ],
+    "outputFormat": "xlsx"
+  },
+  {
+    "label": "DITA to JSON",
+    "pluginName": "dita_to_json",
+    "description": "Plugin that converts DITA file to JSON.",
+    "pluginGUID": "7696d6b4-fb25-4917-8fd9-2958f0f1a47a",
+    "case": [
+      "arg1",
+      "output",
+      ""
+    ],
+    "inputFormats": [
+      "xml"
+    ],
+    "outputFormat": "json"
+  },
+  {
+    "label": "DITA to JSON V2",
+    "pluginName": "dita_to_json_2",
+    "description": "Plugin that converts DITA file to JSON for CCG PDG",
+    "pluginGUID": "fb54fa35-e3c0-4c70-ac41-c7cde733429f",
+    "case": [
+      "arg1",
+      "output",
+      ""
+    ],
+    "inputFormats": [
+      "xml"
+    ],
+    "outputFormat": "json"
+  },
+  {
+    "label": "DITA to JSON V3",
+    "pluginName": "dita_to_json_3",
+    "description": "Plugin that converts DITA file to JSON for DCAI PDG",
+    "pluginGUID": "925a4651-d713-421c-bf75-c1c09b641826",
+    "case": [
+      "arg1",
+      "output",
+      ""
+    ],
+    "inputFormats": [
+      "xml"
+    ],
+    "outputFormat": "json"
+  },
+  {
+    "label": "Power Sequencing to WaveDrom Format",
+    "pluginName": "powersequence",
+    "description": "Plugin that converts Power Sequence Files to a format usable by WaveDrom",
+    "pluginGUID": "eef1881c-7712-4dae-a5bd-ffdb58042eb6",
+    "case": [
+      "arg1",
+      "output",
+      ""
+    ],
+    "inputFormats": [
+      "txt"
+    ],
+    "outputFormat": "json"
+  },
+  {
+    "label": "Fixup plugin",
+    "pluginName": "fixup",
+    "description": "Fills the structure of an Edatasheet with a repair json file.",
+    "pluginGUID": "9289a2cf-7e17-4d36-8f18-186ecadbbe07",
+    "case": [
+      "arg1",
+      "output",
+      "arg2"
+    ],
+    "inputFormats": [
+      "json"
+    ],
+    "outputFormat": "json"
+  },
+  {
+    "label": "Vocabulary file creator",
+    "pluginName": "vocabularyFileCreator",
+    "description": "Creates a template of a vocabulary file from a JSON file",
+    "pluginGUID": "8eca4fce-77dd-44b6-a7c7-9b3764507aec",
+    "case": [
+      "arg1",
+      "output",
+      "arg2"
+    ],
+    "inputFormats": [
+      "json"
+    ],
+    "outputFormat": "json"
+  },
+  {
+    "label": "HTML to JSON",
+    "pluginName": "html_to_json",
+    "description": "Converts an HTML file to a JSON file",
+    "pluginGUID": "012aa326-49a1-4bdd-8bfc-b860021fd91d",
+    "case": [
+      "arg1",
+      "output",
+      ""
+    ],
+    "inputFormats": [
+      "html"
+    ],
+    "outputFormat": "json"
+  },
+  {
+    "label": "Directory Listing",
+    "pluginName": "directory_listing",
+    "description": "This plugin allows the user to lists all the file fields in a datasheet and replace them with the standard icc.",
+    "pluginGUID": "3bf4ede9-9ede-4883-aca6-6cc7876e3ded",
+    "case": [
+      "dir1",
+      "output"
+    ],
+    "caseFormats": {
+      "dir1": {
+        "type": "directory"
+      },
+      "output": {
+        "type": "file",
+        "default": "dita_directory_listing.json"
+      }
+    },
+    "inputFormats": [
+      ""
+    ],
+    "outputFormat": "json",
+    "validateInputs": false
+  },
+  {
+    "label": "Default plugin",
+    "pluginName": "default",
+    "description": "Default plugin that has no functionality",
+    "pluginGUID": "28d1491d-b368-49a0-a9ac-9ed2d917171d",
+    "case": [
+      "",
+      "",
+      ""
+    ],
+    "inputFormats": [
+      ""
+    ],
+    "outputFormat": ""
+  }
+]

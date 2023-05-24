@@ -1,0 +1,10 @@
+{
+    "filetype": "fixup-file",
+    "fields": {
+        "datasheet": {
+            "sku": "New value for SKU",
+            "platformAbbreviation": "New value for platformAbbreviation",
+            "namespace": "Fiuxp namespace"
+        }
+    }
+}

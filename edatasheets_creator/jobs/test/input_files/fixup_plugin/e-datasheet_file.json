@@ -1,0 +1,56 @@
+{
+    "datasheet": {
+        "namespace": "URL Namespace",
+        "generatedOn": "2022-08-26T16:32:13",
+        "generatedBy": "e-Datasheet Generator",
+        "inputFile": "GUID-UUID-Example.xml",
+        "platformAbbreviation": "Unknown",
+        "sku": "Unknown",
+        "title": "E-Datasheet of example",
+        "guid": "UUID-Example",
+        "details": {
+            "design": [
+                {
+                    "index": "1",
+                    "designNote": "",
+                    "referenceDesign": ""
+                },
+                {
+                    "index": "2",
+                    "designNote": "",
+                    "referenceDesign": ""
+                }
+            ]
+        },
+        "extra_details": [
+            {
+                "design_1": [
+                    {
+                        "index": "1",
+                        "designNote": "",
+                        "referenceDesign": ""
+                    },
+                    {
+                        "index": "2",
+                        "designNote": "",
+                        "referenceDesign": ""
+                    }
+                ]
+            },
+            {
+                "design_2": [
+                    {
+                        "index": "1",
+                        "designNote": "",
+                        "referenceDesign": ""
+                    },
+                    {
+                        "index": "2",
+                        "designNote": "",
+                        "referenceDesign": ""
+                    }
+                ]
+            }
+        ]
+    }
+}

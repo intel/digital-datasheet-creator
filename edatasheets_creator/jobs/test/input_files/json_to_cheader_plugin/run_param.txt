@@ -1,0 +1,2 @@
+py main.py --f "../edatasheets_creator/jobs/test/input_files/json_to_cheader_plugin/sample_to_test_2.json" --m "../edatasheets_creator/jobs/test/input_files/json_to_cheader_plugin/sample_h_2.json" --t "header"
+

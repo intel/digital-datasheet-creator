@@ -1,0 +1,458 @@
+{
+    "description": "Sample map file",
+    "guid": "76c6f334-1afe-4b32-9ba7-e1909a79b203",
+    "mapType": "spreadsheet",
+    "datasheetDescLocation" : {
+        "sheetName" : "Read me",
+        "row" : 2,
+        "col" : "A"
+    },
+    "sheets": [
+        {
+            "sheetName": "Read me",
+            "includeInDatasheet" : false
+        },
+        {
+            "sheetName": "Interface (Arch)",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                255,
+                256
+            ],
+            "ignoreCols" : [
+                "ZZ",
+                "ZA"
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 33,
+                            "col" : "B"
+                        },
+                        "dataStartRow" : 34,
+                        "maxRows" : 14
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "C",
+                            "D",
+                            "E"
+                        ]
+                    },
+                    "includeTags" : 
+                        [
+                            {
+                                "fieldLabel" : {
+                                    "row" : 32,
+                                    "col" : "A"
+                                },
+                                "fieldValue" : {
+                                    "row" : 32,
+                                    "col" : "B"
+                                }
+                            }
+                        ]
+                    ,
+                    "fieldHeaders" : {
+                                "row" : 32                                       
+                    }
+                },
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 33,
+                            "col" : "B"
+                        },
+                        "dataStartRow" : 34,
+                        "maxRows" : 14
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R"
+                        ]
+                    },
+                    "includeTags" : 
+                        [
+                            {
+                                "fieldLabel" : {
+                                    "row" : 32,
+                                    "col" : "A"
+                                },
+                                "fieldValue" : {
+                                    "row" : 32,
+                                    "col" : "B"
+                                }
+                            }
+                        ]
+                    ,
+                    "fieldHeaders" : {
+                                "row" : 33                                      
+                    }
+                    
+                },
+
+
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 58,
+                            "col" : "B"
+                        },
+                        "dataStartRow" : 59,
+                        "maxRows" : 9
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "C",
+                            "D",
+                            "E"
+                        ]
+                    },
+                    "includeTags" : 
+                        [
+                            {
+                                "fieldLabel" : {
+                                    "row" : 57,
+                                    "col" : "A"
+                                },
+                                "fieldValue" : {
+                                    "row" : 57,
+                                    "col" : "B"
+                                }
+                            }
+                        ]
+                    ,
+                    "fieldHeaders" : {
+                                "row" : 57                                       
+                    }
+                },
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 58,
+                            "col" : "B"
+                        },
+                        "dataStartRow" : 59,
+                        "maxRows" : 9
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R"
+                        ]
+                    },
+                    "includeTags" : 
+                        [
+                            {
+                                "fieldLabel" : {
+                                    "row" : 57,
+                                    "col" : "A"
+                                },
+                                "fieldValue" : {
+                                    "row" : 57,
+                                    "col" : "B"
+                                }
+                            }
+                        ]
+                    ,
+                    "fieldHeaders" : {
+                                "row" : 58                                      
+                    }
+                    
+                },
+
+
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 78,
+                            "col" : "B"
+                        },
+                        "dataStartRow" : 79,
+                        "maxRows" : 4
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "C",
+                            "D",
+                            "E"
+                        ]
+                    },
+                    "includeTags" : 
+                        [
+                            {
+                                "fieldLabel" : {
+                                    "row" : 77,
+                                    "col" : "A"
+                                },
+                                "fieldValue" : {
+                                    "row" : 77,
+                                    "col" : "B"
+                                }
+                            }
+                        ]
+                    ,
+                    "fieldHeaders" : {
+                                "row" : 77                                       
+                    }
+                },
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 78,
+                            "col" : "B"
+                        },
+                        "dataStartRow" : 79,
+                        "maxRows" : 4
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R"
+                        ]
+                    },
+                    "includeTags" : 
+                        [
+                            {
+                                "fieldLabel" : {
+                                    "row" : 77,
+                                    "col" : "A"
+                                },
+                                "fieldValue" : {
+                                    "row" : 77,
+                                    "col" : "B"
+                                }
+                            }
+                        ]
+                    ,
+                    "fieldHeaders" : {
+                                "row" : 78                                      
+                    }
+                    
+                },
+
+
+
+
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 93,
+                            "col" : "B"
+                        },
+                        "dataStartRow" : 94,
+                        "maxRows" : 52
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "C",
+                            "D",
+                            "E"
+                        ]
+                    },
+                    "includeTags" : 
+                        [
+                            {
+                                "fieldLabel" : {
+                                    "row" : 92,
+                                    "col" : "A"
+                                },
+                                "fieldValue" : {
+                                    "row" : 92,
+                                    "col" : "B"
+                                }
+                            }
+                        ]
+                    ,
+                    "fieldHeaders" : {
+                                "row" : 92                                       
+                    }
+                },
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 93,
+                            "col" : "B"
+                        },
+                        "dataStartRow" : 94,
+                        "maxRows" : 52
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R"
+                        ]
+                    },
+                    "includeTags" : 
+                        [
+                            {
+                                "fieldLabel" : {
+                                    "row" : 92,
+                                    "col" : "A"
+                                },
+                                "fieldValue" : {
+                                    "row" : 92,
+                                    "col" : "B"
+                                }
+                            }
+                        ]
+                    ,
+                    "fieldHeaders" : {
+                                "row" : 93                                      
+                    }
+                    
+                },
+
+
+
+
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 157,
+                            "col" : "B"
+                        },
+                        "dataStartRow" : 94,
+                        "maxRows" : 9
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "C",
+                            "D",
+                            "E"
+                        ]
+                    },
+                    "includeTags" : 
+                        [
+                            {
+                                "fieldLabel" : {
+                                    "row" : 156,
+                                    "col" : "A"
+                                },
+                                "fieldValue" : {
+                                    "row" : 156,
+                                    "col" : "B"
+                                }
+                            }
+                        ]
+                    ,
+                    "fieldHeaders" : {
+                                "row" : 156                                       
+                    }
+                },
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 157,
+                            "col" : "B"
+                        },
+                        "dataStartRow" : 94,
+                        "maxRows" : 9
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R"
+                        ]
+                    },
+                    "includeTags" : 
+                        [
+                            {
+                                "fieldLabel" : {
+                                    "row" : 156,
+                                    "col" : "A"
+                                },
+                                "fieldValue" : {
+                                    "row" : 156,
+                                    "col" : "B"
+                                }
+                            }
+                        ]
+                    ,
+                    "fieldHeaders" : {
+                                "row" : 157                                      
+                    }
+                    
+                }
+
+
+
+
+
+
+
+
+
+
+            ]
+         }
+    ]
+}

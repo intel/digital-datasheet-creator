@@ -1,0 +1,102 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "inputFile": {
+            "type": "string"
+        },
+        "guid": {
+            "type": "string"
+        },
+        "createdOn": {
+            "type": "string"
+        },
+        "export": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    },
+                    "version": {
+                        "type": "integer"
+                    },
+                    "revision": {
+                        "type": "integer"
+                    },
+                    "versionreleasedate": {
+                        "type": "string"
+                    },
+                    "revisionreleasedate": {
+                        "type": "string"
+                    },
+                    "preferrednameEn": {
+                        "type": "string"
+                    },
+                    "synonymousname": {
+                        "type": "string"
+                    },
+                    "shortnameEn": {
+                        "type": "string"
+                    },
+                    "definitionEn": {
+                        "type": "string"
+                    },
+                    "definitionsource": {
+                        "type": "string"
+                    },
+                    "statuslevel": {
+                        "type": "string"
+                    },
+                    "proposaldate": {
+                        "type": "string"
+                    },
+                    "requestid": {
+                        "type": "string"
+                    },
+                    "noteEn": {
+                        "type": "string"
+                    },
+                    "drawing": {
+                        "type": "string"
+                    },
+                    "codepreferredunit": {
+                        "type": "string"
+                    },
+                    "codesalternativeunits": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "code",
+                    "definitionEn",
+                    "definitionsource",
+                    "preferrednameEn",
+                    "proposaldate",
+                    "requestid",
+                    "revision",
+                    "revisionreleasedate",
+                    "shortnameEn",
+                    "statuslevel",
+                    "version",
+                    "versionreleasedate"
+                ]
+            }
+        }
+    },
+    "required": [
+        "createdOn",
+        "description",
+        "export",
+        "guid",
+        "inputFile",
+        "title"
+    ]
+}

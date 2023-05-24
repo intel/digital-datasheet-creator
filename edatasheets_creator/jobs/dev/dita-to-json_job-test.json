@@ -1,0 +1,21 @@
+{
+    "pipelineDescription":"Automate form DITA to JSON",
+    "pipelineJobs":[
+      {
+        "description": "Generate a JSON file from DITA file",
+        "jobID": 1,
+        "jobTasks": [
+          {
+            "taskID" : 1,
+            "description": "Execute Dita to JSON plugin",
+            "taskGUID": "7696d6b4-fb25-4917-8fd9-2958f0f1a47a",
+            "map": "",
+            "vocabulary":"",
+            "arg1": "C:/Users/bamunozm/Downloads/InputFiles/",
+            "arg2": "",
+            "output": "C:/Users/bamunozm/Downloads/OutputJson/"
+          }
+        ]
+      }
+    ]
+  }

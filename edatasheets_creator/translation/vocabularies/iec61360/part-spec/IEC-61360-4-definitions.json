@@ -1,0 +1,249 @@
+{
+    "guid": "1994225a-c7f8-4b1a-983d-2fff1dcdab62",
+    "specification": "IEC 61360-4",
+    "description": "IEC 61360 Part 4 Vocabulary File",
+    "uri": "https://cdd.iec.ch/cdd/iec61360/iec61360.nsf/TreeFrameset?OpenFrameSet",
+    "automationUri": "https://cdd.iec.ch/cdd/iec61360/iec61360.nsf/TU0/",
+    "vocabulary": [
+        {
+            "definitions": []
+        },
+        {
+            "componentID": []
+        },
+        {
+            "type": []
+        },
+        {
+            "required": []
+        },
+        {
+            "properties": []
+        },
+        {
+            "partType": []
+        },
+        {
+            "description": []
+        },
+        {
+            "examples": []
+        },
+        {
+            "manufacturer": []
+        },
+        {
+            "componentName": []
+        },
+        {
+            "orderableMPN": []
+        },
+        {
+            "sourceDatasheetID": []
+        },
+        {
+            "digitalDatasheetID": []
+        },
+        {
+            "status": []
+        },
+        {
+            "enum": []
+        },
+        {
+            "complianceList": []
+        },
+        {
+            "items": []
+        },
+        {
+            "publishedDate": []
+        },
+        {
+            "example": []
+        },
+        {
+            "version": []
+        },
+        {
+            "datasheetURI": []
+        },
+        {
+            "productURI": []
+        },
+        {
+            "guid": []
+        },
+        {
+            "pinSpec": []
+        },
+        {
+            "terminalIdentifier": []
+        },
+        {
+            "name": []
+        },
+        {
+            "standardizedName": []
+        },
+        {
+            "numberOfSupportedFunctions": []
+        },
+        {
+            "functionProperties": []
+        },
+        {
+            "vihMin": []
+        },
+        {
+            "comment": []
+        },
+        {
+            "vihMax": []
+        },
+        {
+            "vilMax": []
+        },
+        {
+            "vilMin": []
+        },
+        {
+            "vol": []
+        },
+        {
+            "voh": []
+        },
+        {
+            "absVmax": []
+        },
+        {
+            "absVmin": []
+        },
+        {
+            "vmax": []
+        },
+        {
+            "imax": []
+        },
+        {
+            "inputLeakage": []
+        },
+        {
+            "outputLeakage": []
+        },
+        {
+            "dcResistance": []
+        },
+        {
+            "voltageOptions": []
+        },
+        {
+            "floatUnused": []
+        },
+        {
+            "internalPullUp": []
+        },
+        {
+            "internalPullDown": []
+        },
+        {
+            "esd": []
+        },
+        {
+            "externalComponents": []
+        },
+        {
+            "componentType": []
+        },
+        {
+            "configuration": []
+        },
+        {
+            "minValue": []
+        },
+        {
+            "maxValue": []
+        },
+        {
+            "value": []
+        },
+        {
+            "componentUnit": []
+        },
+        {
+            "connectionPin": []
+        },
+        {
+            "dependencies": []
+        },
+        {
+            "pinFunction": []
+        },
+        {
+            "perFunctionName": []
+        },
+        {
+            "interfaceType": []
+        },
+        {
+            "pinUsage": []
+        },
+        {
+            "direction": []
+        },
+        {
+            "electricalConfiguration": []
+        },
+        {
+            "polarity": []
+        },
+        {
+            "unit": []
+        },
+        {
+            "siUnit": []
+        },
+        {
+            "absoluteValue": []
+        },
+        {
+            "unitText": []
+        },
+        {
+            "unitFactor": []
+        },
+        {
+            "relativeValueReference": []
+        },
+        {
+            "relativeValueModifier": []
+        },
+        {
+            "relativeValueOperator": []
+        },
+        {
+            "valueDefined": []
+        },
+        {
+            "package": []
+        },
+        {
+            "length": []
+        },
+        {
+            "width": []
+        },
+        {
+            "height": []
+        },
+        {
+            "dimensionUnit": []
+        },
+        {
+            "standardPackageSize": []
+        },
+        {
+            "standardPackageType": []
+        }
+    ]
+}

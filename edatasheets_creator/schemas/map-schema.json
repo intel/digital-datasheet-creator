@@ -1,0 +1,274 @@
+{
+    "$schema":"http://json-schema.org/draft-04/schema#",
+    "title":"Map file schema",
+    "description":"This schema provides the structure to validate a map file",
+    "type":"object",
+    "properties": {
+        "description":{
+            "type":"string",
+            "description": "Description of the map file"
+        },
+        "guid":{
+            "type":"string",
+            "description": "A unique identifier of the map file"
+        },
+        "mapType":{
+            "type":"string",
+            "description": "A map type of the map file"
+        },
+        "datasheetDescLocation":{
+            "description": "A datasheet description processor that tells the processor where to find the description that is used in the datasheet.",
+            "type":"object",
+            "properties": {
+                "sheetName":{
+                    "type":"string",
+                    "description": "Name of the sheet where the description is located"
+                },
+                "row":{
+                    "type":"integer",
+                    "description": "Row where the description info is located",
+                    "minimum": 1
+                },
+                "col":{
+                    "type":"string",
+                    "description": "Row where the description info is located",
+                    "pattern": "^[A-Z]+$"
+                }
+            },
+            "additionalProperties": false,
+            "required":["sheetName", "row", "col"]
+        },
+        "sheets":{
+            "type":"array",
+            "description": "A list of sheets to process",
+            "items": {
+                "type":"object",
+                "description": "Description of each sheet to process",
+                "properties": {
+                    "sheetName":{
+                        "type":"string",
+                        "description": "The worksheet name to process. Must match in the spreadsheet."
+                    },
+                    "includeInDatasheet":{
+                        "type":"boolean",
+                        "description": "Indicates wheter to include in the e-datasheet output file."
+                    },
+                    "ignoreBlanks":{
+                        "type":"boolean",
+                        "description": "Ignore blank spaces or not."
+                    },
+                    "ignoreRows":{
+                        "type":"array",
+                        "description": "Indicates whether to include blank lines and skip rows. Not implemented yet.",
+                        "items": {
+                            "type":"integer",
+                            "description": "Each row to ignore",
+                            "minimum": 1
+                        },
+                        "uniqueItems": true
+                    },
+                    "ignoreCols":{
+                        "type":"array",
+                        "description": "Indicates whether to include blank lines and skip columns.",
+                        "items": {
+                            "type":"string",
+                            "description": "Each column to ignore.",
+                            "pattern": "^[A-Z]+$"
+                        },
+                        "uniqueItems": true
+                    },
+                    "sections":{
+                        "type":"array",
+                        "description": "A worksheet can have multiple sections to process. This array enables specific data elements to be included in the e-datasheet.",
+                        "items": {
+                            "type":"object",
+                            "description": "Sections are defined within the scope of a sheet item.",
+                            "properties": {
+                                "indexOn":{
+                                    "type": "object",
+                                    "description": "indexOn is an optional construct that creates JSON objects in an e-datasheet that has a unique key.",
+                                    "properties": {
+                                        "orientation":{
+                                            "type": "string",
+                                            "description": "Orientation of the datasheet"
+                                        },
+                                        "header":{
+                                            "type": "object",
+                                            "description": "Defines where the indexed field is located.",
+                                            "properties": {
+                                                "row":{
+                                                    "type":"integer",
+                                                    "description": "Row",
+                                                    "minimum": 1
+                                                },
+                                                "col":{
+                                                    "type":"string",
+                                                    "description": "Column",
+                                                    "pattern": "^[A-Z]+$"
+                                                }
+                                            },
+                                            "additionalProperties": false,
+                                            "required":["row", "col"]
+                                        },
+                                        "dataStartRow":{
+                                            "type": "integer",
+                                            "description": "Row to start gathering data.",
+                                            "minimum": 1
+                                        },
+                                        "maxRows":{
+                                            "type": "integer",
+                                            "description": "Max cout of rows to include in the indexing.",
+                                            "minimum": 0
+                                        }
+                                    },
+                                    "additionalProperties": false,
+                                    "required":["orientation", "header", "dataStartRow", "maxRows"]
+                                },
+                                "fieldHeaders":{
+                                    "type":"object",
+                                    "description": "Data fields for the indexed e-datasheet JSON object.",
+                                    "properties": {
+                                        "row":{
+                                            "type":"integer",
+                                            "description": "Row for fieldheaders",
+                                            "minimum": 1
+                                        }
+                                    },
+                                    "additionalProperties": false,
+                                    "required":["row"]
+                                },
+                                "spans":{
+                                    "type":"object",
+                                    "description": "Columns where the data is located",
+                                    "properties": {
+                                        "columns":{
+                                            "type":"array",
+                                            "description": "Columns to gather the data.",
+                                            "items": {
+                                                "type":"string",
+                                                "description": "Each column to gather information",
+                                                "pattern": "^[A-Z]+$"
+                                            },
+                                            "uniqueItems": true
+                                        }
+                                    },
+                                    "additionalProperties": false,
+                                    "required":["columns"]
+                                },
+                                "groupBy":{
+                                    "type":"array",
+                                    "description": "Array of grouping objects.",
+                                    "items": {
+                                        "type":"object",
+                                        "description": "Grouping field object",
+                                        "properties": {
+                                            "name":{
+                                                "type":"object",
+                                                "description": "Defines in which cell the grouping field information can be found.",
+                                                "properties": {
+                                                    "row":{
+                                                        "type":"integer",
+                                                        "description": "Row of the grouping field name",
+                                                        "minimum": 1
+                                                    },
+                                                    "col":{
+                                                        "type":"string",
+                                                        "description": "Column",
+                                                        "pattern": "^[A-Z]+$"
+                                                    },
+                                                    "valueCol":{
+                                                        "type":"string",
+                                                        "description": "Optional value column to include.",
+                                                        "pattern": "^[A-Z]+$|^\\s*$"
+                                                    }
+                                                },
+                                                "additionalProperties": false,
+                                                "required":["row", "col"]
+                                            },
+                                            "spans":{
+                                                "type":"object",
+                                                "description": "Defines which columns could be included in the grouping.",
+                                                "properties": {
+                                                    "columns":{
+                                                        "type":"array",
+                                                        "description": "Columns to take into account.",
+                                                        "items": {
+                                                            "type":"string",
+                                                            "description": "Columns",
+                                                            "pattern": "^[A-Z]+$"
+                                                        },
+                                                        "uniqueItems": true
+                                                    }
+                                                },
+                                                "additionalProperties": false,
+                                                "required":["columns"]
+                                            }
+                                        },
+                                        "additionalProperties": false,
+                                        "required":["name", "spans"]
+                                    }
+                                },
+                                "includeTags":{
+                                    "type":"array",
+                                    "description": "enables you to grab individual areas within a worksheet. It's like a mini-section.",
+                                    "items": {
+                                        "type":"object",
+                                        "description": "Set of row/col to define where the data is.",
+                                        "properties": {
+                                            "fieldLabel":{
+                                                "type":"object",
+                                                "description": "Row/col set for a label and a value and you can have as many of these as you want.",
+                                                "properties": {
+                                                    "row":{
+                                                        "type":"integer",
+                                                        "description": "Row",
+                                                        "minimum": 1
+                                                    },
+                                                    "col":{
+                                                        "type":"string",
+                                                        "description": "Column",
+                                                        "pattern": "^[A-Z]+$"
+                                                    }
+                                                },
+                                                "additionalProperties": false,
+                                                "required":["row", "col"]
+                                            },
+                                            "fieldValue":{
+                                                "type":"object",
+                                                "description": "Position where the value is",
+                                                "properties": {
+                                                    "row":{
+                                                        "type":"integer",
+                                                        "description": "Row",
+                                                        "minimum": 1
+                                                    },
+                                                    "col":{
+                                                        "type":"string",
+                                                        "description": "Column",
+                                                        "pattern": "^[A-Z]+$"
+                                                    }
+                                                },
+                                                "additionalProperties": false,
+                                                "required":["row", "col"]
+                                            }
+                                        },
+                                        "additionalProperties": false,
+                                        "required":["fieldLabel", "fieldValue"]
+                                    }
+                                }
+                            },
+                            "additionalProperties": false,
+                            "required":["fieldHeaders", "spans"]
+                        }
+                    }
+                },
+                "additionalProperties": false,
+                "required":["sheetName", "includeInDatasheet", "ignoreBlanks", "ignoreRows", "ignoreCols", "sections"]
+            },
+            "minItems":1,
+            "uniqueItems": true
+        }
+     },
+    "additionalProperties": false,
+    "required":["description", "guid", "mapType", "sheets"]
+ }

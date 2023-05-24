@@ -1,0 +1,2 @@
+python3 main.py --f "../edatasheets_creator/jobs/test/output_files/dita_to_json/GUID-1234-Example.json" --fixup "../edatasheets_creator/jobs/test/input_files/fixup_plugin/fixup_file.json" --o "../edatasheets_creator/jobs/test/output_files/fixup_files/GUID-1234-Example.json"
+
