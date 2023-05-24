@@ -1,5 +1,5 @@
 # Introduction 
-Digital Datasheets Creator (Pre-Production)
+Digital Datasheets Creator
 
 <!-- [[_TOC_]] -->
 A digital datasheet creator tool that is aligned with the Industry Work Group (IWG) based on joint specification with Google and component vendors.
