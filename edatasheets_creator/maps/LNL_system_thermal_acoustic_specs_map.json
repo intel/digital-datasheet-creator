@@ -1,0 +1,608 @@
+{
+	"description": "LNL STAF Map",
+	"guid": "a0550d97-e99c-47dc-93b6-a69f18107e34",
+	"mapType": "spreadsheet",
+	"sheets": [
+        {
+			"sheetName": "Base System configs MX",
+			"includeInDatasheet": true,
+			"ignoreBlanks": true,
+			"ignoreRows": [],
+			"ignoreCols": [],
+			"sections": [
+				{
+					"indexOn": {
+							"orientation": "column",
+							"header": {
+								"row": 1,
+								"col": "A"
+							},
+							"dataStartRow": 2,
+							"maxRows": 36
+						},
+					"fieldHeaders": {
+						"row": 1
+					},
+					"spans": {
+						"columns": [
+							"A",
+							"B",
+							"C",
+							"D",
+							"E"
+						]
+					}
+				}
+			]
+		},
+		{
+			"sheetName": "Fanless M Clamshell configs",
+			"includeInDatasheet": true,
+			"ignoreBlanks": true,
+			"ignoreRows": [],
+			"ignoreCols": [],
+			"sections": [
+				{
+					"indexOn": {
+						"orientation": "column",
+						"header": {
+							"row": 1,
+							"col": "A"
+						},
+						"dataStartRow": 3,
+						"maxRows": 24
+					},
+					"fieldHeaders": {
+							"row": 2
+						},
+					"spans": {
+						"columns": [
+								"B"
+							]
+						},
+					"groupBy": [
+						{
+							"name": {
+								"row": 1,
+								"col" : "B"
+							},
+							"spans": {
+								"columns": [
+									"B"
+								]
+							}
+						}
+					]
+				},
+				{
+					"indexOn": {
+						"orientation": "column",
+						"header": {
+							"row": 1,
+							"col": "A"
+						},
+						"dataStartRow": 3,
+						"maxRows": 24
+					},
+					"fieldHeaders": {
+							"row": 2
+						},
+					"spans": {
+						"columns": [
+								"C",
+								"D"
+							]
+						},
+					"groupBy": [
+						{
+							"name": {
+								"row": 1,
+								"col" : "B"
+							},
+							"spans": {
+								"columns": [
+									"C",
+									"D"
+								]
+							}
+						}
+					]
+				},
+				{
+					"indexOn": {
+						"orientation": "column",
+						"header": {
+							"row": 1,
+							"col": "A"
+						},
+						"dataStartRow": 3,
+						"maxRows": 24
+					},
+					"fieldHeaders": {
+							"row": 2
+						},
+					"spans": {
+						"columns": [
+								"E",
+								"F"
+							]
+						},
+					"groupBy": [
+						{
+							"name": {
+								"row": 1,
+								"col" : "E"
+							},
+							"spans": {
+								"columns": [
+									"E",
+									"F"
+								]
+							}
+						}
+					]
+				},
+				{
+					"indexOn": {
+						"orientation": "column",
+						"header": {
+							"row": 1,
+							"col": "A"
+						},
+						"dataStartRow": 3,
+						"maxRows": 24
+					},
+					"fieldHeaders": {
+							"row": 2
+						},
+					"spans": {
+						"columns": [
+								"G",
+								"H",
+								"I",
+								"J"
+							]
+						},
+					"groupBy": [
+						{
+							"name": {
+								"row": 1,
+								"col" : "G"
+							},
+							"spans": {
+								"columns": [
+									"G",
+									"H",
+									"I",
+									"J"
+								]
+							}
+						}
+					]
+				},
+				{
+					"indexOn": {
+						"orientation": "column",
+						"header": {
+							"row": 1,
+							"col": "A"
+						},
+						"dataStartRow": 3,
+						"maxRows": 24
+					},
+					"fieldHeaders": {
+							"row": 2
+						},
+					"spans": {
+						"columns": [
+								"K"
+							]
+						},
+					"groupBy": [
+						{
+							"name": {
+								"row": 1,
+								"col" : "K"
+							},
+							"spans": {
+								"columns": [
+									"K"
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"sheetName": "Fanless M tablet configs",
+			"includeInDatasheet": true,
+			"ignoreBlanks": true,
+			"ignoreRows": [],
+			"ignoreCols": [],
+			"sections": [
+				{
+					"indexOn": {
+						"orientation": "column",
+						"header": {
+							"row": 1,
+							"col": "A"
+						},
+						"dataStartRow": 3,
+						"maxRows": 15
+					},
+					"fieldHeaders": {
+							"row": 2
+						},
+					"spans": {
+						"columns": [
+								"B"
+							]
+						},
+					"groupBy": [
+						{
+							"name": {
+								"row": 1,
+								"col" : "B"
+							},
+							"spans": {
+								"columns": [
+									"B"
+								]
+							}
+						}
+					]
+				},
+				{
+					"indexOn": {
+						"orientation": "column",
+						"header": {
+							"row": 1,
+							"col": "A"
+						},
+						"dataStartRow": 3,
+						"maxRows": 15
+					},
+					"fieldHeaders": {
+							"row": 2
+						},
+					"spans": {
+						"columns": [
+								"C",
+								"D"
+							]
+						},
+					"groupBy": [
+						{
+							"name": {
+								"row": 1,
+								"col" : "B"
+							},
+							"spans": {
+								"columns": [
+									"C",
+									"D"
+								]
+							}
+						}
+					]
+				},
+				{
+					"indexOn": {
+						"orientation": "column",
+						"header": {
+							"row": 1,
+							"col": "A"
+						},
+						"dataStartRow": 3,
+						"maxRows": 15
+					},
+					"fieldHeaders": {
+							"row": 2
+						},
+					"spans": {
+						"columns": [
+								"E",
+								"F"
+							]
+						},
+					"groupBy": [
+						{
+							"name": {
+								"row": 1,
+								"col" : "E"
+							},
+							"spans": {
+								"columns": [
+									"E",
+									"F"
+								]
+							}
+						}
+					]
+				},
+				{
+					"indexOn": {
+						"orientation": "column",
+						"header": {
+							"row": 1,
+							"col": "A"
+						},
+						"dataStartRow": 3,
+						"maxRows": 15
+					},
+					"fieldHeaders": {
+							"row": 2
+						},
+					"spans": {
+						"columns": [
+								"G",
+								"H",
+								"I",
+								"J"
+							]
+						},
+					"groupBy": [
+						{
+							"name": {
+								"row": 1,
+								"col" : "G"
+							},
+							"spans": {
+								"columns": [
+									"G",
+									"H",
+									"I",
+									"J"
+								]
+							}
+						}
+					]
+				},
+				{
+					"indexOn": {
+						"orientation": "column",
+						"header": {
+							"row": 1,
+							"col": "A"
+						},
+						"dataStartRow": 3,
+						"maxRows": 15
+					},
+					"fieldHeaders": {
+							"row": 2
+						},
+					"spans": {
+						"columns": [
+								"K"
+							]
+						},
+					"groupBy": [
+						{
+							"name": {
+								"row": 1,
+								"col" : "K"
+							},
+							"spans": {
+								"columns": [
+									"K"
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"sheetName": "Fanned M Clamshell configs",
+			"includeInDatasheet": true,
+			"ignoreBlanks": true,
+			"ignoreRows": [],
+			"ignoreCols": [],
+			"sections": [
+				{
+					"indexOn": {
+						"orientation": "column",
+						"header": {
+							"row": 1,
+							"col": "A"
+						},
+						"dataStartRow": 3,
+						"maxRows": 20
+					},
+					"fieldHeaders": {
+							"row": 2
+						},
+					"spans": {
+						"columns": [
+								"B"
+							]
+						},
+					"groupBy": [
+						{
+							"name": {
+								"row": 1,
+								"col" : "B"
+							},
+							"spans": {
+								"columns": [
+									"B"
+								]
+							}
+						}
+					]
+				},
+				{
+					"indexOn": {
+						"orientation": "column",
+						"header": {
+							"row": 1,
+							"col": "A"
+						},
+						"dataStartRow": 3,
+						"maxRows": 20
+					},
+					"fieldHeaders": {
+							"row": 2
+						},
+					"spans": {
+						"columns": [
+								"C",
+								"D"
+							]
+						},
+					"groupBy": [
+						{
+							"name": {
+								"row": 1,
+								"col" : "B"
+							},
+							"spans": {
+								"columns": [
+									"C",
+									"D"
+								]
+							}
+						}
+					]
+				},
+				{
+					"indexOn": {
+						"orientation": "column",
+						"header": {
+							"row": 1,
+							"col": "A"
+						},
+						"dataStartRow": 3,
+						"maxRows": 20
+					},
+					"fieldHeaders": {
+							"row": 2
+						},
+					"spans": {
+						"columns": [
+								"E",
+								"F"
+							]
+						},
+					"groupBy": [
+						{
+							"name": {
+								"row": 1,
+								"col" : "E"
+							},
+							"spans": {
+								"columns": [
+									"E",
+									"F"
+								]
+							}
+						}
+					]
+				},
+				{
+					"indexOn": {
+						"orientation": "column",
+						"header": {
+							"row": 1,
+							"col": "A"
+						},
+						"dataStartRow": 3,
+						"maxRows": 20
+					},
+					"fieldHeaders": {
+							"row": 2
+						},
+					"spans": {
+						"columns": [
+								"G",
+								"H",
+								"I",
+								"J"
+							]
+						},
+					"groupBy": [
+						{
+							"name": {
+								"row": 1,
+								"col" : "G"
+							},
+							"spans": {
+								"columns": [
+									"G",
+									"H",
+									"I",
+									"J"
+								]
+							}
+						}
+					]
+				},
+				{
+					"indexOn": {
+						"orientation": "column",
+						"header": {
+							"row": 1,
+							"col": "A"
+						},
+						"dataStartRow": 3,
+						"maxRows": 20
+					},
+					"fieldHeaders": {
+							"row": 2
+						},
+					"spans": {
+						"columns": [
+								"K"
+							]
+						},
+					"groupBy": [
+						{
+							"name": {
+								"row": 1,
+								"col" : "K"
+							},
+							"spans": {
+								"columns": [
+									"K"
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"sheetName": "Concurrent workloads",
+			"includeInDatasheet": true,
+			"ignoreBlanks": true,
+			"ignoreRows": [],
+			"ignoreCols": [],
+			"sections": [
+				{
+					"indexOn": {
+						"orientation": "column",
+						"header": {
+							"row": 1,
+							"col": "A"
+						},
+						"dataStartRow": 2,
+						"maxRows": 7
+					},
+					"fieldHeaders": {
+						"row": 1
+					},
+					"spans": {
+						"columns": [
+							"A",
+							"B",
+							"C"
+						]
+					}
+				}
+
+			]
+		}
+        
+    ]
+}

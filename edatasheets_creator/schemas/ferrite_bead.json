@@ -1,0 +1,72 @@
+{
+    "$id": "https://github.com/ajayitem/digital-datasheets/blob/tooling_proposed_changes_2/part-spec/passives/ferrite_bead.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ferrite bead",
+    "type": "object",
+    "properties": {
+        "dcResistance": {
+            "description": "dc resistance (DCR) of ferrite bead",
+            "comment": "units of ohms",
+            "$ref": "../common/unit.json"
+        },
+        "rmsCurrent": {
+            "description": "applied DC current (IRMS) that produces a ferrite bead temperature rise of 40 deg C",
+            "comment": "units of amps",
+            "$ref": "../common/unit.json" 
+        },
+        "impedance100MHz": {
+            "description": "impedance of ferrite bead under standard testing conditions at 100MHz",
+            "comment": "units of ohms",
+            "$ref": "../common/unit.json"
+        },
+        "impedanceTolerance": {
+            "description": "variation of ferrite bead impedance expressed as +/- percentage",
+            "comment": "units of percentage",
+            "$ref": "../common/unit.json"
+        },
+		"pins": {
+			"description": "array of pin objects with associated properties",
+			"type": "array",
+			"items": {
+				"$ref": "../common/pinSpec.json#/pinSpec"
+			}
+		},
+		"package": {
+			"description": "component package information",
+			"$ref": "../common/package.json#/package"
+		},
+		"externalFileMap": {
+			"description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+			"$ref": "#/$defs/externalFileMap"
+		},
+        "componentID": {
+			"description": "methods for identifying the version of the digital datasheet",
+			"$ref": "../common/componentID.json"
+		}
+    },
+	"$defs": {
+		"externalFileMap": {
+			"type": "object",
+			"properties": {
+				"coreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the common part of the part number",
+					"example": "this might include everything about an MCU other than flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"additionalCoreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the changing part of the part number",
+					"example": "this might include the MCU flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"pins": {
+					"description": "pin properties specified by the pin spec file",
+					"$ref": "../common/externalFile.json"
+				},
+				"package": {
+					"description": "package information specified by the package spec file",
+					"$ref": "../common/externalFile.json"
+				}
+			}
+		}
+	}
+}

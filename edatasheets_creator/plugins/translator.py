@@ -1,16 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
-
 import pathlib
 import json
 import re
@@ -147,28 +134,27 @@ class Plugin:
         if isinstance(jsonStr, dict):
 
             for k, v in jsonStr.items():
+                vKey = self.findVocabularyKey(k)
+                if vKey is not None:
+                    k = vKey
 
                 if isinstance(v, list):
 
                     fieldList = []
                     for i in v:
-                        # msg = "\nInside list loop, type of i is " + str(type(i)) + ", i=" + str(i) + "\n\n"
-                        # print(msg)
-                        datasheetSubDict = {}
-                        subDatasheet = self.translate(datasheetSubDict, i)
-                        fieldList.append(subDatasheet)
+                        if (isinstance(i, str)):
+                            fieldList.append(i)
+                        else:
+                            datasheetSubDict = {}
+                            subDatasheet = self.translate(datasheetSubDict, i)
+                            fieldList.append(subDatasheet)
 
                     datasheet[k] = fieldList
 
                 elif isinstance(v, dict):
-
-                    self.translate(datasheet, v)
+                    datasheet[k] = {}
+                    self.translate(datasheet[k], v)
                 else:
-
-                    vKey = self.findVocabularyKey(k)
-                    if vKey is not None:
-                        k = vKey
-
                     datasheet[k] = v
         elif isinstance(jsonStr, list):
             print("The json str is a list so we have to turn the list into a dict first.  Implementation not completed yet.")
@@ -266,7 +252,7 @@ class Plugin:
             fieldName (string): field name used in JSON fieldName generation.
 
         Returns:
-            string: a valid file name substring coponent.
+            string: a valid file name substring component.
         """
         try:
 

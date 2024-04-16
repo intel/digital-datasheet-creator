@@ -1,0 +1,38 @@
+{
+    "$schema":"http://json-schema.org/draft-04/schema#",
+    "title":"Map file schema",
+    "description":"This schema provides the structure to validate a map file for a PowerPoint file",
+    "type":"object",
+    "properties": {
+        "description":{
+            "type":"string",
+            "description": "Description of the map file"
+        },
+        "guid":{
+            "type":"string",
+            "description": "A unique identifier of the map file"
+        },
+        "mapType":{
+            "type":"string",
+            "description": "A map type of the map file"
+        },
+        "slideDetails":{
+            "description": "A list of slides to process",
+            "type":"array",
+            "properties": {
+                "slideNumber":{
+                    "type":"integer",
+                    "description": "Number of the slide where the datasheet is location"
+                },
+                "slideDatasheetTitle":{
+                    "type":"string",
+                    "description": "title of the datasheet in slide"
+                }
+            },
+            "additionalProperties": false,
+            "required":["slideNumber", "slideDatasheetTitle"]
+        }
+     },
+    "additionalProperties": false,
+    "required":["description", "guid", "mapType", "slideDetails"]
+ }

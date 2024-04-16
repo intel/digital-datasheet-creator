@@ -1,15 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
 import re
 from xml.etree.ElementTree import Element  # nosec
 """ Bandit ignore warning reason
@@ -53,7 +41,7 @@ class TableAttributesUtilities:
                 key = self.format.format_name(attributes[0].strip())
                 value = self.format.format_value(attributes[1].strip())
                 key, value = self.format_attributes(key, value)
-                if type(value) == list:
+                if type(value) is list:
                     for item in value:
                         key_element = Element(key)
                         key_element.text = item

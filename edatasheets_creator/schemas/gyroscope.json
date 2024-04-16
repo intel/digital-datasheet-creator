@@ -1,0 +1,125 @@
+{
+    "$id": "https://github.com/ajayitem/digital-datasheets/blob/tooling_proposed_changes_2/part-spec/sensor/gyroscope.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "gyroscope",
+    "type": "object",
+    "properties": {
+        "gyroRanges": {
+            "description": "range of angular speed that gyro can measure",
+            "comment": "units of degrees-per-second (dps)",
+            "type": "number"
+        },
+        "gyroSensitivity": {
+            "description": "smallest change in angular speed gyro is able to capture (typical) at a given gyro range",
+            "comment": "units of LSB/dps",
+            "$ref": "../common/conditionalProperty.json" 
+        },
+        "gyroSensitivityOverTemperature": {
+            "description": "gyroscope sensitivity change over temperature",
+            "comment": "units of percentage per degree celsius",
+            "$ref": "../common/unit.json"
+        },
+        "axis": {
+            "description": "number of axes of measurement",
+            "type": "number"
+        },
+        "zeroRateOffset": {
+            "description": "output of the gyroscope when no angular velocity is applied",
+            "comment": "units of degrees-per-second",
+            "$ref": "../common/unit.json"
+        },
+        "zeroRateOffsetOverTemperature": {
+            "description": "gyro zero rate offset change over temperature",
+            "comment": "units of degrees-per-second per degree celsius (dps/Celsius)",
+            "$ref": "../common/unit.json"
+        },
+        "interface": {
+            "description": "interface(s) for communication to host",
+            "examples": [
+                "i2c",
+                "spi",
+                "analog"
+            ],
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "bandwidth": {
+            "description": "bandwidth of gyroscope",
+            "comment": "units of Hertz (Hz)",
+            "$ref": "../common/unit.json"
+        },
+        "outputDataRate": {
+            "description": "output Data rate (ODR) of a device",
+            "comment": "units of Hertz (Hz)",
+            "$ref": "../common/unit.json"
+        },
+        "outputType": {
+            "description": "measurement output type",
+            "enum": [
+                "analog",
+                "digital"
+            ],
+            "type": "string"
+        },
+        "rmsNoise": {
+            "description": "broadband rms noise of a device",
+            "comment": "units of degrees-per-second rms",
+            "$ref": "../common/unit.json"
+        },
+        "spectralNoiseDensity": {
+            "description": "spectral noise density of a device",
+            "comment": "units of degrees-per-second per square root Hertz (dps/rt-Hz)",
+            "$ref": "../common/unit.json"
+        },
+        "currentConsumption": {
+            "description": "current consumption of a device",
+            "$ref": "../common/currentConsumption.json"
+        },
+		"pins": {
+			"description": "array of pin objects with associated properties",
+			"type": "array",
+			"items": {
+				"$ref": "../common/pinSpec.json#/pinSpec"
+			}
+		},
+		"package": {
+			"description": "component package information",
+			"$ref": "../common/package.json#/package"
+		},
+		"externalFileMap": {
+			"description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+			"$ref": "#/$defs/externalFileMap"
+		},
+        "componentID": {
+			"description": "methods for identifying the version of the digital datasheet",
+			"$ref": "../common/componentID.json"
+		}
+    },
+	"$defs": {
+		"externalFileMap": {
+			"type": "object",
+			"properties": {
+				"coreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the common part of the part number",
+					"example": "this might include everything about an MCU other than flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"additionalCoreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the changing part of the part number",
+					"example": "this might include the MCU flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"pins": {
+					"description": "pin properties specified by the pin spec file",
+					"$ref": "../common/externalFile.json"
+				},
+				"package": {
+					"description": "package information specified by the package spec file",
+					"$ref": "../common/externalFile.json"
+				}
+			}
+		}
+	}
+}

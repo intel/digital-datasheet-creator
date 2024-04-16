@@ -1,0 +1,137 @@
+{
+    "$id": "https://github.com/ajayitem/digital-datasheets/blob/tooling_proposed_changes_2/part-spec/power/load_switch.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "load switch",
+    "type": "object",
+    "required": [
+        "vin",
+        "outputCurrent",
+        "onResistance"
+    ],
+    "properties": {
+        "fetType": {
+            "description": "type of pass FET in a device",
+            "enum": [
+                "NFET",
+                "PFET" 
+            ],
+            "type": "string"
+        },
+        "loadSwitchCount": {
+            "description": "number of load switches in the package.",
+            "type": "number"
+        },
+        "vin": {
+            "description": "input voltage under which a device can be expected to reliabily operate",
+            "comment": "units of volts",
+            "$ref": "../common/unit.json"
+        },
+        "outputCurrent": {
+            "description": "continuous DC cuurent supported by a device",
+            "comment": "units of amps",
+            "$ref": "../common/unit.json"
+        },
+        "onResistance": {
+            "description": "on state resistance of FET",
+            "comment": "conditions includes vin and output current",
+            "$ref": "../common/conditionalProperty.json"
+        },
+        "pdResistance": {
+            "description": "pull-down resistance of a device from the output to the ground",
+            "comment": "units of ohms",
+            "$ref": "../common/unit.json"
+        },
+        "currentLimitSupport": {
+            "description": "whether a device supports current limiting",
+            "type": "boolean"
+        },
+        "adjustableRiseTimeSupport": {
+            "description": "whether a device supports adjustable rise time",
+            "type": "boolean"
+        },
+        "quickOutputDischargeSupport": {
+            "description": "whether a device supports quick output discharge",
+            "type": "boolean"
+        },
+        "reverseCurrentBlockingSupport": {
+            "description": "whether a device supports reverse current blocking",
+            "type": "boolean"
+        },
+        "powerGoodSupport": {
+            "description": "whether a device supports power good",
+            "type": "boolean"
+        },
+        "enableTime": {
+            "description": "time between enable asserted and output voltage rising to 10% nominal",
+            "comment": "conditions include output capacitor value, vin",
+            "$ref": "../common/conditionalProperty.json"
+        },
+        "offTime": {
+            "description": "time between enable deasserted and output voltage falling to 90% nominal",
+            "comment": "conditions include output capacitor value, vin",
+            "$ref": "../common/conditionalProperty.json"
+        },
+        "rampTime": {
+            "description": "time for output voltage to go from 10% vout nominal to 90% vout nominal",
+            "comment": "conditions include output capacitor value, vin",
+            "$ref": "../common/conditionalProperty.json"
+        },
+        "fallTime": {
+            "description": "time for output voltage to go from 90% vout nominal to 10% vout nominal",
+            "comment": "conditions include output capacitor value and current output, vin",
+            "$ref": "../common/conditionalProperty.json"
+        },
+        "currentConsumption": {
+            "description": "current consumption of a device",
+            "$ref": "../common/currentConsumption.json"
+        },
+        "componentProtectionThresholds": {
+            "description": "Thermal and power supply protection thresholds of a device",
+            "$ref": "../common/componentProtectionThresholds.json"
+        },
+		"pins": {
+			"description": "array of pin objects with associated properties",
+			"type": "array",
+			"items": {
+				"$ref": "../common/pinSpec.json#/pinSpec"
+			}
+		},
+		"package": {
+			"description": "component package information",
+			"$ref": "../common/package.json#/package"
+		},
+		"externalFileMap": {
+			"description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+			"$ref": "#/$defs/externalFileMap"
+		},
+        "componentID": {
+			"description": "methods for identifying the version of the digital datasheet",
+			"$ref": "../common/componentID.json"
+		}
+    },
+	"$defs": {
+		"externalFileMap": {
+			"type": "object",
+			"properties": {
+				"coreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the common part of the part number",
+					"example": "this might include everything about an MCU other than flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"additionalCoreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the changing part of the part number",
+					"example": "this might include the MCU flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"pins": {
+					"description": "pin properties specified by the pin spec file",
+					"$ref": "../common/externalFile.json"
+				},
+				"package": {
+					"description": "package information specified by the package spec file",
+					"$ref": "../common/externalFile.json"
+				}
+			}
+		}
+	}
+}

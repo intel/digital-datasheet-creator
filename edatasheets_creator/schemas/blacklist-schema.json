@@ -8,4 +8,4 @@
         "description": "Words to skip when creating a vocabulary file"
     },
     "uniqueItems": true
-}
+} 

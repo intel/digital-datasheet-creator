@@ -1,16 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
-
 import copy
 import json
 import re
@@ -713,7 +700,7 @@ class DataTablePDGCCG:
             if name_item in self.header_keys:
                 if name_item == datasheet_c.DATASHEET_CHANNELS_NAME:
                     channel_value = attributes[1].split('/')
-                    if type(channel_value) == list:
+                    if type(channel_value) is list:
                         for item in channel_value:
                             new_element = Element(name_item)
                             new_element.text = item

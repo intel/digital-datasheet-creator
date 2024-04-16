@@ -1,0 +1,107 @@
+{
+    "$id": "https://github.com/ajayitem/digital-datasheets/blob/tooling_proposed_changes_2/part-spec/passives/capacitor.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "capacitor",
+    "type": "object",
+    "required": [
+        "value"
+    ],
+    "properties": { 
+        "value": {
+            "description": "capacitor value",
+            "comment": "units of farads",
+            "$ref": "../common/unit.json"
+        },
+        "tolerance": {
+            "description": "nominal tolerance of a capacitor",
+            "comment": "units of %",
+            "$ref": "../common/unit.json"
+        },
+        "ratedVoltage": {
+            "description": "maximum voltage which may be applied continuously to a capacitance",
+            "comment": "units of volts",
+            "$ref": "../common/unit.json"
+        },
+        "dielectric": {
+            "description": "dielectric material used in the capacitor",
+            "examples": [
+                "ceramic",
+                "tantalum",
+                "electrolytic"
+            ],
+            "type": "string"
+        },
+        "polarized": {
+            "description": "describes whether the capacitor is polarized",
+            "type": "boolean"
+        },
+        "equivalentSerieResistance": {
+            "description": "equivalent series resistance (ESR) of the capacitor",
+            "comment": "units of ohms",
+            "$ref": "../common/unit.json"
+        },
+        "temperatureCoefficient": {
+            "description": "change in capacitance when the temperature is changed",
+            "comment": "units of farads/degree (Celsius or Kelvin)",
+            "type": "number"
+        },
+        "minTemperature": {
+            "description": "minimum temperature under which a capacitor can be expected to reliably operate",
+            "comment": "units of degrees (Celsius or Kelvin)",
+            "$ref": "../common/unit.json"
+        },
+        "maxTemperature": {
+            "description": "maximum temperature under which a capacitor can be expected to reliably operate",
+            "comment": "units of degrees (Celsius or Kelvin)",
+            "$ref": "../common/unit.json"
+        },
+        "capacitorDerating": {
+            "description": "graph object to capture capacitance changes with voltage",
+            "$ref": "../common/graph.json#/graph"
+        },
+		"pins": {
+			"description": "array of pin objects with associated properties",
+			"type": "array",
+			"items": {
+				"$ref": "../common/pinSpec.json#/pinSpec"
+			}
+		},
+		"package": {
+			"description": "component package information",
+			"$ref": "../common/package.json#/package"
+		},
+		"externalFileMap": {
+			"description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+			"$ref": "#/$defs/externalFileMap"
+		},
+        "componentID": {
+			"description": "methods for identifying the version of the digital datasheet",
+			"$ref": "../common/componentID.json"
+		}
+    },
+	"$defs": {
+		"externalFileMap": {
+			"type": "object",
+			"properties": {
+				"coreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the common part of the part number",
+					"example": "this might include everything about an MCU other than flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"additionalCoreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the changing part of the part number",
+					"example": "this might include the MCU flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"pins": {
+					"description": "pin properties specified by the pin spec file",
+					"$ref": "../common/externalFile.json"
+				},
+				"package": {
+					"description": "package information specified by the package spec file",
+					"$ref": "../common/externalFile.json"
+				}
+			}
+		}
+	}
+}

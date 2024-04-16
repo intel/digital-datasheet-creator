@@ -1,15 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
 import json
 from defusedxml import ElementTree  # nosec
 from pathlib import Path
@@ -49,17 +37,22 @@ class Plugin:
             msg = "DITA Plugin is loaded...\n"
             ExceptionLogger.logInformation(__name__, msg)
 
+            # Build Output File Name
+            path = Path(inputFileName)
+            msg = f"Processing file: {path.name}\n"
+            ExceptionLogger.logInformation(__name__, msg)
+
             source = ElementTree.parse(inputFileName).getroot()
 
             data_table = DataTable(inputFileName, source)
             edatasheet = data_table.transform()
 
+            # Stop execution if the edatasheet is empty
+            if (edatasheet == {}):
+                return
             # Build Outputs
             schema_builder = DictionarySchema()
             if (self.store_data_in_memory):
-                # Build Output File Name
-                path = Path(inputFileName)
-
                 if outputFileName:
                     output_file_name = outputFileName
                 else:

@@ -1,16 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
-
 """
     Core application module that loads plugins and calls the process method on the plugins.
 """
@@ -305,14 +292,14 @@ class DatasheetCreatorApp:
 
         return [inputFileExtension, outputFileExtension]
 
-    def _createRunnerTasks(self, args, inputFileExtension, outputFileExtesion, argumentsPresent):
+    def _createRunnerTasks(self, args, inputFileExtension, outputFileExtension, argumentsPresent):
         """
             Creates and sets tasks to the runner to execute
 
         Args:
            args: Arguments from the invocation command
            inputFileExtension: Extension string of the input file
-           outputFileExtesion: Extension string of the output file
+           outputFileExtension: Extension string of the output file
            argumentsPresent: Flag that indicates if the invocation command had arguments
 
         Returns:
@@ -320,7 +307,7 @@ class DatasheetCreatorApp:
         """
         # Array that will store the tasks created depending on the command parameters
         tasksToExecute = []
-        # Intial task id
+        # Initial task id
         taskID = 1
 
         try:
@@ -337,7 +324,7 @@ class DatasheetCreatorApp:
                         # Load the plugin for the specified file type
 
                         # Validate if is intended to do an spreadsheet format parsing
-                        if (outputFileExtesion == '.xlsx'):
+                        if (outputFileExtension == '.xlsx'):
                             # xls to xlsx
                             if (inputFileExtension == '.xls'):
                                 # Get the xls -> xlsx plugin data
@@ -427,21 +414,33 @@ class DatasheetCreatorApp:
                             # Increment the task ID
                             taskID += 1
 
+                        elif (inputFileExtension == '.pptx'):
+                            # Get the html plugin data
+                            pptxPlugIn = self._runner.findObject(pluginList, pluginconstants.PPTX_TO_JSON, runnerconstants.PLUGIN_OBJECT)
+
+                            # Create a new html task and append to the task array
+                            pptxTask = self._newTask(taskID,
+                                                     pptxPlugIn[runnerconstants.PLUGIN_DESCRIPTION],
+                                                     pptxPlugIn[runnerconstants.PLUGINGUIDTAG],
+                                                     str(self._mapFileName),
+                                                     str(self._vocabulary),
+                                                     str(self._inputFileName),
+                                                     str(self._diffFileToCompare2),
+                                                     str(self._outputFileName))
+                            tasksToExecute.append(pptxTask)
+
+                            # Increment the task ID
+                            taskID += 1
+
                         # NO parsing needed, load the Spreadsheet plug-in
                         elif (self.__isSpreadsheet(inputFileExtension)):
                             # Get the spreadsheet plugin data
                             spreadsheetPlugIn = self._runner.findObject(pluginList, pluginconstants.SPREADSHEET_INDEX, runnerconstants.PLUGIN_OBJECT)
 
                             # Create a new spreadsheet task and append to the task array
-                            spredsheetTask = self._newTask(taskID,
-                                                           spreadsheetPlugIn[runnerconstants.PLUGIN_DESCRIPTION],
-                                                           spreadsheetPlugIn[runnerconstants.PLUGINGUIDTAG],
-                                                           str(self._mapFileName),
-                                                           str(self._vocabulary),
-                                                           str(self._inputFileName),
-                                                           str(self._diffFileToCompare2),
-                                                           str(self._outputFileName))
-                            tasksToExecute.append(spredsheetTask)
+                            spreadsheetTask = self._newTask(taskID, spreadsheetPlugIn[runnerconstants.PLUGIN_DESCRIPTION], spreadsheetPlugIn[runnerconstants.PLUGINGUIDTAG],
+                                                            str(self._mapFileName), str(self._vocabulary), str(self._inputFileName), str(self._diffFileToCompare2), str(self._outputFileName))
+                            tasksToExecute.append(spreadsheetTask)
 
                             # Increment the task ID
                             taskID += 1
@@ -617,7 +616,7 @@ class DatasheetCreatorApp:
         Returns:
            Task: Object task with the parameter information
         """
-        # Asume that we will have a next task with an incremental ID
+        # Assume that we will have a next task with an incremental ID
         nextTask = taskId + 1
         # Create and return the new object
         newTask = Task(taskId, taskDesc, taskGUID, taskMap, taskVocab, taskArg1,
@@ -627,10 +626,10 @@ class DatasheetCreatorApp:
     # Check spreadsheet type
     def __isSpreadsheet(self, ext):
         """
-            Indicates if the extesion is a valid spreadshhet type
+            Indicates if the extension is a valid spreadsheet type
 
         Args:
-           ext: String contatining the extension of the input file
+           ext: String containing the extension of the input file
 
         Returns:
            Boolean: Flag indicating if the extension is a valid spreadsheet type
@@ -648,10 +647,10 @@ class DatasheetCreatorApp:
     # Check JSON type
     def __isJSON(self, ext):
         """
-            Indicates if the extesion is a valid JSON type
+            Indicates if the extension is a valid JSON type
 
         Args:
-           ext: String contatining the extension of the input file
+           ext: String containing the extension of the input file
 
         Returns:
            Boolean: Flag indicating if the extension is a valid JSON type
@@ -671,7 +670,7 @@ class DatasheetCreatorApp:
             Selects the plug-in name to execute depending on the format input
 
         Args:
-           format: String contatining the extension of the input file
+           format: String containing the extension of the input file
 
         Returns:
            String: Name of the selected plug-in

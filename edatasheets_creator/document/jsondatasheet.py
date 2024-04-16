@@ -1,18 +1,4 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
-
 import os
-import re
 import uuid
 
 
@@ -151,7 +137,7 @@ class JsonDataSheet:
                 validFieldName = encodedString.decode()
 
                 # remove items between parentheses
-                validFieldName = re.sub(r"\([^()]*\)", "", validFieldName)
+                # validFieldName = re.sub(r"\([^()]*\)", "", validFieldName)
 
                 validFieldName = validFieldName.title()  # capitalize first letter of every word
 

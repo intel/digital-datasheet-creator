@@ -9,7 +9,7 @@
       "",
       "map"
     ],
-    "inputFormats": [
+    "inputFormats": [ 
       "json"
     ],
     "outputFormat": "h"
@@ -55,7 +55,8 @@
       "map"
     ],
     "inputFormats": [
-      "xlsx"
+      "xlsx",
+      "xlsm"
     ],
     "outputFormat": "json"
   },
@@ -247,6 +248,21 @@
     ],
     "outputFormat": "json",
     "validateInputs": false
+  },
+  {
+    "label": "PPTX to JSON",
+    "pluginName": "pptx_to_json",
+    "description": "Implements Edatasheet generation from an PPTX file.",
+    "pluginGUID": "c378e34a-9f26-463a-ad78-65ddeb7952f2",
+    "case": [
+      "arg1",
+      "output",
+      "map"
+    ],
+    "inputFormats": [
+      "pptx"
+    ],
+    "outputFormat": "json"
   },
   {
     "label": "Default plugin",

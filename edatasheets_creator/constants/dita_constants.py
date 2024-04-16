@@ -1,15 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
 LABEL_HEADER = "label"
 UNIT_HEADER = "unit"
 VALUE_HEADER = "value"
@@ -18,6 +6,7 @@ ROW_START = "row_start"
 ROW_END = "row_end"
 
 COL_NUM = "col_num"
+COL_NUM_ENTRY = "col_num_entry"
 COLNAME = "colname"
 COLNUM = "colnum"
 
@@ -31,6 +20,9 @@ MOREROWS = "morerows"
 NAME = "name"
 
 P_TAG = "p"
+NOTE_TAG = "note"
+LI_TAG = "li"
+OL_TAG = "ol"
 ENTRY_TAG = "entry"
 IMAGE_TAG = "image"
 FIG_TAG = "fig"
@@ -49,3 +41,13 @@ OUTPUTCLASS_ATTRIBUTE = "outputclass"
 ID_ATTRIBUTE = "id"
 UNIT_IDENTIFIER = "unit"
 VALUE_CREATOR = "value"
+
+ATTRIB_ROTATE = "rotate90"
+
+EMPTY_HEADER = "empty header on column"
+
+REPEAT_TIMES = "times"
+REPEAT_ELEMENT = "element"
+REPEAT_COLUMN = "column"
+
+HEADER_UNITS = ["Ω"]

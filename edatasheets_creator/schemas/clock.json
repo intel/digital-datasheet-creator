@@ -1,0 +1,98 @@
+{
+    "$id": "https://github.com/edatasheets/digital-datasheets/blob/main/part-spec/clock/clock.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "clock",
+    "type": "object",
+    "properties": {
+        "fixedFrequency": {
+            "description": "clock frequency value if the clock has a fixed frequency",
+            "comment": "units of Hz",
+            "$ref": "../common/unit.json#/unit"
+        },
+        "numberClockOutputs": {
+            "description": "number of clock outputs in a clock IC",
+            "type": "number"
+        },
+        "diffSingleEnded": { 
+            "description": "property describing whether a clock output is single ended or differential",
+            "enum": [
+                "diff",
+                "single"
+            ],
+            "type": "string"
+        },
+        "jitter": {
+            "description": "cycle to cycle clock jitter",
+            "comment": "units of seconds",
+            "$ref": "../common/unit.json#/unit"
+        },
+        "frequencyTolerance": {
+            "description": "amount of frequency variation specced from nominal frequency",
+            "comment": "units of percentage",
+            "$ref": "../common/unit.json#/unit"
+        },
+        "powerSupplyRejectionRatio": {
+            "description": "power supply rejection ratio (PSRR)or ratio between power supply variation and output variation",
+            "comment": "units of dB",
+            "$ref": "../common/unit.json#/unit"
+        },
+        "outputFormat": {
+            "description": "signal format of clock output",
+            "examples": [
+                "lvpecl",
+                "lvds",
+                "hcsl",
+                "etc."
+            ],
+            "type": "string"
+        },
+        "currentConsumption": {
+            "description": "current used by device in various power modes",
+            "$ref": "../common/currentConsumption.json#/currentConsumption"
+        },
+        "pins": {
+			"description": "array of pin objects with associated properties",
+			"type": "array",
+			"items": {
+				"$ref": "../common/pinSpec.json#/pinSpec"
+			}
+		},
+		"package": {
+			"description": "component package information",
+			"$ref": "../common/package.json#/package"
+		},
+		"externalFileMap": {
+			"description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+			"$ref": "#/$defs/externalFileMap"
+		},
+        "componentID": {
+			"description": "methods for identifying the version of the digital datasheet",
+			"$ref": "../common/componentID.json"
+		}
+    },
+	"$defs": {
+		"externalFileMap": {
+			"type": "object",
+			"properties": {
+				"coreProperties": {
+					"description": "core component properties as defined by the specific component spec file. These properties are described by the common part of the part number",
+					"example": "this might include everything about an MCU other than flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"additionalCoreProperities": {
+					"description": "core component properties as defined by the specific component spec file. These properties are described by the changing part of the part number",
+					"example": "this might include the MCU flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"pins": {
+					"description": "pin properties specified by the pin spec file",
+					"$ref": "../common/externalFile.json"
+				},
+				"package": {
+					"description": "package information specified by the package spec file",
+					"$ref": "../common/externalFile.json"
+				}
+			}
+		}
+	}
+}

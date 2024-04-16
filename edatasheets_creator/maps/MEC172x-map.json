@@ -1,0 +1,348 @@
+{
+    "description": "MEC172x Pin Sheet",
+    "guid": "a0550d97-e99c-47dc-93b6-a69f18107e34",
+    "mapType": "spreadsheet",
+    "sheets": [
+            {
+            "sheetName": "Pinouts",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                
+            ],
+            "ignoreCols" : [
+               
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 1,
+                            "col" : "N"
+                        },
+                        "dataStartRow" : 3,
+                        "maxRows" : 207
+                    },
+                    "fieldHeaders" : {
+                                "row" : 1                                       
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI",
+                            "AJ",
+                            "AK",
+                            "AL",
+                            "AM",
+                            "AN"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "sheetName": "Pin Config Info",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                
+            ],
+            "ignoreCols" : [
+               
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 1,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 3,
+                        "maxRows" : 1024
+                    },
+                    "fieldHeaders" : {
+                                "row" : 1                                       
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI",
+                            "AJ",
+                            "AK",
+                            "AL",
+                            "AM",
+                            "AN",
+                            "AO",
+                            "AP",
+                            "AQ",
+                            "AR",
+                            "AS",
+                            "AT",
+                            "AU"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "sheetName": "GPIO Pin Lock",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                
+            ],
+            "ignoreCols" : [
+               
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 1,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 3,
+                        "maxRows" : 26
+                    },
+                    "fieldHeaders" : {
+                                "row" : 1                                       
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L"
+                        ]
+                    }
+                }
+            ]
+       },
+       {
+            "sheetName": "Pin Investigation",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                
+            ],
+            "ignoreCols" : [
+            
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 1,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 3,
+                        "maxRows" : 175
+                    },
+                    "fieldHeaders" : {
+                                "row" : 1                                       
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "sheetName": "Strap Pins",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                
+            ],
+            "ignoreCols" : [
+            
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 1,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 2,
+                        "maxRows" : 7
+                    },
+                    "fieldHeaders" : {
+                                "row" : 1                                       
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "B",
+                            "C",
+                            "D",
+                            "E"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "sheetName": "MEC172x_pinouts",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                
+            ],
+            "ignoreCols" : [
+            
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 1,
+                            "col" : "F"
+                        },
+                        "dataStartRow" : 3,
+                        "maxRows" : 175
+                    },
+                    "fieldHeaders" : {
+                                "row" : 1                                       
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "sheetName": "5VT pin details",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                
+            ],
+            "ignoreCols" : [
+            
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 1,
+                            "col" : "B"
+                        },
+                        "dataStartRow" : 2,
+                        "maxRows" : 14
+                    },
+                    "fieldHeaders" : {
+                                "row" : 1                                       
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "A",
+                            "C",
+                            "D"
+                        ]
+                    }
+                }
+            ]
+        }    
+        
+    ]
+}

@@ -1,16 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
-
 # Spreadsheet map file class
 
 import json
@@ -372,7 +359,7 @@ class SpreadsheetMap:
                     # ExceptionLogger.logDebug(__name__,'spans =',spans)
                     if spans is not None:
 
-                        if (type(spans) == list):
+                        if (type(spans) is list):
 
                             outputList = spans
                             # ExceptionLogger.logDebug(__name__,'first group by list =',l)
@@ -383,6 +370,63 @@ class SpreadsheetMap:
                 # ExceptionLogger.logInformation(__name__,spreadsheettypes.SPREADSHEET_MAP_GROUPS_FIELD + 'Spans passed is not a list.  Spans=',spans)
 
             return outputList
+
+        except Exception as e:
+            ExceptionLogger.logError(__name__, str(e), e)
+
+    @staticmethod
+    def getListSpanInGroupBy(jsonItem):
+        """
+        Returns a list of the columns included within a groupBy definition.
+
+        Args:
+            jsonItem (dict): a dictionary containing the groupBy information.
+
+        Returns:
+            list: contains columns to include within a groupBy definition.
+        """
+
+        outputList = []
+        try:
+
+            jsonType = type(jsonItem)
+
+            if jsonItem is not None and jsonType == dict:
+
+                for listItem in jsonItem[spreadsheettypes.SPREADSHEET_MAP_GROUPS_FIELD]:
+                    rowSpans = listItem[spreadsheettypes.SPREADSHEET_MAP_SPANS_FIELD][spreadsheettypes.SPREADSHEET_MAP_COLUMNS_FIELD]
+                    outputList.extend(rowSpans)
+
+            return outputList
+
+        except Exception as e:
+            ExceptionLogger.logError(__name__, str(e), e)
+
+    @staticmethod
+    def getSubObjectFlag(groupByItem, column_letter):
+        """
+        Returns a boolean stating if the subobject flag is activated for a group by array item.
+
+        Args:
+            groupByItem (dict): a dictionary containing the groupBy information.
+            column_letter (str): a string of the column letter.
+
+        Returns:
+            boolean: if group by should be a subobject or not.
+        """
+        result = False
+        try:
+
+            jsonType = type(groupByItem)
+
+            if groupByItem is not None and jsonType == list:
+
+                for listItem in groupByItem:
+                    if column_letter in listItem[spreadsheettypes.SPREADSHEET_MAP_SPANS_FIELD][spreadsheettypes.SPREADSHEET_MAP_COLUMNS_FIELD]:
+                        if spreadsheettypes.SPREADSHEET_MAP_INCLUDE_AS_SUBOBJECT in listItem:
+                            result = listItem[spreadsheettypes.SPREADSHEET_MAP_INCLUDE_AS_SUBOBJECT]
+
+            return result
 
         except Exception as e:
             ExceptionLogger.logError(__name__, str(e), e)
@@ -557,6 +601,128 @@ class SpreadsheetMap:
         except Exception as e:
             ExceptionLogger.logError(__name__, "", e)
 
+    def onlyTableName(self, sheetName):
+        """
+        Returns a boolean indicating if tables should be compounded with tab name or not.
+
+        Args:
+            sheetName (string): worksheet name.
+
+        Returns:
+            bool: indicates whether tables should be compounded with tab name or not.
+        """
+        bln = False
+
+        try:
+            for s in self._sheets:
+
+                # find the specified sheet
+                if spreadsheettypes.SPREADSHEET_MAP_SHEETNAME_FIELD in s:
+                    name = s[spreadsheettypes.SPREADSHEET_MAP_SHEETNAME_FIELD]
+
+                    if name == sheetName:
+
+                        # verify that there is a key for sheet inclusion into datasheet
+                        if spreadsheettypes.SPREADSHEET_MAP_ONLY_TABLE_NAME in s:
+
+                            # get the value and convert it to boolean
+                            bln = bool(s[spreadsheettypes.SPREADSHEET_MAP_ONLY_TABLE_NAME])
+                        break
+
+            return bln
+
+        except Exception as e:
+            ExceptionLogger.logError(__name__, "", e)
+
+    def includeMetadata(self):
+        """
+        Returns a boolean indicating if metadata should be included in datasheet or not.
+
+        Args:
+
+
+        Returns:
+            bool: indicates whether metadata should be included in datasheet or not.
+        """
+        bln = True
+
+        try:
+            # get value from map file
+            if spreadsheettypes.SPREADSHEET_MAP_INCLUDE_METADATA in self._mapFile:
+                bln = self._mapFile[spreadsheettypes.SPREADSHEET_MAP_INCLUDE_METADATA]
+
+            return bln
+
+        except Exception as e:
+            ExceptionLogger.logError(__name__, "", e)
+
+    def checkIndustryFormat(self):
+        """
+        Returns a boolean indicating if the datasheet is to conform with industry workgroup specifications.
+
+        Args:
+
+
+        Returns:
+            bool: indicates if the datasheet is to conform with industry workgroup specifications.
+        """
+        bln = False
+
+        try:
+            # get value from map file
+            if spreadsheettypes.SPREADSHEET_MAP_INDUSTRY_FORMAT in self._mapFile:
+                bln = self._mapFile[spreadsheettypes.SPREADSHEET_MAP_INDUSTRY_FORMAT]
+
+            return bln
+
+        except Exception as e:
+            ExceptionLogger.logError(__name__, "", e)
+
+    def macroEnabled(self):
+        """
+        Returns a boolean indicating if the sheet is macro enabled.
+
+        Args:
+
+
+        Returns:
+            bool: indicates whether the sheet is macro enabled or not.
+        """
+        bln = False
+
+        try:
+            # get value from map file
+            if spreadsheettypes.SPREADSHEET_MAP_MACRO_ENABLED in self._mapFile:
+                bln = self._mapFile[spreadsheettypes.SPREADSHEET_MAP_MACRO_ENABLED]
+
+            return bln
+
+        except Exception as e:
+            ExceptionLogger.logError(__name__, "", e)
+
+    def getComponentType(self):
+        """
+        Returns a boolean indicating if tables should be compounded with tab name or not.
+
+        Args:
+            sheetName (string): worksheet name.
+
+        Returns:
+            bool: indicates whether tables should be compounded with tab name or not.
+        """
+        bln = 'default'
+
+        try:
+
+            # get value from map file
+            if spreadsheettypes.SPREADSHEET_MAP_COMPONENT_TYPE in self._mapFile:
+                bln = self._mapFile[spreadsheettypes.SPREADSHEET_MAP_COMPONENT_TYPE]
+
+            return bln
+
+        except Exception as e:
+            ExceptionLogger.logError(__name__, "", e)
+
     def getSheets(self):
         """
         Returns a list containing the worksheets in the map file.
@@ -645,27 +811,29 @@ class SpreadsheetMap:
         isInList = False
 
         try:
-            # ExceptionLogger.logDebug(__name__,"groupBy=",groupBy)
-            spansList = SpreadsheetMap.getGroupBySpansList(groupBy)
+            for currentSpan in groupBy:
+                # ExceptionLogger.logDebug(__name__,"groupBy=",groupBy)
+                spansList = SpreadsheetMap.getGroupBySpansList(currentSpan)
 
-            # ExceptionLogger.logDebug(__name__,"spansList=",spansList)
-            colIdxType = type(colIdx)
+                # ExceptionLogger.logDebug(__name__,"spansList=",spansList)
+                colIdxType = type(colIdx)
 
-            if colIdxType == str and len(colIdx) > 0:
+                if colIdxType == str and len(colIdx) > 0:
 
-                # a letter was passed so set up for check
-                colLetter = colIdx
-            else:
+                    # a letter was passed so set up for check
+                    colLetter = colIdx
+                else:
 
-                # a number was passed so get the column letter
-                colLetter = SpreadsheetMap.getColumnLetter(colIdx)
+                    # a number was passed so get the column letter
+                    colLetter = SpreadsheetMap.getColumnLetter(colIdx)
 
-            if colLetter is not None and len(colLetter) > 0:
-                if spansList is not None:
-                    # idx = spansList.index(colLetter)
-                    isInList = True
+                if colLetter is not None and len(colLetter) > 0:
+                    if colLetter in spansList:
+                        # idx = spansList.index(colLetter)
+                        isInList = True
+                        break
 
-            # ExceptionLogger.logDebug(__name__,"idx=",idx)
+                # ExceptionLogger.logDebug(__name__,"idx=",idx)
 
             return isInList
         except ValueError as ve:

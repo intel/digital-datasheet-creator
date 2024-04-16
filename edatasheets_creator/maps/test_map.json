@@ -1,0 +1,52 @@
+{
+    "description": "IEC 61360-4 - IEC/SC 3D - Common Data Dictionary (CDD- V2.0015.0002) - DET Classifications",
+    "guid": "1ec015bd-7159-4581-a6d8-d1f6b2fe3eb1",
+    "mapType": "spreadsheet",
+    "datasheetDescLocation" : {
+        "sheetName" : "Anchor Systems",
+        "row" : 1,
+        "col" : "A"
+    },
+    "sheets": [
+        {
+            "sheetName": "Fanless M tablet configs",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                
+            ],
+            "ignoreCols" : [
+               
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 2,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 3,
+                        "maxRows" : 400
+                    },
+                    "fieldHeaders" : {
+                                "row" : 2                                       
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I"
+                        ]
+                    }
+                }               
+            ]
+       }        
+    ]
+}

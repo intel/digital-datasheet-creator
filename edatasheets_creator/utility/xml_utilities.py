@@ -1,16 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
-
 import re
 import os
 from typing import List, Tuple
@@ -218,7 +205,7 @@ class XMLUtilities:
 
         except Exception as e:
             ExceptionLogger.logError(__name__, "", e)
-            
+
     def get_text_from_tag(self, source: Element, tag: str) -> str:
         """Get title text from Element using a tag.
 
@@ -248,7 +235,7 @@ class XMLUtilities:
         if source:
             matched_tags = list(source.iter(dita_c.TITLE_TAG))
             title = self.get_text(matched_tags[0]) if matched_tags else title
-
+            title = self.format.format_title(title)
         return title
 
     def get_desc(self, source: Element) -> str:
@@ -314,7 +301,7 @@ class XMLUtilities:
         return list(source.iter(dita_c.TABLE_TAG))
 
     def get_topicref(self, source: Element) -> List[Element]:
-        """Returns a list of topicref elements
+        """Returns a list of topic ref elements
 
         Args:
             source (Element)
@@ -325,7 +312,7 @@ class XMLUtilities:
         return list(source.find(ditamap_c.TOPIC_REF_TAG))
 
     def get_navtitle_from_meta(self, source: Element) -> str:
-        """Returns the navtitle from a topicmeta.
+        """Returns the nav title from a topic meta.
 
         Args:
             source (Element): topicref with a topic meta inside.
@@ -404,7 +391,8 @@ class XMLUtilities:
         entries = list(source.iter(dita_c.ENTRY_TAG))
         for entry in entries:
             attributes = entry.attrib
-            if attributes.get(dita_c.OUTPUTCLASS_ATTRIBUTE, None):
+            outputclass = attributes.get(dita_c.OUTPUTCLASS_ATTRIBUTE, None)
+            if outputclass == dita_c.ATTRIB_ROTATE:
                 return True
         return False
 
@@ -453,6 +441,39 @@ class XMLUtilities:
             List[Element]: List of Element p.
         """
         return list(source.iter(dita_c.P_TAG))
+
+    def get_li_list(self, source: Element):
+        """Get the li list from the source.
+
+        Args:
+            source (Element): Element with li tags.
+
+        Returns:
+            List[Element]: List of Element li.
+        """
+        return list(source.iter(dita_c.LI_TAG))
+
+    def get_ol_list(self, source: Element):
+        """Get the ol list from the source.
+
+        Args:
+            source (Element): Element with li tags.
+
+        Returns:
+            List[Element]: List of Element li.
+        """
+        return list(source.iter(dita_c.OL_TAG))
+
+    def get_note_list(self, source: Element):
+        """Get the note list from the source.
+
+        Args:
+            source (Element): Element with note tags.
+
+        Returns:
+            List[Element]: List of Element note.
+        """
+        return list(source.iter(dita_c.NOTE_TAG))
 
     def get_p_text(self, source: Element) -> str:
         """Get the text inside an entry.
@@ -522,6 +543,7 @@ class XMLUtilities:
                     msg = f"get_column_name_from_dictionary_by_key:  Could not find value for key {key}"
                     ExceptionLogger.logError(__name__, msg)
                     raise Exception(msg)
+
             return column_name, column_unit
 
         except Exception as e:
@@ -541,7 +563,7 @@ class XMLUtilities:
         found_key = None
         try:
             for key, value in dictionary.items():
-                if value[dita_c.COL_NUM] == str(position):
+                if value[dita_c.COL_NUM_ENTRY] == str(position):
                     found_key = key
                     break
 
@@ -573,14 +595,11 @@ class XMLUtilities:
                 column_start_key = source_attributes.get(dita_c.NAMEST, None)
                 if column_start_key:
                     column_end_key = source_attributes.get(dita_c.NAMEEND, None)
-                    if column_end_key and (len(column_start_key) < 4 or len(column_end_key) < 4):
-                        msg = f"Unexpected String {ElementTree.tostring(source, encoding='unicode')}"
-                        ExceptionLogger.logError(__name__, msg)
-                        element_key.append(transformer_constants.FAILED)
-                        return element_key
-
-                    start_index = int(column_start_key[3:])
-                    end_index = int(column_end_key[3:])
+                    # Just use the number section
+                    column_start_key = re.sub('[^0-9,.]', '', column_start_key)
+                    column_end_key = re.sub('[^0-9,.]', '', column_end_key)
+                    start_index = int(column_start_key)
+                    end_index = int(column_end_key)
 
                     for i in range(start_index, end_index + 1):
                         element_key.append("col" + str(i))
@@ -623,7 +642,7 @@ class XMLUtilities:
         xmlstr = ElementTree.tostring(source, encoding='utf8', method='xml')
         return xmlstr
 
-    def get_column_name_from_dictionary(self, source: Element, dictionary: dict) -> Tuple[str, str]:
+    def get_column_name_from_dictionary(self, source: Element, dictionary: dict, counter: int) -> Tuple[str, str]:
         """Get the header name and if applies the unit for the value.
 
         Args:
@@ -647,8 +666,12 @@ class XMLUtilities:
                 end_value = dictionary[end_key].get(dita_c.LABEL_HEADER, "")
                 column_name = str(start_value) + "-" + str(end_value)
             else:
-                msg = f"Could not find column key for element {self.element_to_string(source)}"
-                ExceptionLogger.logError(__name__, msg)
+                item = self.get_column_header_key_from_ordinal_pos(dictionary, counter)
+                if item:
+                    column_name = self.format.format_name(item)
+                else:
+                    msg = f"Could not find column key for element {self.element_to_string(source)}"
+                    ExceptionLogger.logError(__name__, msg)
         else:
             element_key = source.attrib.get(dita_c.COLNAME, "").strip()
             column_name = dictionary[element_key].get(dita_c.LABEL_HEADER, None)

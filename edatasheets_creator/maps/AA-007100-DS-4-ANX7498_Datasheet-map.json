@@ -1,0 +1,48 @@
+{
+    "description": "AA-007100-DS-4-ANX7498 Datasheet map file",
+    "guid": "d685b823-0888-47f6-a7b5-6d7033bb67e0",
+    "mapType": "spreadsheet",
+    "datasheetDescLocation" : {
+        "sheetName" : "Readme",
+        "row" : 1,
+        "col" : "A"
+    },
+    "sheets": [
+        {
+            "sheetName": "50-pin QFN Descriptions",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                
+            ],
+            "ignoreCols" : [
+               
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 1,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 2,
+                        "maxRows" : 100
+                    },
+                    "fieldHeaders" : {
+                                "row" : 1                                       
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F"
+                        ]
+                    }
+                }               
+            ]
+        }
+    ]
+}

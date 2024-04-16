@@ -1,0 +1,240 @@
+{
+    "$id": "https://github.com/ajayitem/digital-datasheets/blob/tooling_proposed_changes_2/part-spec/semiconductor/mosfet.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "mosfet",
+    "type": "object",
+    "required": [
+      "mosfetType",
+      "mosfetChannelType"
+    ],
+    "properties": {
+      "mosfetType": {
+        "description": "type of MOSFET.", 
+        "examples": [
+          "smallSignal",
+          "power"
+        ],
+        "type": "string"
+      },
+      "mosfetChannelType": {
+        "description": "doping of a transistor's channel - describes whether a transistor is n-type or p-type.",
+        "enum": [
+          "nType",
+          "pType",
+          "nAndpType"
+        ],
+        "type": "string"
+      },
+      "transistorCount": {
+        "description": "number of transistors in the package.",
+        "type": "number"
+      },
+      "vgs": {
+        "description": "gate to source voltage difference of a MOSFET.",
+        "comment": "units of volts",
+        "$ref": "../common/unit.json"
+      },
+      "vgsMax": {
+        "description": "maximum gate to source voltage difference that can be continously applied to a MOSFET. This is a limiting value.",
+        "comment": "units of volts",
+        "$ref": "../common/unit.json"
+      },
+      "vds": {
+        "description": "drain to source voltage difference of a MOSFET.",
+        "comment": "units of volts",
+        "$ref": "../common/unit.json"
+      },
+      "vdsMax": {
+        "description": "maximum drain to source voltage difference that can be continously applied to a MOSFET. This is a limiting value.",
+        "comment": "units of volts",
+        "$ref": "../common/unit.json"
+      },
+      "vdsVbr": {
+        "description": "drain to source breakdown voltage of a MOSFET.",
+        "comment": "units of volts",
+        "$ref": "../common/unit.json"
+      },
+      "vgsTh": {
+        "description": "gate to source voltage difference required to produce a conducting path between drain and source.",
+        "comment": "units of volts",
+        "$ref": "../common/unit.json"
+      },
+      "vsdDiodeVf": {
+        "description": "reverse diode forward voltage when a MOSFET is in off-state.",
+        "comment": "units of volts",
+        "$ref": "../common/unit.json"
+      },
+      "iD": {
+        "description": "Drain Current of a MOSFET.",
+        "comment": "units of amps",
+        "$ref": "../common/unit.json"
+      },
+      "iDrain": {
+        "description": "maximum continous DC current that can flow through a MOSFET channel.This is a limiting value.",
+        "comment": "units of amps",
+        "$ref": "../common/unit.json"
+      },
+      "idPulsed": {
+        "description": "maximum pulsed DC current that can flow through a MOSFET channel.This is a limiting value.",
+        "comment": "units of amps",
+        "$ref": "../common/unit.json"
+      },
+      "iDss": {
+        "description": "drain-source leakage current of a MOSFET when the gate to source voltage difference is zero",
+        "$comment": "condition includes drain-source voltage",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "iGss": {
+        "description": "gate-source leakage current of a MOSFET when the drain to source voltage difference is zero",
+        "$comment": "conditions include gate-source voltage",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "diodeContinuousCurrent": {
+        "description": "maximum continuous forward current of the body diode of a MOSFET (IS).This is a limiting value.",
+        "comment": "units of amps",
+        "$ref": "../common/unit.json"
+      },
+      "diodePulsedCurrent": {
+        "description": "maximum pulsed forward current of the body diode of a MOSFET. This is a limiting value.",
+        "comment": "units of amps",
+        "$ref": "../common/unit.json"
+      },
+      "forwardTransconductance": {
+        "description": "signal gain, change in drain current with variation of gate-source voltage of a MOSFET (gFS).",
+        "$comment": "conditions include vds, iDrain",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "rdson": {
+        "description": "on-state resistance of a MOSFET.",
+        "$comment": "conditions include vds, vgs, temperature",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "rg": {
+        "description": "internal gate resistance of a MOSFET.",
+        "$comment": "conditions include vds, vgs, temperature",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "ciss": {
+        "description": "input capacitance of a MOSFET.",
+        "$comment": "conditions include vds, vgs",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "coss": {
+        "description": "output capacitance of a MOSFET.",
+        "$comment": "conditions include vds, vgs",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "crss": {
+        "description": "reverse transfer capacitance of a MOSFET.",
+        "$comment": "conditions include vds, vgs",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "qg": {
+        "description": "total gate charge of a MOSFET.",
+        "$comment": "conditions include drain-source voltage and drain current",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "qgd": {
+        "description": "gate to drain charge of a MOSFET.",
+        "$comment": "conditions include drain-source voltage and drain current",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "qgs": {
+        "description": "gate to source charge of a MOSFET.",
+        "$comment": "conditions include drain-source voltage and drain current",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "qrr": {
+        "description": "reverse recovery charge of the body diode of a MOSFET.",
+        "$comment": "conditions include diode forward current",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "idVsVds": {
+        "description": "graph of drain current (iD) vs drain source voltage (vds).",
+        "$ref": "../common/graph.json"
+      },
+      "idVsVgs": {
+        "description": "graph of drain current (iD) vs gate source voltage (vgs).",
+        "$ref": "../common/graph.json"
+      },
+      "tdON": {
+        "description": "turn-on delay time of a MOSFET",
+        "$comment": "conditions include drain-source voltage (Vds), gate-source voltage (Vgs), load value.",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "tdOFF": {
+        "description": "turn-off delay time of a MOSFET",
+        "$comment": "conditions include drain-source voltage (Vds), gate-source voltage (Vgs), load value.",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "riseTime": {
+        "description": "rise time of a MOSFET",
+        "$comment": "conditions include drain-source voltage (Vds), gate-source voltage (Vgs), load value.",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "fallTime": {
+        "description": "fall time of a MOSFET",
+        "$comment": "conditions include drain-source voltage (Vds), gate-source voltage (Vgs), load value.",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "trr": {
+        "description": "reverse recovery time of the body diode of a MOSFET.",
+        "$comment": "conditions include body diode forward current value and ramp rate.",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "pTot": {
+        "description": "maximum power dissipation of a MOSFET.",
+        "$comment": "conditions include temeprature",
+        "$ref": "../common/conditionalProperty.json"
+      },
+      "pdVsTemp": {
+        "description": "graph of power dissipation vs temperature.",
+        "$ref": "../common/graph.json"
+      },
+          "pins": {
+              "description": "array of pin objects with associated properties",
+              "type": "array",
+              "items": {
+                  "$ref": "../common/pinSpec.json#/pinSpec"
+              }
+          },
+          "package": {
+              "description": "component package information",
+              "$ref": "../common/package.json#/package"
+          },
+          "externalFileMap": {
+              "description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+              "$ref": "#/$defs/externalFileMap"
+          },
+          "componentID": {
+              "description": "methods for identifying the version of the digital datasheet",
+              "$ref": "../common/componentID.json"
+          }
+    },
+      "$defs": {
+          "externalFileMap": {
+              "type": "object",
+              "properties": {
+                  "coreProperties": {
+                      "description": "core component properties as definied by the specific component spec file. These properties are described by the common part of the part number",
+                      "example": "this might include everything about an MCU other than flash size",
+                      "$ref": "../common/externalFile.json"
+                  },
+                  "additionalCoreProperties": {
+                      "description": "core component properties as definied by the specific component spec file. These properties are described by the changing part of the part number",
+                      "example": "this might include the MCU flash size",
+                      "$ref": "../common/externalFile.json"
+                  },
+                  "pins": {
+                      "description": "pin properties specified by the pin spec file",
+                      "$ref": "../common/externalFile.json"
+                  },
+                  "package": {
+                      "description": "package information specified by the package spec file",
+                      "$ref": "../common/externalFile.json"
+                  }
+              }
+          }
+      }
+  }
+  

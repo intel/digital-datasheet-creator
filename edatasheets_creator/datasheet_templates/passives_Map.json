@@ -1,0 +1,5112 @@
+{
+    "description": "passives Map",
+	"guid": "a0550d97-e99c-47dc-93b6-a69f18107e34",
+	"mapType": "spreadsheet",
+    "sheets": [ 
+    {
+        "sheetName": "resistor",
+        "includeInDatasheet": true,
+        "ignoreBlanks": false,
+        "onlyTableName": true,
+        "ignoreRows": [],
+        "ignoreCols": [],
+        "sections": [
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 1,
+                        "col": "A"
+                    },
+                    "dataStartRow": 4,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 3
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI",
+                            "AJ",
+                            "AK",
+                            "AL",
+                            "AM",
+                            "AN",
+                            "AO",
+                            "AP",
+                            "AQ",
+                            "AR",
+                            "AS",
+                            "AT",
+                            "AU",
+                            "AV",
+                            "AW",
+                            "AX",
+                            "AY",
+                            "AZ",
+                            "BA",
+                            "BB",
+                            "BC",
+                            "BD",
+                            "BE",
+                            "BF",
+                            "BG",
+                            "BH",
+                            "BI",
+                            "BJ",
+                            "BK",
+                            "BL",
+                            "BM",
+                            "BN",
+                            "BO",
+                            "BP",
+                            "BQ",
+                            "BR",
+                            "BS",
+                            "BT",
+                            "BU",
+                            "BV",
+                            "BW",
+                            "BX",
+                            "BY"
+                        ]
+                    },
+                "groupBy": [
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "D"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "D",
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J",
+                                    "K",
+                                    "L",
+                                    "M"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "N"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "N",
+                                    "O",
+                                    "P",
+                                    "Q",
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U",
+                                    "V",
+                                    "W"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "X"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "X",
+                                    "Y",
+                                    "Z",
+                                    "AA",
+                                    "AB",
+                                    "AC",
+                                    "AD",
+                                    "AE",
+                                    "AF",
+                                    "AG"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "AH"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AH",
+                                    "AI",
+                                    "AJ",
+                                    "AK",
+                                    "AL",
+                                    "AM",
+                                    "AN",
+                                    "AO",
+                                    "AP",
+                                    "AQ"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "AR"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AR",
+                                    "AS",
+                                    "AT",
+                                    "AU",
+                                    "AV",
+                                    "AW",
+                                    "AX",
+                                    "AY",
+                                    "AZ",
+                                    "BA"
+                                    
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "BB"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BB",
+                                    "BC",
+                                    "BD",
+                                    "BE",
+                                    "BF",
+                                    "BG",
+                                    "BH",
+                                    "BI",
+                                    "BJ",
+                                    "BK"
+                                    
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "BL"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BL",
+                                    "BM",
+                                    "BN",
+                                    "BO",
+                                    "BP",
+                                    "BQ",
+                                    "BR",
+                                    "BS",
+                                    "BT",
+                                    "BU"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 10,
+                        "col": "A"
+                    },
+                    "dataStartRow": 13,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 12
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 11,
+                                "col": "E"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 11,
+                                "col": "I"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "I",
+                                    "J"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 29,
+                        "col": "A"
+                    },
+                    "dataStartRow": 32,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 31
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 30,
+                                "col": "G"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "G",
+                                    "H",
+                                    "I"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 41,
+                        "col": "A"
+                    },
+                    "dataStartRow": 44,
+                    "maxRows": 2
+                },
+                "fieldHeaders": {
+                        "row": 43
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI",
+                            "AJ",
+                            "AK",
+                            "AL",
+                            "AM",
+                            "AN",
+                            "AO",
+                            "AP",
+                            "AQ",
+                            "AR",
+                            "AS",
+                            "AT",
+                            "AU",
+                            "AV",
+                            "AW",
+                            "AX",
+                            "AY",
+                            "AZ",
+                            "BA",
+                            "BB",
+                            "BC",
+                            "BD",
+                            "BE",
+                            "BF",
+                            "BG",
+                            "BH",
+                            "BI",
+                            "BJ",
+                            "BK",
+                            "BL",
+                            "BM",
+                            "BN",
+                            "BO",
+                            "BP",
+                            "BQ",
+                            "BR",
+                            "BS",
+                            "BT",
+                            "BU",
+                            "BV",
+                            "BW",
+                            "BX",
+                            "BY",
+                            "BZ",
+                            "CA",
+                            "CB",
+                            "CC",
+                            "CD",
+                            "CE",
+                            "CF",
+                            "CG",
+                            "CH",
+                            "CI",
+                            "CJ",
+                            "CK",
+                            "CL",
+                            "CM",
+                            "CN",
+                            "CO",
+                            "CP",
+                            "CQ",
+                            "CR",
+                            "CS",
+                            "CT",
+                            "CU",
+                            "CV",
+                            "CW",
+                            "CX",
+                            "CY",
+                            "CZ",
+                            "DA",
+                            "DB",
+                            "DC",
+                            "DD",
+                            "DE",
+                            "DF",
+                            "DG",
+                            "DH",
+                            "DI",
+                            "DJ",
+                            "DK",
+                            "DL",
+                            "DM",
+                            "DN",
+                            "DO",
+                            "DP",
+                            "DQ",
+                            "DR",
+                            "DS",
+                            "DT",
+                            "DU",
+                            "DV",
+                            "DW",
+                            "DX",
+                            "DY",
+                            "DZ",
+                            "EA",
+                            "EB",
+                            "EC",
+                            "ED",
+                            "EE",
+                            "EF",
+                            "EG",
+                            "EH",
+                            "EI",
+                            "EJ",
+                            "EK",
+                            "EL",
+                            "EM",
+                            "EN",
+                            "EO",
+                            "EP",
+                            "EQ",
+                            "ER",
+                            "ES",
+                            "ET",
+                            "EU",
+                            "EV",
+                            "EW",
+                            "EX",
+                            "EY",
+                            "EZ",
+                            "FA",
+                            "FB",
+                            "FC",
+                            "FD"                    
+                    ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "G"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J",
+                                    "K",
+                                    "L",
+                                    "M",
+                                    "N",
+                                    "O",
+                                    "P"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "Q"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "Q",
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U",
+                                    "V",
+                                    "W",
+                                    "X",
+                                    "Y",
+                                    "Z"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "AA"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AA",
+                                    "AB",
+                                    "AC",
+                                    "AD",
+                                    "AE",
+                                    "AF",
+                                    "AG",
+                                    "AH",
+                                    "AI",
+                                    "AJ"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "AK"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AK",
+                                    "AL",
+                                    "AM",
+                                    "AN",
+                                    "AO",
+                                    "AP",
+                                    "AQ",
+                                    "AR",
+                                    "AS",
+                                    "AT"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "AU"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AU",
+                                    "AV",
+                                    "AW",
+                                    "AX",
+                                    "AY",
+                                    "AZ",
+                                    "BA",
+                                    "BB",
+                                    "BC",
+                                    "BD"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "BE"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BE",
+                                    "BF",
+                                    "BG",
+                                    "BH",
+                                    "BI",
+                                    "BJ",
+                                    "BK",
+                                    "BL",
+                                    "BM",
+                                    "BN"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "BO"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BO",
+                                    "BP",
+                                    "BQ",
+                                    "BR",
+                                    "BS",
+                                    "BT",
+                                    "BU",
+                                    "BV",
+                                    "BW",
+                                    "BX"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "BY"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BY",
+                                    "BZ",
+                                    "CA",
+                                    "CB",
+                                    "CC",
+                                    "CD",
+                                    "CE",
+                                    "CF",
+                                    "CG",
+                                    "CH"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "CI"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "CI",
+                                    "CJ",
+                                    "CK",
+                                    "CL",
+                                    "CM",
+                                    "CN",
+                                    "CO",
+                                    "CP",
+                                    "CQ",
+                                    "CR"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "CS"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "CS",
+                                    "CT",
+                                    "CU",
+                                    "CV",
+                                    "CW",
+                                    "CX",
+                                    "CY",
+                                    "CZ",
+                                    "DA",
+                                    "DB"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "DC"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "DC",
+                                    "DD",
+                                    "DE",
+                                    "DF",
+                                    "DG",
+                                    "DH",
+                                    "DI",
+                                    "DJ",
+                                    "DK",
+                                    "DL"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "DM"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "DM",
+                                    "DN",
+                                    "DO",
+                                    "DP",
+                                    "DQ",
+                                    "DR",
+                                    "DS",
+                                    "DT",
+                                    "DU",
+                                    "DV"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "DW"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "DW",
+                                    "DX",
+                                    "DY",
+                                    "DZ",
+                                    "EA",
+                                    "EB",
+                                    "EC",
+                                    "ED",
+                                    "EE",
+                                    "EF"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "EI"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "EI",
+                                    "EJ",
+                                    "EK",
+                                    "EL",
+                                    "EM",
+                                    "EN",
+                                    "EO",
+                                    "EP",
+                                    "EQ",
+                                    "ER"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "ES"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "ES",
+                                    "ET",
+                                    "EU",
+                                    "EV",
+                                    "EW",
+                                    "EX",
+                                    "EY",
+                                    "EZ",
+                                    "FA",
+                                    "FB"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 52,
+                        "col": "A"
+                    },
+                    "dataStartRow": 55,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 54
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 53,
+                                "col": "B"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "B",
+                                    "C",
+                                    "D",
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J",
+                                    "K"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 53,
+                                "col": "L"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "L",
+                                    "M",
+                                    "N",
+                                    "O",
+                                    "P",
+                                    "Q",
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 53,
+                                "col": "V"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "V",
+                                    "W",
+                                    "X",
+                                    "Y",
+                                    "Z",
+                                    "AA",
+                                    "AB",
+                                    "AC",
+                                    "AD",
+                                    "AE"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 58,
+                        "col": "A"
+                    },
+                    "dataStartRow": 60,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 59
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F"
+                        ]
+                    }
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 64,
+                        "col": "A"
+                    },
+                    "dataStartRow": 67,
+                    "maxRows": 1
+                },
+                "fieldHeaders": {
+                        "row": 65
+                    },
+                "spans": {
+                    "columns": [
+                            "A"
+                        ]
+                    }
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 71,
+                        "col": "A"
+                    },
+                    "dataStartRow": 74,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 72
+                    },
+                "spans": {
+                    "columns": [
+                            "A"
+                        ]
+                    }
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 77,
+                        "col": "A"
+                    },
+                    "dataStartRow": 80,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 78
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F"
+                        ]
+                    }
+            }
+
+        ]
+    },
+
+    {
+        "sheetName": "capacitor",
+        "includeInDatasheet": true,
+        "ignoreBlanks": false,
+        "onlyTableName": true,
+        "ignoreRows": [],
+        "ignoreCols": [],
+        "sections": [
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 1,
+                        "col": "A"
+                    },
+                    "dataStartRow": 4,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 3
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI",
+                            "AJ",
+                            "AK",
+                            "AL",
+                            "AM",
+                            "AN",
+                            "AO",
+                            "AP",
+                            "AQ",
+                            "AR",
+                            "AS",
+                            "AT",
+                            "AU",
+                            "AV",
+                            "AW",
+                            "AX",
+                            "AY",
+                            "AZ",
+                            "BA",
+                            "BB",
+                            "BC",
+                            "BD",
+                            "BE",
+                            "BF",
+                            "BG",
+                            "BH",
+                            "BI",
+                            "BJ",
+                            "BK",
+                            "BL",
+                            "BM",
+                            "BN",
+                            "BO",
+                            "BP"
+                        ]
+                    },
+                "groupBy": [
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "F"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "F",
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J",
+                                    "K",
+                                    "L",
+                                    "M",
+                                    "N",
+                                    "O"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "P"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "P",
+                                    "Q",
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U",
+                                    "V",
+                                    "W",
+                                    "X",
+                                    "Y"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "Z"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "Z",
+                                    "AA",
+                                    "AB",
+                                    "AC",
+                                    "AD",
+                                    "AE",
+                                    "AF",
+                                    "AG",
+                                    "AH",
+                                    "AI"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "AJ"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AJ",
+                                    "AK",
+                                    "AL",
+                                    "AM",
+                                    "AN",
+                                    "AO",
+                                    "AP",
+                                    "AQ",
+                                    "AR",
+                                    "AS"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "AT"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AT",
+                                    "AU",
+                                    "AV",
+                                    "AW",
+                                    "AX",
+                                    "AY",
+                                    "AZ",
+                                    "BA",
+                                    "BB",
+                                    "BC"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "BD"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BD",
+                                    "BE",
+                                    "BF",
+                                    "BG",
+                                    "BH",
+                                    "BI",
+                                    "BJ",
+                                    "BK",
+                                    "BL",
+                                    "BM"
+                                    
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 10,
+                        "col": "A"
+                    },
+                    "dataStartRow": 13,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 12
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 11,
+                                "col": "E"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 11,
+                                "col": "I"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "I",
+                                    "J"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 29,
+                        "col": "A"
+                    },
+                    "dataStartRow": 32,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 31
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 30,
+                                "col": "G"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "G",
+                                    "H",
+                                    "I"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 41,
+                        "col": "A"
+                    },
+                    "dataStartRow": 44,
+                    "maxRows": 2
+                },
+                "fieldHeaders": {
+                        "row": 43
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI",
+                            "AJ",
+                            "AK",
+                            "AL",
+                            "AM",
+                            "AN",
+                            "AO",
+                            "AP",
+                            "AQ",
+                            "AR",
+                            "AS",
+                            "AT",
+                            "AU",
+                            "AV",
+                            "AW",
+                            "AX",
+                            "AY",
+                            "AZ",
+                            "BA",
+                            "BB",
+                            "BC",
+                            "BD",
+                            "BE",
+                            "BF",
+                            "BG",
+                            "BH",
+                            "BI",
+                            "BJ",
+                            "BK",
+                            "BL",
+                            "BM",
+                            "BN",
+                            "BO",
+                            "BP",
+                            "BQ",
+                            "BR",
+                            "BS",
+                            "BT",
+                            "BU",
+                            "BV",
+                            "BW",
+                            "BX",
+                            "BY",
+                            "BZ",
+                            "CA",
+                            "CB",
+                            "CC",
+                            "CD",
+                            "CE",
+                            "CF",
+                            "CG",
+                            "CH",
+                            "CI",
+                            "CJ",
+                            "CK",
+                            "CL",
+                            "CM",
+                            "CN",
+                            "CO",
+                            "CP",
+                            "CQ",
+                            "CR",
+                            "CS",
+                            "CT",
+                            "CU",
+                            "CV",
+                            "CW",
+                            "CX",
+                            "CY",
+                            "CZ",
+                            "DA",
+                            "DB",
+                            "DC",
+                            "DD",
+                            "DE",
+                            "DF",
+                            "DG",
+                            "DH",
+                            "DI",
+                            "DJ",
+                            "DK",
+                            "DL",
+                            "DM",
+                            "DN",
+                            "DO",
+                            "DP",
+                            "DQ",
+                            "DR",
+                            "DS",
+                            "DT",
+                            "DU",
+                            "DV",
+                            "DW",
+                            "DX",
+                            "DY",
+                            "DZ",
+                            "EA",
+                            "EB",
+                            "EC",
+                            "ED",
+                            "EE",
+                            "EF",
+                            "EG",
+                            "EH",
+                            "EI",
+                            "EJ",
+                            "EK",
+                            "EL",
+                            "EM",
+                            "EN",
+                            "EO",
+                            "EP",
+                            "EQ",
+                            "ER",
+                            "ES",
+                            "ET",
+                            "EU",
+                            "EV",
+                            "EW",
+                            "EX",
+                            "EY",
+                            "EZ",
+                            "FA",
+                            "FB",
+                            "FC",
+                            "FD"                    
+                    ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "G"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J",
+                                    "K",
+                                    "L",
+                                    "M",
+                                    "N",
+                                    "O",
+                                    "P"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "Q"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "Q",
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U",
+                                    "V",
+                                    "W",
+                                    "X",
+                                    "Y",
+                                    "Z"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "AA"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AA",
+                                    "AB",
+                                    "AC",
+                                    "AD",
+                                    "AE",
+                                    "AF",
+                                    "AG",
+                                    "AH",
+                                    "AI",
+                                    "AJ"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "AK"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AK",
+                                    "AL",
+                                    "AM",
+                                    "AN",
+                                    "AO",
+                                    "AP",
+                                    "AQ",
+                                    "AR",
+                                    "AS",
+                                    "AT"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "AU"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AU",
+                                    "AV",
+                                    "AW",
+                                    "AX",
+                                    "AY",
+                                    "AZ",
+                                    "BA",
+                                    "BB",
+                                    "BC",
+                                    "BD"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "BE"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BE",
+                                    "BF",
+                                    "BG",
+                                    "BH",
+                                    "BI",
+                                    "BJ",
+                                    "BK",
+                                    "BL",
+                                    "BM",
+                                    "BN"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "BO"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BO",
+                                    "BP",
+                                    "BQ",
+                                    "BR",
+                                    "BS",
+                                    "BT",
+                                    "BU",
+                                    "BV",
+                                    "BW",
+                                    "BX"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "BY"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BY",
+                                    "BZ",
+                                    "CA",
+                                    "CB",
+                                    "CC",
+                                    "CD",
+                                    "CE",
+                                    "CF",
+                                    "CG",
+                                    "CH"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "CI"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "CI",
+                                    "CJ",
+                                    "CK",
+                                    "CL",
+                                    "CM",
+                                    "CN",
+                                    "CO",
+                                    "CP",
+                                    "CQ",
+                                    "CR"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "CS"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "CS",
+                                    "CT",
+                                    "CU",
+                                    "CV",
+                                    "CW",
+                                    "CX",
+                                    "CY",
+                                    "CZ",
+                                    "DA",
+                                    "DB"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "DC"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "DC",
+                                    "DD",
+                                    "DE",
+                                    "DF",
+                                    "DG",
+                                    "DH",
+                                    "DI",
+                                    "DJ",
+                                    "DK",
+                                    "DL"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "DM"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "DM",
+                                    "DN",
+                                    "DO",
+                                    "DP",
+                                    "DQ",
+                                    "DR",
+                                    "DS",
+                                    "DT",
+                                    "DU",
+                                    "DV"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "DW"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "DW",
+                                    "DX",
+                                    "DY",
+                                    "DZ",
+                                    "EA",
+                                    "EB",
+                                    "EC",
+                                    "ED",
+                                    "EE",
+                                    "EF"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "EI"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "EI",
+                                    "EJ",
+                                    "EK",
+                                    "EL",
+                                    "EM",
+                                    "EN",
+                                    "EO",
+                                    "EP",
+                                    "EQ",
+                                    "ER"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "ES"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "ES",
+                                    "ET",
+                                    "EU",
+                                    "EV",
+                                    "EW",
+                                    "EX",
+                                    "EY",
+                                    "EZ",
+                                    "FA",
+                                    "FB"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 52,
+                        "col": "A"
+                    },
+                    "dataStartRow": 55,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 54
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 53,
+                                "col": "B"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "B",
+                                    "C",
+                                    "D",
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J",
+                                    "K"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 53,
+                                "col": "L"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "L",
+                                    "M",
+                                    "N",
+                                    "O",
+                                    "P",
+                                    "Q",
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 53,
+                                "col": "V"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "V",
+                                    "W",
+                                    "X",
+                                    "Y",
+                                    "Z",
+                                    "AA",
+                                    "AB",
+                                    "AC",
+                                    "AD",
+                                    "AE"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 58,
+                        "col": "A"
+                    },
+                    "dataStartRow": 60,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 59
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F"
+                        ]
+                    }
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 64,
+                        "col": "A"
+                    },
+                    "dataStartRow": 67,
+                    "maxRows": 1
+                },
+                "fieldHeaders": {
+                        "row": 65
+                    },
+                "spans": {
+                    "columns": [
+                            "A"
+                        ]
+                    }
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 71,
+                        "col": "A"
+                    },
+                    "dataStartRow": 74,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 72
+                    },
+                "spans": {
+                    "columns": [
+                            "A"
+                        ]
+                    }
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 77,
+                        "col": "A"
+                    },
+                    "dataStartRow": 80,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 78
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F"
+                        ]
+                    }
+            }
+
+        ]
+    },
+
+    {
+        "sheetName": "inductor",
+        "includeInDatasheet": true,
+        "ignoreBlanks": false,
+        "onlyTableName": true,
+        "ignoreRows": [],
+        "ignoreCols": [],
+        "sections": [
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 1,
+                        "col": "A"
+                    },
+                    "dataStartRow": 4,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 3
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI",
+                            "AJ",
+                            "AK",
+                            "AL",
+                            "AM",
+                            "AN",
+                            "AO",
+                            "AP",
+                            "AQ",
+                            "AR",
+                            "AS",
+                            "AT",
+                            "AU",
+                            "AV",
+                            "AW",
+                            "AX",
+                            "AY",
+                            "AZ",
+                            "BA",
+                            "BB",
+                            "BC",
+                            "BD",
+                            "BE",
+                            "BF",
+                            "BG",
+                            "BH",
+                            "BI",
+                            "BJ",
+                            "BK",
+                            "BL",
+                            "BM",
+                            "BN",
+                            "BO",
+                            "BP",
+                            "BQ",
+                            "BR",
+                            "BS",
+                            "BT",
+                            "BU",
+                            "BV",
+                            "BW",
+                            "BX",
+                            "BY",
+                            "BZ",
+                            "CA",
+                            "CB",
+                            "CC",
+                            "CD",
+                            "CE",
+                            "CF",
+                            "CG",
+                            "CH",
+                            "CI",
+                            "CJ",
+                            "CK",
+                            "CL",
+                            "CM",
+                            "CN",
+                            "CO",
+                            "CP",
+                            "CQ",
+                            "CR",
+                            "CS",
+                            "CT"
+                        ]
+                    },
+                "groupBy": [
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "E"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J",
+                                    "K",
+                                    "L",
+                                    "M",
+                                    "N"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "O"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "O",
+                                    "P",
+                                    "Q",
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U",
+                                    "V",
+                                    "W",
+                                    "X"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "Y"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "Y",
+                                    "Z",
+                                    "AA",
+                                    "AB",
+                                    "AC",
+                                    "AD",
+                                    "AE",
+                                    "AF",
+                                    "AG",
+                                    "AH"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "AI"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AI",
+                                    "AJ",
+                                    "AK",
+                                    "AL",
+                                    "AM",
+                                    "AN",
+                                    "AO",
+                                    "AP",
+                                    "AQ",
+                                    "AR"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "AS"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AS",
+                                    "AT",
+                                    "AU",
+                                    "AV",
+                                    "AW",
+                                    "AX",
+                                    "AY",
+                                    "AZ",
+                                    "BA",
+                                    "BB"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "BC"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BC",
+                                    "BD",
+                                    "BE",
+                                    "BF",
+                                    "BG",
+                                    "BH",
+                                    "BI",
+                                    "BJ",
+                                    "BK",
+                                    "BL"
+                                    
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "BM"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BM",
+                                    "BN",
+                                    "BO",
+                                    "BP",
+                                    "BQ",
+                                    "BR",
+                                    "BS",
+                                    "BT",
+                                    "BU",
+                                    "BV"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "BW"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BW",
+                                    "BX",
+                                    "BY",
+                                    "BZ",
+                                    "CA",
+                                    "CB",
+                                    "CC",
+                                    "CD",
+                                    "CE",
+                                    "CF"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "CG"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "CG",
+                                    "CH",
+                                    "CI",
+                                    "CJ",
+                                    "CK",
+                                    "CL",
+                                    "CM",
+                                    "CN",
+                                    "CO",
+                                    "CP"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 10,
+                        "col": "A"
+                    },
+                    "dataStartRow": 13,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 12
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 11,
+                                "col": "E"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 11,
+                                "col": "I"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "I",
+                                    "J"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 29,
+                        "col": "A"
+                    },
+                    "dataStartRow": 32,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 31
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 30,
+                                "col": "G"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "G",
+                                    "H",
+                                    "I"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 41,
+                        "col": "A"
+                    },
+                    "dataStartRow": 44,
+                    "maxRows": 2
+                },
+                "fieldHeaders": {
+                        "row": 43
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI",
+                            "AJ",
+                            "AK",
+                            "AL",
+                            "AM",
+                            "AN",
+                            "AO",
+                            "AP",
+                            "AQ",
+                            "AR",
+                            "AS",
+                            "AT",
+                            "AU",
+                            "AV",
+                            "AW",
+                            "AX",
+                            "AY",
+                            "AZ",
+                            "BA",
+                            "BB",
+                            "BC",
+                            "BD",
+                            "BE",
+                            "BF",
+                            "BG",
+                            "BH",
+                            "BI",
+                            "BJ",
+                            "BK",
+                            "BL",
+                            "BM",
+                            "BN",
+                            "BO",
+                            "BP",
+                            "BQ",
+                            "BR",
+                            "BS",
+                            "BT",
+                            "BU",
+                            "BV",
+                            "BW",
+                            "BX",
+                            "BY",
+                            "BZ",
+                            "CA",
+                            "CB",
+                            "CC",
+                            "CD",
+                            "CE",
+                            "CF",
+                            "CG",
+                            "CH",
+                            "CI",
+                            "CJ",
+                            "CK",
+                            "CL",
+                            "CM",
+                            "CN",
+                            "CO",
+                            "CP",
+                            "CQ",
+                            "CR",
+                            "CS",
+                            "CT",
+                            "CU",
+                            "CV",
+                            "CW",
+                            "CX",
+                            "CY",
+                            "CZ",
+                            "DA",
+                            "DB",
+                            "DC",
+                            "DD",
+                            "DE",
+                            "DF",
+                            "DG",
+                            "DH",
+                            "DI",
+                            "DJ",
+                            "DK",
+                            "DL",
+                            "DM",
+                            "DN",
+                            "DO",
+                            "DP",
+                            "DQ",
+                            "DR",
+                            "DS",
+                            "DT",
+                            "DU",
+                            "DV",
+                            "DW",
+                            "DX",
+                            "DY",
+                            "DZ",
+                            "EA",
+                            "EB",
+                            "EC",
+                            "ED",
+                            "EE",
+                            "EF",
+                            "EG",
+                            "EH",
+                            "EI",
+                            "EJ",
+                            "EK",
+                            "EL",
+                            "EM",
+                            "EN",
+                            "EO",
+                            "EP",
+                            "EQ",
+                            "ER",
+                            "ES",
+                            "ET",
+                            "EU",
+                            "EV",
+                            "EW",
+                            "EX",
+                            "EY",
+                            "EZ",
+                            "FA",
+                            "FB",
+                            "FC",
+                            "FD"                    
+                    ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "G"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J",
+                                    "K",
+                                    "L",
+                                    "M",
+                                    "N",
+                                    "O",
+                                    "P"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "Q"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "Q",
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U",
+                                    "V",
+                                    "W",
+                                    "X",
+                                    "Y",
+                                    "Z"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "AA"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AA",
+                                    "AB",
+                                    "AC",
+                                    "AD",
+                                    "AE",
+                                    "AF",
+                                    "AG",
+                                    "AH",
+                                    "AI",
+                                    "AJ"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "AK"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AK",
+                                    "AL",
+                                    "AM",
+                                    "AN",
+                                    "AO",
+                                    "AP",
+                                    "AQ",
+                                    "AR",
+                                    "AS",
+                                    "AT"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "AU"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AU",
+                                    "AV",
+                                    "AW",
+                                    "AX",
+                                    "AY",
+                                    "AZ",
+                                    "BA",
+                                    "BB",
+                                    "BC",
+                                    "BD"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "BE"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BE",
+                                    "BF",
+                                    "BG",
+                                    "BH",
+                                    "BI",
+                                    "BJ",
+                                    "BK",
+                                    "BL",
+                                    "BM",
+                                    "BN"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "BO"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BO",
+                                    "BP",
+                                    "BQ",
+                                    "BR",
+                                    "BS",
+                                    "BT",
+                                    "BU",
+                                    "BV",
+                                    "BW",
+                                    "BX"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "BY"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BY",
+                                    "BZ",
+                                    "CA",
+                                    "CB",
+                                    "CC",
+                                    "CD",
+                                    "CE",
+                                    "CF",
+                                    "CG",
+                                    "CH"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "CI"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "CI",
+                                    "CJ",
+                                    "CK",
+                                    "CL",
+                                    "CM",
+                                    "CN",
+                                    "CO",
+                                    "CP",
+                                    "CQ",
+                                    "CR"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "CS"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "CS",
+                                    "CT",
+                                    "CU",
+                                    "CV",
+                                    "CW",
+                                    "CX",
+                                    "CY",
+                                    "CZ",
+                                    "DA",
+                                    "DB"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "DC"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "DC",
+                                    "DD",
+                                    "DE",
+                                    "DF",
+                                    "DG",
+                                    "DH",
+                                    "DI",
+                                    "DJ",
+                                    "DK",
+                                    "DL"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "DM"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "DM",
+                                    "DN",
+                                    "DO",
+                                    "DP",
+                                    "DQ",
+                                    "DR",
+                                    "DS",
+                                    "DT",
+                                    "DU",
+                                    "DV"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "DW"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "DW",
+                                    "DX",
+                                    "DY",
+                                    "DZ",
+                                    "EA",
+                                    "EB",
+                                    "EC",
+                                    "ED",
+                                    "EE",
+                                    "EF"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "EI"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "EI",
+                                    "EJ",
+                                    "EK",
+                                    "EL",
+                                    "EM",
+                                    "EN",
+                                    "EO",
+                                    "EP",
+                                    "EQ",
+                                    "ER"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "ES"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "ES",
+                                    "ET",
+                                    "EU",
+                                    "EV",
+                                    "EW",
+                                    "EX",
+                                    "EY",
+                                    "EZ",
+                                    "FA",
+                                    "FB"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 52,
+                        "col": "A"
+                    },
+                    "dataStartRow": 55,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 54
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 53,
+                                "col": "B"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "B",
+                                    "C",
+                                    "D",
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J",
+                                    "K"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 53,
+                                "col": "L"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "L",
+                                    "M",
+                                    "N",
+                                    "O",
+                                    "P",
+                                    "Q",
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 53,
+                                "col": "V"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "V",
+                                    "W",
+                                    "X",
+                                    "Y",
+                                    "Z",
+                                    "AA",
+                                    "AB",
+                                    "AC",
+                                    "AD",
+                                    "AE"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 58,
+                        "col": "A"
+                    },
+                    "dataStartRow": 60,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 59
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F"
+                        ]
+                    }
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 64,
+                        "col": "A"
+                    },
+                    "dataStartRow": 67,
+                    "maxRows": 1
+                },
+                "fieldHeaders": {
+                        "row": 65
+                    },
+                "spans": {
+                    "columns": [
+                            "A"
+                        ]
+                    }
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 71,
+                        "col": "A"
+                    },
+                    "dataStartRow": 74,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 72
+                    },
+                "spans": {
+                    "columns": [
+                            "A"
+                        ]
+                    }
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 77,
+                        "col": "A"
+                    },
+                    "dataStartRow": 80,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 78
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F"
+                        ]
+                    }
+            }
+
+        ]
+    },
+
+    {
+        "sheetName": "common mode choke",
+        "includeInDatasheet": true,
+        "ignoreBlanks": false,
+        "onlyTableName": true,
+        "ignoreRows": [],
+        "ignoreCols": [],
+        "sections": [
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 1,
+                        "col": "A"
+                    },
+                    "dataStartRow": 4,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 3
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI",
+                            "AJ"
+                        ]
+                    },
+                "groupBy": [
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "D"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "D",
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J",
+                                    "K",
+                                    "L",
+                                    "M"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "N"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "N",
+                                    "O",
+                                    "P",
+                                    "Q",
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U",
+                                    "V",
+                                    "W"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "X"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "X",
+                                    "Y",
+                                    "Z",
+                                    "AA",
+                                    "AB",
+                                    "AC",
+                                    "AD",
+                                    "AE",
+                                    "AF",
+                                    "AG"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 10,
+                        "col": "A"
+                    },
+                    "dataStartRow": 13,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 12
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 11,
+                                "col": "E"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 11,
+                                "col": "I"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "I",
+                                    "J"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 29,
+                        "col": "A"
+                    },
+                    "dataStartRow": 32,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 31
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 30,
+                                "col": "G"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "G",
+                                    "H",
+                                    "I"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 41,
+                        "col": "A"
+                    },
+                    "dataStartRow": 44,
+                    "maxRows": 2
+                },
+                "fieldHeaders": {
+                        "row": 43
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI",
+                            "AJ",
+                            "AK",
+                            "AL",
+                            "AM",
+                            "AN",
+                            "AO",
+                            "AP",
+                            "AQ",
+                            "AR",
+                            "AS",
+                            "AT",
+                            "AU",
+                            "AV",
+                            "AW",
+                            "AX",
+                            "AY",
+                            "AZ",
+                            "BA",
+                            "BB",
+                            "BC",
+                            "BD",
+                            "BE",
+                            "BF",
+                            "BG",
+                            "BH",
+                            "BI",
+                            "BJ",
+                            "BK",
+                            "BL",
+                            "BM",
+                            "BN",
+                            "BO",
+                            "BP",
+                            "BQ",
+                            "BR",
+                            "BS",
+                            "BT",
+                            "BU",
+                            "BV",
+                            "BW",
+                            "BX",
+                            "BY",
+                            "BZ",
+                            "CA",
+                            "CB",
+                            "CC",
+                            "CD",
+                            "CE",
+                            "CF",
+                            "CG",
+                            "CH",
+                            "CI",
+                            "CJ",
+                            "CK",
+                            "CL",
+                            "CM",
+                            "CN",
+                            "CO",
+                            "CP",
+                            "CQ",
+                            "CR",
+                            "CS",
+                            "CT",
+                            "CU",
+                            "CV",
+                            "CW",
+                            "CX",
+                            "CY",
+                            "CZ",
+                            "DA",
+                            "DB",
+                            "DC",
+                            "DD",
+                            "DE",
+                            "DF",
+                            "DG",
+                            "DH",
+                            "DI",
+                            "DJ",
+                            "DK",
+                            "DL",
+                            "DM",
+                            "DN",
+                            "DO",
+                            "DP",
+                            "DQ",
+                            "DR",
+                            "DS",
+                            "DT",
+                            "DU",
+                            "DV",
+                            "DW",
+                            "DX",
+                            "DY",
+                            "DZ",
+                            "EA",
+                            "EB",
+                            "EC",
+                            "ED",
+                            "EE",
+                            "EF",
+                            "EG",
+                            "EH",
+                            "EI",
+                            "EJ",
+                            "EK",
+                            "EL",
+                            "EM",
+                            "EN",
+                            "EO",
+                            "EP",
+                            "EQ",
+                            "ER",
+                            "ES",
+                            "ET",
+                            "EU",
+                            "EV",
+                            "EW",
+                            "EX",
+                            "EY",
+                            "EZ",
+                            "FA",
+                            "FB",
+                            "FC",
+                            "FD"                    
+                    ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "G"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J",
+                                    "K",
+                                    "L",
+                                    "M",
+                                    "N",
+                                    "O",
+                                    "P"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "Q"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "Q",
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U",
+                                    "V",
+                                    "W",
+                                    "X",
+                                    "Y",
+                                    "Z"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "AA"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AA",
+                                    "AB",
+                                    "AC",
+                                    "AD",
+                                    "AE",
+                                    "AF",
+                                    "AG",
+                                    "AH",
+                                    "AI",
+                                    "AJ"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "AK"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AK",
+                                    "AL",
+                                    "AM",
+                                    "AN",
+                                    "AO",
+                                    "AP",
+                                    "AQ",
+                                    "AR",
+                                    "AS",
+                                    "AT"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "AU"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AU",
+                                    "AV",
+                                    "AW",
+                                    "AX",
+                                    "AY",
+                                    "AZ",
+                                    "BA",
+                                    "BB",
+                                    "BC",
+                                    "BD"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "BE"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BE",
+                                    "BF",
+                                    "BG",
+                                    "BH",
+                                    "BI",
+                                    "BJ",
+                                    "BK",
+                                    "BL",
+                                    "BM",
+                                    "BN"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "BO"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BO",
+                                    "BP",
+                                    "BQ",
+                                    "BR",
+                                    "BS",
+                                    "BT",
+                                    "BU",
+                                    "BV",
+                                    "BW",
+                                    "BX"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "BY"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BY",
+                                    "BZ",
+                                    "CA",
+                                    "CB",
+                                    "CC",
+                                    "CD",
+                                    "CE",
+                                    "CF",
+                                    "CG",
+                                    "CH"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "CI"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "CI",
+                                    "CJ",
+                                    "CK",
+                                    "CL",
+                                    "CM",
+                                    "CN",
+                                    "CO",
+                                    "CP",
+                                    "CQ",
+                                    "CR"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "CS"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "CS",
+                                    "CT",
+                                    "CU",
+                                    "CV",
+                                    "CW",
+                                    "CX",
+                                    "CY",
+                                    "CZ",
+                                    "DA",
+                                    "DB"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "DC"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "DC",
+                                    "DD",
+                                    "DE",
+                                    "DF",
+                                    "DG",
+                                    "DH",
+                                    "DI",
+                                    "DJ",
+                                    "DK",
+                                    "DL"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "DM"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "DM",
+                                    "DN",
+                                    "DO",
+                                    "DP",
+                                    "DQ",
+                                    "DR",
+                                    "DS",
+                                    "DT",
+                                    "DU",
+                                    "DV"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "DW"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "DW",
+                                    "DX",
+                                    "DY",
+                                    "DZ",
+                                    "EA",
+                                    "EB",
+                                    "EC",
+                                    "ED",
+                                    "EE",
+                                    "EF"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "EI"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "EI",
+                                    "EJ",
+                                    "EK",
+                                    "EL",
+                                    "EM",
+                                    "EN",
+                                    "EO",
+                                    "EP",
+                                    "EQ",
+                                    "ER"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 42,
+                                "col": "ES"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "ES",
+                                    "ET",
+                                    "EU",
+                                    "EV",
+                                    "EW",
+                                    "EX",
+                                    "EY",
+                                    "EZ",
+                                    "FA",
+                                    "FB"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 52,
+                        "col": "A"
+                    },
+                    "dataStartRow": 55,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 54
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 53,
+                                "col": "B"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "B",
+                                    "C",
+                                    "D",
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J",
+                                    "K"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 53,
+                                "col": "L"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "L",
+                                    "M",
+                                    "N",
+                                    "O",
+                                    "P",
+                                    "Q",
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 53,
+                                "col": "V"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "V",
+                                    "W",
+                                    "X",
+                                    "Y",
+                                    "Z",
+                                    "AA",
+                                    "AB",
+                                    "AC",
+                                    "AD",
+                                    "AE"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 58,
+                        "col": "A"
+                    },
+                    "dataStartRow": 60,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 59
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F"
+                        ]
+                    }
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 64,
+                        "col": "A"
+                    },
+                    "dataStartRow": 67,
+                    "maxRows": 1
+                },
+                "fieldHeaders": {
+                        "row": 65
+                    },
+                "spans": {
+                    "columns": [
+                            "A"
+                        ]
+                    }
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 71,
+                        "col": "A"
+                    },
+                    "dataStartRow": 74,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 72
+                    },
+                "spans": {
+                    "columns": [
+                            "A"
+                        ]
+                    }
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 77,
+                        "col": "A"
+                    },
+                    "dataStartRow": 80,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 78
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F"
+                        ]
+                    }
+            }
+
+        ]
+    },
+
+    {
+        "sheetName": "ferrite bead",
+        "includeInDatasheet": true,
+        "ignoreBlanks": false,
+        "onlyTableName": true,
+        "ignoreRows": [],
+        "ignoreCols": [],
+        "sections": [
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 1,
+                        "col": "A"
+                    },
+                    "dataStartRow": 4,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 3
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI",
+                            "AJ",
+                            "AK",
+                            "AL",
+                            "AM",
+                            "AN",
+                            "AO",
+                            "AP",
+                            "AQ",
+                            "AR"
+                        ]
+                    },
+                "groupBy": [
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "C"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "C",
+                                    "D",
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J",
+                                    "K",
+                                    "L"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "M"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "M",
+                                    "N",
+                                    "O",
+                                    "P",
+                                    "Q",
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U",
+                                    "V"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "W"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "W",
+                                    "X",
+                                    "Y",
+                                    "Z",
+                                    "AA",
+                                    "AB",
+                                    "AC",
+                                    "AD",
+                                    "AE",
+                                    "AF"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "AG"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AG",
+                                    "AH",
+                                    "AI",
+                                    "AJ",
+                                    "AK",
+                                    "AL",
+                                    "AM",
+                                    "AN",
+                                    "AO",
+                                    "AP"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 10,
+                        "col": "A"
+                    },
+                    "dataStartRow": 13,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 12
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 11,
+                                "col": "E"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 11,
+                                "col": "I"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "I",
+                                    "J"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 22,
+                        "col": "A"
+                    },
+                    "dataStartRow": 25,
+                    "maxRows": 2
+                },
+                "fieldHeaders": {
+                        "row": 24
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI",
+                            "AJ",
+                            "AK",
+                            "AL",
+                            "AM",
+                            "AN",
+                            "AO",
+                            "AP",
+                            "AQ",
+                            "AR",
+                            "AS",
+                            "AT",
+                            "AU",
+                            "AV",
+                            "AW",
+                            "AX",
+                            "AY",
+                            "AZ",
+                            "BA",
+                            "BB",
+                            "BC",
+                            "BD",
+                            "BE",
+                            "BF",
+                            "BG",
+                            "BH",
+                            "BI",
+                            "BJ",
+                            "BK",
+                            "BL",
+                            "BM",
+                            "BN",
+                            "BO",
+                            "BP",
+                            "BQ",
+                            "BR",
+                            "BS",
+                            "BT",
+                            "BU",
+                            "BV",
+                            "BW",
+                            "BX",
+                            "BY",
+                            "BZ",
+                            "CA",
+                            "CB",
+                            "CC",
+                            "CD",
+                            "CE",
+                            "CF",
+                            "CG",
+                            "CH",
+                            "CI",
+                            "CJ",
+                            "CK",
+                            "CL",
+                            "CM",
+                            "CN",
+                            "CO",
+                            "CP",
+                            "CQ",
+                            "CR",
+                            "CS",
+                            "CT",
+                            "CU",
+                            "CV",
+                            "CW",
+                            "CX",
+                            "CY",
+                            "CZ",
+                            "DA",
+                            "DB",
+                            "DC",
+                            "DD",
+                            "DE",
+                            "DF",
+                            "DG",
+                            "DH",
+                            "DI",
+                            "DJ",
+                            "DK",
+                            "DL",
+                            "DM",
+                            "DN",
+                            "DO",
+                            "DP",
+                            "DQ",
+                            "DR",
+                            "DS",
+                            "DT",
+                            "DU",
+                            "DV",
+                            "DW",
+                            "DX",
+                            "DY",
+                            "DZ",
+                            "EA",
+                            "EB",
+                            "EC",
+                            "ED",
+                            "EE",
+                            "EF",
+                            "EG",
+                            "EH",
+                            "EI",
+                            "EJ",
+                            "EK",
+                            "EL",
+                            "EM",
+                            "EN",
+                            "EO",
+                            "EP",
+                            "EQ",
+                            "ER",
+                            "ES",
+                            "ET",
+                            "EU",
+                            "EV",
+                            "EW",
+                            "EX",
+                            "EY",
+                            "EZ",
+                            "FA",
+                            "FB",
+                            "FC",
+                            "FD"                    
+                    ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 23,
+                                "col": "G"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J",
+                                    "K",
+                                    "L",
+                                    "M",
+                                    "N",
+                                    "O",
+                                    "P"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 23,
+                                "col": "Q"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "Q",
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U",
+                                    "V",
+                                    "W",
+                                    "X",
+                                    "Y",
+                                    "Z"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 23,
+                                "col": "AA"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AA",
+                                    "AB",
+                                    "AC",
+                                    "AD",
+                                    "AE",
+                                    "AF",
+                                    "AG",
+                                    "AH",
+                                    "AI",
+                                    "AJ"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 23,
+                                "col": "AK"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AK",
+                                    "AL",
+                                    "AM",
+                                    "AN",
+                                    "AO",
+                                    "AP",
+                                    "AQ",
+                                    "AR",
+                                    "AS",
+                                    "AT"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 23,
+                                "col": "AU"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "AU",
+                                    "AV",
+                                    "AW",
+                                    "AX",
+                                    "AY",
+                                    "AZ",
+                                    "BA",
+                                    "BB",
+                                    "BC",
+                                    "BD"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 23,
+                                "col": "BE"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BE",
+                                    "BF",
+                                    "BG",
+                                    "BH",
+                                    "BI",
+                                    "BJ",
+                                    "BK",
+                                    "BL",
+                                    "BM",
+                                    "BN"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 23,
+                                "col": "BO"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BO",
+                                    "BP",
+                                    "BQ",
+                                    "BR",
+                                    "BS",
+                                    "BT",
+                                    "BU",
+                                    "BV",
+                                    "BW",
+                                    "BX"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 23,
+                                "col": "BY"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "BY",
+                                    "BZ",
+                                    "CA",
+                                    "CB",
+                                    "CC",
+                                    "CD",
+                                    "CE",
+                                    "CF",
+                                    "CG",
+                                    "CH"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 23,
+                                "col": "CI"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "CI",
+                                    "CJ",
+                                    "CK",
+                                    "CL",
+                                    "CM",
+                                    "CN",
+                                    "CO",
+                                    "CP",
+                                    "CQ",
+                                    "CR"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 23,
+                                "col": "CS"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "CS",
+                                    "CT",
+                                    "CU",
+                                    "CV",
+                                    "CW",
+                                    "CX",
+                                    "CY",
+                                    "CZ",
+                                    "DA",
+                                    "DB"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 23,
+                                "col": "DC"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "DC",
+                                    "DD",
+                                    "DE",
+                                    "DF",
+                                    "DG",
+                                    "DH",
+                                    "DI",
+                                    "DJ",
+                                    "DK",
+                                    "DL"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 23,
+                                "col": "DM"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "DM",
+                                    "DN",
+                                    "DO",
+                                    "DP",
+                                    "DQ",
+                                    "DR",
+                                    "DS",
+                                    "DT",
+                                    "DU",
+                                    "DV"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 23,
+                                "col": "DW"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "DW",
+                                    "DX",
+                                    "DY",
+                                    "DZ",
+                                    "EA",
+                                    "EB",
+                                    "EC",
+                                    "ED",
+                                    "EE",
+                                    "EF"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 23,
+                                "col": "EI"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "EI",
+                                    "EJ",
+                                    "EK",
+                                    "EL",
+                                    "EM",
+                                    "EN",
+                                    "EO",
+                                    "EP",
+                                    "EQ",
+                                    "ER"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 23,
+                                "col": "ES"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "ES",
+                                    "ET",
+                                    "EU",
+                                    "EV",
+                                    "EW",
+                                    "EX",
+                                    "EY",
+                                    "EZ",
+                                    "FA",
+                                    "FB"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 33,
+                        "col": "A"
+                    },
+                    "dataStartRow": 36,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 35
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 34,
+                                "col": "B"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "B",
+                                    "C",
+                                    "D",
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J",
+                                    "K"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 34,
+                                "col": "L"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "L",
+                                    "M",
+                                    "N",
+                                    "O",
+                                    "P",
+                                    "Q",
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 34,
+                                "col": "V"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "V",
+                                    "W",
+                                    "X",
+                                    "Y",
+                                    "Z",
+                                    "AA",
+                                    "AB",
+                                    "AC",
+                                    "AD",
+                                    "AE"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 39,
+                        "col": "A"
+                    },
+                    "dataStartRow": 41,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 40
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F"
+                        ]
+                    }
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 45,
+                        "col": "A"
+                    },
+                    "dataStartRow": 48,
+                    "maxRows": 1
+                },
+                "fieldHeaders": {
+                        "row": 46
+                    },
+                "spans": {
+                    "columns": [
+                            "A"
+                        ]
+                    }
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 52,
+                        "col": "A"
+                    },
+                    "dataStartRow": 55,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 53
+                    },
+                "spans": {
+                    "columns": [
+                            "A"
+                        ]
+                    }
+            },
+
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 58,
+                        "col": "A"
+                    },
+                    "dataStartRow": 61,
+                    "maxRows": 0
+                },
+                "fieldHeaders": {
+                        "row": 59
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F"
+                        ]
+                    }
+            }
+
+        ]
+    }
+        
+    ]
+}

@@ -1,16 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
-
 """
 Plug-in constants for spreadsheet parser.
 """
@@ -18,7 +5,7 @@ Plug-in constants for spreadsheet parser.
 PLUGIN = 'spreadsheet'
 
 spreadsheetExtensions = {
-    'xlsExtension': '.xls',
+    'xlsExtension': '.xlsm',
     'xlsxExtension': '.xlsx',
     'sheetsExtension': '.gsheet'
 }
@@ -38,6 +25,12 @@ SPREADSHEET_MAP_GUID_FIELD = 'guid'
 SPREADSHEET_MAP_GROUPS_FIELD = 'groupBy'
 SPREADSHEET_MAP_HEADER_FIELD = 'header'
 SPREADSHEET_MAP_INCLUDE_IN_DATASHEET_FIELD = 'includeInDatasheet'
+SPREADSHEET_MAP_INCLUDE_METADATA = 'includeMetadata'
+SPREADSHEET_MAP_INDUSTRY_FORMAT = 'industryFormat'
+SPREADSHEET_MAP_INCLUDE_AS_SUBOBJECT = 'includeAsSubObject'
+SPREADSHEET_MAP_ONLY_TABLE_NAME = 'onlyTableName'
+SPREADSHEET_MAP_COMPONENT_TYPE = 'componentType'
+SPREADSHEET_MAP_MACRO_ENABLED = 'macroEnabled'
 SPREADSHEET_MAP_INCLUDE_TAGS_FIELD = 'includeTags'
 SPREADSHEET_MAP_INDEX_ON_FIELD = 'indexOn'
 SPREADSHEET_MAP_IGNORE_BLANKS_FIELD = 'ignoreBlanks'
@@ -60,3 +53,5 @@ SPREADSHEET_MAP_EMPTY_VAL = "value not specified, none"
 
 SPREADSHEET_TABLES = "tables"
 SPREADSHEET_DATASHEET = "datasheet"
+
+SPREADSHEET_DATETIME_TYPE = "<class 'datetime.datetime'>"
