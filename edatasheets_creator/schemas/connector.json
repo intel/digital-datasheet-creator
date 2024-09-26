@@ -1,0 +1,97 @@
+{
+	"$id": "https://github.com/edatasheets/digital-datasheets/blob/rev0.95_rev/part-spec/component.json",
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"title": "component",
+	"required": [
+		"componentID"
+	],
+	"properties": {
+		"componentID": {
+			"description": "methods for identifying the version of the digital datasheet",
+			"$ref": "./common/componentID.json#/componentID"
+		},
+        "function": {
+            "description": "intended function of a connector", 
+            "examples": [
+                "headphone jack",
+                "USB-C",
+                "HDMI",
+                "etc."
+            ],
+            "type": "string"
+        },
+        "contactCount": {
+            "description": "number of contacts in a connector",
+            "type": "number"
+        },
+        "type": {
+            "description": "property describing the method of mating to the connector",
+            "examples": [
+                "plug",
+                "receptacle",
+                "header",
+                "jumper",
+                "etc."
+            ],
+            "type": "string"
+        },
+        "cycleRating": {
+            "description": "number of plug/unplug cycles a connector is rated to support",
+            "type": "number"
+        },
+        "pitch": {
+            "description": "distance from the center of one contact on the connector to the center of the next contact",
+            "comment": "units of mm",
+            "$ref": "../common/unit.json#/unit"
+        },
+        "keying": {
+            "description": "property describing whether a connector has an asymmetry to prevent it from being plugged in the wrong direction",
+            "type": "boolean"
+        },
+        "numberPins": {
+            "description": "number of pins on the connector",
+            "type": "number"
+        },
+		"pins": {
+			"description": "array of pin objects with associated properties",
+			"type": "array",
+			"items": {
+				"$ref": "./common/pinSpec.json#/pinSpec"
+			}
+		},
+		"package": {
+			"description": "component package information",
+			"$ref": "./common/package.json#/package"
+		},
+		"externalFileMap": {
+			"description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+			"$ref": "#/$defs/externalFileMap"
+		}
+	},
+	"$defs": {
+		"externalFileMap": {
+			"type": "object",
+			"properties": {
+				"coreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the common part of the part number",
+					"example": "this might include everything about an MCU other than flash size",
+					"$ref": "./common/externalFile.json#/externalFile"
+				},
+				"additionalCoreProperities": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the changing part of the part number",
+					"example": "this might include the MCU flash size",
+					"$ref": "./common/externalFile.json#/externalFile"
+				},
+				"pins": {
+					"description": "pin properties specified by the pin spec file",
+					"$ref": "./common/externalFile.json#/externalFile"
+				},
+				"package": {
+					"description": "package information specified by the package spec file",
+					"$ref": "./common/externalFile.json#/externalFile"
+				}
+			}
+		}
+	}
+}

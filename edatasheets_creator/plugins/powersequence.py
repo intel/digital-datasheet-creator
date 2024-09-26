@@ -1,15 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
 import inspect
 import os
 import shutil
@@ -68,8 +56,8 @@ class Plugin:
 
     def convertToDict(self, formatter):
         """
-        :param formatter: formmatter takes in the extension of the file to be converted
-        :return: an updated class dictionary with correct json fromat
+        :param formatter: formatter takes in the extension of the file to be converted
+        :return: an updated class dictionary with correct json format
         """
         if formatter.lower() == 'txt':
             string_output = self.convertToJson()
@@ -87,7 +75,7 @@ class Plugin:
             self.updated_dict = ast.literal_eval(string_output)
             with open(self.output_file_name, "w", encoding="utf8") as output_json:
                 json.dump(json_object, output_json, indent=2, ensure_ascii=False)
-            
+
         elif formatter.lower() == 'json':
             with open(self.file_name) as f:
                 self.updated_dict = json.load(f)

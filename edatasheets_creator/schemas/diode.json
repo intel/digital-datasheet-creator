@@ -1,0 +1,155 @@
+{
+    "$id": "https://github.com/ajayitem/digital-datasheets/blob/tooling_proposed_changes_2/part-spec/semiconductor/diode.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "diode",
+    "type": "object",
+    "properties": {
+        "type": {
+            "description": "type of diode",
+            "examples": [
+                "zener",
+                "schottky",
+                "esd",
+                "switching", 
+                "rectifier",
+                "tvs"
+            ],
+            "type": "string"
+        },
+        "diodeCount": {
+            "description": "number of diodes in the package",
+            "type": "number"
+        },
+        "diodeConfiguration": {
+            "description": "configuration of diode",
+            "examples": [
+                "unidirectional",
+                "bidirectional"
+            ],
+            "type": "string"
+        },
+        "numberOfProtectedLines": {
+            "description": "number of lines a diode can protect",
+            "type": "number"
+        },
+        "vf": {
+            "description": "forward voltage of a diode",
+            "comment": "conditions include: forward current of diode under which a given forward voltage was measured",
+            "$ref": "../common/conditionalProperty.json"
+        },
+        "if": {
+            "description": "continuous forward current of a diode",
+            "comment": "units of amps",
+            "$ref": "../common/unit.json"
+        },
+        "ifm": {
+            "description": "maximum continuous forward current a diode can support",
+            "comment": "units of amps",
+            "$ref": "../common/unit.json"
+        },
+        "ifrm": {
+            "description": "maximum repetitive peak forward current a diode can support",
+            "comment": "units of amps",
+            "$ref": "../common/unit.json"
+        },
+        "ifsm": {
+            "description": "maximum non-repetitive surge forward current a diode can support",
+            "comment": "units of amps",
+            "$ref": "../common/unit.json"
+        },
+        "vbr": {
+            "description": "breakdown voltage of a diode",
+            "comment": "units of volts",
+            "$ref": "../common/unit.json"
+        },
+        "ir": {
+            "description": "reverse current",
+            "comment": "conditions include: reverse bias voltage under which reverse leakage current occurs",
+            "$ref": "../common/conditionalProperty.json#"
+        },
+        "vz": {
+            "description": "breakdown voltage of a zener diode",
+            "comment": "conditions include: minimum reverse current condition under which breakdown voltage of a zener diode is achieved",
+            "$ref": "../common/conditionalProperty.json"
+        },
+        "vrm": {
+            "description": "maximum reverse standoff voltage a tvs diode can withstand",
+            "comment": "units of volts",
+            "$ref": "../common/unit.json"
+        },
+        "vcl": {
+            "description": "clamping voltage of a tvs diode",
+            "comment": "conditions include: surge current condition under which a tvs clamping voltage occurs",
+            "$ref": "../common/conditionalProperty.json"
+        },
+        "vr": {
+            "description": "maximum continuous reverse biased voltage a diode can support",
+            "comment": "units of volts",
+            "$ref": "../common/unit.json"
+        },
+        "vrrm": {
+            "description": "maximum repetitive reverse voltage pulses a diode can support",
+            "comment": "units of volts",
+            "$ref": "../common/unit.json"
+        },
+        "cd": {
+            "description": "diode junction capacitance - between the anode and cathode- in reverse bias condition",
+            "comment": "units of farads",
+            "$ref": "../common/unit.json"
+        },
+        "trr": {
+            "description": "reverse recovery time it takes the diode to stop conducting when its voltage changes from forward-bias to reverse-bias",
+            "comment": "units of seconds",
+            "$ref": "../common/unit.json"
+        },
+        "pTot": {
+            "description": "maximum power dissipation of a forward biased diode",
+            "$comment": "conditions include temperature",
+            "$ref": "../common/conditionalProperty.json"
+        },
+        "ifVsVf": {
+            "description": "graph of forward current (If) vs forward voltage (VfTyp)",
+            "$ref": "../common/graph.json"
+        },
+        "pins": {
+			"description": "array of pin objects with associated properties",
+			"type": "array",
+			"items": {
+				"$ref": "../common/pinSpec.json#/pinSpec"
+			}
+		},
+		"package": {
+			"description": "component package information",
+			"$ref": "../common/package.json#/package"
+		},
+		"externalFileMap": {
+			"description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+			"$ref": "#/$defs/externalFileMap"
+		}
+    },
+	"$defs": {
+		"externalFileMap": {
+			"type": "object",
+			"properties": {
+				"coreProperties": {
+					"description": "core component properties as defined by the specific component spec file. These properties are described by the common part of the part number",
+					"example": "this might include everything about an MCU other than flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"additionalCoreProperities": {
+					"description": "core component properties as defined by the specific component spec file. These properties are described by the changing part of the part number",
+					"example": "this might include the MCU flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"pins": {
+					"description": "pin properties specified by the pin spec file",
+					"$ref": "../common/externalFile.json"
+				},
+				"package": {
+					"description": "package information specified by the package spec file",
+					"$ref": "../common/externalFile.json"
+				}
+			}
+		}
+	}
+}

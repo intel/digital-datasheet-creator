@@ -1,0 +1,147 @@
+{
+    "$id": "https://github.com/ajayitem/digital-datasheets/blob/tooling_proposed_changes_2/part-spec/memory/dram.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "dram",
+    "type": "object",
+    "required": [
+        "capacity"
+    ],
+    "properties": {
+        "type": {
+            "description": "type of dram", 
+            "examples": [
+                "lpddr3",
+                "ddr3",
+                "lpddr4",
+                "lpddr4x",
+                "ddr4",
+                "lpddr5",
+                "ddr5"
+            ],
+            "type": "string"
+        },
+        "capacity": {
+            "description": "capacity of dram chip",
+            "comment": "units of bytes (B)",
+            "$ref": "../common/unit.json"
+        },
+        "ranksperModule": {
+            "description": "numbers of ranks on dram module",
+            "type": "number"
+        },
+        "diesPerChip": {
+            "description": "number of dies on dram chip",
+            "type": "number"
+        },
+        "channelsPerDie": {
+            "description": "number of channels per die on dram chip",
+            "type": "number"
+        },
+        "banksPerChannel": {
+            "description": "number of banks per channel of dram",
+            "type": "number"
+        },
+        "bitsPerChannel": {
+            "description": "channel density of dram",
+            "comment": "units of bits (b)",
+            "$ref": "../common/unit.json"
+        },
+        "bitsPerDie": {
+            "description": "total die density of dram",
+            "comment": "units of bits (b)",
+            "$ref": "../common/unit.json"
+        },
+        "pageSize": {
+            "description": "page size of dram",
+            "comment": "units of bytes (B)",
+            "$ref": "../common/unit.json"
+        },
+        "rows": {
+            "description": "number of rows per channel of dram",
+            "type": "number"
+        },
+        "columns": {
+            "description": "number of columns per row of dram",
+            "type": "number"
+        },
+        "dataRate": {
+            "description": "dram maximum data rate",
+            "comment": "units of mega transfers per second (MT/s)",
+            "type": "number"
+        },
+        "speed": {
+            "description": "dram maximum speed",
+            "comment": "units of Hertz(Hz)",
+            "$ref": "../common/unit.json"
+        },
+        "latencyCas": {
+            "description": "cl/tCAS, delay between read command issued and first output data available for read",
+            "comment": "delay specified by number of clock cycles",
+            "type": "number"
+        },
+        "delayRasCas": {
+            "description": "tRCD,delay between activation of row and activation of column where data is stored in the dram",
+            "comment": "units of ns",
+            "$ref": "../common/unit.json"
+        },
+        "delayRasPrecharge": {
+            "description": "tRP, delay between closing access to a row through the precharge command and activating a new row to access data ",
+            "comment": "units of ns",
+            "$ref": "../common/unit.json"
+        },
+        "delayActivePrecharge": {
+            "description": "tRAS, delay between row active command issued and precharge command issued ",
+            "comment": "units of ns",
+            "$ref": "../common/unit.json"
+        },
+        "currentConsumption": {
+            "description": "current consumption of a device",
+            "comment": "units of amps",
+            "$ref": "../common/currentConsumption.json"
+        },
+		"pins": {
+			"description": "array of pin objects with associated properties",
+			"type": "array",
+			"items": {
+				"$ref": "../common/pinSpec.json#/pinSpec"
+			}
+		},
+		"package": {
+			"description": "component package information",
+			"$ref": "../common/package.json#/package"
+		},
+		"externalFileMap": {
+			"description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+			"$ref": "#/$defs/externalFileMap"
+		},
+        "componentID": {
+			"description": "methods for identifying the version of the digital datasheet",
+			"$ref": "../common/componentID.json"
+		}
+    },
+	"$defs": {
+		"externalFileMap": {
+			"type": "object",
+			"properties": {
+				"coreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the common part of the part number",
+					"example": "this might include everything about an MCU other than flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"additionalCoreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the changing part of the part number",
+					"example": "this might include the MCU flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"pins": {
+					"description": "pin properties specified by the pin spec file",
+					"$ref": "../common/externalFile.json"
+				},
+				"package": {
+					"description": "package information specified by the package spec file",
+					"$ref": "../common/externalFile.json"
+				}
+			}
+		}
+	}
+}

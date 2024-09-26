@@ -1,15 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
 import glob
 import json
 import os
@@ -54,10 +42,14 @@ class Plugin(PluginBase):
         directories_list = glob.iglob(directory_path, recursive=True)
         for file_name in directories_list:
             if validateRealPath(file_name):
-                source_element = ElementTree.parse(file_name).getroot()
-                suffix_file_name = os.path.basename(file_name)
-                metadata = self.xml_utilities.get_attributes_from_dita(source_element, suffix_file_name)
-                tables_listing.update(metadata)
+                try:
+                    source_element = ElementTree.parse(file_name).getroot()
+                    suffix_file_name = os.path.basename(file_name)
+                    if not (self.xml_utilities.get_tables(source_element) == []):
+                        metadata = self.xml_utilities.get_attributes_from_dita(source_element, suffix_file_name)
+                        tables_listing.update(metadata)
+                except Exception as e:
+                    ExceptionLogger.logError(__name__, "", e)
 
         msg = f"Writing the output json file: {output_file}...\n"
         ExceptionLogger.logInformation(__name__, msg)

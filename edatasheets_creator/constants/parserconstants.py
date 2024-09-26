@@ -1,21 +1,9 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
-
 """
 Contains the JSON keys for the jobs and task parsing process.
 """
 # Validation constants
 MAP_SCHEMA_PATH = "schemas/map-schema.json"
+PPTX_MAP_SCHEMA_PATH = "schemas/map-schema-pptx.json"
 
 # Pipeline constants
 PIPELINE_DESCRIPTION = 'pipelineDescription'

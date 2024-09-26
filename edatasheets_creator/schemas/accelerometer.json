@@ -1,0 +1,152 @@
+{
+    "$id": "https://github.com/ajayitem/digital-datasheets/blob/tooling_proposed_changes_2/part-spec/sensor/accelerometer.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "accelerometer",
+    "type": "object", 
+    "properties": {
+        "accelerometerType": {
+            "description": "type of accelerometer",
+            "examples": [
+                "capacitive MEMS",
+                "piezoresistive",
+                "piezoelectric"
+            ],
+            "type": "string"
+        },
+        "accelerationRanges": {
+            "description": "range of force that accelerometer can measure",
+            "examples": [
+                [2,4],
+                [2,4,8]
+            ],
+            "comment": "units of g",
+            "type": "array",
+            "items": {
+                "type": "number"
+            }
+        },
+        "accelerationSensitivity": {
+            "description": "smallest change in force the accelerometer is able to capture (typical) at a given acceleration range",
+            "examples": [
+                "16000",
+                "8000",
+                "4000",
+                "2000"
+            ],
+            "comment": "units of LSB/g (least significant bits per g) at a given acceleration range and output resolution",
+            "$ref": "../common/unit.json"
+        },
+        "accelerationSensitivityOverTemperature": {
+            "description": "accelerometer sensitivity change over temperature",
+            "comment": "units of percentage per degree celsius (%/Celsius)",
+            "$ref": "../common/unit.json"
+        },
+        "axis": {
+            "description": "number of axes of acceleration measurement",
+            "type": "number"
+        },
+        "zerogOffset": {
+            "description": "output of the accelerometer when no acceleration is applied",
+            "comment": "units of g-force (g)",
+            "$ref": "../common/unit.json"
+        },
+        "zerogOffsetOverTemperature": {
+            "description": "accelerometer zero-g offset change over temperature",
+            "comment": "units of milli g-force per degree celsius (mg/Celcius)",
+            "$ref": "../common/unit.json"
+        },
+        "outputType": {
+            "description": "measurement output type",
+            "enum": [
+                "analog",
+                "digital"
+            ],
+            "type": "string"
+        },
+        "outputResolution": {
+            "description": "output resolution of acceleration measurement",
+            "comment": "units of bits",
+            "$ref": "../common/unit.json"
+        },
+        "interface": {
+            "description": "interface(s) for communication to host",
+            "examples": [
+                "i2c",
+                "spi",
+                "analog"
+            ],
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "bandwidth": {
+            "description": "bandwidth of acceleration measurement",
+            "comment": "units of hertz (Hz)",
+            "$ref": "../common/unit.json"
+        },
+        "outputDataRate": {
+            "description": "output Data rate (ODR) of a device",
+            "comment": "units of Hz",
+            "$ref": "../common/unit.json"
+        },
+        "rmsNoise": {
+            "description": "broadband rms noise of a device",
+            "comment": "units of milli g-force",
+            "$ref": "../common/unit.json"
+        },
+        "spectralNoiseDensity": {
+            "description": "spectral noise density of a device",
+            "comment": "units of milli g-force per square root of Hz (milli-g/rt-Hz)",
+            "$ref": "../common/unit.json"
+        },
+        "currentConsumption": {
+            "description": "current consumption of a device",
+            "$ref": "../common/currentConsumption.json"
+        },
+		"pins": {
+			"description": "array of pin objects with associated properties",
+			"type": "array",
+			"items": {
+				"$ref": "../common/pinSpec.json#/pinSpec"
+			}
+		},
+		"package": {
+			"description": "component package information",
+			"$ref": "../common/package.json#/package"
+		},
+		"externalFileMap": {
+			"description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+			"$ref": "#/$defs/externalFileMap"
+		},
+        "componentID": {
+			"description": "methods for identifying the version of the digital datasheet",
+			"$ref": "../common/componentID.json"
+		}
+    },
+	"$defs": {
+		"externalFileMap": {
+			"type": "object",
+			"properties": {
+				"coreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the common part of the part number",
+					"example": "this might include everything about an MCU other than flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"additionalCoreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the changing part of the part number",
+					"example": "this might include the MCU flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"pins": {
+					"description": "pin properties specified by the pin spec file",
+					"$ref": "../common/externalFile.json"
+				},
+				"package": {
+					"description": "package information specified by the package spec file",
+					"$ref": "../common/externalFile.json"
+				}
+			}
+		}
+	}
+}

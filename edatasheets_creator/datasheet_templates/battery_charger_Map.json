@@ -1,0 +1,682 @@
+{
+    "description": "Macro Test Map",
+	"guid": "a0550d97-e99c-47dc-93b6-a69f18107e34",
+	"mapType": "spreadsheet",
+    "includeMetadata": false,
+    "componentType": "battery_charger",
+    "industryFormat": true,
+    "macroEnabled": true,
+    "sheets": [ 
+        {
+            "sheetName": "componentID",
+            "includeInDatasheet": true,
+            "ignoreBlanks": true,
+            "onlyTableName": true,
+            "ignoreRows": [],
+            "ignoreCols": [],
+            "sections": [
+                {
+                    "indexOn": {
+                        "orientation": "column",
+                        "header": {
+                            "row": 1,
+                            "col": "A"
+                        },
+                        "dataStartRow": 4,
+                        "maxRows": 5
+                    },
+                    "fieldHeaders": {
+                            "row": 3
+                        },
+                    "spans": {
+                        "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M"
+                            ]
+                        },
+                        "groupBy": [
+                            {
+                                "name": {
+                                    "row": 2,
+                                    "col": "E"
+                                },
+                                "spans": {
+                                    "columns": [
+                                        "E",
+                                        "F",
+                                        "G",
+                                        "H"
+                                    ]
+                                },
+                                "includeAsSubObject": true
+                            },
+                            {
+                                "name": {
+                                    "row": 2,
+                                    "col": "I"
+                                },
+                                "spans": {
+                                    "columns": [
+                                        "I",
+                                        "J",
+                                        "K"
+                                    ]
+                                },
+                                "includeAsSubObject": true
+                            }
+                        ]
+                }
+    
+    
+    
+            ]
+        },
+        {
+            "sheetName": "battery_charger",
+            "includeInDatasheet": true,
+            "ignoreBlanks": true,
+            "onlyTableName": true,
+            "ignoreRows": [],
+            "ignoreCols": [],
+            "sections": [
+                {
+                    "indexOn": {
+                        "orientation": "column",
+                        "header": {
+                            "row": 1,
+                            "col": "A"
+                        },
+                        "dataStartRow": 4,
+                        "maxRows": 5
+                    },
+                    "fieldHeaders": {
+                            "row": 3
+                        },
+                    "spans": {
+                        "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI"
+                            ]
+                        }
+                }   
+            ]
+        },
+        {
+            "sheetName": "pins",
+            "includeInDatasheet": true,
+            "ignoreBlanks": true,
+            "onlyTableName": true,
+            "ignoreRows": [],
+            "ignoreCols": [],
+            "sections": [
+                {
+                    "indexOn": {
+                        "orientation": "column",
+                        "header": {
+                            "row": 1,
+                            "col": "A"
+                        },
+                        "dataStartRow": 4,
+                        "maxRows": 100
+                    },
+                    "fieldHeaders": {
+                            "row": 3
+                        },
+                    "spans": {
+                        "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB"
+                            ]
+                        },
+                        "groupBy": [
+                            {
+                                "name": {
+                                    "row": 2,
+                                    "col": "F"
+                                },
+                                "spans": {
+                                    "columns": [
+                                        "F",
+                                        "G",
+                                        "H",
+                                        "I",
+                                        "J",
+                                        "K"
+                                    ]
+                                },
+                                "includeAsSubObject": true
+                            },
+                            {
+                                "name": {
+                                    "row": 2,
+                                    "col": "AA"
+                                },
+                                "spans": {
+                                    "columns": [
+                                        "AA",
+                                        "AB"
+                                    ]
+                                },
+                                "includeAsSubObject": true
+                            }
+                        ]
+                }
+    
+    
+    
+            ]
+        },
+    {
+        "sheetName": "efficiency",
+        "includeInDatasheet": true,
+        "ignoreBlanks": true,
+        "onlyTableName": true,
+        "ignoreRows": [],
+        "ignoreCols": [],
+        "sections": [
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 1,
+                        "col": "A"
+                    },
+                    "dataStartRow": 4,
+                    "maxRows": 100
+                },
+                "fieldHeaders": {
+                        "row": 3
+                    },
+                "spans": {
+                    "columns": [
+                        "A",
+                        "B",
+                        "C",
+                        "D",
+                        "E",
+                        "F",
+                        "G",
+                        "H",
+                        "I"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "G"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "G",
+                                    "H",
+                                    "I"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            }
+
+
+
+        ]
+    },
+
+
+
+    {
+        "sheetName": "package",
+        "includeInDatasheet": true,
+        "ignoreBlanks": true,
+        "onlyTableName": true,
+        "ignoreRows": [],
+        "ignoreCols": [],
+        "sections": [
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 1,
+                        "col": "A"
+                    },
+                    "dataStartRow": 4,
+                    "maxRows": 5
+                },
+                "fieldHeaders": {
+                        "row": 3
+                    },
+                "spans": {
+                    "columns": [
+                        "A",
+                        "B",
+                        "C",
+                        "D",
+                        "E",
+                        "F",
+                        "G",
+                        "H",
+                        "I",
+                        "J",
+                        "K",
+                        "L",
+                        "M",
+                        "N",
+                        "O",
+                        "P",
+                        "Q",
+                        "R",
+                        "S",
+                        "T",
+                        "U",
+                        "V",
+                        "W"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "D"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "D",
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H",
+                                    "I"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "J"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "J",
+                                    "K",
+                                    "L",
+                                    "M",
+                                    "N",
+                                    "O"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "P"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "P",
+                                    "Q",
+                                    "R",
+                                    "S",
+                                    "T",
+                                    "U"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            }
+
+
+
+        ]
+    },
+    
+
+    {
+        "sheetName": "integratedFetProperties",
+        "includeInDatasheet": true,
+        "ignoreBlanks": true,
+        "onlyTableName": true,
+        "ignoreRows": [],
+        "ignoreCols": [],
+        "sections": [
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 1,
+                        "col": "A"
+                    },
+                    "dataStartRow": 4,
+                    "maxRows": 100
+                },
+                "fieldHeaders": {
+                        "row": 3
+                    },
+                "spans": {
+                    "columns": [
+                        "A",
+                        "B",
+                        "C",
+                        "D",
+                        "E",
+                        "F",
+                        "G",
+                        "H",
+                        "I",
+                        "J",
+                        "K",
+                        "L"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "A"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "A",
+                                    "B",
+                                    "C",
+                                    "D"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "E"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "E",
+                                    "F",
+                                    "G",
+                                    "H"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "I"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "I",
+                                    "J",
+                                    "K",
+                                    "L"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            }
+
+
+
+        ]
+    },
+
+
+    {
+        "sheetName": "externalFileMap",
+        "includeInDatasheet": true,
+        "ignoreBlanks": true,
+        "onlyTableName": true,
+        "ignoreRows": [],
+        "ignoreCols": [],
+        "sections": [
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 1,
+                        "col": "A"
+                    },
+                    "dataStartRow": 4,
+                    "maxRows": 5
+                },
+                "fieldHeaders": {
+                        "row": 3
+                    },
+                "spans": {
+                    "columns": [
+                        "A",
+                        "B",
+                        "C",
+                        "D",
+                        "E",
+                        "F",
+                        "G",
+                        "H",
+                        "I",
+                        "J",
+                        "K",
+                        "L"
+                        ]
+                    },
+                    "groupBy": [
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "A"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "A",
+                                    "B",
+                                    "C",
+                                    "D",
+                                    "E",
+                                    "F"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        },
+                        {
+                            "name": {
+                                "row": 2,
+                                "col": "G"
+                            },
+                            "spans": {
+                                "columns": [
+                                    "G",
+                                    "H",
+                                    "I",
+                                    "J",
+                                    "K",
+                                    "L"
+                                ]
+                            },
+                            "includeAsSubObject": true
+                        }
+                    ]
+            }
+
+
+
+        ]
+    },
+    {
+        "sheetName": "componentProtectionThresholds",
+        "includeInDatasheet": true,
+        "ignoreBlanks": true,
+        "onlyTableName": true,
+        "ignoreRows": [],
+        "ignoreCols": [],
+        "sections": [
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 1,
+                        "col": "A"
+                    },
+                    "dataStartRow": 4,
+                    "maxRows": 100
+                },
+                "fieldHeaders": {
+                        "row": 3
+                    },
+                "spans": {
+                    "columns": [
+                        "A",
+                        "B",
+                        "C",
+                        "D"
+                        ]
+                    }
+            }
+        ]
+    },
+    {
+        "sheetName": "cPTs-powerSupplyProtection",
+        "includeInDatasheet": true,
+        "ignoreBlanks": true,
+        "onlyTableName": true,
+        "ignoreRows": [],
+        "ignoreCols": [],
+        "sections": [
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 1,
+                        "col": "A"
+                    },
+                    "dataStartRow": 4,
+                    "maxRows": 100
+                },
+                "fieldHeaders": {
+                        "row": 3
+                    },
+                "spans": {
+                    "columns": [
+                        "A",
+                        "B",
+                        "C",
+                        "D",
+                        "E",
+                        "F",
+                        "G"
+                        ]
+                    }
+            }
+        ]
+    },
+    {
+        "sheetName": "currentConsumption",
+        "includeInDatasheet": true,
+        "ignoreBlanks": true,
+        "onlyTableName": true,
+        "ignoreRows": [],
+        "ignoreCols": [],
+        "sections": [
+            {
+                "indexOn": {
+                    "orientation": "column",
+                    "header": {
+                        "row": 1,
+                        "col": "A"
+                    },
+                    "dataStartRow": 4,
+                    "maxRows": 100
+                },
+                "fieldHeaders": {
+                        "row": 3
+                    },
+                "spans": {
+                    "columns": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F"
+                        ]
+                    }
+            }
+
+        ]
+    }
+        
+    ]
+}

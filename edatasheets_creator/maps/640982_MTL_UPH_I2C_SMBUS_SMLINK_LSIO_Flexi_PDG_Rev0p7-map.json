@@ -1,0 +1,84 @@
+{
+    "description": "Map File",
+    "guid": "a0d93ad1-b93a-43ef-95a2-853d66c65cf7",
+    "mapType": "spreadsheet",
+    "datasheetDescLocation" : {
+        "sheetName" : "Legal Disclaimer",
+        "row" : 1,
+        "col" : "A"
+    },
+    "sheets": [
+        {
+            "sheetName": "Legal Disclaimer",
+            "includeInDatasheet" : false
+        },
+        {
+            "sheetName": "Summary",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                255,
+                256
+            ],
+            "ignoreCols" : [
+                "ZZ",
+                "ZA"
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 7,
+                            "col" : "A"
+                        },
+                        "dataStartRow" : 8,
+                        "maxRows" : 18
+                    },
+                    "fieldHeaders" : {
+                                "row" : 4                                       
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "C",
+                            "D",
+                            "E"
+                        ]
+                    },
+                    "groupBy" : [
+
+                        {
+                            "name" : {
+                                "row" : 4,
+                                "col" : "A",
+                                "valueCol" : ""                                   
+                            },
+                            "spans" : {
+                                "columns" : [
+                                    "C",
+                                    "D",
+                                    "E"
+                                ]
+                            }
+                        },
+                        {
+                            "name" : {
+                                "row" : 3,
+                                "col" : "C",
+                                "valueCol" : ""                                   
+                            },
+                            "spans" : {
+                                "columns" : [
+                                    "C",
+                                    "D",
+                                    "E"
+                                ]
+                            }
+                        }
+                    ]
+                    
+                }
+            ]
+       }
+    ]
+}

@@ -1,0 +1,99 @@
+{
+    "$id": "https://github.com/ajayitem/digital-datasheets/blob/tooling_proposed_changes_2/part-spec/passives/resistor.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "resistor",
+    "type": "object",
+    "required": [
+        "value"
+    ],
+    "properties": {
+        "value": {
+            "description": "resistor value",
+            "comment": "units of ohms",
+            "$ref": "../common/unit.json" 
+        },
+        "tolerance": {
+            "description": "nominal tolerance of a resistor",
+            "comment": "units of %",
+            "$ref": "../common/unit.json"
+        },
+        "powerRating": {
+            "description": "measure of power a resistor can dissipate indefinitely without degrading performance",
+            "comment": "units of watts",
+            "$ref": "../common/unit.json"
+        },
+        "temperatureCoefficient": {
+            "description": "change in resistance when the temperature is changed",
+            "comment": "units of ohms/degree (Celsius or Kelvin)",
+            "type": "number"
+        },
+        "maxOverloadVoltage": {
+            "description": "maximum voltage that can be applied to the resistor for a short period of time",
+            "comment": "units of volts",
+            "$ref": "../common/unit.json"
+        },
+        "maxLimitingElementVoltage": {
+            "description": "maximum voltage value that can be applied continuously to the resistor",
+            "comment": "units of volts",
+            "$ref": "../common/unit.json"
+        },
+        "minTemperature": {
+            "description": "minimum temperature under which a resistor can be expected to reliably operate",
+            "comment": "units of degrees (Celsius or Kelvin)",
+            "$ref": "../common/unit.json"
+        },
+        "maxTemperature": {
+            "description": "maximum temperature under which a resistor can be expected to reliably operate",
+            "comment": "units of degrees (Celsius or Kelvin)",
+            "$ref": "../common/unit.json"
+        },
+        "resistorDerating": {
+            "description": "graph object to capture resistance changes with temperature",
+            "$ref": "../common/graph.json"
+        },
+		"pins": {
+			"description": "array of pin objects with associated properties",
+			"type": "array",
+			"items": {
+				"$ref": "../common/pinSpec.json#/pinSpec"
+			}
+		},
+		"package": {
+			"description": "component package information",
+			"$ref": "../common/package.json#/package"
+		},
+		"externalFileMap": {
+			"description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+			"$ref": "#/$defs/externalFileMap"
+		},
+        "componentID": {
+			"description": "methods for identifying the version of the digital datasheet",
+			"$ref": "../common/componentID.json"
+		}
+    },
+	"$defs": {
+		"externalFileMap": {
+			"type": "object",
+			"properties": {
+				"coreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the common part of the part number",
+					"example": "this might include everything about an MCU other than flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"additionalCoreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the changing part of the part number",
+					"example": "this might include the MCU flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"pins": {
+					"description": "pin properties specified by the pin spec file",
+					"$ref": "../common/externalFile.json"
+				},
+				"package": {
+					"description": "package information specified by the package spec file",
+					"$ref": "../common/externalFile.json"
+				}
+			}
+		}
+	}
+}

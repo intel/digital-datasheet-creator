@@ -1,0 +1,105 @@
+{
+    "$id": "https://github.com/ajayitem/digital-datasheets/blob/tooling_proposed_changes_2/part-spec/memory/eeprom.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "eeprom",
+    "type": "object",
+    "required": [
+        "capacity"
+    ],
+    "properties": {
+        "capacity": {
+            "description": "capacity/density of eeprom",
+            "comment": "units of bits",
+            "$ref": "../common/unit.json" 
+        },
+        "numberOfWords": {
+            "description": "number of rows in the eeprom",
+            "type": "number"
+        },
+        "bitsPerWords": {
+            "description": "number of columns in the eeprom",
+            "type": "number"
+        },
+        "bootBlockSize": {
+            "description": "size of the eeprom boot block",
+            "comment": "units of bits",
+            "$ref": "../common/unit.json"
+        },
+        "interface": {
+            "description": "interface of eeprom to host",
+            "examples": [
+                "spi",
+                "i2c",
+                "serial 1-wire"
+            ],
+            "type": "string"
+        },
+        "clockFrequency": {
+            "description": "eeprom clock frequency",
+            "comment": "units of Hertz (Hz)",
+            "$ref": "../common/unit.json"
+        },
+        "accessTime": {
+            "description": "time to access the eeprom",
+            "comment": "units of seconds (s)",
+            "$ref": "../common/unit.json"
+        },
+        "endurance": {
+            "description": "time in years a bit in the eeprom can retain its data state ",
+            "type": "number"
+        },
+        "dataRetention": {
+            "description": "maximum number of read and write cycle the part can support",
+            "type": "number"
+        },
+        "currentConsumption": {
+            "description": "current consumption of a device",
+            "comment": "units of amps",
+            "$ref": "../common/currentConsumption.json"
+        },
+		"pins": {
+			"description": "array of pin objects with associated properties",
+			"type": "array",
+			"items": {
+				"$ref": "../common/pinSpec.json#/pinSpec"
+			}
+		},
+		"package": {
+			"description": "component package information",
+			"$ref": "../common/package.json#/package"
+		},
+		"externalFileMap": {
+			"description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+			"$ref": "#/$defs/externalFileMap"
+		},
+        "componentID": {
+			"description": "methods for identifying the version of the digital datasheet",
+			"$ref": "../common/componentID.json"
+		}
+    },
+	"$defs": {
+		"externalFileMap": {
+			"type": "object",
+			"properties": {
+				"coreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the common part of the part number",
+					"example": "this might include everything about an MCU other than flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"additionalCoreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the changing part of the part number",
+					"example": "this might include the MCU flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"pins": {
+					"description": "pin properties specified by the pin spec file",
+					"$ref": "../common/externalFile.json"
+				},
+				"package": {
+					"description": "package information specified by the package spec file",
+					"$ref": "../common/externalFile.json"
+				}
+			}
+		}
+	}
+}

@@ -1,14 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
 import os
 from pathlib import Path
 from os.path import isfile, islink, join
@@ -39,7 +28,7 @@ def validateRealPath(pathToFile: str) -> bool:
     """
     isValidFile = False
     fileExist = False
-    # Is link will retrun true if file is a symlink, negate it to only accept actual files
+    # Is link will return true if file is a symlink, negate it to only accept actual files
     isValidFile = not islink(pathToFile)
-    fileExist = isfile(pathToFile)      
+    fileExist = isfile(pathToFile)
     return isValidFile and fileExist

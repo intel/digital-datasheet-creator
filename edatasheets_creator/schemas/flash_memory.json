@@ -1,0 +1,130 @@
+{
+    "$id": "https://github.com/ajayitem/digital-datasheets/blob/tooling_proposed_changes_2/part-spec/memory/flash_memory.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "flash memory",
+    "type": "object",
+    "required": [
+        "capacity"
+    ],
+    "properties": {
+        "capacity": {
+            "description": "capacity/density of flash memory",
+            "comment": "units of bits",
+            "$ref": "../common/unit.json" 
+        },
+        "pageSize": {
+            "description": "page size of flash memory",
+            "comment": "units of bits",
+            "$ref": "../common/unit.json"
+        },
+        "blockSize": {
+            "description": "block size of flash memory",
+            "comment": "units of bits",
+            "$ref": "../common/unit.json"
+        },
+        "bootBlockSize": {
+            "description": "size of the flash memory boot block",
+            "comment": "units of bits",
+            "$ref": "../common/unit.json"
+        },
+        "interface": {
+            "description": "interface of flash memory to host",
+            "type": "string",
+            "examples": [
+                "spi",
+                "quad-spi",
+                "i2c"
+            ]
+        },
+        "clockFrequency": {
+            "description": "flash memory clock frequency",
+            "comment": "units of Hertz (Hz)",
+            "$ref": "../common/unit.json"
+        },
+        "blockEraseTime": {
+            "description": "time it takes to erase a block (largest erasable unit) of the flash memory",
+            "comment": "units of seconds (s)",
+            "$ref": "../common/unit.json"
+        },
+        "sectorEraseTime": {
+            "description": "time it takes to erase a sector (smallest erasable unit) of the flash memory",
+            "comment": "units of seconds (s)",
+            "$ref": "../common/unit.json"
+        },
+        "chipEraseTime": {
+            "description": "time it takes to erase the flash memory",
+            "comment": "units of seconds (s)",
+            "$ref": "../common/unit.json"
+        },
+        "pageProgramTime": {
+            "description": "time it takes to program a page of the flash memory",
+            "comment": "units of seconds (s)",
+            "$ref": "../common/unit.json"
+        },
+        "endurance": {
+            "description": "time in years a bit in the eeprom can retain its data state ",
+            "type": "number"
+        },
+        "dataRetention": {
+            "description": "maximum number of read and write cycle the part can support",
+            "type": "number"
+        },
+        "hwReset": {
+            "description": "whether the part supports a hardware reset pin",
+            "type": "boolean"
+        },
+        "writeProtect": {
+            "description": "whether the part has a write protect pin",
+            "type": "boolean"
+        },
+        "currentConsumption": {
+            "description": "current consumption of a device",
+            "comment": "units of amps",
+            "$ref": "../common/currentConsumption.json"
+        },
+		"pins": {
+			"description": "array of pin objects with associated properties",
+			"type": "array",
+			"items": {
+				"$ref": "../common/pinSpec.json#/pinSpec"
+			}
+		},
+		"package": {
+			"description": "component package information",
+			"$ref": "../common/package.json#/package"
+		},
+		"externalFileMap": {
+			"description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+			"$ref": "#/$defs/externalFileMap"
+		},
+        "componentID": {
+			"description": "methods for identifying the version of the digital datasheet",
+			"$ref": "../common/componentID.json"
+		}
+    },
+	"$defs": {
+		"externalFileMap": {
+			"type": "object",
+			"properties": {
+				"coreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the common part of the part number",
+					"example": "this might include everything about an MCU other than flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"additionalCoreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the changing part of the part number",
+					"example": "this might include the MCU flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"pins": {
+					"description": "pin properties specified by the pin spec file",
+					"$ref": "../common/externalFile.json"
+				},
+				"package": {
+					"description": "package information specified by the package spec file",
+					"$ref": "../common/externalFile.json"
+				}
+			}
+		}
+	}
+}

@@ -1,16 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
-
 """
     main.py
     -------
@@ -22,11 +9,13 @@
 import sys
 import os
 
+
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 
 from edatasheets_creator.core import DatasheetCreatorApp
 from edatasheets_creator.functions import t
+# from edatasheets_creator.tests import practice_tests as tests
 
 """
     Main application start
@@ -40,4 +29,9 @@ app = DatasheetCreatorApp(sys.argv[1:])
 print(t("Starting Application"))
 
 # Run application
+
 app.run()
+
+
+# suite = unittest.TestLoader().loadTestsFromModule(tests)
+# unittest.TextTestRunner(verbosity=2).run(suite)

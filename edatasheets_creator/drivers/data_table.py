@@ -1,14 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
 from pathlib import Path
 import re
 from xml.etree.ElementTree import Element  # nosec
@@ -38,6 +27,8 @@ class DataTable:
         self.table_attributes_utilities = TableAttributesUtilities()
         self.format = Format()
         self.column_header_keys: dict[str, dict] = {}
+        self.col_name_exists: bool = False
+        self.entry_to_repeat: list = []
         self.document_title = self.xml_utilities.get_title(self.source)
         self.file_name = Path(self.file_name_path).name
         self.edatasheet = EDatasheet(self.document_title, self.file_name)
@@ -100,7 +91,7 @@ class DataTable:
             ExceptionLogger.logError(__name__, "", e)
 
     def build_output_xml_document(self, input: Element) -> dict:
-        """Converts the readed xml (dita) document to an edatasheet format.
+        """Converts the read xml (dita) document to an edatasheet format.
 
         Args:
             input (Element): Dita Element.
@@ -114,18 +105,26 @@ class DataTable:
 
             root_element = Element(header_constants.DATASHEET)
 
-            # Some DITA files do not have sections so we will have to have an alternate path for to handle that case
-            tables_element = self.build_tables(root_element, title, self.xml_utilities.get_tables(source_root))
+            # Get tables, if any, from the DITA file
+            tables_on_file = self.xml_utilities.get_tables(source_root)
 
-            tables_element = self.xml_utilities.build_attachments(root_element, source_root)
+            # Validate if the DITA file needs to be processed by checking if it contains tables
+            edatasheet = {}
+            if tables_on_file:
+                # Some DITA files do not have sections so we will have to have an alternate path for to handle that case
+                tables_element = self.build_tables(root_element, title, tables_on_file)
 
-            dictionary = {}
-            if len(list(root_element.iter())) > 1:
-                dictionary = self.xml_utilities.xml_to_dictionary(tables_element, (transformer_constants.ATTACHMENTS, transformer_constants.TABLE_ENTRIES))
+                tables_element = self.xml_utilities.build_attachments(root_element, source_root)
+                dictionary = {}
+                if len(list(root_element.iter())) > 1:
+                    dictionary = self.xml_utilities.xml_to_dictionary(tables_element, (transformer_constants.ATTACHMENTS, transformer_constants.TABLE_ENTRIES))
 
-            msg = "Generating the output dictionary...\n"
+                msg = "Generating the output dictionary...\n"
+                edatasheet = self.edatasheet.get_edatasheet(dictionary)
+            else:
+                msg = "DITA file does not contain tables, it will be skipped\n"
             ExceptionLogger.logInformation(__name__, msg)
-            edatasheet = self.edatasheet.get_edatasheet(dictionary)
+
             return edatasheet
 
         except Exception as e:
@@ -305,8 +304,9 @@ class DataTable:
                 note_element.text = self.format.format_value(self.xml_utilities.get_text(entries[0]).strip())
             else:
                 try:
+                    counter = 0
                     for entry in entries:
-                        s_col_name, s_col_unit = self.xml_utilities.get_column_name_from_dictionary(entry, self.column_header_keys)
+                        s_col_name, s_col_unit = self.xml_utilities.get_column_name_from_dictionary(entry, self.column_header_keys, counter)
                         if not s_col_name:
                             # TODO: Check if is necessary to apply col_units here
                             s_col_name = self.xml_utilities.get_column_name_string_from_dictionary_range(entry, self.column_header_keys)
@@ -323,10 +323,14 @@ class DataTable:
                             else:
                                 s_element.text = s_value
                             item_list.append(s_element)
+                        elif s_value == "":
+                            # Do not add an entry as the value of the cell is empty
+                            pass
                         else:
                             s_element = Element(s_col_name)
                             s_element.text = transformer_constants.NOT_FOUND
                             item_list.append(s_element)
+                        counter += 1
                 except Exception as e:
                     ExceptionLogger.logError(__name__, '', e)
                 return item_list
@@ -349,20 +353,53 @@ class DataTable:
             element_temp = source
             item_list: List[Element] = []
             column_number = 0
+
+            # Detect and add the entries that need to be repeated
+            if len(self.entry_to_repeat) > 0:
+                for entry_repeat in self.entry_to_repeat:
+                    entries.insert(entry_repeat[dita_c.REPEAT_COLUMN], entry_repeat[dita_c.REPEAT_ELEMENT])
+                    entry_repeat[dita_c.REPEAT_TIMES] = entry_repeat[dita_c.REPEAT_TIMES] - 1
+
             for entry in entries:
+                merged_columns_count = 0
                 column_index: List[str] = self.xml_utilities.get_column_index(entry)
-                if column_index:
+                if column_index and self.col_name_exists:
                     for item in column_index:
-                        col_element[item] = entry
+                        # Make standard the col prefix
+                        itemUsed = self.make_standard_col_name(item)
+                        col_element[itemUsed] = entry
+                        merged_columns_count += 1
+                    merged_columns_count -= 1
                 else:
                     item = self.xml_utilities.get_column_header_key_from_ordinal_pos(self.column_header_keys, column_number)
                     if item:
                         col_element[item] = entry
                     else:
-                        ExceptionLogger.logError(__name__, f"Could not find any value for this entry {self.xml_utilities.element_to_string(entry)}")
+                        ExceptionLogger.logInformation(__name__, f"Could not find any header for this entry {self.xml_utilities.element_to_string(entry)}")
+
+                entry_attributes = entry.attrib
+                # Validate vertically merged cells on table
+                more_rows = entry_attributes.get(dita_c.MOREROWS, None)
+                if more_rows and (entry not in self.entry_to_repeat):
+                    already_present = False
+                    # Validate if entry is already present
+                    for element_entry in self.entry_to_repeat:
+                        if element_entry[dita_c.REPEAT_ELEMENT] == entry:
+                            already_present = True
+                            if (element_entry.get(dita_c.REPEAT_TIMES, None) == 0):
+                                # Delete the object that it is not repeated further
+                                self.entry_to_repeat.remove(element_entry)
+                            break
+                    if not already_present:
+                        # Add the new entries on the entries for the following rows
+                        entry_to_add = dict()
+                        entry_to_add[dita_c.REPEAT_TIMES] = int(more_rows)
+                        entry_to_add[dita_c.REPEAT_ELEMENT] = entry
+                        entry_to_add[dita_c.REPEAT_COLUMN] = column_number
+                        self.entry_to_repeat.append(entry_to_add)
 
                 element_temp = entry
-                column_number += 1
+                column_number += 1 + merged_columns_count
 
             is_note = True
 
@@ -371,10 +408,10 @@ class DataTable:
                     is_note = False
                     break
 
-            if is_note:
+            amount_of_columns = len(col_element)
+            if is_note and (amount_of_columns > 1):
                 note = self.xml_utilities.get_text(entries[0]) if entries else ""
-                note_element = Element(transformer_constants.NOTES)
-                note_element.text = note
+                note_element = self._handle_notes(entries[0], note)
                 item_list.append(note_element)
 
             else:
@@ -383,15 +420,7 @@ class DataTable:
                         col_name, col_unit = self.xml_utilities.get_column_name_from_dictionary_by_key(key, self.column_header_keys)
                         if value is not None:
                             element_value = self.xml_utilities.get_text(value)
-                            p_list = self.xml_utilities.get_p_list(value)
-                            if p_list:
-                                p_string = ""
-                                for p in p_list:
-                                    if len(p_string) > 0:
-                                        p_string += ","
-                                    p_value = self.format.format_value(self.xml_utilities.get_text(p))
-                                    p_string += p_value
-                                element_value = p_string
+                            element_value = self.format.format_value(element_value)
                             if element_value and len(element_value) > 0:
                                 column_name_element = Element(col_name)
                                 if col_unit:
@@ -403,7 +432,33 @@ class DataTable:
                                     column_name_element.append(unit_element)
                                 else:
                                     column_name_element.text = self.format.format_special_fields(col_name, element_value)
-                                item_list.append(column_name_element)
+
+                                notes_in_entry = self.xml_utilities.get_note_list(value)
+                                p_in_entry = self.xml_utilities.get_p_list(value)
+                                namest = value.attrib.get(dita_c.NAMEST, None)
+                                if notes_in_entry and not p_in_entry and namest:
+                                    column_name_element = self._handle_notes(value, element_value)
+                                    item_list = []
+                                    item_list.append(column_name_element)
+                                    break
+                                elif len(entries) == 1 and namest:
+                                    column_name_element = self._handle_notes(value, element_value)
+                                    item_list = []
+                                    item_list.append(column_name_element)
+                                    break
+
+                                # Do not add repeated entries
+                                if len(item_list) > 0:
+                                    add_entry = True
+                                    for item_to_check in item_list:
+                                        if item_to_check.text == column_name_element.text and item_to_check.tag == column_name_element.tag:
+                                            # Do not add the repeated entry
+                                            add_entry = False
+                                            break
+                                    if add_entry:
+                                        item_list.append(column_name_element)
+                                else:
+                                    item_list.append(column_name_element)
 
                     except Exception as e:
                         ExceptionLogger.logError(__name__, "", e)
@@ -412,9 +467,34 @@ class DataTable:
         except Exception as e:
             ExceptionLogger.logError(__name__, "", e)
 
+    def _handle_notes(self, value: Element, element_value: str) -> Element:
+        """Creates a Note entry on the table
+        Args:
+            value (Element): Entry that will be formatted as Note
+            element_value (Str): Value of the row being processed
+
+        Returns:
+            Element: Note element that was parsed
+        """
+        column_name_element = Element(transformer_constants.NOTES)
+        bullets = self.xml_utilities.get_li_list(value)
+        ordered = self.xml_utilities.get_ol_list(value)
+        if bullets and ordered:
+            bullets_text = ""
+            counter = 1
+            for bullet in bullets:
+                bullets_text += f" {str(counter)}. {self.xml_utilities.get_text(bullet)}"
+                counter += 1
+            element_value = bullets_text
+        else:
+            element_value = f"1. {element_value}"
+        column_name_element.text = self.format.format_value(element_value)
+
+        return column_name_element
+
     def initialize_fields(self, source: Element) -> bool:
         """Initialize table headers and store it on the global column_header_keys dictionary, to
-        to use it to build the stucture of the final table.
+        to use it to build the structure of the final table.
 
         Args:
             source (Element): XML Element with the entire fields on the document.
@@ -425,14 +505,18 @@ class DataTable:
         """
         try:
             row_index = -1
-            col_index = 0
             self.column_header_keys.clear()
             header_rows = self.xml_utilities.get_table_headers(source)
+            self.col_name_exists = False
+            handle_multiple_rows = False
 
             if not header_rows:
                 return False
 
             for row in header_rows:
+                if not handle_multiple_rows:
+                    col_index = 0
+                    actual_col_index = 0
                 row_index += 1
                 entries = self.xml_utilities.get_entries(row)
 
@@ -445,17 +529,48 @@ class DataTable:
                     name_end = entry.attrib.get(dita_c.NAMEEND, None)
                     more_rows = entry.attrib.get(dita_c.MOREROWS, None)
 
+                    # Manage columns with empty headers
+                    if (entry_value == "" or entry_value is None) and row_index == 0:
+                        entry_value = f"{dita_c.EMPTY_HEADER}{col_index}"
+
+                    # Manage tables with repeated header values, and that will be used as header keys
+                    if (entry_value in self.column_header_keys):
+                        entry_value = f"{entry_value}col{col_index}"
+
                     column_headers = {}
                     key = []
 
                     if not col_num:
                         column_headers[dita_c.COL_NUM] = str(col_index)
 
+                    # This is being added as it is needed when data entries do not have colnum
+                    if row_index > 0:
+                        # As part of multiple header rows, it is needed to map them to an existing column
+                        index_of_header = 0
+                        for column_name, _ in self.column_header_keys.items():
+                            if column_name == col_name:
+                                column_headers[dita_c.COL_NUM_ENTRY] = str(index_of_header)
+                                break
+                            index_of_header += 1
+                            column_headers[dita_c.COL_NUM_ENTRY] = str(actual_col_index)
+                    else:
+                        column_headers[dita_c.COL_NUM_ENTRY] = str(col_index)
+
                     if (not col_name and not name_start):
-                        key.append(entry_value)
+                        if row_index > 0:
+                            # All child headers must have a parent header
+                            if entry_value not in self.column_header_keys:
+                                # Add the column name if there is a mismatch on the header key
+                                key.append(f"col{actual_col_index + 1}")
+                            else:
+                                # The header exists, do nothing else
+                                key.append(entry_value)
+                        else:
+                            key.append(entry_value)
                         column_headers[dita_c.NAME] = entry_value
 
                     if col_name:
+                        self.col_name_exists = True
                         key.append(col_name.strip())
                         column_headers[dita_c.NAME] = col_name.strip()
 
@@ -463,24 +578,20 @@ class DataTable:
                     end = 0
 
                     if name_start:
+                        self.col_name_exists = True
                         column_headers[dita_c.NAME_START] = name_start.strip()
-                        if (len(name_start) < 4):
-                            msg = f"The namest is incorrect: {name_start}"
-                            ExceptionLogger.logError(__name__, msg)
-                            raise Exception(msg)
-                        start = int(name_start[3:])
+                        name_start = re.sub('[^0-9,.]', '', name_start)
+                        start = int(name_start)
 
                     if name_end:
                         column_headers[dita_c.NAME_END] = name_end.strip()
-                        if (len(name_end) < 4):
-                            msg = f"The namest is incorrect: {name_end}"
-                            ExceptionLogger.logError(__name__, msg)
-                            raise Exception(msg)
-                        end = int(name_end[3:])
+                        name_end = re.sub('[^0-9,.]', '', name_end)
+                        end = int(name_end)
 
                     if more_rows:
                         column_headers[dita_c.MORE_ROWS] = more_rows.strip()
                         column_headers[dita_c.ROW_END] = int(more_rows) + row_index
+                        handle_multiple_rows = True
 
                     column_headers[dita_c.ROW_START] = row_index
                     if (start - end != 0):
@@ -491,20 +602,56 @@ class DataTable:
                         column_units = re.findall(r"\[([^)]+)\]", entry_value)
                         if column_units:
                             unit = column_units[-1]
-                            column_headers[dita_c.UNIT_HEADER] = unit
-                            # entry_value = entry_value.replace(f"({unit})", "").strip()
-                            entry_value = entry_value.replace(f"[{unit}]", "").strip()
+                            if unit in dita_c.HEADER_UNITS:
+                                # Just specify the unit of the column if it is part of the known parsed units
+                                column_headers[dita_c.UNIT_HEADER] = unit
+                                entry_value = entry_value.replace(f"[{unit}]", "").strip()
                         column_headers[dita_c.LABEL_HEADER] = self.format.format_name(entry_value)
                     else:
-                        column_headers[dita_c.LABEL_HEADER] = transformer_constants.EMPTY
+                        column_headers[dita_c.LABEL_HEADER] = self.format.format_name(f"{dita_c.EMPTY_HEADER}{col_index}")
 
                     for item in key:
-                        if item in self.column_header_keys:
-                            header = self.column_header_keys[item]
-                            column_headers[dita_c.LABEL_HEADER] = header[dita_c.LABEL_HEADER] + "-" + column_headers[dita_c.LABEL_HEADER]
-                        self.column_header_keys[item] = column_headers
+                        temp_header = dict(column_headers)
+                        # Make standard the col prefix
+                        itemUsed = self.make_standard_col_name(item)
+                        # Validate if the header is a child of another header
+                        if itemUsed in self.column_header_keys:
+                            temp_header = {}
+                            header = self.column_header_keys[itemUsed]
+                            header_name_start = header.get(dita_c.NAME_START, None)
+                            header_name_end = header.get(dita_c.NAME_END, None)
+                            column_name_start = column_headers.get(dita_c.NAME_START, None)
+                            column_name_end = column_headers.get(dita_c.NAME_END, None)
+                            # Dimension the column depending on the smallest element
+                            if (header_name_start is None and header_name_end is None) and (column_name_start is not None and column_name_end is not None):
+                                # First row is just a normal cell, take the properties from the smallest header
+                                temp_header = header
+                            else:
+                                # Lower header is smaller, take these properties
+                                temp_header = dict(column_headers)
+                            temp_header[dita_c.LABEL_HEADER] = header[dita_c.LABEL_HEADER] + "-" + column_headers[dita_c.LABEL_HEADER]
+                        self.column_header_keys[itemUsed] = temp_header
+                        actual_col_index += 1
                     col_index += 1
             return True
 
         except Exception as e:
             ExceptionLogger.logError(__name__, "", e)
+
+    def make_standard_col_name(self, item: str) -> str:
+        """If the column name is c, change it to col
+
+        Args:
+            item (str): name of the column
+
+        Returns:
+            str: name of the column making sure starts with col
+        """
+        itemChars = "".join(re.findall('[a-zA-Z]+', item))
+        if itemChars == "c":
+            # Need to format the entry
+            itemNumbers = "".join(re.findall(r'\d+', item))
+            itemUsed = f"col{itemNumbers}"
+        else:
+            itemUsed = item
+        return itemUsed

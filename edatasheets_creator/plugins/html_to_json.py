@@ -1,15 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
 import json
 from pathlib import Path
 from edatasheets_creator.constants import serializationconstants
@@ -35,7 +23,7 @@ class Plugin:
 
     def process(self, html_file, output_filename, mapFile=""):
         """
-        Plugin that converst an HTML file to JSON
+        Plugin that converts an HTML file to JSON
 
         Args:
             html_file (PosixPath): Input file name
@@ -189,11 +177,11 @@ class Plugin:
             type_of_table (list): table identifier
 
         Returns:
-            list: string list contatining the table name and description
+            list: string list containing the table name and description
         """
         header_data = ["", ""]
         try:
-            # Validate the tiptle depending on the type of table
+            # Validate the title depending on the type of table
             if (type_of_table == htmlconstants.SUMMARY_TABLE_TYPE):
                 header_data[0] = wrapper.h1.text
                 header_data[1] = wrapper.span.text

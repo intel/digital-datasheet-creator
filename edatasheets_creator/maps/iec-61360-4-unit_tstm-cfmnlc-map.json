@@ -1,0 +1,71 @@
+{
+    "description": "IEC 61360-4 - IEC/SC 3D - Common Data Dictionary (CDD- V2.0015.0002) - UNIT_TSTM-CFMNLC",
+    "guid": "57fe623e-3689-4929-9cb4-ea859a9de472",
+    "mapType": "spreadsheet",
+    "datasheetDescLocation" : {
+        "sheetName" : "Export",
+        "row" : 12,
+        "col" : "A"
+    },
+    "sheets": [
+        {
+            "sheetName": "Export",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                
+            ],
+            "ignoreCols" : [
+               
+            ],
+            "sections" : [ 
+                {
+                    "dataStartRow" : 38,
+                    "maxRows" : 30,
+                    "fieldHeaders" : {
+                                "row" : 24                                       
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC",
+                            "AD",
+                            "AE",
+                            "AF",
+                            "AG",
+                            "AH",
+                            "AI",
+                            "AK"
+                        ]
+                    }
+                }               
+            ]
+       }        
+    ]
+}

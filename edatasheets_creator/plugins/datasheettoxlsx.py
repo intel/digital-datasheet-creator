@@ -1,16 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
-
 # DataSheet to xlsx plugin class
 
 from pathlib import Path
@@ -117,10 +104,10 @@ class Plugin:
 
     def __verifyFormat(self, fileName: str, format: str) -> bool:
         """
-        This function provides the functionality to verify the format of a file, based on its sufix
+        This function provides the functionality to verify the format of a file, based on its suffix
 
         Args:
-            fileName (string): Complete file name including its sufix.
+            fileName (string): Complete file name including its suffix.
             format (string): Expected format that the file has to be.
 
         Returns:

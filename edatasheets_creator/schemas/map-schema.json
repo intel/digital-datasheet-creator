@@ -14,7 +14,23 @@
         },
         "mapType":{
             "type":"string",
-            "description": "A map type of the map file"
+            "description": "A map type of the map file" 
+        },
+        "industryFormat": {
+            "type":"boolean",
+            "description": "This flag specifies if the datasheet is to conform with industry workgroup specifications"
+        },
+        "componentType":{
+            "type":"string",
+            "description": "Component kind for the datasheet. This will enable the software to produce datasheets that match with the use case of the component"
+        },
+        "includeMetadata":{
+            "type":"boolean",
+            "description": "Indicates whether to include metadata in the e-datasheet output file. (optional)"
+        },
+        "macroEnabled":{
+            "type":"boolean",
+            "description": "Flag that specifies if Excel sheet is macro enabled"
         },
         "datasheetDescLocation":{
             "description": "A datasheet description processor that tells the processor where to find the description that is used in the datasheet.",
@@ -49,9 +65,13 @@
                         "type":"string",
                         "description": "The worksheet name to process. Must match in the spreadsheet."
                     },
+                    "onlyTableName":{
+                        "type":"boolean",
+                        "description": "Indicates whether to have only table name as key or tab-tablename as key in datasheet"
+                    },
                     "includeInDatasheet":{
                         "type":"boolean",
-                        "description": "Indicates wheter to include in the e-datasheet output file."
+                        "description": "Indicates whether to include in the e-datasheet output file."
                     },
                     "ignoreBlanks":{
                         "type":"boolean",
@@ -92,24 +112,6 @@
                                             "type": "string",
                                             "description": "Orientation of the datasheet"
                                         },
-                                        "header":{
-                                            "type": "object",
-                                            "description": "Defines where the indexed field is located.",
-                                            "properties": {
-                                                "row":{
-                                                    "type":"integer",
-                                                    "description": "Row",
-                                                    "minimum": 1
-                                                },
-                                                "col":{
-                                                    "type":"string",
-                                                    "description": "Column",
-                                                    "pattern": "^[A-Z]+$"
-                                                }
-                                            },
-                                            "additionalProperties": false,
-                                            "required":["row", "col"]
-                                        },
                                         "dataStartRow":{
                                             "type": "integer",
                                             "description": "Row to start gathering data.",
@@ -121,8 +123,8 @@
                                             "minimum": 0
                                         }
                                     },
-                                    "additionalProperties": false,
-                                    "required":["orientation", "header", "dataStartRow", "maxRows"]
+                                    "additionalProperties": true,
+                                    "required":["orientation", "dataStartRow", "maxRows"]
                                 },
                                 "fieldHeaders":{
                                     "type":"object",
@@ -202,6 +204,10 @@
                                                 },
                                                 "additionalProperties": false,
                                                 "required":["columns"]
+                                            },
+                                            "includeAsSubObject":{
+                                                "type":"boolean",
+                                                "description": "Determines if groupBy should be written as subobject or as a compound key"
                                             }
                                         },
                                         "additionalProperties": false,

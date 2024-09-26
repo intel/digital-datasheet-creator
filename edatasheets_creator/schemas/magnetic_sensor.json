@@ -1,0 +1,120 @@
+{
+    "$id": "https://github.com/ajayitem/digital-datasheets/blob/tooling_proposed_changes_2/part-spec/sensor/magnetic_sensor.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "magnetic sensor",
+    "type": "object",
+    "properties": {
+        "magneticSensingTechnology": {
+            "description": "method by which magnetism is detected",
+            "examples": [
+                "gmr",
+                "hall effect"
+            ],
+            "type": "string"
+        },
+        "outputType": {
+            "description": "measurement output type", 
+            "enum": [
+                "analog",
+                "pwm"
+            ],
+            "type": "string"
+        },
+        "quiescentOutput": {
+            "description": "output of the magnetic sensor when no magnet is present",
+            "comment": "units of volts(v)",
+            "$ref": "../common/unit.json"
+        },
+        "outputVoltageLinearRange": {
+            "description": "output voltage range over which the magnetic flux density response is linear",
+            "comment": "lower value of the range captured by min value and top value of the range captured by max value (V) ",
+            "$ref": "../common/unit.json"
+        },
+        "linearMagneticSensingRange": {
+            "description": "magnetic flux density range over which the output voltage is linear ",
+            "comment": "units of mT",
+            "$ref": "../common/unit.json"
+        },
+        "sensitivity": {
+            "description": "this is the gain - amount of change in the output voltage for a change in the magnetic flux density",
+            "comment": "units of mV/mT",
+            "$ref": "../common/unit.json"
+        },
+        "operatePoint": {
+            "description": "magnetic flux density threshold which causes the sensor output to turn on",
+            "comment": "units of mT. Depending on the sensor's design, the operation point can cause the output to trip High or Low.",
+            "$ref": "../common/unit.json"
+        },
+        "releasePoint": {
+            "description": "magnetic flux density threshold which causes the sensor output to turn off",
+            "comment": "units of mT. Depending on the sensor's design, the release point can cause the output to trip High or Low.",
+            "$ref": "../common/unit.json"
+        },
+        "outputPolarity": {
+            "description": "indicates whether the sensor output is active high or active low",
+            "enum": [
+                "high",
+                "low"
+            ],
+            "type": "string"
+        },
+        "hysteresis": {
+            "description": "delta between the operate point and the release point threshold",
+            "comment": "units of mT",
+            "$ref": "../common/unit.json"
+        },
+        "bandwidth": {
+            "description": "sensing bandwidth",
+            "comment": "units of Hertz (Hz)",
+            "$ref": "../common/unit.json"
+        },
+        "currentConsumption": {
+            "description": "current consumption of a device",
+            "$ref": "../common/currentConsumption.json"
+        },
+		"pins": {
+			"description": "array of pin objects with associated properties",
+			"type": "array",
+			"items": {
+				"$ref": "../common/pinSpec.json#/pinSpec"
+			}
+		},
+		"package": {
+			"description": "component package information",
+			"$ref": "../common/package.json#/package"
+		},
+		"externalFileMap": {
+			"description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+			"$ref": "#/$defs/externalFileMap"
+		},
+        "componentID": {
+			"description": "methods for identifying the version of the digital datasheet",
+			"$ref": "../common/componentID.json"
+		}
+    },
+	"$defs": {
+		"externalFileMap": {
+			"type": "object",
+			"properties": {
+				"coreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the common part of the part number",
+					"example": "this might include everything about an MCU other than flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"additionalCoreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the changing part of the part number",
+					"example": "this might include the MCU flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"pins": {
+					"description": "pin properties specified by the pin spec file",
+					"$ref": "../common/externalFile.json"
+				},
+				"package": {
+					"description": "package information specified by the package spec file",
+					"$ref": "../common/externalFile.json"
+				}
+			}
+		}
+	}
+}

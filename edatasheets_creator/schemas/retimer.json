@@ -1,0 +1,107 @@
+{
+    "$id": "https://github.com/ajayitem/digital-datasheets/blob/tooling_proposed_changes_2/part-spec/ic_io/retimer.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "retimer",
+    "type": "object",
+    "properties": {
+        "numberOfLanes": {
+            "description": "number of lanes supported by a device",
+            "type": "number"
+        },
+        "interface": {
+            "description": "list of interface(s) supported by a device", 
+            "examples": [
+                "HDMI",
+                "DP1.4",
+                "USB3.2 Gen2x1",
+                "PCIe3.0",
+                "TBT3.0",
+                "USB4"
+            ],
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "dpMaxLinkRate": {
+            "description": "Max link rate supported by DP interface of a device",
+            "examples": [
+                "HBR",
+                "HBR2",
+                "HBR33",
+                "UHBR10",
+                "UHBR13.5"
+            ],
+            "type": "string"
+        },
+        "maxDataRate": {
+            "description": "maximum data rate supported by a device",
+            "comment": "units of Hz",
+            "$ref": "../common/unit.json"
+        },
+        "integratedAuxLsSwitch": {
+            "description": "whether the AUX/LSx switch for SBU is integrated",
+            "type": "boolean"
+        },
+        "commonClock": {
+            "description": "whether a device supports common reference clock",
+            "type": "boolean"
+        },
+        "sris": {
+            "description": "whether a device supports Seperate Reference clock with Independent Spread spectrum clocking(SRIS)",
+            "type": "boolean"
+        },
+        "srns": {
+            "description": "whether a device supports Seperate Reference clock with No Spread spectrum clocking (SRNS)",
+            "type": "boolean"
+        },
+        "currentConsumption": {
+            "description": "current used by device in various power modes",
+            "$ref": "../common/currentConsumption.json"
+        },
+		"pins": {
+			"description": "array of pin objects with associated properties",
+			"type": "array",
+			"items": {
+				"$ref": "../common/pinSpec.json#/pinSpec"
+			}
+		},
+		"package": {
+			"description": "component package information",
+			"$ref": "../common/package.json#/package"
+		},
+		"externalFileMap": {
+			"description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+			"$ref": "#/$defs/externalFileMap"
+		},
+        "componentID": {
+			"description": "methods for identifying the version of the digital datasheet",
+			"$ref": "../common/componentID.json"
+		}
+    },
+	"$defs": {
+		"externalFileMap": {
+			"type": "object",
+			"properties": {
+				"coreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the common part of the part number",
+					"example": "this might include everything about an MCU other than flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"additionalCoreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the changing part of the part number",
+					"example": "this might include the MCU flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"pins": {
+					"description": "pin properties specified by the pin spec file",
+					"$ref": "../common/externalFile.json"
+				},
+				"package": {
+					"description": "package information specified by the package spec file",
+					"$ref": "../common/externalFile.json"
+				}
+			}
+		}
+	}
+}

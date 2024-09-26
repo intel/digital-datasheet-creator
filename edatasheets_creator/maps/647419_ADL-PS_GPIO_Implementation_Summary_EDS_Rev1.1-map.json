@@ -1,0 +1,77 @@
+{
+    "description": "GPIO Implementation Map file",
+    "guid": "bad5aeec-0746-4d2f-8912-b6e2c2a8cd35",
+    "mapType": "spreadsheet",
+    "datasheetDescLocation" : {
+        "sheetName" : "Legal Disclaimer",
+        "row" : 6,
+        "col" : "A"
+    },
+    "sheets": [
+        {
+            "sheetName": "Legal Disclaimer",
+            "includeInDatasheet" : false
+        },
+        {
+            "sheetName": "GPIO Implementation",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                
+            ],
+            "ignoreCols" : [
+               
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 2,
+                            "col" : "B"
+                        },
+                        "dataStartRow" : 4,
+                        "maxRows" : 188
+                    },
+                    "fieldHeaders" : {
+                                "row" : 2                                       
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G",
+                            "H",
+                            "I",
+                            "J",
+                            "K",
+                            "L",
+                            "M",
+                            "N",
+                            "O",
+                            "P",
+                            "Q",
+                            "R",
+                            "S",
+                            "T",
+                            "U",
+                            "V",
+                            "W",
+                            "X",
+                            "Y",
+                            "Z",
+                            "AA",
+                            "AB",
+                            "AC"
+                        ]
+                    }
+                }               
+            ]
+       }
+        
+    ]
+}

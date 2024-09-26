@@ -1,15 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
 from urllib.parse import urljoin
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
@@ -44,7 +32,7 @@ class Plugin:
                                 """ Bandit ignore warning reason
                                 The page variable value is not an input of the system. Instead, the
                                 possible value is specified in function process() as a hard coded URL.
-                                For this reason the validation of file/ tipe of inputs it is not necessary
+                                For this reason the validation of file/ type of inputs it is not necessary
                                 and the vulnerability described is not applicable to the system:
                                 https://cwe.mitre.org/data/definitions/20.html
                                 """

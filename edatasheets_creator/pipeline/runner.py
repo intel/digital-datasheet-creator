@@ -1,16 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
-
 # Runner class
 
 from os.path import isdir
@@ -71,7 +58,7 @@ class Runner():
             if (validateRealPath(jobFile)):
                 # Creates a parser and triggers the JSON parsing
                 ExceptionLogger.logInformation(__name__, "", f'Executing jobs in file: {jobFile}')
-                isValid = validateJson(get_relative_path(r.PIPELINE_SCHEMA), jobFile)
+                isValid = validateJson(get_relative_path(r.PIPELINE_SCHEMA), "", jobFile, ["xlsx"])
 
                 if (not isValid):
                     error_object = {
@@ -321,7 +308,7 @@ class Runner():
                         # Execute the task newly created
                         self.__processTask(newTask)
                 else:
-                    ExceptionLogger.logError(__name__, 'Not a valid file or directory')
+                    ExceptionLogger.logError(__name__, f'Not a valid file or directory: {inputFile}\n\n')
 
         except Exception as e:
             ExceptionLogger.logError(__name__, "", e)
@@ -359,7 +346,8 @@ class Runner():
 
                     # Validate if the inputs exists depending on the argument type
                     argumentValues = [arg1, arg2, arg3]
-                    inputFilesExist = filesExistsOnPath(argumentValues, pluginArguments, True)
+                    inputFormat = pluginDict[r.PLUGIN_INPUT_FORMATS]
+                    inputFilesExist = filesExistsOnPath(argumentValues, pluginArguments, inputFormat, True)
 
                     # Validate that the output path exists
                     outputPathExist = outputPathExists(argumentValues, pluginArguments)

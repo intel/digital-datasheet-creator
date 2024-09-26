@@ -1,0 +1,150 @@
+{
+    "$id": "https://github.com/ajayitem/digital-datasheets/blob/tooling_proposed_changes_2/part-spec/power/pmic.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "pmic",
+    "type": "object",
+    "properties": {
+        "linearRegulatorCount": {
+            "description": "number of linear regulators in the device",
+            "type": "number"
+        },
+        "buckRegulatorCount": {
+            "description": "number of buck regulators in the device",
+            "type": "number" 
+        },
+        "boostRegulatorCount": {
+            "description": "number of boost regulators in the device",
+            "type": "number"
+        },
+        "buckBoostRegulatorCount": {
+            "description": "number of buck-boost regulators in the device",
+            "type": "number"
+        },
+        "adcCount": {
+            "description": "number of analog to digital converters in the device",
+            "type": "number"
+        },
+        "externalClockCount": {
+            "description": "number of external clocks the device requires",
+            "type": "number"
+        },
+        "internalClockCount": {
+            "description": "number of clocks/oscillators in the device",
+            "type": "number"
+        },
+        "loadSwitchCount": {
+            "description": "number of load switches in the device",
+            "type": "number"
+        },
+        "usbSwitchCount": {
+            "description": "number of USB switches in the device",
+            "type": "number"
+        },
+        "componentList": {
+            "description": "List of components integrated in the device",
+            "comment": "list should include components with an existing digital datasheet specification",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "powerComponentDefinitions": {
+            "description": "definition(specification) of each instance of a component in the device",
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/powerComponentDefinitions"
+            }
+        },
+        "vin": {
+            "description": "input voltage under which a device can be expected to reliabily operate",
+            "comment": "units of volts",
+            "$ref": "../common/unit.json"
+        },
+        "currentConsumption": {
+            "description": "current consumption of a device",
+            "$ref": "../common/currentConsumption.json"
+        },
+        "componentProtectionThresholds": {
+            "description": "Thermal and power supply protection thresholds of a device",
+            "$ref": "../common/componentProtectionThresholds.json"
+        },
+		"pins": {
+			"description": "array of pin objects with associated properties",
+			"type": "array",
+			"items": {
+				"$ref": "../common/pinSpec.json#/pinSpec"
+			}
+		},
+		"package": {
+			"description": "component package information",
+			"$ref": "../common/package.json#/package"
+		},
+		"externalFileMap": {
+			"description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+			"$ref": "#/$defs/externalFileMap"
+		},
+        "componentID": {
+			"description": "methods for identifying the version of the digital datasheet",
+			"$ref": "../common/componentID.json"
+		}
+    },
+    "$defs": {
+        "powerComponentDefinitions": {
+            "type": "object",
+            "properties": {
+                "componentName": {
+                    "description": "name of the component defined in the digital datasheets specifications",
+                    "examples": [
+                        "linear_regulator",
+                        "switching_regulator",
+                        "load_switch",
+                        "displaybacklight_driver",
+                        "adc",
+                        "clock"
+                    ],
+                    "type": "string"
+                },
+                "instanceName": {
+                    "description": "name of component instance",
+                    "examples": [
+                        "LDO1",
+                        "BUCK1",
+                        "BUCK3",
+                        "clock1"
+                    ],
+                    "type": "string"
+                },
+                "instanceDefinition": {
+                    "description": "definition of the component instance as defined in the specifications",
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                }
+            }
+        },
+        "externalFileMap": {
+			"type": "object",
+			"properties": {
+				"coreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the common part of the part number",
+					"example": "this might include everything about an MCU other than flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"additionalCoreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the changing part of the part number",
+					"example": "this might include the MCU flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"pins": {
+					"description": "pin properties specified by the pin spec file",
+					"$ref": "../common/externalFile.json"
+				},
+				"package": {
+					"description": "package information specified by the package spec file",
+					"$ref": "../common/externalFile.json"
+				}
+			}
+		}
+    }
+}

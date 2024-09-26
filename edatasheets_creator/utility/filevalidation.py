@@ -1,17 +1,5 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
 """
-    This file holds validation functions for file existance and format compliance.
+    This file holds validation functions for file existence and format compliance.
 """
 
 import platform
@@ -19,9 +7,13 @@ from os.path import isdir
 from edatasheets_creator.logger.exceptionlogger import ExceptionLogger
 from edatasheets_creator.constants import parserconstants as pc
 from pathlib import Path
+from typing import List
 from jsonschema import validate, ValidationError
-from json import load
+from json import load, dump
 from edatasheets_creator.utility.path_utilities import get_relative_path, validateRealPath
+import os
+import requests
+from edatasheets_creator.constants import serializationconstants, datasheetconstants, schema_constants
 
 
 def parseJsonToDict(inputFilePath: str) -> dict:
@@ -44,7 +36,7 @@ def parseJsonToDict(inputFilePath: str) -> dict:
         ExceptionLogger.logError(__name__, e)
 
 
-def validateJson(schemaPath: str, jsonDataPath: str) -> bool:
+def validateJson(schemaPathXLSX: str, schemaPathPPTX: str, jsonDataPath: str, inputFormat: List[str]) -> bool:
     """
         Function to validate the schema of the input json.
         Args:
@@ -54,8 +46,10 @@ def validateJson(schemaPath: str, jsonDataPath: str) -> bool:
         Return:
             Boolean: Status and message.
     """
-
-    json_schema = parseJsonToDict(schemaPath)
+    if inputFormat[0] == "xlsx":
+        json_schema = parseJsonToDict(schemaPathXLSX)
+    elif inputFormat[0] == "pptx":
+        json_schema = parseJsonToDict(schemaPathPPTX)
     jsonData = parseJsonToDict(jsonDataPath)
     result = True
     errorMsg = None
@@ -70,7 +64,33 @@ def validateJson(schemaPath: str, jsonDataPath: str) -> bool:
     return result, errorMsg
 
 
-def filesExistsOnPath(filePaths, argumentTypes, supportForEmpty):
+def validateWithSchema(datasheet, componentType):
+    """
+
+    Main logic method for spreadsheet processing without a map file needed
+
+    Args:
+        wb : Workbook of the given file name
+        inputFileName (PosixPath): Input file name
+        outputFileName (PosixPath): Output file name
+        datasheet : The outputted data
+    """
+    result = True
+    errorMsg = None
+    schema_load = readWorkgroupSchema(componentType, online=False, validation=True)
+
+    try:
+
+        validate(instance=datasheet, schema=schema_load)
+
+    except ValidationError as e:
+        errorMsg = "Final output does not match schema. Please check: " + " '" + e.absolute_path[0] + "'  in the template to fix the error. Error message is: '" + e.message + "' " if "description" in e.schema else e.message
+        result = False
+
+    return result, errorMsg
+
+
+def filesExistsOnPath(filePaths, argumentTypes, inputFormat, supportForEmpty):
     """
         Checks if the array of paths received corresponds to existing files
 
@@ -114,7 +134,7 @@ def filesExistsOnPath(filePaths, argumentTypes, supportForEmpty):
                         # Check if file exists
                         existFlags[i] = validateRealPath(paths[i])
                         if (existFlags[i]):
-                            response = validateJson(get_relative_path(pc.MAP_SCHEMA_PATH), paths[i])
+                            response = validateJson(get_relative_path(pc.MAP_SCHEMA_PATH), get_relative_path(pc.PPTX_MAP_SCHEMA_PATH), paths[i], inputFormat)
                             existFlags[i] = response[0]
                             errorMsg = response[1]
 
@@ -131,12 +151,12 @@ def filesExistsOnPath(filePaths, argumentTypes, supportForEmpty):
                 # File was not found, report it
                 if errorMsg:
                     error_object = {
-                        "message": f'File especified in argument: {types[i]} with value: {paths[i]} has a schema error "{errorMsg}"',
+                        "message": f'File specified in argument: {types[i]} with value: {paths[i]} has a schema error "{errorMsg}"',
                         "exception": "FileNotFound",
                     }
                 else:
                     error_object = {
-                        "message": f'File especified in argument: {types[i]} with value: {paths[i]} was not found or has a invalid format',
+                        "message": f'File specified in argument: {types[i]} with value: {paths[i]} was not found or has a invalid format',
                         "exception": "FileNotFound"
                     }
                 ExceptionLogger.logError(__name__, "", error_object)
@@ -197,3 +217,48 @@ def outputPathExists(filePaths, argumentTypes):
 
     return pathExists
 
+
+def readWorkgroupSchema(componentType, online=False, validation=False):
+    """
+        Reads the Industry Datasheet Workgroup schema
+
+    Args:
+        componentType (str): name of component
+        online (boolean): if datasheet would be retrieved online or locally
+        validation (boolean): if schema would be used for validation or not
+
+    Returns:
+        data (dict): dictionary of schema
+    """
+    if componentType in datasheetconstants.DATASHEET_COMPONENT_COMMON_MAPPING:
+        componentType = datasheetconstants.DATASHEET_COMPONENT_COMMON_MAPPING[componentType]
+    if validation is True:
+        componentType = datasheetconstants.DATASHEET_ROOT_SCHEMA_NAME
+    if componentType == datasheetconstants.DATASHEET_ROOT_SCHEMA_NAME:
+        if online is False:
+            path_list = [os.path.dirname(__file__), '..', 'schemas', 'edatasheet_schema', 'part-spec']
+            base_path = os.path.abspath(os.path.join(*path_list))
+            file_path = "{}\\{}.json".format(base_path, componentType)
+            with open(file_path) as f:
+                data = load(f)
+        elif online is True:
+            file_path = schema_constants.SCHEMA_URL + componentType + ".json"
+            data = requests.get(file_path, timeout=25).json()
+    else:
+        component_folder = datasheetconstants.DATASHEET_GROUPING[componentType]
+        if online is False:
+            path_list = [os.path.dirname(__file__), '..', 'schemas', 'edatasheet_schema', 'part-spec', component_folder]
+            base_path = os.path.abspath(os.path.join(*path_list))
+            file_path = "{}\\{}.json".format(base_path, componentType)
+            with open(file_path) as f:
+                data = load(f)
+        else:
+            file_path = schema_constants.SCHEMA_URL + component_folder + "/" + componentType
+            data = requests.get(file_path, timeout=25).json()
+    return data
+
+
+def writeToJSON(edatasheet, outputFileName):
+    with open(outputFileName, "w", encoding='utf-8') as outfile:
+        dump(edatasheet, outfile, ensure_ascii=False, indent=serializationconstants.JSON_INDENT_DEFAULT)
+        outfile.close()

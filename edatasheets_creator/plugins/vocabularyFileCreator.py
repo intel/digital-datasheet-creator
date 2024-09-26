@@ -1,15 +1,3 @@
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-#
-# THE SOFTWARE CONTAINED IN THIS FILE IS CONFIDENTIAL AND PROPRIETARY
-# TO INTEL CORPORATION. THIS PRINTOUT MAY NOT BE PHOTOCOPIED,
-# REPRODUCED, OR USED IN ANY MANNER WITHOUT THE EXPRESSED WRITTEN
-# CONSENT OF INTEL CORPORATION. ALL LOCAL, STATE, AND FEDERAL
-# LAWS RELATING TO COPYRIGHTED MATERIAL APPLY.
-#
-# Copyright (c), Intel Corporation
-#
-# ********************** COPYRIGHT INTEL CORPORATION ***********************
-
 from json import load, dump
 from typing import Any
 from edatasheets_creator.logger.exceptionlogger import ExceptionLogger
@@ -83,7 +71,7 @@ class Plugin:
             else:
                 if (self.__verifyFormat(blackListPath, JSON_SUFIX)):
 
-                    if (not validateJson(get_relative_path(BLACKLIST_SCHEMA_PATH), blackListPath)):
+                    if (not validateJson(get_relative_path(BLACKLIST_SCHEMA_PATH), "", blackListPath, ["xlsx"])):
                         raise TypeError("Schema of the input blacklist file is invalid...")
                     else:
                         blacklist = self.__parseJsonToDict(blackListPath)
@@ -138,10 +126,10 @@ class Plugin:
 
     def __verifyFormat(self, fileName: str, format: str) -> bool:
         """
-        This function provides the functionality to verify the format of a file, based on its sufix
+        This function provides the functionality to verify the format of a file, based on its suffix
 
         Args:
-            fileName (string): Complete file name including its sufix.
+            fileName (string): Complete file name including its suffix.
             format (string): Expected format that the file has to be.
 
         Returns:
@@ -231,7 +219,7 @@ class Plugin:
         # Adding the header of the vocabulary file
         vocabularyDict = VOCABULARY_HEADER
 
-        # Getting all the fielNames in the json file
+        # Getting all the fieldNames in the json file
         fieldNameList = self.__parseDictionary(inputJsonDict, blackList)
 
         # Creating list of dict objects

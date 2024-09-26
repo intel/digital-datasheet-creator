@@ -1,0 +1,86 @@
+{
+    "$id": "https://github.com/edatasheets/digital-datasheets/blob/main/part-spec/ic_io/bridge_chip.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "bridge chip",
+    "type": "object",
+    "properties": {
+        "muxRatio": {
+            "description": "ratio of inputs to outputs",
+            "examples": [
+                "2:1", 
+                "1:1",
+                "etc."
+            ],
+            "$ref": "../common/ratio.json#/ratio"
+        },
+        "inputInterfaces": {
+            "description": "list of interfaces at the input of the bridge",
+            "examples": [
+                "HDMI2.0",
+                "DP HBR2"
+            ],
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "outputInterfaces": {
+            "description": "list of interfaces at the output of the bridge",
+            "examples": [
+                "DP HBR2"
+            ],
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "currentConsumption": {
+            "description": "current used by device in various power modes",
+            "$ref": "../common/currentConsumption.json#/currentConsumption"
+        },
+		"pins": {
+			"description": "array of pin objects with associated properties",
+			"type": "array",
+			"items": {
+				"$ref": "../common/pinSpec.json#/pinSpec"
+			}
+		},
+		"package": {
+			"description": "component package information",
+			"$ref": "../common/package.json#/package"
+		},
+		"externalFileMap": {
+			"description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+			"$ref": "#/$defs/externalFileMap"
+		},
+        "componentID": {
+			"description": "methods for identifying the version of the digital datasheet",
+			"$ref": "../common/componentID.json"
+		}
+    },
+	"$defs": {
+		"externalFileMap": {
+			"type": "object",
+			"properties": {
+				"coreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the common part of the part number",
+					"example": "this might include everything about an MCU other than flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"additionalCoreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the changing part of the part number",
+					"example": "this might include the MCU flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"pins": {
+					"description": "pin properties specified by the pin spec file",
+					"$ref": "../common/externalFile.json"
+				},
+				"package": {
+					"description": "package information specified by the package spec file",
+					"$ref": "../common/externalFile.json"
+				}
+			}
+		}
+	}
+}

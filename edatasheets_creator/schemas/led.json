@@ -1,0 +1,116 @@
+{
+    "$id": "https://github.com/ajayitem/digital-datasheets/blob/tooling_proposed_changes_2/part-spec/semiconductor/led.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "LED",
+    "type": "object",
+    "properties": {
+        "ledColor": {
+            "description": "LED color",
+            "examples": [
+                "green",
+                "infrared",
+                "white"
+            ],
+            "type": "string" 
+        },
+        "vf": {
+            "description": "forward voltage of an LED ",
+            "comment": "conditions include: forward current of LED under which a given forward voltage was measured",
+            "$ref": "../common/conditionalProperty.json"
+        },
+        "if": {
+            "description": "continuous forward current of an LED",
+            "comment": "units of amps",
+            "$ref": "../common/unit.json"
+        },
+        "ifp": {
+            "description": "peak forward current of an LED",
+            "comment": "units of amps",
+            "$ref": "../common/unit.json"
+        },
+        "vr": {
+            "description": "maximum continuous reverse biased voltage an LED can support",
+            "comment": "units of volts",
+            "$ref": "../common/unit.json"
+        },
+        "ir": {
+            "description": "reverse current (leakage) of an LED",
+            "comment": "conditions include: reverse biased voltage under which LED ir was measured",
+            "$ref": "../common/conditionalProperty.json"
+        },
+        "ledCapacitance": {
+            "description": "capacitance of an LED",
+            "$comment": "units of pico Farads (pF)",
+            "$ref": "../common/unit.json"
+        },
+        "iv": {
+            "description": "LED luminous intensity",
+            "$comment": "units of candela (cd). Measurement conditions include LED forward current, if",
+            "$ref": "../common/conditionalProperty.json"
+        },
+        "peakWavelength": {
+            "description": "light spectrum output value emitted by an LED at highest wavelength",
+            "$comment": "units of nanometer(nm). Measurement conditions include LED forward current, if",
+            "$ref": "../common/conditionalProperty.json"
+        },
+        "dominantWavelength": {
+            "description": " dominant wavelength an LED emits the majority of the time",
+            "$comment": "units of nanometer(nm). Measurement conditions include LED forward current, if",
+            "$ref": "../common/conditionalProperty.json"
+        },
+        "angleHalfIntensity": {
+            "description": " angle at which LED intensity falls to 50% of its maximum value",
+            "$comment": "units of degrees",
+            "$ref": "../common/unit.json"
+        },
+        "pd": {
+            "description": "power dissipation of an LED",
+            "$comment": "units of milliwatts (mW)",
+            "$ref": "../common/unit.json"
+        },
+		"pins": {
+			"description": "array of pin objects with associated properties",
+			"type": "array",
+			"items": {
+				"$ref": "../common/pinSpec.json#/pinSpec"
+			}
+		},
+		"package": {
+			"description": "component package information",
+			"$ref": "../common/package.json#/package"
+		},
+		"externalFileMap": {
+			"description": "external files that describe key component properties. External files can be used in lieu of defining core properties, pins, and package informatoin in the same file",
+			"$ref": "#/$defs/externalFileMap"
+		},
+        "componentID": {
+			"description": "methods for identifying the version of the digital datasheet",
+			"$ref": "../common/componentID.json"
+		}
+    },
+	"$defs": {
+		"externalFileMap": {
+			"type": "object",
+			"properties": {
+				"coreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the common part of the part number",
+					"example": "this might include everything about an MCU other than flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"additionalCoreProperties": {
+					"description": "core component properties as definied by the specific component spec file. These properties are described by the changing part of the part number",
+					"example": "this might include the MCU flash size",
+					"$ref": "../common/externalFile.json"
+				},
+				"pins": {
+					"description": "pin properties specified by the pin spec file",
+					"$ref": "../common/externalFile.json"
+				},
+				"package": {
+					"description": "package information specified by the package spec file",
+					"$ref": "../common/externalFile.json"
+				}
+			}
+		}
+	}
+}

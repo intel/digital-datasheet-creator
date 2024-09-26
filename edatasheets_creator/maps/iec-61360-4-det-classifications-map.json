@@ -1,0 +1,48 @@
+{
+    "description": "IEC 61360-4 - IEC/SC 3D - Common Data Dictionary (CDD- V2.0015.0002) - DET Classifications",
+    "guid": "d5b5eb4d-b2a2-4a05-92f9-b045fc160bd1",
+    "mapType": "spreadsheet",
+    "datasheetDescLocation" : {
+        "sheetName" : "Export",
+        "row" : 12,
+        "col" : "A"
+    },
+    "sheets": [
+        {
+            "sheetName": "Export",
+            "includeInDatasheet" : true,
+            "ignoreBlanks" : true,
+            "ignoreRows" : [
+                
+            ],
+            "ignoreCols" : [
+               
+            ],
+            "sections" : [ 
+                {
+                    "indexOn" : {
+                        "orientation" : "column",
+                        "header" : {
+                            "row" : 24,
+                            "col" : "B"
+                        },
+                        "dataStartRow" : 38,
+                        "maxRows" : 200
+                    },
+                    "fieldHeaders" : {
+                                "row" : 24                                       
+                    },
+                    "spans" : {
+                        "columns" : [
+                            "C",
+                            "D",
+                            "E",
+                            "F",
+                            "G"
+                        ]
+                    }
+                }               
+            ]
+       }        
+    ]
+}
