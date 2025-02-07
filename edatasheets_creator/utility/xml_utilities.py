@@ -530,7 +530,7 @@ class XMLUtilities:
                 column_name = dictionary[key].get(dita_c.LABEL_HEADER)
                 column_unit = dictionary[key].get(dita_c.UNIT_HEADER)
             else:
-                match = re.findall("(\d)+", key)
+                match = re.findall(r"(\d)+", key)
                 if match:
                     pos = int(match[0]) - 1
                     item = self.get_column_header_key_from_ordinal_pos(dictionary, pos)

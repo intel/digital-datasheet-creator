@@ -33,7 +33,7 @@ class FieldReplacement:
             path = Path(input_file_name)
 
             if not output_file_name:
-                output_file_name = str(path.parent) + "\\" + path.stem + ".json"
+                output_file_name = str(path.parent) + "/" + path.stem + ".json"
 
             self.dictionary_utilities.stores_dictionary_to_json_file(output_file_name, input_dictionary)
 

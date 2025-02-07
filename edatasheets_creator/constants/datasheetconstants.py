@@ -82,11 +82,13 @@ DATASHEET_INSTANCE_DEF_EXTERNAL_FILE = 'instanceDef_externalFileMap'
 DATASHEET_COMPONENT_PROTECTION_THRESHOLD = 'componentProtectionThresholds'
 DATASHEET_PART_PIN_PATHS = 'partPinPaths'
 DATASHEET_PIN_PATHS = 'pinPaths'
+DATASHEET_POWER_SEQUENCE = 'powerSequence'
 DATASHEET_COMPONENT_PIN_NAMES = 'componentPinNames'
 DATASHEET_COMPONENT_ID = 'componentID'
 DATASHEET_ORDERABLE_MPN = 'orderableMPN'
 DATASHEET_COMPLIANCE_LIST = 'complianceList'
 DATASHEET_CORE_PROPERTIES = 'coreProperties'
+DATASHEET_POWER_SEQUENCE_ARRAY_PROPERTIES = ['signal1TerminalIdentifiers', 'signal2TerminalIdentifiers']
 DATASHEET_DIODE_P_TOT = 'pTot'
 DATASHEET_DIODE_VF = 'vf'
 DATASHEET_DIODE_IR = 'ir'
@@ -110,8 +112,12 @@ DATASHEET_X_DATA = 'xData'
 DATASHEET_Y_DATA = 'yData'
 DATASHEET_TYP_VALUE = "Typ Value"
 DATASHEET_PIN_EXTERNAL_COMPONENTS_START = "Component Type"
-DATASHEET_SCHEMA_MAPPING = {'Pins': 'pins', 'pins': 'pins', 'Package': 'package', 'package': 'package', "componentID": "componentID", "componentid": "componentID", "externalComponents": "externalComponents", "level shifter": "level_shifter",
-                            'currentConsumption': 'currentConsumption', 'coreProperties': 'coreProperties', 'externalFileMap': 'externalFileMap', 'externalfilemap': 'externalFileMap', 'diode': 'diode',
+DATASHEET_GRAPH_CURVE_START = "Label"
+DATASHEET_PIN_PART_PIN_PATHS_START = "Component Name"
+# This constant list contains all TABs present on the IWG templates
+# In some scenarios, DDC code might require camel case or all lower case keys, reason of why some keys show this repeated values
+DATASHEET_SCHEMA_MAPPING = {'reliability': 'reliability',  'Reliability': 'reliability', 'powerSequence': 'powerSequence', 'Pins': 'pins', 'pins': 'pins', 'Package': 'package', 'package': 'package', "componentID": "componentID", "componentid": "componentID", "externalComponents": "externalComponents", "level shifter": "level_shifter",
+                            'currentConsumption': 'currentConsumption', 'coreProperties': 'coreProperties', 'externalFileMap': 'externalFileMap', 'externalfilemap': 'externalFileMap', 'componentPropertyExternalFiles': 'componentPropertyExternalFiles', 'diode': 'diode',
                             'ifVsVf': 'ifVsVf', 'pTot': 'pTot', 'vcl': 'vcl', 'vz': 'vz', 'vf': 'vf', 'ir': 'ir', 'partPinPaths': 'partPinPaths', 'adc': 'adc', 'dac': 'dac',
                             'switch': 'switch', 'clock': 'clock', 'oscillator': 'oscillator', 'phaseJitter': 'phaseJitter', 'bridge_chip': 'bridge_chip',
                             'highspeed_mux': 'highspeed_mux', 'redriver': 'redriver', 'retimer': 'retimer', 'usb_bc12': 'usb_bc12', 'usbc_pdcontroller': 'usbc_pdcontroller',
@@ -123,37 +129,117 @@ DATASHEET_SCHEMA_MAPPING = {'Pins': 'pins', 'pins': 'pins', 'Package': 'package'
                             'collectorEmitterSaturationVolt': 'collectorEmitterSaturationVoltage', 'baseEmitterSaturationVoltage': 'baseEmitterSaturationVoltage', 'delayTime': 'delayTime',
                             'riseTime': 'riseTime', 'storageTime': 'storageTime', 'fallTime': 'fallTime', 'collectorCapacitance': 'collectorCapacitance', 'emitterCapacitance': 'emitterCapacitance',
                             'transitionFrequency': 'transitionFrequency', 'icVsHfe': 'icVsHfe', 'icVsVce': 'icVsVce', 'ibVsVce': 'ibVsVce', 'pdVsTemp': 'pdVsTemp', 'iv': 'iv', 'iDss': 'iDss',
-                            'iGss': 'iGss', 'idVsVds': 'idVsVds', 'idVsVgs': 'idVsVgs', 'forwardTransconductance': 'forwardTransconductance', 'rdson': 'rdson', 'rg': 'rg', 'ciss': 'ciss', 'coss': 'coss',
+                            'iGss': 'iGss', 'IGss': 'iGss', 'idVsVds': 'idVsVds', 'idVsVgs': 'idVsVgs', 'forwardTransconductance': 'forwardTransconductance', 'rdson': 'rdson', 'rg': 'rg', 'ciss': 'ciss', 'coss': 'coss',
                             'crss': 'crss', 'qg': 'qg', 'qgd': 'qgd', 'qgs': 'qgs', 'qrr': 'qrr', 'tdON': 'tdON', 'tdOFF': 'tdOFF', 'trr': 'trr', 'instanceDef_externalFileMap': 'instanceDefinition',
                             'powerComponentDefinitions': 'powerComponentDefinitions', 'integratedFetProperties': 'integratedFetProperties', 'powerEfficiency': 'powerEfficiency', 'onResistance': 'onResistance',
                             'enableTime': 'enableTime', 'rampTime': 'rampTime', 'offTime': 'offTime', 'powerSupplyRejectionRatio': 'powerSupplyRejectionRatio', 'rmsOutputNoise': 'rmsOutputNoise',
-                            'singlePowerFetPair': 'singlePowerFetPair', 'inputPowerFetPair': 'inputPowerFetPair', 'outputPowerFetPair': 'outputPowerFetPair'}
+                            'singlePowerFetPair': 'singlePowerFetPair', 'inputPowerFetPair': 'inputPowerFetPair', 'outputPowerFetPair': 'outputPowerFetPair', 'thermal': 'thermal', 'register': 'register', 'registerBitField':'register', 'additionalSpecExternalFiles': 'additionalSpecExternalFiles'}
 DATASHEET_SCHEMA_PROPERTY_MAPPING = {'string': 'str', 'number': 'int', 'array': 'list', 'object': 'dict', 'boolean': 'bool'}
 DATASHEET_UNIT_LIST = ['length', 'width', 'height', 'pitch', 'vihMin', 'vihMax', 'vilMax', 'vilMin', 'vol', 'voh', 'absVmax', 'absVmin', 'vmax', 'imax', 'inputLeakage', 'outputLeakage', 'dcResistance', 'internalPullUp', 'internalPullDown',
-                       'inputvoltage', 'outputvoltage', 'quiescentCurrent', 'shutdownCurrent', 'activeCurrent', 'sleepCurrent', 'idleCurrent']
+                       'inputvoltage', 'outputvoltage', 'quiescentCurrent', 'shutdownCurrent', 'activeCurrent', 'sleepCurrent', 'idleCurrent', 'junctionTemperature', 'junctionTemperatureAbsMax', 'ambientTemperature', 'ambientTemperatureAbsMax',
+                       'caseTemperature', 'caseTemperatureAbsMax', 'leadTemperatureAbsMax', 'storageTemperatureAbsMax', 'packageThermalResistance', 'thermalResistanceJunctionToAmbient', 'thermalResistanceJunctionToCase',
+                       'thermalResistanceJunctionToboard', 'thermalResistanceJunctionToLead', 'thermalResistanceCaseToAmbient', 'thermalDesignPower', 'peakPower', 'registerSize']
 DATASHEET_EMPTY_MACRO_UNIT = 'Typ Value: , Si_Unit: , Unit Name: , min Value: , max Value: , Unit factor: , Relative Value Reference: , Relative Value Modifier: , Relative Value Operator: , Value Defined: '
-DATASHEET_GROUPING = {'clock': 'clock', 'oscillator': 'clock', 'componentID': 'common', 'componentProtectionThresholds': 'common', 'conditionalProperty': 'common', 'coreProperties': 'common',
-                      'currentConsumption': 'common', 'externalFile': 'common', 'graph': 'common', 'package': 'common', 'pinPaths': 'common', 'pinSpec': 'common', 'powerFetProperties': 'common',
+DATASHEET_EMPTY_MACRO_CURVE_GRAPH = 'Label: , xData: , yData: '
+# This constant list indicates on which folder (inside part-spec) the schema is located
+DATASHEET_GROUPING = {'reliability': 'common', 'powerSequence': 'common', 'clock': 'clock', 'oscillator': 'clock', 'componentID': 'common', 'componentProtectionThresholds': 'common', 'conditionalProperty': 'common', 'coreProperties': 'common',
+                      'currentConsumption': 'common', 'externalFile': 'common',  'externalFileMap': 'common', 'graph': 'common', 'package': 'common', 'pinPaths': 'common', 'pinSpec': 'common', 'powerFetProperties': 'common',
                       'ratio': 'common', 'register': 'common', 'unit': 'common', 'adc': 'data_converter', 'dac': 'data_converter', 'connector': 'hardware', 'switch': 'hardware', 'bridge_chip': 'ic_io',
                       'highspeed_mux': 'ic_io', 'level_shifter': 'ic_io', 'redriver': 'ic_io', 'retimer': 'ic_io', 'usb_bc12': 'ic_io', 'usbc_pdcontroller': 'ic_io', 'usbc_portcontroller': 'ic_io', 'microcontroller': 'ic_microcontroller',
                       'audio_codec': 'ic_misc', 'speaker_amplifier': 'ic_misc', 'tpm': 'ic_misc', 'wlan_module': 'ic_misc', 'wwan_module': 'ic_misc', 'logic_gate': 'logic', 'dram': 'memory', 'eeprom': 'memory',
                       'flash_memory': 'memory', 'rom': 'memory', 'capacitor': 'passives', 'common_mode_choke': 'passives', 'ferrite_bead': 'passives', 'inductor': 'passives', 'resistor': 'passives',
                       'battery_charger': 'power', 'displaybacklight_driver': 'power', 'linear_regulator': 'power', 'load_switch': 'power', 'pmic': 'power', 'switching_regulator': 'power',
                       'bjt': 'semiconductor', 'diode': 'semiconductor', 'led': 'semiconductor', 'mosfet': 'semiconductor', 'accelerometer': 'sensor', 'gyroscope': 'sensor', 'magnetic_sensor': 'sensor',
-                      'thermal_sensor': 'sensor', 'sd_card': 'storage', 'ssd': 'storage', 'valueOptions': 'common', 'values': 'common'}
-DATASHEET_COMPONENT_KEYS = ['componentID', 'coreProperties', 'pins', 'package', 'externalfilemap', 'componentid']
+                      'thermal_sensor': 'sensor', 'sd_card': 'storage', 'ssd': 'storage', 'valueOptions': 'common', 'values': 'common', 'thermal': 'common'}
+
+# This constant list contains all TABs that are present on the component.json file, meaning they are shared accross all components
+DATASHEET_COMPONENT_KEYS = ['componentID', 'coreProperties', 'pins', 'package', 'externalFileMap', 'componentPropertyExternalFiles', 'additionalSpecExternalFiles', 'componentid', 'thermal', 'register', 'reliability', 'powerSequence']
 DATASHEET_ROOT_SCHEMA_NAME = 'component'
 DATASHEET_PART_TYPE = 'partType'
 DATASHEET_COMPONENT_TYPE = 'componentType'
 DATASHEET_CONFIGURATION = 'configuration'
-DATASHEET_COMPONENT_COMMON_MAPPING = {'pins': 'pinSpec', 'package': 'package', 'Pins': 'pinSpec', 'functionProperties': 'pinSpec', 'vihMin': 'pinSpec', 'vihMax': 'pinSpec', 'vilMax': 'pinSpec', 'vilMin': 'pinSpec',
-                                      'vol': 'pinSpec', 'voh': 'pinSpec', 'absVmax': 'pinSpec', 'absVmin': 'pinSpec', 'vmax': 'pinSpec', 'imax': 'pinSpec', 'inputLeakage': 'pinSpec', 'outputLeakage': 'pinSpec',
-                                      'dcResistance': 'pinSpec', 'voltageOptions': 'pinSpec', 'internalPullUp': 'pinSpec', 'internalPullDown': 'pinSpec', 'externalComponents': 'pinSpec',
-                                      'externalFileMap': 'component', 'pins-Externalcomponents': 'pinSpec', 'length': 'package', 'width': 'package', 'height': 'package', 'valueOptions': 'values'}
-DATASHEET_DEFAULT_KEYS = ['$id', '$schema', 'title', '$defs', 'type', 'properties', 'required', 'additionalProperties']
+
+# This constant list indicates the file (inside part-spec) on which the object definition is located
+DATASHEET_COMPONENT_COMMON_MAPPING = {
+    'pins': {
+        'pins': 'pinSpec', 
+        'Pins': 'pinSpec', 
+        'functionProperties': 'pinSpec', 
+        'vihMin': 'pinSpec', 
+        'vihMax': 'pinSpec', 
+        'vilMax': 'pinSpec', 
+        'vilMin': 'pinSpec',
+        'vol': 'pinSpec', 
+        'voh': 'pinSpec', 
+        'absVmax': 'pinSpec', 
+        'absVmin': 'pinSpec', 
+        'vmax': 'pinSpec', 
+        'imax': 'pinSpec', 
+        'inputLeakage': 'pinSpec', 
+        'outputLeakage': 'pinSpec',
+        'dcResistance': 'pinSpec', 
+        'voltageOptions': 'pinSpec', 
+        'internalPullUp': 'pinSpec', 
+        'internalPullDown': 'pinSpec', 
+        'externalComponents': 'pinSpec',
+        'pins-Externalcomponents': 'pinSpec'
+    },
+    'package': {
+        'length': 'package', 
+        'width': 'package', 
+        'height': 'package',
+        'package': 'package'
+    },
+    'thermal': {
+        'junctionTemperature': 'thermal', 
+        'junctionTemperatureAbsMax': 'thermal', 
+        'ambientTemperature': 'thermal', 
+        'ambientTemperatureAbsMax': 'thermal', 
+        'caseTemperature': 'thermal',
+        'caseTemperatureAbsMax': 'thermal', 
+        'leadTemperatureAbsMax': 'thermal', 
+        'storageTemperatureAbsMax': 'thermal', 
+        'packageThermalResistance': 'thermal',
+        'thermalResistanceJunctionToAmbient': 'thermal', 
+        'thermalResistanceJunctionToCase': 'thermal', 
+        'thermalResistanceJunctionToBoard': 'thermal',
+        'thermalResistanceJunctionToLead': 'thermal', 
+        'thermalResistanceCaseToAmbient': 'thermal', 
+        'thermalDesignPower': 'thermal', 
+        'peakPower': 'thermal'
+    },
+    'register': {
+        'registerBitField':'register', 
+        'registerSize':'register'
+    },
+    'additionalSpecExternalFiles': {
+        'additionalSpecExternalFiles':'externalFile'
+    },
+    'externalFileMap': {
+        'externalFileMap': 'component',
+    },
+    'componentPropertyExternalFiles': {
+        'componentPropertyExternalFiles': 'externalFileMap',
+        'coreProperties': 'externalFileMap',
+        'additionalCoreProperties': 'externalFileMap',
+        'pins': 'externalFileMap',
+        'package': 'externalFileMap',
+        'powerSequence': 'externalFileMap',
+        'register': 'externalFileMap',
+        'thermal': 'externalFileMap',
+        'reliability': 'externalFileMap'
+    }
+}
+
+DATASHEET_MACRO_MAPPING = {
+    'valueOptions': 'values',
+    'graph': 'graph'
+}
+DATASHEET_DEFAULT_KEYS = ['$id', '$schema', 'title', '$defs', 'type', 'properties', 'required', 'additionalProperties', 'register']
 DATASHEET_EXTERNAL_FILE_MAP_KEYS = ['coreProperties', 'additionalCoreProperties', 'pins', 'package']
 DATASHEET_VALUE_KEYS = ['typValue', 'siUnit', 'unitName', 'minValue', 'maxValue', 'unitFactor', 'relativeValueReference', 'relativeValueModifier', 'relativeValueOperator', 'valueDefined', 'conditions']
 DATASHEET_EXTERNAL_PINS = ['pins-Externalcomponents', 'pins-Partpinpaths']
 DATASHEET_NAME_KEY = 'name_key'
 DATASHEET_VALUES_PARAMETER = 'values'
 DATASHEET_VALUE_OPTIONS_PARAMETER = 'valueOptions'
+DATASHEET_CURVE_ARRAYS = [DATASHEET_X_DATA, DATASHEET_Y_DATA]

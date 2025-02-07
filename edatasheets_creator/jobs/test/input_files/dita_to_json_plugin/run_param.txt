@@ -1,2 +1,0 @@
-python3 main.py --f "../edatasheets_creator/jobs/test/input_files/dita_to_json_plugin/GUID-1234-Example.xml" --o "../edatasheets_creator/jobs/test/output_files/dita_to_json/GUID-1234-Example.json"
-

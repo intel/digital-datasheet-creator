@@ -2,9 +2,15 @@
 import re
 import os
 import ast
+import traceback
+
 from openpyxl import load_workbook
 import inspect
 import json
+
+import warnings
+
+
 
 from edatasheets_creator.document.jsondatasheet import JsonDataSheet
 from edatasheets_creator.document.jsondatasheetschema import JsonDataSheetSchema
@@ -23,12 +29,18 @@ from edatasheets_creator.constants import spreadsheettypes
 from edatasheets_creator.exceptions.configurationerror import ConfigurationError
 from edatasheets_creator.plugins.spreadsheetmap import SpreadsheetMap
 from edatasheets_creator.logger.exceptionlogger import ExceptionLogger
+from edatasheets_creator.utility.excel_utilities import ExcelUtilities
+import copy
 
 
 class Plugin:
     """
     Spreadsheet plugin class that implements datasheet generation from an XLSX
     """
+
+    PINS_FUNCTION_PROPERTIES_SHEET_NAME = 'pins (function properties)'
+    PINS_PARENT_GROUPS_NAME = ['pinProperties', 'functionProperties']
+    PINS_SHEETS = ['pins', PINS_FUNCTION_PROPERTIES_SHEET_NAME]
 
     def __init__(self):
         """
@@ -41,6 +53,7 @@ class Plugin:
         self.format = Format()
         self.startIndexCurrentTable = 0
         self.tableCounter = 1
+        self.excelUtilities = ExcelUtilities()
 
     def __repr__(self):
         """
@@ -71,13 +84,14 @@ class Plugin:
             # Validate if the input files exists on the system as they are required
             if (not validateRealPath(inputFileName)):
                 # Input file does not exist
-                ExceptionLogger.logInformation(__name__, "", t("\n Input file does not exists"))
+                ExceptionLogger.logInformation(__name__,  t("\n Input file does not exists"))
                 print()
                 return
 
             if ((not validateRealPath(mapFileName)) and mapFileName != ""):
                 # Map file does not exist
-                ExceptionLogger.logInformation(__name__, "", t("\n Map file does not exists"))
+                ExceptionLogger.logError(__name__, "Map file does not exists", FileNotFoundError())
+                #ExceptionLogger.logInformation(__name__, "", t("\n Map file does not exists"))
                 print()
                 return
 
@@ -85,8 +99,10 @@ class Plugin:
             self._outputFileName = outputFileName
             self._mapFileName = mapFileName
 
-            wb = load_workbook(filename=inputFileName, data_only=True)
-            ExceptionLogger.logInformation(__name__, t("\n\nProcessing") + " " + t("workbook") + ":  " + str(inputFileName) + "...\n")
+            with warnings.catch_warnings():
+                warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
+                wb = load_workbook(filename=inputFileName, data_only=True)
+                ExceptionLogger.logInformation(__name__, t("\nProcessing") + " " + t("workbook") + ":  " + str(inputFileName) + "...\n")
 
             outputSuffix = os.path.splitext(self._outputFileName)
             if outputSuffix[1] == ("." + serializationconstants.C_HEADER_NAME):
@@ -126,17 +142,15 @@ class Plugin:
                 if map.includeMetadata():
                     datasheet = datasheetHeader
 
-                # ExceptionLogger.logDebug(__name__,"datasheet:",datasheet)
-
                 # iterate through the sheets described in the map file, ignore other worksheets
 
                 datasheet[spreadsheettypes.SPREADSHEET_TABLES] = {}
                 for i in sheetNames:
                     self.startIndexCurrentTable = 0
                     if map.ignoreBlanks(i) is False:
-                        ExceptionLogger.logInformation(__name__, t("\nProcessing") + " " + t("spreadsheet") + ":  " + i + "..." + " Output for " + i + " may not match schema. Set ignoreBlanks in map file to True to correct")
+                        ExceptionLogger.logInformation(__name__, t("Processing") + " " + t("spreadsheet") + ":  " + i + "..." + " Output for " + i + " may not match schema. Set ignoreBlanks in map file to True to correct")
                     else:
-                        ExceptionLogger.logInformation(__name__, t("\nProcessing") + " " + t("spreadsheet") + ":  " + i + "...")
+                        ExceptionLogger.logInformation(__name__, t("Processing") + " " + t("spreadsheet") + ":  " + i + "...")
                     self._worksheetSectionIndexWritten = False  # controls writing the IndexOn item
                     ws = wb[i]
 
@@ -146,6 +160,10 @@ class Plugin:
 
                     wb.active = i
                     sheet = wb.active
+                    # WORKAROUND pins - pins (function properties) SSB
+                    currentSheetName = 'pins' if sheet.title.lower() == self.PINS_FUNCTION_PROPERTIES_SHEET_NAME else sheet.title
+                    # WORKAROUND pins - pins (function properties) SSB
+                    self.excelUtilities.updateSheetName(currentSheetName)
 
                     # if the worksheet should be included in the datasheet, process it
                     if map.includeInDatasheet(sheet.title):
@@ -157,7 +175,7 @@ class Plugin:
                         # ExceptionLogger.logDebug(__name__,"datasheet:",v)
                 if map.checkIndustryFormat():
                     datasheet = self.applySpecialRules(datasheet, map, sheetNames)
-                    strMsg = "\n\n" + t("Validating ") + " " + str((self._outputFileName)) + " with schema " + "...\n"
+                    strMsg = "" + t("Validating ") + " " + str(self._outputFileName) + " with schema " + "..."
                     ExceptionLogger.logInformation(__name__, strMsg)
                     result, errorMsg = validateWithSchema(datasheet[spreadsheettypes.SPREADSHEET_TABLES], map.getComponentType())
 
@@ -171,11 +189,27 @@ class Plugin:
                         schema = JsonDataSheetSchema(self._outputFileName)
                         schema.write()
                     else:
-                        ExceptionLogger.logInformation(__name__, errorMsg)
+
+                        # Extract directory and filename
+                        directory, filename = os.path.split(self._outputFileName)
+                        name, ext = os.path.splitext(filename)
+
+                        # Create new filename with "INVALID-RESULT"
+                        new_filename = f"INVALID-RESULT-FILE-{name}{ext}"
+
+                        # Construct the full path with the new filename
+                        new_output_file = os.path.join(directory, new_filename)
+
+                        datasheet = datasheet[spreadsheettypes.SPREADSHEET_TABLES]
+                        edatasheet = datasheet
+
+                        writeToJSON(edatasheet, new_output_file)
+                        ExceptionLogger.logError("" + t("Writing") + " invalid schema. Please check errors above " + str((new_output_file)) + "...")
+
 
                 else:
                     edatasheet = {spreadsheettypes.SPREADSHEET_DATASHEET: datasheet}
-                    strMsg = "\n\n" + t("Writing") + " " + str((self._outputFileName)) + "...\n"
+                    strMsg = "" + t("Writing") + " " + str((self._outputFileName)) + "..."
                     ExceptionLogger.logInformation(__name__, strMsg)
 
                     # pretty print JSON, preserving unicode characters
@@ -260,7 +294,7 @@ class Plugin:
                     self._colLetter = SpreadsheetMap.getColumnLetter(self._indexOnCol)
 
                 # adding the values of the dictionary to the output file
-                strMsg = "\n\n" + t("Writing") + " " + str((self._outputFileName)) + "...\n"
+                strMsg = "" + t("Writing") + " " + str((self._outputFileName)) + "...\n"
                 ExceptionLogger.logInformation(__name__, strMsg)
                 self._tablesDatasheet[worksheetName].append(indexOnDict)
                 indexOnDict = dict()
@@ -461,7 +495,7 @@ class Plugin:
                 if (min_row <= row and min_col <= colIndex and row <= max_row and colIndex <= max_col):
                     cells = str(range_).split(':')[0]
                     # ExceptionLogger.logDebug(__name__, "cells=", cells)
-                    mergedRowNum = int(re.search("\d+", str(cells))[0])  # noqa
+                    mergedRowNum = int(re.search(r"\d+", str(cells))[0])  # noqa
                     # ExceptionLogger.logDebug(__name__, "mergedRowNum=", mergedRowNum)
                     cIdx = SpreadsheetMap.getColumnIndex(cells)
                     colLetter = SpreadsheetMap.getColumnLetter(cIdx)
@@ -552,7 +586,6 @@ class Plugin:
             ExceptionLogger.logError(__name__, "", e)
 
     def processFunctionProperties(self, pin_list, macro_state, ignore_blanks):
-
         """
 
         This method processes the function properties in pins.
@@ -607,6 +640,7 @@ class Plugin:
             if char == ",":
                 value_start = i
                 value = unit_string[start_index + 1:value_start]
+                key = datasheetconstants.DATASHEET_X_DATA if key == datasheetconstants.DATASHEET_X_DATA.lower() else datasheetconstants.DATASHEET_Y_DATA if key == datasheetconstants.DATASHEET_Y_DATA.lower() else key
                 if (key == datasheetconstants.DATASHEET_CONDITIONS and (unit_string[value_start + 1:value_start + 3].strip() == 'T' or value_start + 1 == len(unit_string))) or (key != datasheetconstants.DATASHEET_CONDITIONS):
                     if self.format.is_float(value.replace(" ", "")):
                         value = float(value.replace(" ", ""))
@@ -770,82 +804,54 @@ class Plugin:
             refactoredDatasheet: Datasheet with connectors processed
         """
 
-        refactoredDatasheet = []
+        # WORKAROUND pins - pins (function properties) SSB
+        # since this logic was implemented for terminalIdentifier data as string
+        # changes will be necessary to adapt this logic to terminalIdentifier as an array
+        # this only applies for 'pins (function properties)' tab. Since now 'pins' tab does not have function properties
+        # WORKAROUND pins - pins (function properties) SSB
         try:
             pins = datasheet[sheetName][datasheetconstants.DATASHEET_PINS_KEYWORD.lower()]
         except KeyError:
             pins = datasheet[sheetName][datasheetconstants.DATASHEET_PINS_KEYWORD]
-        start = 0
-        temp_start = 0
-        while start < len(pins):
-            # convert terminal identifier value to string
-            if datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD in pins[start]:
-                pins[start][datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD] = str(pins[start][datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD])
-            # check that terminal identifier is not empty since this is the basis for combination into a list
-            if len(pins[start][datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD]) > 0:
-                # check for end of pin list
-                if start + 1 == len(pins):
-                    refactoredDatasheet.append(pins[start])
-                    start = start + 1
-                    temp_start = start
 
-            # check if the next terminal identifier is same as the present one
-                elif datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD in pins[start + 1]:
-                    if pins[start + 1][datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD].isdigit() and pins[start][datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD].isdigit():
-                        if temp_start != start or int(pins[start + 1][datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD]) == int(pins[start][datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD]):
-                            try:
-                                # count how many terminal identifiers are same
-                                while int(pins[start + 1][datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD]) == int(pins[start][datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD]):
-                                    start = start + 1
-                                # combine all dictionaries into one
-                                pins_to_combine = pins[temp_start:start + 1]
-                                d = self.processFunctionProperties(pins_to_combine, macro_state, ignore_blanks)
-                                refactoredDatasheet.append(d)
-                                start = start + 1
-                                temp_start = start
-                            except Exception:
-                                # edge case if pin list count is beyond the number of pins
-                                pins_to_combine = pins[temp_start:start + 1]
-                                d = self.processFunctionProperties(pins_to_combine, macro_state, ignore_blanks)
-                                refactoredDatasheet.append(d)
-                                start = start + 1
-                                temp_start = start
-                        # check if the next terminal identifier is different from the present one
-                        elif int(pins[start + 1][datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD]) != int(pins[start][datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD]):
-                            refactoredDatasheet.append(pins[start])
-                            start = start + 1
-                            temp_start = start
-                    else:
-                        if temp_start != start or pins[start + 1][datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD] == pins[start][datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD]:
-                            try:
-                                # count how many terminal identifiers are same
-                                while pins[start + 1][datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD] == pins[start][datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD]:
-                                    start = start + 1
-                                # combine all dictionaries into one
-                                pins_to_combine = pins[temp_start:start + 1]
-                                d = self.processFunctionProperties(pins_to_combine, macro_state, ignore_blanks)
-                                refactoredDatasheet.append(d)
-                                start = start + 1
-                                temp_start = start
-                            except Exception:
-                                # edge case if pin list count is beyond the number of pins
-                                pins_to_combine = pins[temp_start:start + 1]
-                                d = self.processFunctionProperties(pins_to_combine, macro_state, ignore_blanks)
-                                refactoredDatasheet.append(d)
-                                start = start + 1
-                                temp_start = start
-                        # check if the next terminal identifier is different from the present one
-                        elif pins[start + 1][datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD] != pins[start][datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD]:
-                            refactoredDatasheet.append(pins[start])
-                            start = start + 1
-                            temp_start = start
+        newPinList = []
+        for pin in pins:
+            if datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD in pin.keys():
+                terminalIdentifer = pin[datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD]
+                if len(terminalIdentifer):
+                    terminalIdentifierList = str(terminalIdentifer[0]).split(',')
+                    pin[datasheetconstants.DATASHEET_TERMINAL_IDENTIFIER_KEYWORD] = [singleTerminalIdentifier.strip() for singleTerminalIdentifier in terminalIdentifierList]
+
+        currentPinPosition = 0
+        for pin in pins:
+            if not pin.get('functionProperties') or 'terminalIdentifier' not in pin:
+                currentPinPosition += 1
+                newPinList.append(pin)
+                continue
+            pinsToMerge = []
+            uniqueTerminalIdentifierInPin = []
+            for terminalId in pin.get('terminalIdentifier', []):
+                if len(pins) - 1 == currentPinPosition:
+                    newPinList.append(pin)
+                    break
+                for nextPinIndexPosition in range(currentPinPosition + 1, len(pins)):
+                    terminalIdFound = next((id for id in pins[nextPinIndexPosition].get('terminalIdentifier', []) if str(id) == str(terminalId)), None)
+                    if terminalIdFound:
+                        pinsToMerge.append(pins[nextPinIndexPosition])
+                        pins[nextPinIndexPosition].get('terminalIdentifier', []).remove(terminalIdFound)
+                if not len(pinsToMerge):
+                    uniqueTerminalIdentifierInPin.append(terminalId)
                 else:
-                    start = start + 1
-            else:
-                refactoredDatasheet.append(pins[start])
-                start = start + 1
-                temp_start = start
-        return refactoredDatasheet
+                    newPin = copy.deepcopy(pin)
+                    newPin['terminalIdentifier'] = [terminalId]
+                    pinsToMerge.insert(0, newPin)
+                    newPinList.append(self.processFunctionProperties(pinsToMerge, macro_state, ignore_blanks))
+                pinsToMerge = []
+            if len(uniqueTerminalIdentifierInPin):  # if pin has several terminal identifier that not match with other pins identifier keep those as a list in the same pin
+                pin['terminalIdentifier'] = uniqueTerminalIdentifierInPin
+                newPinList.append(pin)
+            currentPinPosition += 1
+        return newPinList or pins
 
     def processBallMap(self, datasheet, sheetName):
         """
@@ -928,10 +934,13 @@ class Plugin:
             datasheet = self.processComponentID(datasheet[spreadsheettypes.SPREADSHEET_TABLES])
         # Process pins and function properties in datasheet
         if datasheetconstants.DATASHEET_PINS_KEYWORD.lower() in datasheet[spreadsheettypes.SPREADSHEET_TABLES]:
-            sheetNamePosition = sheetNames.index(datasheetconstants.DATASHEET_PINS_KEYWORD.lower())
+            pinDatasheetName = datasheetconstants.DATASHEET_PINS_KEYWORD.lower()
+            # WORKAROUND pins - pins (function properties) SSB
+            if self.PINS_FUNCTION_PROPERTIES_SHEET_NAME in sheetNames:
+                pinDatasheetName = self.PINS_FUNCTION_PROPERTIES_SHEET_NAME
+            # WORKAROUND pins - pins (function properties) SSB
+            sheetNamePosition = sheetNames.index(pinDatasheetName)
             ignore_blanks = map.ignoreBlanks(sheetNames[sheetNamePosition])
-            pins_list = self.processFunctionProperties2(datasheet[spreadsheettypes.SPREADSHEET_TABLES][datasheetconstants.DATASHEET_PINS_KEYWORD.lower()], macro_state, ignore_blanks)
-            datasheet[spreadsheettypes.SPREADSHEET_TABLES][datasheetconstants.DATASHEET_PINS_KEYWORD.lower()] = pins_list
             datasheet[spreadsheettypes.SPREADSHEET_TABLES][datasheetconstants.DATASHEET_PINS_KEYWORD.lower()] = self.processConnector(datasheet, spreadsheettypes.SPREADSHEET_TABLES, macro_state, ignore_blanks)
         # Process conditional property in datasheet
         conditional_parameters = self.getCommonOwnerParameters(datasheet, map, datasheetconstants.DATASHEET_CONDITIONAL_PROPERTY)
@@ -940,25 +949,18 @@ class Plugin:
         # Process parameters that have type of array of strings in datasheet
         if any(parameter in datasheet[spreadsheettypes.SPREADSHEET_TABLES] for parameter in datasheetconstants.DATASHEET_ARRAY_STRINGS):
             datasheet = self.processArrayStrings(datasheet[spreadsheettypes.SPREADSHEET_TABLES])
-        # Process graphs in datasheet
-        graph_parameters = self.getCommonOwnerParameters(datasheet, map, datasheetconstants.DATASHEET_GRAPH)
-        if any(parameter in datasheet[spreadsheettypes.SPREADSHEET_TABLES] for parameter in graph_parameters):
-            datasheet = self.processGraph(datasheet[spreadsheettypes.SPREADSHEET_TABLES], graph_parameters)
         # Process integrated fet properties in datasheet
         if any(parameter in datasheet[spreadsheettypes.SPREADSHEET_TABLES] for parameter in datasheetconstants.DATASHEET_POWER_FET_PROPERTIES_PARAMETERS):
             datasheet = self.processIntegratedFetProperties(datasheet[spreadsheettypes.SPREADSHEET_TABLES], datasheetconstants.DATASHEET_POWER_FET_PROPERTIES_PARAMETERS)
-        # Process part pin paths in datasheet
-        if datasheetconstants.DATASHEET_PART_PIN_PATHS in datasheet[spreadsheettypes.SPREADSHEET_TABLES]:
-            datasheet = self.processPartPinPaths(datasheet[spreadsheettypes.SPREADSHEET_TABLES])
-        # Process pin paths in datasheet pins
-        if datasheetconstants.DATASHEET_PINS_KEYWORD.lower() in datasheet[spreadsheettypes.SPREADSHEET_TABLES]:
-            datasheet = self.processPinPaths(datasheet[spreadsheettypes.SPREADSHEET_TABLES])
         # Process component protection threshold in datasheet
         if datasheetconstants.DATASHEET_COMPONENT_PROTECTION_THRESHOLD in datasheet[spreadsheettypes.SPREADSHEET_TABLES] and datasheetconstants.DATASHEET_POWER_SUPPLY_PROTECTION in datasheet[spreadsheettypes.SPREADSHEET_TABLES]:
             datasheet = self.processComponentProtectionThresholds(datasheet[spreadsheettypes.SPREADSHEET_TABLES])
         # Process power component definitions in datasheet
         if datasheetconstants.DATASHEET_POWER_COMPONENT_DEFINITIONS in datasheet[spreadsheettypes.SPREADSHEET_TABLES]:
             datasheet = self.processPowerComponentDefinitions(datasheet[spreadsheettypes.SPREADSHEET_TABLES])
+        # Process power sequence properties
+        if datasheetconstants.DATASHEET_POWER_SEQUENCE in datasheet[spreadsheettypes.SPREADSHEET_TABLES]:
+            datasheet = self.processPowerSequence(datasheet[spreadsheettypes.SPREADSHEET_TABLES])
         datasheet = self.processCoreProperties(datasheet[spreadsheettypes.SPREADSHEET_TABLES])
         return datasheet
 
@@ -1092,52 +1094,6 @@ class Plugin:
         output_dict[spreadsheettypes.SPREADSHEET_TABLES] = datasheet
         return output_dict
 
-    def processPartPinPaths(self, datasheet):
-        """
-
-        This method processes keys that contain part pins in the datasheet.
-
-        Args:
-            datasheet (dict): A dictionary referencing the output datasheet
-
-        Returns:
-            output_dict (dict): dictionary with Part Pin Paths processed
-        """
-        output_dict = {}
-        # Check for part pin path in datasheet
-        if datasheetconstants.DATASHEET_PART_PIN_PATHS in datasheet:
-            for datum in datasheet[datasheetconstants.DATASHEET_PART_PIN_PATHS]:
-                # Convert string information to list
-                if isinstance(datum[datasheetconstants.DATASHEET_COMPONENT_PIN_NAMES][0], str):
-                    component_text = datum[datasheetconstants.DATASHEET_COMPONENT_PIN_NAMES][0]
-                    datum[datasheetconstants.DATASHEET_COMPONENT_PIN_NAMES] = component_text.split(common_constants.COMMA)
-        for pin in datasheet[datasheetconstants.DATASHEET_PINS_KEYWORD.lower()]:
-            external_component_list = []
-            # Check for part pin path in pin list
-            if datasheetconstants.DATASHEET_PIN_PATHS in pin:
-                # Get Part Pin Path string
-                get_reference = pin[datasheetconstants.DATASHEET_PIN_PATHS][datasheetconstants.DATASHEET_PART_PIN_PATHS]
-                component_text = get_reference[0]
-                if len(component_text) > 0:
-                    # Get list of part pin paths
-                    multiple_external_component_index = component_text.split(common_constants.COMMA)
-                    if len(multiple_external_component_index) > 1:
-                        multiple_external_component_list = []
-                        # Process each part pin path
-                        for component in multiple_external_component_index:
-                            external_component_index = component.split(common_constants.DASH)[1]
-                            multiple_external_component_list.append(datasheet[datasheetconstants.DATASHEET_PART_PIN_PATHS][int(external_component_index) - 4])
-                            pin[datasheetconstants.DATASHEET_PIN_PATHS][datasheetconstants.DATASHEET_PART_PIN_PATHS] = multiple_external_component_list
-                    else:
-                        # Process single part pin path
-                        external_component_index = component_text.split(common_constants.DASH)[1]
-                        external_component_list.append(datasheet[datasheetconstants.DATASHEET_PIN_PATHS][int(external_component_index) - 4])
-                        pin[datasheetconstants.DATASHEET_PIN_PATHS] = external_component_list
-        # Delete part pin path from dictionary
-        del datasheet[datasheetconstants.DATASHEET_PART_PIN_PATHS]
-        output_dict[spreadsheettypes.SPREADSHEET_TABLES] = datasheet
-        output_dict[spreadsheettypes.SPREADSHEET_TABLES] = datasheet
-        return output_dict
 
     def processIntegratedFetProperties(self, datasheet, power_fet_parameters):
         """
@@ -1164,34 +1120,25 @@ class Plugin:
         output_dict[spreadsheettypes.SPREADSHEET_TABLES] = datasheet
         return output_dict
 
-    def processGraph(self, datasheet, graph_parameters):
+
+    def processPowerSequence(self, datasheet):
         """
 
-        This method processes keys that contain graphs in the datasheet.
+        This method processes keys that power sequence table in the datasheet.
 
         Args:
             datasheet (dict): A dictionary referencing the output datasheet
-            graph_parameters (list): properties linked to common/graphProperties
 
         Returns:
-            output_dict (dict): dictionary with component ID processed
-
+            output_dict (dict): dictionary with power sequence processed properties processed
         """
         output_dict = {}
-        # Search if any parameter in datasheetconstants.DATASHEET_GRAPH_KEY_OWNERS is in datasheet
-        for parameter in graph_parameters:
-            if parameter in datasheet:
-                if datasheetconstants.DATASHEET_CURVE in datasheet[parameter]:
-                    for datum in datasheet[parameter][datasheetconstants.DATASHEET_CURVE]:
-                        if common_constants.COMMA in datum[datasheetconstants.DATASHEET_X_DATA][0]:
-                            # Split value into list from string
-                            component_text = datum[datasheetconstants.DATASHEET_X_DATA][0]
-                            datum[datasheetconstants.DATASHEET_X_DATA] = [int(i) for i in component_text.split(common_constants.COMMA)]
-                        if common_constants.COMMA in datum[datasheetconstants.DATASHEET_Y_DATA][0]:
-                            # Split value into list from string
-                            component_text = datum[datasheetconstants.DATASHEET_Y_DATA][0]
-                            datum[datasheetconstants.DATASHEET_Y_DATA] = [int(i) for i in component_text.split(common_constants.COMMA)]
-        # Update dictionary
+
+        for powerSequenceElement in datasheet[datasheetconstants.DATASHEET_POWER_SEQUENCE]:
+            for powerSequenceProperty in datasheetconstants.DATASHEET_POWER_SEQUENCE_ARRAY_PROPERTIES:
+                if powerSequenceProperty in powerSequenceElement:
+                    powerSequenceElement[powerSequenceProperty] = [item.strip() for item in powerSequenceElement[powerSequenceProperty][0].split(common_constants.COMMA) if item.strip()]
+
         output_dict[spreadsheettypes.SPREADSHEET_TABLES] = datasheet
         return output_dict
 
@@ -1266,63 +1213,19 @@ class Plugin:
         if datasheetconstants.DATASHEET_COMPLIANCE_LIST in datasheet[datasheetconstants.DATASHEET_COMPONENT_ID]:
             if common_constants.COMMA in datasheet[datasheetconstants.DATASHEET_COMPONENT_ID][datasheetconstants.DATASHEET_COMPLIANCE_LIST][0]:
                 component_text = datasheet[datasheetconstants.DATASHEET_COMPONENT_ID][datasheetconstants.DATASHEET_COMPLIANCE_LIST][0]
-                datasheet[datasheetconstants.DATASHEET_COMPONENT_ID][datasheetconstants.DATASHEET_COMPLIANCE_LIST] = component_text.split(common_constants.COMMA)
+                datasheet[datasheetconstants.DATASHEET_COMPONENT_ID][datasheetconstants.DATASHEET_COMPLIANCE_LIST] =  [item.strip() for item in component_text.split(common_constants.COMMA) if item.strip()]
         # Process orderable MPN in component ID
         if datasheetconstants.DATASHEET_ORDERABLE_MPN in datasheet[datasheetconstants.DATASHEET_COMPONENT_ID]:
             if isinstance(datasheet[datasheetconstants.DATASHEET_COMPONENT_ID][datasheetconstants.DATASHEET_ORDERABLE_MPN][0], str):
                 if common_constants.COMMA in datasheet[datasheetconstants.DATASHEET_COMPONENT_ID][datasheetconstants.DATASHEET_ORDERABLE_MPN][0]:
                     component_text = datasheet[datasheetconstants.DATASHEET_COMPONENT_ID][datasheetconstants.DATASHEET_ORDERABLE_MPN][0]
-                    datasheet[datasheetconstants.DATASHEET_COMPONENT_ID][datasheetconstants.DATASHEET_ORDERABLE_MPN] = component_text.split(common_constants.COMMA)
+                    datasheet[datasheetconstants.DATASHEET_COMPONENT_ID][datasheetconstants.DATASHEET_ORDERABLE_MPN] =  [item.strip() for item in component_text.split(common_constants.COMMA) if item.strip()]
             elif isinstance(datasheet[datasheetconstants.DATASHEET_COMPONENT_ID][datasheetconstants.DATASHEET_ORDERABLE_MPN][0], int):
                 component_text = datasheet[datasheetconstants.DATASHEET_COMPONENT_ID][datasheetconstants.DATASHEET_ORDERABLE_MPN][0]
                 datasheet[datasheetconstants.DATASHEET_COMPONENT_ID][datasheetconstants.DATASHEET_ORDERABLE_MPN] = [str(component_text)]
         output_dict[spreadsheettypes.SPREADSHEET_TABLES] = datasheet
         return output_dict
 
-    def processPinPaths(self, datasheet):
-        """
-
-        This method processes keys that contain pin paths in the datasheet.
-
-        Args:
-            datasheet (dict): A dictionary referencing the output datasheet
-
-        Returns:
-            output_dict (dict): dictionary with pin paths processed
-
-        """
-        output_dict = {}
-        # Iterate through each pin in the datasheet
-        for pin in datasheet[datasheetconstants.DATASHEET_PINS_KEYWORD.lower()]:
-            # Check if external component key in pin
-            if datasheetconstants.DATASHEET_PIN_PATHS in pin:
-                # Get the reference to the external component sheet in a list
-                pin_part_pin_path_reference = pin[datasheetconstants.DATASHEET_PIN_PATHS]
-                for i in range(len(pin_part_pin_path_reference[datasheetconstants.DATASHEET_PART_PIN_PATHS])):
-                    pin_part_pin_path_reference[datasheetconstants.DATASHEET_PART_PIN_PATHS] = self.processPartPinPathValues(pin_part_pin_path_reference[datasheetconstants.DATASHEET_PART_PIN_PATHS][i])
-        output_dict[spreadsheettypes.SPREADSHEET_TABLES] = datasheet
-        return output_dict
-
-    def processPartPinPathValues(self, pin_part_pin_path_reference_details):
-        part_pin_path_list = []
-        part_pin_path_dict = {}
-        pin_part_pin_path_reference_details_list = pin_part_pin_path_reference_details.split(common_constants.COMMA)
-        for i in range(len(pin_part_pin_path_reference_details_list)):
-            start_index = 0
-            for j in range(len(pin_part_pin_path_reference_details_list[i])):
-                if pin_part_pin_path_reference_details_list[i][j] == common_constants.COLON:
-                    part_component_name = pin_part_pin_path_reference_details_list[i][start_index:j].strip()
-                    part_component_name = part_component_name[0].lower() + part_component_name[1:]
-                    part_component_name = self.format.convert_to_camel_case(part_component_name, True)
-                    part_component_value = pin_part_pin_path_reference_details_list[i][j + 1:len(pin_part_pin_path_reference_details_list[i])].strip()
-                    if part_component_name == datasheetconstants.DATASHEET_COMPONENT_PIN_NAMES:
-                        part_component_value = [x.strip() for x in part_component_value.split(common_constants.SEMI_COLON)]
-                        part_pin_path_dict[part_component_name] = part_component_value
-                        part_pin_path_list.append(part_pin_path_dict)
-                    else:
-                        part_pin_path_dict[part_component_name] = part_component_value
-                    break
-        return part_pin_path_list
 
     def processExternalComponents(self, datasheet):
         """
@@ -1340,104 +1243,42 @@ class Plugin:
         # Iterate through each pin in the datasheet
         for pin in datasheet[datasheetconstants.DATASHEET_PINS_KEYWORD.lower()]:
             # Check if external component key in pin
-            if datasheetconstants.DATASHEET_EXTERNAL_COMPONENTS in pin:
-                # Get the reference to the external component sheet in a list
-                pin_external_component_reference = pin[datasheetconstants.DATASHEET_EXTERNAL_COMPONENTS]
-                for i in range(len(pin_external_component_reference)):
-                    if datasheetconstants.DATASHEET_CONDITIONS in pin_external_component_reference[i]:
-                        pin_external_component_reference[i][datasheetconstants.DATASHEET_CONDITIONS] = self.processConditionsInValues(pin_external_component_reference[i][datasheetconstants.DATASHEET_CONDITIONS])
-                if len(pin_external_component_reference) == 1:
-                    pin_external_component_reference[i] = self.processValuesOptionsForConditions(pin_external_component_reference[i])
-                    pin[datasheetconstants.DATASHEET_EXTERNAL_COMPONENTS] = pin_external_component_reference[i]
-                else:
-                    pin_external_component_reference = self.processValuesOptionsForConditions(pin_external_component_reference)
-                    pin[datasheetconstants.DATASHEET_EXTERNAL_COMPONENTS] = pin_external_component_reference
+            pinProperties = pin.get('pinProperties', {})
+            if pinProperties:
+                pin['pinProperties'] = self.updateExternalComponentInPinProperties(pinProperties)
+            else:
+                for functionProperty in pin.get('functionProperties', []):
+                    pinProperties = functionProperty.get('perFunctionProperties', {}).get('pinProperties', {})
+                    if pinProperties:
+                        functionProperty['perFunctionProperties']['pinProperties'] = self.updateExternalComponentInPinProperties(pinProperties)
         output_dict[spreadsheettypes.SPREADSHEET_TABLES] = datasheet
         return output_dict
 
-    def processValuesOptionsForConditions(self, pin_values):
+    def updateExternalComponentInPinProperties(self, pinProperties: dict) -> dict:
         """
+        Update external component macro inside pin properties dictionary
 
-        This method processes values options for conditions in the datasheet.
+        :param pinProperties:
 
-        Args:
-            pin_values (list, dict): A list or dictionary referencing the input pin
-
-        Returns:
-            processed_output (list): processed condition values
-        """
-        value_dictionary = {}
-        merge_external_component_dictionaries = {}
-        processed_output = []
-        if isinstance(pin_values, list):
-            for d in pin_values:
-                merge_external_component_dictionaries.update(d)
-            pin_values = merge_external_component_dictionaries
-        for external_component_key in pin_values:
-            if external_component_key != datasheetconstants.DATASHEET_COMPONENT_TYPE and external_component_key != datasheetconstants.DATASHEET_CONFIGURATION:
-                value_dictionary[external_component_key] = pin_values[external_component_key]
-        pin_values[datasheetconstants.DATASHEET_VALUES_PARAMETER] = []
-        pin_values[datasheetconstants.DATASHEET_VALUES_PARAMETER].append(value_dictionary)
-        for external_component_key in list(pin_values.keys()):
-            if external_component_key != datasheetconstants.DATASHEET_VALUES_PARAMETER and external_component_key != datasheetconstants.DATASHEET_COMPONENT_TYPE and external_component_key != datasheetconstants.DATASHEET_CONFIGURATION:
-                del pin_values[external_component_key]
-        if isinstance(pin_values, dict):
-            processed_output.append(pin_values)
-            return processed_output
-        else:
-            return pin_values
-
-    def processConditionsInValues(self, condition_value):
-        """
-
-        This method processes conditions in values in the datasheet.
-
-        Args:
-            condition_value (list): A list of the conditions separated by a semi colon
-
-        Returns:
-            conditions_split (list): list of split strings based on a semi colon
-        """
-        if len(condition_value) == 1:
-            conditions_split = condition_value[0].split(common_constants.SEMI_COLON)
-        else:
-            conditions_split = condition_value
-        return conditions_split
-
-    def processFunctionProperties2(self, pins_list, macro_state, ignore_blanks):
-        """
-
-        This method processes the function properties into a list in a hardware connector.
-
-        Args:
-            pin_list (list): A list of pins dictionaries with same terminal identifier number which are to be merged to one dictionary
-            macro_state (boolean): Flag for if the Excel file is a macro enabled file or not
-            ignore_blanks (boolean): Flag for if blanks in the Excel file should be ignored or not
-
-        Returns:
-            new_pin_list (list): list with function properties processed.
+        :returns:
 
         """
-
-        new_pin_list = []
-        for pin in pins_list:
-            d = {}
-            for k in pin.keys():
-                # store all values asides the function properties in the dictionary
-                if k.lower() != datasheetconstants.DATASHEET_FUNCTION_PROPERTIES_KEYWORD.lower():
-                    d[k] = pin[k]
+        processedExternalComponentList = []
+        externalComponentList = pinProperties.get(datasheetconstants.DATASHEET_EXTERNAL_COMPONENTS, [])
+        for externalComponent in externalComponentList:
+            currentValueOptionsData = {}
+            currentExternalComponent = {}
+            for externalComponentKey in externalComponent:
+                if externalComponentKey in datasheetconstants.DATASHEET_VALUE_KEYS:
+                    currentValueOptionsData[externalComponentKey] = externalComponent[externalComponentKey]
                 else:
-                    # merge all function property values into a list and add to dictionary
-                    function_list = [{}]
-                    for dicta in pin[k]:
-                        dicta_key = list(dicta.keys())[0]
-                        dicta_value = dicta[dicta_key]
-                        function_list[0][dicta_key] = dicta_value
-                    d[datasheetconstants.DATASHEET_FUNCTION_PROPERTIES_KEYWORD] = function_list
-            new_pin_list.append(d)
-        if macro_state is True:
-            d = self.processUnits(d, ignore_blanks)
-        return new_pin_list
+                    currentExternalComponent[externalComponentKey] = externalComponent[externalComponentKey]
+            currentExternalComponent[datasheetconstants.DATASHEET_VALUES_PARAMETER] = [currentValueOptionsData]
+            processedExternalComponentList.append(currentExternalComponent)
+        if len(processedExternalComponentList):
+            pinProperties[datasheetconstants.DATASHEET_EXTERNAL_COMPONENTS] = processedExternalComponentList
+        return pinProperties
+
 
     def getDatasheetRowIndex(self, datasheet, rowObj, section, map):
         """
@@ -1580,7 +1421,7 @@ class Plugin:
                 self._worksheetSectionIndexWritten = True
 
         except Exception as e:
-            ExceptionLogger.logError(__name__, "", e)
+            ExceptionLogger.logError(__name__, "Error serializing ", e)
 
     def serializeIndex(self, datasheet, sheetKey, wb, sheetName, section, map):
         """
@@ -1729,6 +1570,10 @@ class Plugin:
             ref_and_def_dictionary (dict): dictionary containing mapping to references and definitions
         """
         ref_and_def_dictionary = {schema_constants.REF: [], schema_constants.DEF_SINGULAR: []}
+        # WORKAROUND pins - pins (function properties) SSB
+        if dict_key_name == 'pinSpec':
+            ref_and_def_dictionary[schema_constants.DEF_SINGULAR].append('externalComponents')
+        # WORKAROUND pins - pins (function properties) SSB
         # Iterate through keys in schema properties
         if dict_key_name is not None and dict_key_name in json_value:
             try:
@@ -1821,13 +1666,51 @@ class Plugin:
         Returns:
             dict_key_name (str) : dictionary top level key for the schema
         """
-        if sheetName in datasheetconstants.DATASHEET_COMPONENT_COMMON_MAPPING:
-            dict_key_name = datasheetconstants.DATASHEET_COMPONENT_COMMON_MAPPING[sheetName]
+        component_common_mapping_value = self.excelUtilities.getPropertyValueFromDatasheetComponentCommonMapping(sheetName)
+        if component_common_mapping_value:
+            dict_key_name = component_common_mapping_value
         elif len(list(set(list(schema_json.keys())) - set(datasheetconstants.DATASHEET_DEFAULT_KEYS))) > 0:
             dict_key_name = list(set(list(schema_json.keys())) - set(datasheetconstants.DATASHEET_DEFAULT_KEYS))[0]
         else:
             dict_key_name = sheetName
         return dict_key_name
+
+    def getParamTypeInSchema(self, jsonSchema: dict, parameter: str, baseSchemaKey: str,
+                             completeJsonSchema: dict) -> str:
+        """
+        Recursively search a specific property in a json schema to return the defined data type
+
+        :param jsonSchema:
+        :param parameter:
+        :param baseSchemaKey:
+        :param completeJsonSchema:
+
+        :returns:
+
+        """
+        try:
+            schemaProperties = jsonSchema.get(baseSchemaKey, {}).get('properties', {})
+            for schemaPropertyKey, schemaPropertyValue in schemaProperties.items():
+                if schemaPropertyKey.lower() == parameter.lower():
+                    return schemaPropertyValue.get('type', 'object')
+                referencedPropertyPath = schemaPropertyValue.get('items', {}).get('$ref') or schemaPropertyValue.get('$ref')
+                if referencedPropertyPath:
+                    referencedSchemaName = referencedPropertyPath.split('/')[-1]
+                    if referencedPropertyPath.startswith('#'):
+                        schemaContent = jsonSchema.get('$defs', {}).get(referencedSchemaName) or completeJsonSchema.get('$defs', {}).get(referencedSchemaName)
+                        referencedSchema = {referencedSchemaName: schemaContent} if schemaContent else {}
+                    else:
+                        referencedSchema = readWorkgroupSchema(referencedSchemaName)
+                    result = self.getParamTypeInSchema(referencedSchema, parameter, referencedSchemaName,
+                                                       completeJsonSchema)
+                    if result:
+                        return result
+        except Exception as e:
+            ExceptionLogger.logError(
+                __name__,
+                f"Error getting paramType in schema for parameter: {parameter}. Base schema key: {baseSchemaKey} ",
+                e)
+            ExceptionLogger.logDebug(__name__, f"Json Schema {jsonSchema}")
 
     def type_search(self, json_value, parameter, full_json={}, root=False, dict_key_name=None):
         """
@@ -1892,8 +1775,9 @@ class Plugin:
                 return common_constants.OBJECT_TYPE
             if root is True:
                 name_key = refs
-                if name_key in datasheetconstants.DATASHEET_COMPONENT_COMMON_MAPPING:
-                    name_key = datasheetconstants.DATASHEET_COMPONENT_COMMON_MAPPING[name_key]
+                component_common_mapping_value = self.excelUtilities.getPropertyValueFromDatasheetComponentCommonMapping(name_key)
+                if component_common_mapping_value:
+                    name_key = component_common_mapping_value
                     root = False
             else:
                 if dict_key_name in json_value:
@@ -1905,8 +1789,9 @@ class Plugin:
                     try:
                         name_key = self.name_split(json_value[schema_constants.PROPERTIES][refs][schema_constants.REF])
                     except KeyError:
-                        if refs in datasheetconstants.DATASHEET_COMPONENT_COMMON_MAPPING:
-                            name_key = datasheetconstants.DATASHEET_COMPONENT_COMMON_MAPPING[refs]
+                        component_common_mapping_value = self.excelUtilities.getPropertyValueFromDatasheetComponentCommonMapping(refs)
+                        if component_common_mapping_value:
+                            name_key = component_common_mapping_value
             ideal_json = readWorkgroupSchema(name_key)
             # response = self.type_search(ideal_json[name_key], parameter, full_json=ideal_json, dict_key_name=None)
             response = self.type_search(ideal_json, parameter, full_json=ideal_json, dict_key_name=name_key, root=root)
@@ -1944,32 +1829,42 @@ class Plugin:
         Returns:
             datasheet (dict) : updated datasheet
         """
-        # If sheetName is not equal to component
-        if sheetName != map.getComponentType():
-            if sheetName not in datasheet:
-                datasheet[sheetName] = {}
-        dict_key_name = self.getTopLevelDictionaryKeyName(schema_json, sheetName)
-        data_type = self.type_search(schema_json, key, dict_key_name=dict_key_name, root=root)
-        if (list(updatedDict.keys())[0] in datasheetconstants.DATASHEET_VALUE_KEYS) or (data_type is None and key == 'T'):
-            datasheet = self.processArrayWG(datasheet[sheetName], readWorkgroupSchema('values'), 'values', map, key, updatedDict, datasheetconstants.DATASHEET_SCHEMA_PROPERTY_MAPPING, entry_index, sub_entry_index=sub_entry_index)
-        # If data type of key is an object recursively process the object
-        elif data_type == common_constants.OBJECT_TYPE:
-            if sheetName == map.getComponentType():
-                updatedDict = self.processObjectWG(datasheet, schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index, root, sub_entry_index=sub_entry_index)
-            else:
-                updatedDict = self.processObjectWG(datasheet[sheetName], schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index, root, sub_entry_index=sub_entry_index)
-        # If data type of key is an array recursively process the array
-        elif data_type == common_constants.ARRAY_TYPE and any(isinstance(i, dict) for i in updatedDict.values()) is False:
-            if sheetName not in datasheet:
-                updatedDict = self.processArrayWG(datasheet, schema_json, key, map, key, updatedDict[key], property_dict, entry_index, root)
-            else:
-                updatedDict = self.processArrayWG(datasheet[sheetName], schema_json, key, map, key, updatedDict[key], property_dict, entry_index, root)
-        elif data_type == common_constants.ARRAY_TYPE and any(isinstance(i, dict) for i in updatedDict.values()) is True:
-            updatedDict = self.processArrayWG(datasheet[sheetName], schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index, root)
-        elif data_type != common_constants.ARRAY_TYPE:
-            # property_type = self.type_search(schema_json, key, dict_key_name=map.getComponentType())
-            datasheet = self.updateDatasheetWithNewKeyObject(map, datasheet, sheetName, key, data_type, updatedDict, property_dict)
-        return datasheet
+        try:
+            # If sheetName is not equal to component
+            if sheetName != map.getComponentType():
+                if sheetName not in datasheet:
+                    datasheet[sheetName] = {}
+            dict_key_name = self.getTopLevelDictionaryKeyName(schema_json, sheetName)
+            data_type = self.getParamTypeInSchema(schema_json, key, dict_key_name, schema_json)
+            if data_type is None:
+                raise KeyError(f"Column {key} was not found in schema. Double check if column is a valid on in schema {sheetName}")
+
+            if (list(updatedDict.keys())[0] in datasheetconstants.DATASHEET_VALUE_KEYS) or (data_type is None and key == 'T'):
+                datasheet = self.processArrayWG(datasheet[sheetName], readWorkgroupSchema('values'), 'values', map, key, updatedDict, datasheetconstants.DATASHEET_SCHEMA_PROPERTY_MAPPING, entry_index, sub_entry_index=sub_entry_index)
+            # If data type of key is an object recursively process the object
+            elif data_type == common_constants.OBJECT_TYPE:
+                if sheetName == map.getComponentType():
+                    updatedDict = self.processObjectWG(datasheet, schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index, root, sub_entry_index=sub_entry_index)
+                else:
+                    updatedDict = self.processObjectWG(datasheet[sheetName], schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index, root, sub_entry_index=sub_entry_index)
+            # If data type of key is an array recursively process the array
+            elif data_type == common_constants.ARRAY_TYPE and any(isinstance(i, dict) for i in updatedDict.values()) is False:
+                if sheetName not in datasheet:
+                    updatedDict = self.processArrayWG(datasheet, schema_json, key, map, key, updatedDict[key], property_dict, entry_index, root, sub_entry_index)
+                else:
+                    updatedDict = self.processArrayWG(datasheet[sheetName], schema_json, key, map, key, updatedDict[key], property_dict, entry_index, root, sub_entry_index)
+            elif data_type == common_constants.ARRAY_TYPE and any(isinstance(i, dict) for i in updatedDict.values()) is True:
+                updatedDict = self.processArrayWG(datasheet[sheetName], schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index, root, sub_entry_index)
+            elif data_type != common_constants.ARRAY_TYPE:
+                # property_type = self.type_search(schema_json, key, dict_key_name=map.getComponentType())
+                datasheet = self.updateDatasheetWithNewKeyObject(map, datasheet, sheetName, key, data_type, updatedDict, property_dict)
+            return datasheet
+
+        except Exception as e:
+            raise RuntimeError(f"Error processing object sheet name: {sheetName}. "
+                               f"\nTop level name: {dict_key_name}. "
+                               f"\nDataType: {data_type}. "
+                               f"\nInvalid object data: {updatedDict} ") from e
 
     def processArrayWG(self, datasheet, schema_json, sheetName, map, key, updatedDict, property_dict, entry_index, root=False, sub_entry_index=0):
         """
@@ -1989,46 +1884,61 @@ class Plugin:
             datasheet (dict) : updated datasheet
 
         """
-        # Base condition: If sheetName is not in datasheet
-        if sheetName not in datasheet:
-            datasheet[sheetName] = []
-        dict_key_name = self.getTopLevelDictionaryKeyName(schema_json, sheetName)
-        # dict_key_name = list(set(list(schema_json.keys())) - set(datasheetconstants.DATASHEET_DEFAULT_KEYS))[0]
-        data_type = self.type_search(schema_json, key, dict_key_name=dict_key_name)
-        # Base condition: If updated dict is a string, integer of float
-        if isinstance(updatedDict, str) or isinstance(updatedDict, int) or isinstance(updatedDict, float):
-            if sheetName == datasheetconstants.DATASHEET_CONDITIONS and isinstance(updatedDict, str):
-                condition_value_split = [x.strip() for x in updatedDict.split(common_constants.SEMI_COLON)]
-                datasheet[sheetName].extend(condition_value_split)
-            else:
-                datasheet[sheetName].append(updatedDict)
-        # If data type of key is an object recursively process the object
-        elif data_type == common_constants.OBJECT_TYPE:
-            if isinstance(datasheet[sheetName], list):
-                if len(datasheet[sheetName]) == 0 and entry_index == 0:
-                    updatedDict = self.processObjectWG({}, schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index, sub_entry_index=sub_entry_index)
-                    datasheet[sheetName].append(updatedDict)
-                elif 0 <= entry_index >= len(datasheet[sheetName]):
-                    updatedDict = self.processObjectWG({}, schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index, sub_entry_index=sub_entry_index)
-                    datasheet[sheetName].append(updatedDict)
-                elif len(list(updatedDict[key])) > 0:
-                    updatedDict = self.processObjectWG(datasheet[sheetName][entry_index], schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index, sub_entry_index=sub_entry_index)
+        try:
+            # Base condition: If sheetName is not in datasheet
+            if sheetName not in datasheet:
+                datasheet[sheetName] = []
+            dict_key_name = self.getTopLevelDictionaryKeyName(schema_json, sheetName)
+            # dict_key_name = list(set(list(schema_json.keys())) - set(datasheetconstants.DATASHEET_DEFAULT_KEYS))[0]
+            data_type = self.getParamTypeInSchema(schema_json, key, dict_key_name, schema_json)
+            # Base condition: If updated dict is a string, integer of float
+            if isinstance(updatedDict, str) or isinstance(updatedDict, int) or isinstance(updatedDict, float):
+                if sheetName == datasheetconstants.DATASHEET_CONDITIONS and isinstance(updatedDict, str) or sheetName == datasheetconstants.DATASHEET_COMPONENT_PIN_NAMES:
+                    condition_value_split = [x.strip() for x in updatedDict.split(common_constants.SEMI_COLON)]
+                    datasheet[sheetName].extend(condition_value_split)
+                elif sheetName in datasheetconstants.DATASHEET_CURVE_ARRAYS and isinstance(updatedDict, str):
+                    datasheet[sheetName].extend([int(i) for i in updatedDict.split(common_constants.SEMI_COLON)])
                 else:
-                    updatedDict = self.processObjectWG(datasheet[sheetName][entry_index], schema_json, key, map, list(updatedDict[key]), updatedDict[key], property_dict, entry_index, sub_entry_index=sub_entry_index)
-            else:
-                updatedDict = self.processObjectWG(datasheet[sheetName], schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index)
-        # If data type of key is an array recursively process the array
-        elif data_type == common_constants.ARRAY_TYPE:
-            if len(list(updatedDict[key])) > 0:
-                if dict_key_name == datasheetconstants.DATASHEET_VALUE_OPTIONS_PARAMETER or list(updatedDict.keys())[0] == datasheetconstants.DATASHEET_CONDITIONS:
-                    updatedDict = self.processArrayWG(datasheet[sheetName][sub_entry_index], schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index, sub_entry_index=sub_entry_index)
+                    datasheet[sheetName].append(updatedDict)
+            # If data type of key is an object recursively process the object
+            elif data_type == common_constants.OBJECT_TYPE:
+                if isinstance(datasheet[sheetName], list):
+                    if len(datasheet[sheetName]) == 0 and entry_index == 0:
+                        updatedDict = self.processObjectWG({}, schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index, sub_entry_index=sub_entry_index)
+                        datasheet[sheetName].append(updatedDict)
+                    # WORKAROUND pins - pins (function properties) SSB
+                    elif entry_index > 0 and key.lower() == 'perfunctionproperties':
+                        updatedDict = self.processObjectWG(datasheet[sheetName][0], schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index, sub_entry_index=sub_entry_index)
+                    # WORKAROUND pins - pins (function properties) SSB
+                    elif 0 <= entry_index >= len(datasheet[sheetName]):
+                        updatedDict = self.processObjectWG({}, schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index, sub_entry_index=sub_entry_index)
+                        datasheet[sheetName].append(updatedDict)
+                    elif len(list(updatedDict[key])) > 0:
+                        updatedDict = self.processObjectWG(datasheet[sheetName][entry_index], schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index, sub_entry_index=sub_entry_index)
+                    else:
+                        updatedDict = self.processObjectWG(datasheet[sheetName][entry_index], schema_json, key, map, list(updatedDict[key]), updatedDict[key], property_dict, entry_index, sub_entry_index=sub_entry_index)
                 else:
-                    updatedDict = self.processArrayWG(datasheet[sheetName][entry_index], schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index, sub_entry_index=sub_entry_index)
+                    updatedDict = self.processObjectWG(datasheet[sheetName], schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index)
+            # If data type of key is an array recursively process the array
+            elif data_type == common_constants.ARRAY_TYPE:
+                nextProperty = str(updatedDict[key]) if isinstance(updatedDict[key], (str, int, float)) else list(updatedDict[key])[0]
+                if dict_key_name == datasheetconstants.DATASHEET_VALUE_OPTIONS_PARAMETER or datasheetconstants.DATASHEET_CONDITIONS in [nextProperty, key] or key in datasheetconstants.DATASHEET_CURVE_ARRAYS or key == datasheetconstants.DATASHEET_COMPONENT_PIN_NAMES:
+                    updatedDict = self.processArrayWG(datasheet[sheetName][sub_entry_index], schema_json, key, map, nextProperty, updatedDict[key], property_dict, entry_index, sub_entry_index=sub_entry_index)
+                else:
+                    # WORKAROUND pins - pins (function properties) SSB
+                    if sheetName.lower() in self.PINS_SHEETS and key.lower() == 'terminalidentifier':
+                        if len(datasheet[sheetName]) == entry_index:
+                            datasheet[sheetName].append({})
+                        updatedDict = self.processArrayWG(datasheet[sheetName][entry_index], schema_json, key, map, key, updatedDict[key], property_dict, entry_index, sub_entry_index=sub_entry_index)
+                    # WORKAROUND pins - pins (function properties) SSB
+                    else:
+                        updatedDict = self.processArrayWG(datasheet[sheetName][entry_index], schema_json, key, map, list(updatedDict[key])[0], updatedDict[key], property_dict, entry_index, sub_entry_index=sub_entry_index)
             else:
-                updatedDict = self.processArrayWG(datasheet[sheetName][entry_index], schema_json, key, map, list(updatedDict[key]), updatedDict[key], property_dict, entry_index)
-        else:
-            datasheet = self.updateDatasheetWithNewKeyArray(datasheet, sheetName, schema_json, key, dict_key_name, updatedDict, property_dict, entry_index, sub_entry_index)
-        return datasheet
+                datasheet = self.updateDatasheetWithNewKeyArray(datasheet, sheetName, schema_json, key, dict_key_name, updatedDict, property_dict, entry_index, sub_entry_index)
+            return datasheet
+
+        except Exception as e:
+            raise RuntimeError("Error trying to parse array values") from e
 
     def getTopLevelDictionaryKeyName(self, schema_json, sheetName):
         """
@@ -2043,8 +1953,9 @@ class Plugin:
             dict_key_name (string) : top level dictionary key name in schema
 
         """
-        if sheetName in datasheetconstants.DATASHEET_COMPONENT_COMMON_MAPPING:
-            dict_key_name = datasheetconstants.DATASHEET_COMPONENT_COMMON_MAPPING[sheetName]
+        component_common_mapping_value = self.excelUtilities.getPropertyValueFromDatasheetComponentCommonMapping(sheetName)
+        if component_common_mapping_value:
+            dict_key_name = component_common_mapping_value
         elif len(list(set(list(schema_json.keys())) - set(datasheetconstants.DATASHEET_DEFAULT_KEYS))) > 0:
             dict_key_name = list(set(list(schema_json.keys())) - set(datasheetconstants.DATASHEET_DEFAULT_KEYS))[0]
         else:
@@ -2070,7 +1981,7 @@ class Plugin:
             datasheet (dict) : updated datasheet
 
         """
-        property_type = self.type_search(schema_json, key, dict_key_name=dict_key_name)
+        property_type = self.getParamTypeInSchema(schema_json, key, dict_key_name, schema_json)
         current_type = type(updatedDict[key]).__name__
         if property_dict[property_type] == current_type:
             pass
@@ -2084,13 +1995,13 @@ class Plugin:
                 updatedDict = prevDict
             datasheet[key] = updatedDict
         else:
-            if sub_entry_index > 0 or dict_key_name == datasheetconstants.DATASHEET_VALUE_OPTIONS_PARAMETER:
+            if sub_entry_index > 0 or dict_key_name == datasheetconstants.DATASHEET_VALUE_OPTIONS_PARAMETER or sheetName == datasheetconstants.DATASHEET_EXTERNAL_COMPONENTS:
                 if 0 <= sub_entry_index < len(datasheet[sheetName]):
                     datasheet[sheetName][sub_entry_index].update(updatedDict)
                 else:
                     datasheet[sheetName].append(updatedDict)
             else:
-                if 0 <= entry_index < len(datasheet[sheetName]):
+                if (0 <= entry_index < len(datasheet[sheetName])) and (sheetName not in ["functionProperties"]):
                     datasheet[sheetName][entry_index].update(updatedDict)
                 else:
                     datasheet[sheetName].append(updatedDict)
@@ -2144,6 +2055,11 @@ class Plugin:
             updatedDict (dict): The dictionary item to replace/update in the datasheet.
         """
         try:
+
+            # WORKAROUND pins - pins (function properties) SSB
+            sheetName = sheetKey = 'pins' if sheetName.lower() == self.PINS_FUNCTION_PROPERTIES_SHEET_NAME else sheetName
+            # WORKAROUND pins - pins (function properties) SSB
+
             componentType = map.getComponentType()
             root_schema = readWorkgroupSchema(datasheetconstants.DATASHEET_ROOT_SCHEMA_NAME)
             defined_schema = readWorkgroupSchema(componentType)
@@ -2166,11 +2082,11 @@ class Plugin:
                         datasheet = self.processArrayWG(datasheet, defined_schema, sheetName, map, key, updatedDict, datasheetconstants.DATASHEET_SCHEMA_PROPERTY_MAPPING, entry_index, root=True, sub_entry_index=sub_entry_index)
                 elif sheetKey in datasheetconstants.DATASHEET_EXTERNAL_PINS:
                     if self.type_search(root_schema, datasheetconstants.DATASHEET_SCHEMA_MAPPING[sheetName],
-                                        dict_key_name=datasheetconstants.DATASHEET_COMPONENT_COMMON_MAPPING[datasheetconstants.DATASHEET_PINS_KEYWORD]) == common_constants.OBJECT_TYPE:
+                                        dict_key_name=self.excelUtilities.getPropertyValueFromDatasheetComponentCommonMapping(datasheetconstants.DATASHEET_PINS_KEYWORD)) == common_constants.OBJECT_TYPE:
                         defined_schema = readWorkgroupSchema(datasheetconstants.DATASHEET_SCHEMA_MAPPING[datasheetconstants.DATASHEET_PINS_KEYWORD])
                         datasheet = self.processObjectWG(datasheet, defined_schema, sheetName, map, key, updatedDict, datasheetconstants.DATASHEET_SCHEMA_PROPERTY_MAPPING, entry_index, root=True)
                     elif self.type_search(root_schema, datasheetconstants.DATASHEET_SCHEMA_MAPPING[sheetName],
-                                          dict_key_name=datasheetconstants.DATASHEET_COMPONENT_COMMON_MAPPING[datasheetconstants.DATASHEET_PINS_KEYWORD]) == common_constants.ARRAY_TYPE:
+                                          dict_key_name=self.excelUtilities.getPropertyValueFromDatasheetComponentCommonMapping(datasheetconstants.DATASHEET_PINS_KEYWORD)) == common_constants.ARRAY_TYPE:
                         defined_schema = readWorkgroupSchema(datasheetconstants.DATASHEET_SCHEMA_MAPPING[datasheetconstants.DATASHEET_PINS_KEYWORD])
                         datasheet = self.processArrayWG(datasheet, defined_schema, sheetName, map, key, updatedDict, datasheetconstants.DATASHEET_SCHEMA_PROPERTY_MAPPING, entry_index)
                 else:
@@ -2178,6 +2094,9 @@ class Plugin:
                         datasheet = self.processObjectWG(datasheet, defined_schema, sheetName, map, key, updatedDict, datasheetconstants.DATASHEET_SCHEMA_PROPERTY_MAPPING, entry_index, sub_entry_index=sub_entry_index)
                     elif self.type_search(defined_schema, datasheetconstants.DATASHEET_SCHEMA_MAPPING[sheetName], dict_key_name=componentType) == common_constants.ARRAY_TYPE:
                         datasheet = self.processArrayWG(datasheet, defined_schema, sheetName, map, key, updatedDict, datasheetconstants.DATASHEET_SCHEMA_PROPERTY_MAPPING, entry_index, sub_entry_index=sub_entry_index)
+        except RuntimeError as e:
+            ExceptionLogger.logError(__name__, "", e)
+            exit(1)
         except Exception as e:
             ExceptionLogger.logError(__name__, "", e)
 
@@ -2231,7 +2150,8 @@ class Plugin:
         elif property_type == common_constants.BOOLEAN_SHORT_TYPE and current_type == common_constants.STRING_SHORT_TYPE:
             dictKeys = list(updatedDict)
             key = dictKeys[0]
-            new_dict = {key: False}
+            boolValue = True if updatedDict[key].lower() == 'true' else False
+            new_dict = {key: boolValue}
             updatedDict = new_dict
         return updatedDict
 
@@ -2414,6 +2334,7 @@ class Plugin:
             map (dict): parser rules for the worksheet
         """
         try:
+            originalSheetName = sheetName
             if indexOn is not None:
                 columnIndex = -1
 
@@ -2430,149 +2351,143 @@ class Plugin:
                 # Perform Processing
                 if spans is not None and len(spans) > 0:
                     for s in spans:
-                        if s in colsToIgnore:
-                            columnIndex += 1
-                            pass
-                        else:
-                            val = None
-                            itemDict = None
-                            groupBy = None
-                            itemSubNewDict = None
-                            columnIndex += 1
-
-                            val = self.getColValueFromRow(rowValues, s, wb, rowNumber)
-                            if ignoreBlanksFlag is True and len(str(val).strip()) == 0:
+                        try:
+                            if s in colsToIgnore:
+                                columnIndex += 1
                                 pass
-                            elif ((val is not None) and (len(str(val)) >= 0)):
-                                indexValue = self.getColValueFromRow(rowValues, headerCol, wb, rowNumber)
-                                groupBy = map.getGroups(section)
-                                if groupBy is not None:
+                            else:
+                                val = None
+                                itemDict = None
+                                groupBy = None
+                                itemSubNewDict = None
+                                columnIndex += 1
 
-                                    spanListInGroupBy = SpreadsheetMap.getListSpanInGroupBy(section)
-                                    if s in spanListInGroupBy and SpreadsheetMap.getSubObjectFlag(groupBy, s):
-                                        compoundNameList = fieldHeaders[columnIndex].split('-')
-                                        baseHeader = compoundNameList[0]
-                                        subHeader = compoundNameList[1]
-                                        itemSubNewDict = dict({subHeader: val})
-                                        itemDict = dict({baseHeader: itemSubNewDict})
+                                val = self.getColValueFromRow(rowValues, s, wb, rowNumber)
+                                if ignoreBlanksFlag is True and len(str(val).strip()) == 0:
+                                    pass
+                                elif ((val is not None) and (len(str(val)) >= 0)):
+                                    indexValue = self.getColValueFromRow(rowValues, headerCol, wb, rowNumber)
+                                    groupBy = map.getGroups(section)
+                                    if groupBy is not None:
+
+                                        spanListInGroupBy = SpreadsheetMap.getListSpanInGroupBy(section)
+                                        if s in spanListInGroupBy and SpreadsheetMap.getSubObjectFlag(groupBy, s):
+                                            compoundNameList = fieldHeaders[columnIndex].split('-')
+                                            baseHeader = compoundNameList[0]
+                                            subHeader = compoundNameList[1]
+                                            itemSubNewDict = dict({subHeader: val})
+                                            itemDict = dict({baseHeader: itemSubNewDict})
+                                        else:
+                                            if val is not None and len(str(val)) >= 0:
+                                                itemDict = dict({fieldHeaders[columnIndex]: val})
                                     else:
+
                                         if val is not None and len(str(val)) >= 0:
                                             itemDict = dict({fieldHeaders[columnIndex]: val})
-                                else:
 
-                                    if val is not None and len(str(val)) >= 0:
-                                        itemDict = dict({fieldHeaders[columnIndex]: val})
-
-                                if itemDict is not None:
-                                    # Process Macro
-                                    if map.macroEnabled() is True:
-                                        itemDict = self.processUnitMacro(map, sheetName, itemDict)
-                                        if isinstance(itemDict, dict) and list(itemDict.keys())[0] == datasheetconstants.DATASHEET_EXTERNAL_COMPONENTS:
-                                            itemDict = self.processPinExternalComponentsMacro(map, sheetName, itemDict)
-                                        if isinstance(itemDict, dict) and isinstance(itemDict[list(itemDict.keys())[0]], dict):
-                                            sub_header_1 = list(itemDict.keys())[0]
-                                            sub_header_2 = list(itemDict[sub_header_1].keys())[0]
-                                            if isinstance(itemDict[sub_header_1][sub_header_2], str) and itemDict[sub_header_1][sub_header_2].startswith(datasheetconstants.DATASHEET_TYP_VALUE):
-                                                sheetKey, sheetName = sub_header_1, sub_header_1
-                                                itemDict = self.processUnitMacro(map, sheetName, itemSubNewDict)
-                                        sub_entry_index = 0
-                                        # Process based on input types
-                                        if isinstance(itemDict, list) and len(itemDict) != 0:
-                                            for k in range(len(itemDict)):
-                                                item = itemDict[k]
-                                                top_level_key = list(item.keys())[0]
-                                                sub_unit_dict = item[top_level_key]
-                                                if list(sub_unit_dict.keys())[0] == datasheetconstants.DATASHEET_COMPONENT_TYPE and k > 0 and top_level_key == datasheetconstants.DATASHEET_EXTERNAL_COMPONENTS:
-                                                    sub_entry_index = sub_entry_index + 1
-                                                elif k > 0 and top_level_key != datasheetconstants.DATASHEET_EXTERNAL_COMPONENTS:
-                                                    current_unit_value = list(sub_unit_dict.keys())[0]
-                                                    prev_item = itemDict[k - 1]
-                                                    prev_top_level_key = list(prev_item.keys())[0]
-                                                    prev_sub_unit_dict = prev_item[prev_top_level_key]
-                                                    previous_unit_value = list(prev_sub_unit_dict.keys())[0]
-                                                    if datasheetconstants.DATASHEET_VALUE_KEYS.index(current_unit_value) < datasheetconstants.DATASHEET_VALUE_KEYS.index(previous_unit_value):
-                                                        sub_entry_index = sub_entry_index + 1
-                                                self.updateDatasheetDictWG(datasheet, sheetKey, indexFieldName, indexValue, item, rowNumber, dataStartOffset, rowNumTracker, map, section, entry_index, sheetName, sub_entry_index)
-                                        elif isinstance(itemDict, dict) and len(itemDict) != 0:
+                                    if itemDict is not None:
+                                        # Process Macro
+                                        if map.macroEnabled() is True:
+                                            # returns a list with contains macro values by page
+                                            itemDict = self.processMacroValues(map, sheetName, itemDict)
+                                            sub_entry_index = 0
+                                            # Process based on input types
+                                            if isinstance(itemDict, list) and len(itemDict) != 0:
+                                                for macroValuesByPage in itemDict:
+                                                    for macroKeyValuePair in macroValuesByPage:
+                                                        # WORKAROUND pins - pins (function properties) SSB
+                                                        topLevelKey =  next(iter(macroKeyValuePair))
+                                                        if originalSheetName.lower() in self.PINS_SHEETS and topLevelKey in self.PINS_PARENT_GROUPS_NAME and topLevelKey == 'functionProperties':
+                                                            macroKeyValuePair = {'functionProperties': {'perFunctionProperties': {'pinProperties': macroKeyValuePair['functionProperties']}}}
+                                                        # WORKAROUND pins - pins (function properties) SSB
+                                                        self.updateDatasheetDictWG(datasheet, sheetKey, indexFieldName, indexValue, macroKeyValuePair, rowNumber, dataStartOffset, rowNumTracker, map, section, entry_index, sheetName, sub_entry_index)
+                                                    sub_entry_index += 1
+                                            elif isinstance(itemDict, dict) and len(itemDict) != 0:
+                                                # WORKAROUND pins - pins (function properties) SSB
+                                                if originalSheetName.lower() in self.PINS_SHEETS and 'functionProperties' in itemDict and 'perFunctionName' not in itemDict['functionProperties']:
+                                                    itemDict = {'functionProperties': {'perFunctionProperties': {'pinProperties': itemDict['functionProperties']}}}
+                                                # WORKAROUND pins - pins (function properties) SSB
+                                                self.updateDatasheetDictWG(datasheet, sheetKey, indexFieldName, indexValue, itemDict, rowNumber, dataStartOffset, rowNumTracker, map, section, entry_index, sheetName)
+                                        else:
                                             self.updateDatasheetDictWG(datasheet, sheetKey, indexFieldName, indexValue, itemDict, rowNumber, dataStartOffset, rowNumTracker, map, section, entry_index, sheetName)
-                                    else:
-                                        self.updateDatasheetDictWG(datasheet, sheetKey, indexFieldName, indexValue, itemDict, rowNumber, dataStartOffset, rowNumTracker, map, section, entry_index, sheetName)
+                        except Exception as e:
+                            ExceptionLogger.logError(__name__,
+                                                     f"Error processing column {s} from datasheet {sheetKey}. "
+                                                     f"\nRow number {rowNumber}."
+                                                     f"\nValue {self.getColValueFromRow(rowValues, s, wb, rowNumber)}", e)
+
+                            raise e
 
         except Exception as e:
-            ExceptionLogger.logError(__name__, "", e)
+            ExceptionLogger.logError(__name__, f"Error processing spreadsheet dataRow", e)
 
-    def processUnitMacro(self, map, sheetName, itemDict):
-        """
-        Process unit values specified in the macro file. If non unit values return original item dictionary
+    def findRecursivelyProperty(self, itemDict, propertyName):
 
-        Args:
-            map (dict): parser rules for the worksheet
-            sheetName (string): name of current worksheet
-            itemDict (dict): dictionary containing values for that cell
+        if not itemDict or not isinstance(itemDict, dict):
+            return
+
+        if propertyName in itemDict.keys():
+            return itemDict
+        else:
+            for key in itemDict.keys():
+                return self.findRecursivelyProperty(itemDict[key], propertyName)
+
+    def processMacroValues(self, map: any, sheetName: str, itemDict: dict) -> dict:
         """
-        all_keys = list(itemDict.keys())
-        ignore_blanks = map.ignoreBlanks(sheetName)
-        allItemDict = []
-        if len(all_keys) > 0:
-            dict_value = itemDict[all_keys[0]]
-            # Convert unit values from string to dictionary
-            if isinstance(dict_value, str):
-                if dict_value.startswith(datasheetconstants.DATASHEET_TYP_VALUE):
-                    loop_values = self.convertUnitStrToDict(dict_value, ignore_blanks)
-                elif all_keys[0] in datasheetconstants.DATASHEET_UNIT_LIST and len(dict_value) == 0 and ignore_blanks is False:
-                    dict_value = datasheetconstants.DATASHEET_EMPTY_MACRO_UNIT
-                    loop_values = self.convertUnitStrToDict(dict_value, ignore_blanks)
-                else:
-                    return itemDict
+        Process macro in order to get the data from a string to a dictionary
+        
+        :params map:
+        :params sheetName:
+        :params itemDict:
+        
+        :returns:
+        """
+        try:
+            ignoreBlanks = map.ignoreBlanks(sheetName)
+            formattedMacroValuesByPage = []
+            macroValuesByPage = []
+            parentKeys = []
+            auxItemDict = itemDict
+            
+
+            while isinstance(itemDict, dict):
+                topKey = list(itemDict.keys())[0]
+                parentKeys.insert(0, topKey)
+                itemDict = itemDict[topKey]
+                
+            macroStringValue = str(itemDict)    
+            try:
+                macroStartValue = macroStringValue.split(',')[0].split(':')[0].strip()
+                regexToSplitMacroByPages = f'({macroStartValue}: [^,]+(?:, [^,]+)*?,)(?= {macroStartValue}:|$)'
+                macroValuesByPage = re.findall(regexToSplitMacroByPages, macroStringValue)
+            except Exception:
+                pass
+                
+            if macroStringValue.startswith(datasheetconstants.DATASHEET_TYP_VALUE) or macroStringValue.startswith(datasheetconstants.DATASHEET_GRAPH_CURVE_START) or macroStringValue.startswith(datasheetconstants.DATASHEET_PIN_PART_PIN_PATHS_START):
+                processedMacroValuesByPage = [self.convertUnitStrToDict(macroValues, ignoreBlanks) for macroValues in macroValuesByPage]
+            elif macroStringValue.startswith(datasheetconstants.DATASHEET_PIN_EXTERNAL_COMPONENTS_START):
+                processedMacroValuesByPage = [self.convertUnitStrToDict(macroValues, ignoreBlanks, processorType=datasheetconstants.DATASHEET_EXTERNAL_COMPONENTS) for macroValues in macroValuesByPage]
             else:
-                return itemDict
-        for i in range(len(loop_values)):
-            if len(loop_values[i]) != 0:
-                # Add unit dictionary to original parameter containing the unit
-                for key in loop_values[i]:
-                    inner_dict = {}
-                    outer_dict = {}
-                    inner_dict[key] = loop_values[i][key]
-                    outer_dict[all_keys[0]] = inner_dict
-                    allItemDict.append(outer_dict)
-        return allItemDict
+                return auxItemDict
+            
+            closestParentkey = parentKeys.pop(0)
+            for macroValues in processedMacroValuesByPage:
+                macroCurrentPageValues = []
+                for macroValue in macroValues:
+                    values = list(macroValue.items())
+                    for value in values:
+                        newItemDict = {closestParentkey: {
+                            value[0]: value[1]
+                        }}
+                        for keyParent in parentKeys:
+                            newItemDict = {keyParent: newItemDict}
+                        macroCurrentPageValues.append(newItemDict)
+                formattedMacroValuesByPage.append(macroCurrentPageValues)
 
-    def processPinExternalComponentsMacro(self, map, sheetName, itemDict):
-        """
-        Process unit values specified in the macro file. If non unit values return original item dictionary
-
-        Args:
-            map (dict): parser rules for the worksheet
-            sheetName (string): name of current worksheet
-            itemDict (dict): dictionary containing values for that cell
-        """
-        all_keys = list(itemDict.keys())
-        ignore_blanks = map.ignoreBlanks(sheetName)
-        allItemDict = []
-        if len(all_keys) > 0:
-            dict_value = itemDict[all_keys[0]]
-            # Convert unit values from string to dictionary
-            if isinstance(dict_value, str):
-                if dict_value.startswith(datasheetconstants.DATASHEET_PIN_EXTERNAL_COMPONENTS_START):
-                    loop_values = self.convertUnitStrToDict(dict_value, ignore_blanks, processorType=datasheetconstants.DATASHEET_EXTERNAL_COMPONENTS)
-                elif all_keys[0] in datasheetconstants.DATASHEET_UNIT_LIST and len(dict_value) == 0 and ignore_blanks is False:
-                    dict_value = datasheetconstants.DATASHEET_EMPTY_MACRO_UNIT
-                    loop_values = self.convertUnitStrToDict(dict_value, ignore_blanks)
-                else:
-                    return itemDict
-            else:
-                return itemDict
-        for i in range(len(loop_values)):
-            if len(loop_values[i]) != 0:
-                # Add unit dictionary to original parameter containing the unit
-                for key in loop_values[i]:
-                    inner_dict = {}
-                    outer_dict = {}
-                    inner_dict[key] = loop_values[i][key]
-                    outer_dict[all_keys[0]] = inner_dict
-                    allItemDict.append(outer_dict)
-        return allItemDict
-
+            return formattedMacroValuesByPage
+        except Exception as e:
+            ExceptionLogger.logError(__name__, f"Error processing unit macro for item dict: {itemDict}", e)
+            raise e
     def processSpanValuesForIndexedSection(self, datasheet, sheetKey, wb, sheetName, section, spans, fieldHeaders, indexOn, rowNumber, rowValues, map, dataStartOffset, rowNumTracker, entry_index):
         """
         Processing loop for the spans within an indexed section.
@@ -3000,62 +2915,12 @@ class Plugin:
 
             if section is not None:
 
-                fieldHeaders, fieldHeaderRow = self.getFieldHeadersForSection(wb, sheetName, section, map)
-                indexOn = map.getIndexOn(section)
-                if indexOn is not None:
-                    maxRows = map.getValue(spreadsheettypes.SPREADSHEET_MAP_MAX_ROWS_FIELD, indexOn)
-                    dataStartRow = map.getValue(spreadsheettypes.SPREADSHEET_MAP_DATA_START_ROW_FIELD, indexOn)
-                    header = indexOn[spreadsheettypes.SPREADSHEET_MAP_HEADER_FIELD]
-                    if isinstance(header, list):
-                        headerFieldName = ""
-                        for header_element in header:
-                            headerRow = map.getValue(spreadsheettypes.SPREADSHEET_MAP_ROW_FIELD, header_element)
-                            headerCol = map.getValue(spreadsheettypes.SPREADSHEET_MAP_COL_FIELD, header_element)
-                            headerFieldName_temp = self.getCellValue(wb, sheetName, headerRow, headerCol)
-                            # Eliminate unwanted characters
-                            headerFieldName_temp = self.format.delete_repeated_characters(headerFieldName_temp)
-                            headerFieldName += f"{JsonDataSheet.generateValidJsonFieldName(headerFieldName_temp)}-"
-                        # Eliminate last "-" character that it is not necessary
-                        headerFieldName = headerFieldName[:-1]
-                        # Save the header row to compare and validate if title is needed
-                        headerRow = map.getValue(spreadsheettypes.SPREADSHEET_MAP_ROW_FIELD, header[0])
-                        indexOnRow = indexOn[spreadsheettypes.SPREADSHEET_MAP_HEADER_FIELD][0][spreadsheettypes.SPREADSHEET_MAP_ROW_FIELD]
-                        indexOnCol = indexOn[spreadsheettypes.SPREADSHEET_MAP_HEADER_FIELD][0][spreadsheettypes.SPREADSHEET_MAP_COL_FIELD]
-                    else:
-                        # Just one object on the header section
-                        headerRow = map.getValue(spreadsheettypes.SPREADSHEET_MAP_ROW_FIELD, header)
-                        headerCol = map.getValue(spreadsheettypes.SPREADSHEET_MAP_COL_FIELD, header)
-                        headerFieldName = self.getCellValue(wb, sheetName, headerRow, headerCol)
-                        headerFieldName = self.format.delete_repeated_characters(headerFieldName)
-                        headerFieldName = JsonDataSheet.generateValidJsonFieldName(headerFieldName)
-                        indexOnRow = indexOn[spreadsheettypes.SPREADSHEET_MAP_HEADER_FIELD][spreadsheettypes.SPREADSHEET_MAP_ROW_FIELD]
-                        indexOnCol = indexOn[spreadsheettypes.SPREADSHEET_MAP_HEADER_FIELD][spreadsheettypes.SPREADSHEET_MAP_COL_FIELD]
-
-                    self._indexOnRow = indexOnRow
-                    self._indexOnCol = indexOnCol
-
-                    # add the indexOn dictionary to the datasheet
-                    self.serializeIndexWG(datasheet, tableName, wb, sheetName, section, map)
-
-                    rowNumTracker = self.getRowNumberTracker(wb, map, section, datasheet, tableName, sheetName)
-                    dataStartOffset = dataStartRow - 1
-                    rowNum = dataStartOffset
-                    rowsToIgnore = map.getRowsToIgnore(sheetName)
-
-                else:
-                    datasheet[tableName] = []
-                    # IndexOn was not found so just process each row/column
-                    dataStartRow = map.getValue(spreadsheettypes.SPREADSHEET_MAP_DATA_START_ROW_FIELD, section)
-                    if dataStartRow is None:
-                        dataStartRow = datasheetconstants.DATASHEET_DEFAULT_DATASTART
-                    maxRows = map.getValue(spreadsheettypes.SPREADSHEET_MAP_MAX_ROWS_FIELD, section)
-                    if maxRows is None:
-                        maxRows = datasheetconstants.DATASHEET_DEFAULT_MAX_ROWS
-                    dataStartOffset = dataStartRow - 1
-                    rowNum = dataStartOffset
+                dataStartOffset, dataStartRow, fieldHeaders, indexOn, maxRows, rowNum, rowsToIgnore = (
+                    self.getDatasetColumns(dataStartRow, datasheet, map, maxRows, section, sheetName, tableName, wb))
 
                 entry_index = 0
                 entries_to_delete = []
+                rowNumTracker = 0
                 while rowNum < (maxRows + dataStartRow):
                     if indexOn is not None:
                         if rowNum + 1 in rowsToIgnore:
@@ -3068,7 +2933,7 @@ class Plugin:
 
                     rowValues = self.getRow(wb, sheetName, rowNum)
 
-                    if rowValues is not None:
+                    if self.rowHasAnyValue(rowValues):
 
                         # add the columns identified in the section configuration
                         if indexOn is not None:
@@ -3077,10 +2942,13 @@ class Plugin:
                         else:
                             self.addSectionColumnsToDatasheet(datasheet, tableName, wb, sheetName, section, fieldHeaders, rowNum, rowValues, map, dataStartOffset, rowNumTracker=None, entry_index=entry_index)
                     else:
-                        break
+                        rowNum += 1
+                        continue
 
                     rowNum += 1
                     entry_index += 1
+
+                ExceptionLogger.logInformation(__name__, f"Processed rows: {rowNumTracker} \n")
 
             else:
                 # did not find a section, raise an error
@@ -3089,6 +2957,98 @@ class Plugin:
                 raise ConfigurationError(s, d)
         except Exception as e:
             ExceptionLogger.logError(__name__, "", e)
+
+
+    def rowHasAnyValue(self, rowValues):
+        """
+            Checks if the rowValues has any value.
+
+            Args:
+                rowValues (list of Cell): A list of Cell objects representing a row.
+
+            Returns:
+                bool: True if any cell has a value, False otherwise.
+            """
+        if rowValues is None:
+            return False
+        return any(cell.value is not None and cell.value != '' for cell in rowValues)
+
+
+    def getDatasetColumns(self, dataStartRow, datasheet, map, maxRows, section, sheetName, tableName, wb):
+        """
+        Get the columns for the dataset.
+
+        Args:
+            dataStartRow (int): The starting row for data.
+            datasheet (dict): The output datasheet.
+            map (SpreadsheetMap): The map containing parser rules for the worksheet.
+            maxRows (int): The maximum number of rows to process.
+            section (dict): The parser rules for the current section.
+            sheetName (str): The name of the current worksheet.
+            tableName (str): The name of the table being processed.
+            wb (Workbook): The workbook object.
+
+        Returns:
+            tuple: A tuple containing field headers, field header row, index on, max rows, data start row, and rows to ignore.
+        """
+        fieldHeaders, fieldHeaderRow = self.getFieldHeadersForSection(wb, sheetName, section, map)
+        indexOn = map.getIndexOn(section)
+        if indexOn is not None:
+            maxRows = map.getValue(spreadsheettypes.SPREADSHEET_MAP_MAX_ROWS_FIELD, indexOn)
+            dataStartRow = map.getValue(spreadsheettypes.SPREADSHEET_MAP_DATA_START_ROW_FIELD, indexOn)
+            header = indexOn[spreadsheettypes.SPREADSHEET_MAP_HEADER_FIELD]
+            if isinstance(header, list):
+                headerFieldName = ""
+                for header_element in header:
+                    headerRow = map.getValue(spreadsheettypes.SPREADSHEET_MAP_ROW_FIELD, header_element)
+                    headerCol = map.getValue(spreadsheettypes.SPREADSHEET_MAP_COL_FIELD, header_element)
+                    headerFieldName_temp = self.getCellValue(wb, sheetName, headerRow, headerCol)
+                    # Eliminate unwanted characters
+                    headerFieldName_temp = self.format.delete_repeated_characters(headerFieldName_temp)
+                    headerFieldName += f"{JsonDataSheet.generateValidJsonFieldName(headerFieldName_temp)}-"
+                # Eliminate last "-" character that it is not necessary
+                headerFieldName = headerFieldName[:-1]
+                # Save the header row to compare and validate if title is needed
+                headerRow = map.getValue(spreadsheettypes.SPREADSHEET_MAP_ROW_FIELD, header[0])
+                indexOnRow = indexOn[spreadsheettypes.SPREADSHEET_MAP_HEADER_FIELD][0][
+                    spreadsheettypes.SPREADSHEET_MAP_ROW_FIELD]
+                indexOnCol = indexOn[spreadsheettypes.SPREADSHEET_MAP_HEADER_FIELD][0][
+                    spreadsheettypes.SPREADSHEET_MAP_COL_FIELD]
+            else:
+                # Just one object on the header section
+                headerRow = map.getValue(spreadsheettypes.SPREADSHEET_MAP_ROW_FIELD, header)
+                headerCol = map.getValue(spreadsheettypes.SPREADSHEET_MAP_COL_FIELD, header)
+                headerFieldName = self.getCellValue(wb, sheetName, headerRow, headerCol)
+                headerFieldName = self.format.delete_repeated_characters(headerFieldName)
+                headerFieldName = JsonDataSheet.generateValidJsonFieldName(headerFieldName)
+                indexOnRow = indexOn[spreadsheettypes.SPREADSHEET_MAP_HEADER_FIELD][
+                    spreadsheettypes.SPREADSHEET_MAP_ROW_FIELD]
+                indexOnCol = indexOn[spreadsheettypes.SPREADSHEET_MAP_HEADER_FIELD][
+                    spreadsheettypes.SPREADSHEET_MAP_COL_FIELD]
+
+            self._indexOnRow = indexOnRow
+            self._indexOnCol = indexOnCol
+
+            # add the indexOn dictionary to the datasheet
+            self.serializeIndexWG(datasheet, tableName, wb, sheetName, section, map)
+
+            rowNumTracker = self.getRowNumberTracker(wb, map, section, datasheet, tableName, sheetName)
+            dataStartOffset = dataStartRow - 1
+            rowNum = dataStartOffset
+            rowsToIgnore = map.getRowsToIgnore(sheetName)
+
+        else:
+            datasheet[tableName] = []
+            # IndexOn was not found so just process each row/column
+            dataStartRow = map.getValue(spreadsheettypes.SPREADSHEET_MAP_DATA_START_ROW_FIELD, section)
+            if dataStartRow is None:
+                dataStartRow = datasheetconstants.DATASHEET_DEFAULT_DATASTART
+            maxRows = map.getValue(spreadsheettypes.SPREADSHEET_MAP_MAX_ROWS_FIELD, section)
+            if maxRows is None:
+                maxRows = datasheetconstants.DATASHEET_DEFAULT_MAX_ROWS
+            dataStartOffset = dataStartRow - 1
+            rowNum = dataStartOffset
+        return dataStartOffset, dataStartRow, fieldHeaders, indexOn, maxRows, rowNum, rowsToIgnore
 
     def parseSection(self, datasheet, sheetKey, wb, sheetName, section, map):
         """Main processing for an individual section.

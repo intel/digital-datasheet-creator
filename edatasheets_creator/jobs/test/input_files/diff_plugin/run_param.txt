@@ -1,4 +1,0 @@
-py main.py --diff1 "../edatasheets_creator/jobs/test/input_files/diff_plugin/export_sample.json" --diff2 "../edatasheets_creator/jobs/test/input_files/diff_plugin/export_sample_2.json" --o "../edatasheets_creator/jobs/test/output_files/diff_files/"
-py main.py --diff1 "../edatasheets_creator/jobs/test/input_files/diff_plugin/sample.json" --diff2 "../edatasheets_creator/jobs/test/input_files/diff_plugin/sample-2.json"
-
-
