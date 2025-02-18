@@ -18,6 +18,7 @@ class ExcelUtilities:
     
     _instance = None
     sheetName = ''
+    allowedSpecialCharacters = ['+']
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
