@@ -4,17 +4,20 @@
 
 import platform
 from os.path import isdir
+
+import jsonschema
+
 from edatasheets_creator.logger.exceptionlogger import ExceptionLogger
 from edatasheets_creator.constants import parserconstants as pc
 from pathlib import Path
 from typing import List
-from jsonschema import validate, ValidationError
-from json import load, dump
+from jsonschema import validate, exceptions, ValidationError, Draft7Validator as Validator
+from json import load, dump, dumps
 from edatasheets_creator.utility.path_utilities import get_relative_path, validateRealPath
 import os
 import requests
 from edatasheets_creator.constants import serializationconstants, datasheetconstants, schema_constants
-
+from edatasheets_creator.utility.excel_utilities import ExcelUtilities
 
 def parseJsonToDict(inputFilePath: str) -> dict:
     """
@@ -64,27 +67,53 @@ def validateJson(schemaPathXLSX: str, schemaPathPPTX: str, jsonDataPath: str, in
     return result, errorMsg
 
 
+def translate_error(error):
+    if error.path:
+        error_path = error.path[-1]
+    else:
+        error_path = "unknown"
+
+    if error.validator == 'oneOf':
+        schema_titles = [schema.get('title', 'unknown') for schema in error.schema['oneOf']]
+        failing_value = error.instance.get('partType', 'unknown')
+        return (
+            f"Validation failed for '{error_path}':\n"
+            f"The provided data does not match any of the allowed schemas.\n"
+            f"Failing section/sheet name: {failing_value}\n"
+            f"Data value: {dumps(error.instance, indent=4)}"
+
+        )
+    else:
+        return (
+            f"Validation failed for '{error_path}':\n"
+            f"Validator: {error.validator}\n"
+            f"Message: {error.message}\n"
+            f"Instance path: {'/'.join(map(str, error.path))}\n"
+            f"Invalid value: {error.instance}\n"
+        )
+    #return str(error)
+
 def validateWithSchema(datasheet, componentType):
     """
 
     Main logic method for spreadsheet processing without a map file needed
 
     Args:
-        wb : Workbook of the given file name
-        inputFileName (PosixPath): Input file name
-        outputFileName (PosixPath): Output file name
+        componentType (PosixPath): Component to be validated
         datasheet : The outputted data
     """
     result = True
     errorMsg = None
     schema_load = readWorkgroupSchema(componentType, online=False, validation=True)
 
-    try:
+    schema_validator = Validator(schema_load)
 
-        validate(instance=datasheet, schema=schema_load)
+    errors = schema_validator.iter_errors(datasheet)
 
-    except ValidationError as e:
-        errorMsg = "Final output does not match schema. Please check: " + " '" + e.absolute_path[0] + "'  in the template to fix the error. Error message is: '" + e.message + "' " if "description" in e.schema else e.message
+    for index, error in enumerate(sorted(errors, key=exceptions.relevance)):
+        translated_error = translate_error(error)
+        ExceptionLogger.logError(__name__, '', f"{translated_error}")
+        ExceptionLogger.logDebug(__name__, str(error))
         result = False
 
     return result, errorMsg
@@ -230,32 +259,40 @@ def readWorkgroupSchema(componentType, online=False, validation=False):
     Returns:
         data (dict): dictionary of schema
     """
-    if componentType in datasheetconstants.DATASHEET_COMPONENT_COMMON_MAPPING:
-        componentType = datasheetconstants.DATASHEET_COMPONENT_COMMON_MAPPING[componentType]
-    if validation is True:
-        componentType = datasheetconstants.DATASHEET_ROOT_SCHEMA_NAME
-    if componentType == datasheetconstants.DATASHEET_ROOT_SCHEMA_NAME:
-        if online is False:
-            path_list = [os.path.dirname(__file__), '..', 'schemas', 'edatasheet_schema', 'part-spec']
-            base_path = os.path.abspath(os.path.join(*path_list))
-            file_path = "{}\\{}.json".format(base_path, componentType)
-            with open(file_path) as f:
-                data = load(f)
-        elif online is True:
-            file_path = schema_constants.SCHEMA_URL + componentType + ".json"
-            data = requests.get(file_path, timeout=25).json()
-    else:
-        component_folder = datasheetconstants.DATASHEET_GROUPING[componentType]
-        if online is False:
-            path_list = [os.path.dirname(__file__), '..', 'schemas', 'edatasheet_schema', 'part-spec', component_folder]
-            base_path = os.path.abspath(os.path.join(*path_list))
-            file_path = "{}\\{}.json".format(base_path, componentType)
-            with open(file_path) as f:
-                data = load(f)
+    try:
+        excelUtilities = ExcelUtilities()
+        componentTypeInSchemaComponentCommonMapping = excelUtilities.getPropertyValueFromDatasheetComponentCommonMapping(componentType)
+        if componentTypeInSchemaComponentCommonMapping:
+            componentType = componentTypeInSchemaComponentCommonMapping
+        if validation is True:
+            componentType = datasheetconstants.DATASHEET_ROOT_SCHEMA_NAME
+        if componentType == datasheetconstants.DATASHEET_ROOT_SCHEMA_NAME:
+            if online is False:
+                path_list = [os.path.dirname(__file__), '..', 'schemas', 'edatasheet_schema', 'part-spec']
+                base_path = os.path.abspath(os.path.join(*path_list))
+                file_path = "{}/{}.json".format(base_path, componentType)
+                with open(file_path) as f:
+                    data = load(f)
+            elif online is True:
+                file_path = schema_constants.SCHEMA_URL + componentType + ".json"
+                data = requests.get(file_path, timeout=25).json()
         else:
-            file_path = schema_constants.SCHEMA_URL + component_folder + "/" + componentType
-            data = requests.get(file_path, timeout=25).json()
-    return data
+            component_folder = datasheetconstants.DATASHEET_GROUPING[componentType]
+            if online is False:
+                path_list = [os.path.dirname(__file__), '..', 'schemas', 'edatasheet_schema', 'part-spec', component_folder]
+                base_path = os.path.abspath(os.path.join(*path_list))
+                file_path = "{}/{}.json".format(base_path, componentType)
+                with open(file_path) as f:
+                    data = load(f)
+            else:
+                file_path = schema_constants.SCHEMA_URL + component_folder + "/" + componentType
+                data = requests.get(file_path, timeout=25).json()
+        return data
+
+    except Exception as e:
+        ExceptionLogger.logError(__name__, f"Error obtaining schema for component type {componentType}", e)
+        raise e
+
 
 
 def writeToJSON(edatasheet, outputFileName):

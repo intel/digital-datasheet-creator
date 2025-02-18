@@ -36,7 +36,7 @@ class DictionarySchema:
         """
         try:
             outputPath = Path(inputFile)
-            outputSchemaFileName = str(outputPath.parent) + "\\" + outputPath.stem + "-" + serializationconstants.JSON_SCHEMA_NAME + '.' + serializationconstants.JSON_FILE_EXTENSION
+            outputSchemaFileName = str(outputPath.parent) + "/" + outputPath.stem + "-" + serializationconstants.JSON_SCHEMA_NAME + '.' + serializationconstants.JSON_FILE_EXTENSION
 
             schema = self.get_schema(dictionary)
 

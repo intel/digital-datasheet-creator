@@ -721,7 +721,8 @@ class SpreadsheetMap:
             return bln
 
         except Exception as e:
-            ExceptionLogger.logError(__name__, "", e)
+            ExceptionLogger.logError(__name__, f"Error obtaining {spreadsheettypes.SPREADSHEET_MAP_COMPONENT_TYPE} from Map File", e)
+            ExceptionLogger.logDebug(__name__, f"Debug - Map file: {self._mapFile}")
 
     def getSheets(self):
         """

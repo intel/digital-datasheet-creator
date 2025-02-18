@@ -56,7 +56,7 @@ class Plugin:
                 if outputFileName:
                     output_file_name = outputFileName
                 else:
-                    output_file_name = str(path.parent) + "\\" + path.stem + ".json"
+                    output_file_name = str(path.parent) + "/" + path.stem + ".json"
 
                 msg = f"Writing the output json file: {output_file_name}...\n"
                 ExceptionLogger.logInformation(__name__, msg)

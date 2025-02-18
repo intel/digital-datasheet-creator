@@ -1,4 +1,0 @@
-py main.py --f "../edatasheets_creator/jobs/test/input_files/xlsx_to_json_with_map_plugin/sample.xlsx" --m "../edatasheets_creator/jobs/test/input_files/xlsx_to_json_with_map_plugin/lists-of-units-map.json" --o "../edatasheets_creator/jobs/test/output_files/xlsx_to_json_with_map_files/output.json"
-
-py main.py --f "C:/Users/crisptof/Work/ThorPeak/Task 8508/PTL_system_thermal_acoustic_specs.xlsx" --m "C:/Users/crisptof/Work/ThorPeak/digital-datasheets-creator/edatasheets_creator/maps/test_map.json"
-

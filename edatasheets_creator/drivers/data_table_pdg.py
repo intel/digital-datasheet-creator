@@ -611,7 +611,7 @@ class DataTablePDGCCG:
         if self.output_file_name:
             output_file_name = self.output_file_name
         else:
-            output_file_name = str(path.parent) + "\\" + path.stem + ".json"
+            output_file_name = str(path.parent) + "/" + path.stem + ".json"
         xmlstr = ElementTree.tostring(source_element).decode("utf-8")
         data_dict = xmltodict.parse(xmlstr)
         with open(output_file_name, "w", encoding="utf8") as output_json:
