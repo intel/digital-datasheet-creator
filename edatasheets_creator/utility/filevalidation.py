@@ -110,11 +110,15 @@ def validateWithSchema(datasheet, componentType):
 
     errors = schema_validator.iter_errors(datasheet)
 
-    for index, error in enumerate(sorted(errors, key=exceptions.relevance)):
-        translated_error = translate_error(error)
-        ExceptionLogger.logError(__name__, '', f"{translated_error}")
-        ExceptionLogger.logDebug(__name__, str(error))
-        result = False
+    try:
+        for index, error in enumerate(sorted(errors, key=exceptions.relevance)):
+            translated_error = translate_error(error)
+            ExceptionLogger.logError(__name__, '', f"{translated_error}")
+            ExceptionLogger.logDebug(__name__, str(error))
+            result = False
+    except Exception as e:
+        ExceptionLogger.logError(__name__, 'Validation error', e)
+        raise e
 
     return result, errorMsg
 

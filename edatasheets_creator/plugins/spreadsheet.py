@@ -2243,7 +2243,7 @@ class Plugin:
                     if data == serializationconstants.EMPTY_HEADER or dataStripped == "":
                         data = f"empty header col {col}"
                     industryFormatCheck = map.checkIndustryFormat()
-                    fieldHeader = self.format.format_name_spreadsheet(data, industryFormatCheck)
+                    fieldHeader = self.format.format_name_spreadsheet(data, industryFormatCheck, self.excelUtilities.allowedSpecialCharacters)
                     if isSubHeader:
                         # Build the header list for the sub-document field names to be added
                         groupByItemHeaderDictList = SpreadsheetMap.getGroupByItemHeaderDictList(groupBy)

@@ -69,6 +69,10 @@ class Format:
     FORMATTER_AT_EDGES = {
         "characters": [0x28, 0x29]
     }
+    
+    SPECIAL_CASING_WORDS = {
+        'mhz': 'MHz'
+    }
 
     def int_try_parse(self, value) -> Tuple[int, bool]:
         """Validates if can parse the provided value
@@ -97,7 +101,15 @@ class Format:
         if string:
             if industryFormatCheck is True:
                 words = string.split(" ")
-                return words[0] + ''.join(word.title() if word.isupper() is False else word for word in words[1:])
+                parsedWords = []
+                for word in words[1:]:
+                    if self.SPECIAL_CASING_WORDS.get(word.lower()):
+                        parsedWords.append(self.SPECIAL_CASING_WORDS.get(word.lower()))
+                    elif word.isupper() is False:
+                        parsedWords.append(word.title())
+                    else:
+                        parsedWords.append(word)
+                return words[0] + ''.join(parsedWords)
             else:
                 words = string.lower().split(" ")
                 return words[0] + ''.join(word.title() for word in words[1:])
@@ -134,12 +146,13 @@ class Format:
             return string
         return s[0] + ''.join(i.capitalize() for i in s[1:])
 
-    def format_by_mapper(self, string: str, mapper: dict) -> str:
+    def format_by_mapper(self, string: str, mapper: dict, allowedSpecialCharacters: list[str] = []) -> str:
         """Replace values from a string using a mapper dictionary, check the examples on the top of this class
 
         Args:
             string (str): string to format
             mapper (dict): dictionary mapper
+            allowedSpecialCharacters (list[str]): list of allowed special characters
 
         Returns:
             str: formatted string.
@@ -148,8 +161,8 @@ class Format:
             for _, value in mapper.items():
                 replace_to = value.get("replace_to", "")
                 for character in value.get("characters", []):
-                    string = string.replace(chr(character), replace_to)
-
+                    if chr(character) not in allowedSpecialCharacters:
+                        string = string.replace(chr(character), replace_to)
             return string
 
         except Exception as e:
@@ -232,11 +245,13 @@ class Format:
         except Exception as e:
             ExceptionLogger.logError(__name__, "", e)
 
-    def format_name_spreadsheet(self, string: str, industryFormatCheck: bool = False) -> str:
+    def format_name_spreadsheet(self, string: str, industryFormatCheck: bool = False, allowedSpecialCharacters: list[str] = []) -> str:
         """Replaces the supplied characters in FORMATTERS_NAME_MAP and converts the string to camel case for spreadsheet files.
 
         Args:
             string (str): string to format.
+            industryFormatCheck (bool): boolean value
+            allowedSpecialCharacters (list[str]): list of allowed special characters
 
         Returns:
             str: formatted string.
@@ -244,7 +259,7 @@ class Format:
         try:
             string = self.convert_to_camel_case(string, industryFormatCheck)
 
-            string = self.format_by_mapper(string, self.FORMATTERS_NAME_MAP)
+            string = self.format_by_mapper(string, self.FORMATTERS_NAME_MAP, allowedSpecialCharacters)
 
             string = string.replace(' ', "")
             string = string.replace('*', "")
