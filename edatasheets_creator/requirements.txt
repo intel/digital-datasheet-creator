@@ -23,7 +23,7 @@ gprof2dot==2022.7.29
 idna==3.7
 imagesize==1.4.1
 importlib-metadata==1.7.0
-Jinja2==3.1.4
+Jinja2==3.1.5
 json-settings==0.1.4
 jsonpath-rw==1.4.0
 jsonpath-rw-ext==1.2.2
