@@ -1,8 +1,3 @@
-
- ![Pylint Badge](https://img.shields.io/badge/Pylint-3.79-red.svg) 
-
- ![Integration Testing](https://github.com/intel-innersource/applications.platforms.data.edatasheets.digital-datasheet-creator-plugins/actions/workflows/integration-testing.yml/badge.svg)
- 
 # Digital Datasheets Creator
 
 ## Description
